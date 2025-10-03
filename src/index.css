@@ -1,0 +1,74 @@
+/* Tailwind CSS directives - these warnings are expected and can be safely ignored */
+/* The CSS language server doesn't recognize @tailwind directives, but they work correctly during build */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #0a0a0a;
+    color: #ffffff;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+}
+
+@layer components {
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, #CABC32 0%, #059669 100%);
+    color: #0a0a0a;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    color: #0a0a0a;
+    text-decoration: none;
+    filter: brightness(1.1);
+  }
+
+  .btn-secondary {
+    background: #141414;
+    color: #ffffff;
+    border: 2px solid #333333;
+  }
+
+  .btn-secondary:hover {
+    background: #1e1e1e;
+    border-color: #CABC32;
+    color: #CABC32;
+    text-decoration: none;
+  }
+}
