@@ -237,6 +237,7 @@ const Diggle = () => {
           </div>
         </div>
         </div>
+        </div>
       </div>
     </div>
   )
