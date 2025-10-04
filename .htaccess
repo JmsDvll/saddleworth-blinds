@@ -117,9 +117,9 @@ RewriteRule ^terms-conditions/?$ /terms-conditions.html [R=301,L]
 # Custom Error Pages - Updated for React app
 ErrorDocument 404 /index.html
 
-# Force HTTPS (uncomment when SSL is active)
-# RewriteCond %{HTTPS} off
-# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+# Force HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
 # Prevent hotlinking of images
 RewriteCond %{HTTP_REFERER} !^$

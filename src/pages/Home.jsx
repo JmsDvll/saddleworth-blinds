@@ -1,5 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import FAQSection from '../components/FAQSection'
+import ReviewsSection from '../components/ReviewsSection'
 
 const Home = () => {
   return (
@@ -179,6 +181,16 @@ const Home = () => {
             </div>
           </div>
         </div>
+      </section>
+
+      {/* Reviews Section */}
+      <section className="py-20 bg-gray-900">
+        <ReviewsSection />
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-20">
+        <FAQSection />
       </section>
     </>
   )

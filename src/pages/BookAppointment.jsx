@@ -11,6 +11,7 @@ const BookAppointment = () => {
     rooms: '',
     timeframe: '',
     budget: '',
+    blindType: '',
     message: '',
     preferredTime: [],
     marketing: false,
@@ -31,11 +32,68 @@ const BookAppointment = () => {
     e.preventDefault()
     setIsSubmitting(true)
 
-    // Simulate form submission
-    setTimeout(() => {
-      alert('Thank you for your interest! We\'ll contact you soon.')
+    // Create FormData object to send to PHP
+    const formDataToSend = new FormData()
+    
+    // Add all form fields
+    formDataToSend.append('firstName', formData.firstName)
+    formDataToSend.append('lastName', formData.lastName)
+    formDataToSend.append('email', formData.email)
+    formDataToSend.append('phone', formData.phone)
+    formDataToSend.append('address', formData.address)
+    formDataToSend.append('postcode', formData.postcode)
+    formDataToSend.append('rooms', formData.rooms)
+    formDataToSend.append('timeframe', formData.timeframe)
+    formDataToSend.append('budget', formData.budget)
+    formDataToSend.append('message', formData.message)
+    formDataToSend.append('blindType', formData.blindType || '')
+    
+    // Add preferred times as array
+    formData.preferredTime.forEach(time => {
+      formDataToSend.append('preferredTime[]', time)
+    })
+    
+    // Add anti-spam fields
+    formDataToSend.append('form_start_time', Math.floor(Date.now() / 1000) - 10) // Started 10 seconds ago
+    formDataToSend.append('website', '') // Honeypot field
+
+    try {
+      const response = await fetch('/process-booking.php', {
+        method: 'POST',
+        body: formDataToSend
+      })
+
+      if (response.ok) {
+        // Success - show success message and reset form
+        alert('Thank you for booking! We\'ll contact you within 24 hours to arrange your free consultation.')
+        
+        // Reset form
+        setFormData({
+          firstName: '',
+          lastName: '',
+          email: '',
+          phone: '',
+          address: '',
+          postcode: '',
+          rooms: '',
+          timeframe: '',
+          budget: '',
+          blindType: '',
+          message: '',
+          preferredTime: [],
+          marketing: false,
+          privacy: false
+        })
+      } else {
+        // Error
+        alert('Sorry, there was an error sending your booking. Please call us on 01457 597091.')
+      }
+    } catch (error) {
+      console.error('Form submission error:', error)
+      alert('Sorry, there was an error sending your booking. Please call us on 01457 597091.')
+    } finally {
       setIsSubmitting(false)
-    }, 1000)
+    }
   }
 
   return (
@@ -210,6 +268,31 @@ const BookAppointment = () => {
                     <option value="2000+">£2,000+</option>
                   </select>
                 </div>
+              </div>
+
+              <div>
+                <label htmlFor="blindType" className="block text-sm font-medium text-white mb-2">
+                  What type of blinds are you interested in?
+                </label>
+                <select
+                  id="blindType"
+                  name="blindType"
+                  value={formData.blindType}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:ring-2 focus:ring-brand-gold focus:border-transparent"
+                >
+                  <option value="">Not sure yet</option>
+                  <option value="roller">Roller Blinds</option>
+                  <option value="venetian">Venetian Blinds</option>
+                  <option value="vertical">Vertical Blinds</option>
+                  <option value="vision">Vision Blinds</option>
+                  <option value="perfect-fit">Perfect Fit Blinds</option>
+                  <option value="shutters">Shutters</option>
+                  <option value="roman">Roman Blinds</option>
+                  <option value="curtains">Curtains</option>
+                  <option value="allusion">Allusion Blinds</option>
+                  <option value="multiple">A mix of different types</option>
+                </select>
               </div>
 
               <div>
