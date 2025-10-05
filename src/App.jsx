@@ -28,8 +28,11 @@ import TermsConditions from './pages/TermsConditions'
 function App() {
   return (
     <div className="min-h-screen bg-gray-900 text-white">
+      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-brand-gold text-gray-900 px-4 py-2 rounded">
+        Skip to main content
+      </a>
       <Header />
-      <main>
+      <main id="main-content">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />

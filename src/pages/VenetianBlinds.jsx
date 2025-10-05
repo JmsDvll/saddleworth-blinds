@@ -255,7 +255,7 @@ const VenetianBlinds = () => {
             </div>
             <div className="bg-gray-800 rounded-lg overflow-hidden">
               <img
-                src="/images/optimized/venetian-blind-grey-400.jpg"
+                src="/images/optimized/venetian-wood-natural-400.jpg"
                 alt="Grey venetian blinds"
                 className="w-full h-48 object-cover"
               />

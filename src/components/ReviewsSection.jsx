@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const ReviewsSection = () => {
   const reviews = [
@@ -140,12 +141,12 @@ const ReviewsSection = () => {
           <p className="text-gray-300 mb-6">
             Experience the difference of working with Saddleworth's trusted blind specialists
           </p>
-          <a
-            href="/book-appointment"
+          <Link
+            to="/book-appointment"
             className="btn btn-primary text-lg"
           >
             Book Your Free Consultation
-          </a>
+          </Link>
         </div>
       </div>
     </section>

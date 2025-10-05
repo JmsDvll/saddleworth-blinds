@@ -192,7 +192,7 @@ const VerticalBlinds = () => {
             </div>
             <div className="bg-gray-800 rounded-lg overflow-hidden group hover:shadow-xl transition-all duration-300">
               <img
-                src="/images/optimized/vertical-blind-modern-400.jpg"
+                src="/images/optimized/vertical-blind-grey-400.jpg"
                 alt="Modern vertical blinds providing clean aesthetics"
                 className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
               />

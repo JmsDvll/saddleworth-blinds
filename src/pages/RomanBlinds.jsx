@@ -66,7 +66,7 @@ const RomanBlinds = () => {
 
             <div className="relative">
               <img
-                src="/images/optimized/venetian-starwood-1600.jpg"
+                src="/images/optimized/vision-viale-linen-1600.jpg"
                 alt="Elegant Roman blinds in a Saddleworth home"
                 className="w-full h-auto rounded-lg shadow-2xl"
                 loading="eager"

@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 const FAQSection = () => {
   const [openItems, setOpenItems] = useState([])
@@ -127,12 +128,12 @@ const FAQSection = () => {
               >
                 Call 01457 597091
               </a>
-              <a
-                href="/contact"
+              <Link
+                to="/contact"
                 className="btn btn-secondary"
               >
                 Send us a message
-              </a>
+              </Link>
             </div>
           </div>
         </div>

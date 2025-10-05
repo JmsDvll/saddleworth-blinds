@@ -97,12 +97,13 @@ const ContactForm = () => {
             Email Address *
           </label>
           <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleInputChange}
-            required
+          type="email"
+          id="email"
+          name="email"
+          value={formData.email}
+          onChange={handleInputChange}
+          required
+          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
             className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:ring-2 focus:ring-brand-gold focus:border-transparent"
             placeholder="john@example.com"
           />
@@ -119,6 +120,8 @@ const ContactForm = () => {
             value={formData.phone}
             onChange={handleInputChange}
             required
+            pattern="[0-9\s()+-]+"
+            minLength="10"
             className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:ring-2 focus:ring-brand-gold focus:border-transparent"
             placeholder="01457 597091"
           />
