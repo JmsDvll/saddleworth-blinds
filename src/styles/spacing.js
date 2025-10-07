@@ -3,6 +3,7 @@
 export const spacing = {
   // Section padding
   section: {
+    py: 'py-20 lg:py-32',
     large: 'py-20 lg:py-24',
     base: 'py-16 lg:py-20',
     small: 'py-12 lg:py-16',
@@ -11,9 +12,18 @@ export const spacing = {
 
   // Container padding
   container: {
+    default: 'container',
     base: 'px-4 md:px-6 lg:px-8',
     narrow: 'px-4 md:px-8 lg:px-12',
     wide: 'px-4 md:px-4 lg:px-6'
+  },
+
+  // Layout utilities
+  layout: {
+    grid: 'grid',
+    gridCols2: 'grid lg:grid-cols-2',
+    gridCols3: 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3',
+    gridCols4: 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4'
   },
 
   // Grid gaps
@@ -50,7 +60,13 @@ export const spacing = {
     section: 'mb-16 lg:mb-20',
     element: 'mb-6 lg:mb-8',
     text: 'mb-4',
-    none: 'mb-0'
+    none: 'mb-0',
+    topLg: 'mt-8',
+    topXl: 'mt-16',
+    bottomSm: 'mb-2',
+    bottomMd: 'mb-4',
+    bottomLg: 'mb-6',
+    bottomXl: 'mb-12'
   },
 
   // Padding utilities
@@ -58,7 +74,11 @@ export const spacing = {
     card: 'p-6 lg:p-8',
     button: 'px-6 py-3 lg:px-8 lg:py-4',
     input: 'px-4 py-3',
-    badge: 'px-3 py-1'
+    badge: 'px-3 py-1',
+    lg: 'p-6',
+    xl: 'p-8',
+    topMd: 'pt-4',
+    topLg: 'pt-6'
   },
 
   // Height utilities

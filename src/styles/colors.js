@@ -17,7 +17,13 @@ export const colors = {
     overlay: 'bg-black/50',
     overlayDark: 'bg-black/70',
     card: 'bg-gray-800',
-    cardHover: 'bg-gray-700'
+    cardHover: 'bg-gray-700',
+    gradient: 'bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900',
+    gradientDark: 'bg-gradient-to-br from-gray-800 via-gray-900 to-gray-800',
+    gradientSubtle: 'bg-gradient-to-br from-gray-900/50 via-gray-800/50 to-gray-900/50',
+    gold: 'bg-brand-gold',
+    goldGradient: 'bg-gradient-to-r from-brand-gold to-yellow-400',
+    dark: 'bg-gray-900'
   },
 
   // Text colors
@@ -26,7 +32,12 @@ export const colors = {
     secondary: 'text-gray-300',
     muted: 'text-gray-400',
     accent: 'text-brand-gold',
-    link: 'text-brand-gold hover:text-yellow-500'
+    link: 'text-brand-gold hover:text-yellow-500',
+    white: 'text-white',
+    gold: 'text-brand-gold',
+    lightGray: 'text-gray-300',
+    dark: 'text-gray-900',
+    darkGray: 'text-gray-800'
   },
 
   // Border colors
@@ -50,11 +61,16 @@ export const colors = {
   },
 
   // State colors
-  states: {
+  state: {
     hover: 'hover:bg-gray-700',
     focus: 'focus:ring-2 focus:ring-brand-gold focus:ring-offset-2 focus:ring-offset-gray-900',
     active: 'bg-gray-700',
-    disabled: 'opacity-50 cursor-not-allowed'
+    disabled: 'opacity-50 cursor-not-allowed',
+    success: 'text-green-600',
+    info: 'text-blue-600',
+    warning: 'bg-yellow-100',
+    warningBorder: 'border-yellow-300',
+    warningText: 'text-yellow-800'
   }
 }
 

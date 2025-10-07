@@ -5,6 +5,18 @@ export const interactive = {
   button: {
     base: 'inline-flex items-center justify-center font-semibold rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed',
     
+    // Direct button class combinations
+    primary: 'btn btn-primary',
+    secondary: 'btn btn-secondary', 
+    primaryDark: 'btn bg-gray-900 text-white hover:bg-gray-800',
+    outline: 'btn bg-transparent border-2 border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white',
+    ghost: 'text-gray-300 hover:text-white hover:bg-gray-800 focus:ring-gray-600',
+    
+    // Sizes
+    small: 'text-sm px-4 py-2',
+    medium: 'text-base px-6 py-3',
+    large: 'text-lg px-8 py-4',
+    
     sizes: {
       sm: 'px-4 py-2 text-sm',
       base: 'px-6 py-3 text-base',
@@ -25,7 +37,8 @@ export const interactive = {
     base: 'transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-gold rounded',
     default: 'text-brand-gold hover:text-yellow-500 underline-offset-2 hover:underline',
     nav: 'text-white hover:text-brand-gold',
-    subtle: 'text-gray-400 hover:text-white'
+    subtle: 'text-gray-400 hover:text-white',
+    accent: 'text-brand-gold hover:text-brand-green transition-colors'
   },
 
   // Form elements
@@ -41,7 +54,7 @@ export const interactive = {
 
   // Card interactions
   card: {
-    base: 'bg-gray-800 rounded-lg overflow-hidden transition-all duration-300',
+    base: 'group bg-gray-900 rounded-2xl overflow-hidden hover:shadow-2xl hover:shadow-brand-gold/20 transition-all duration-300 hover:-translate-y-2 border border-gray-800 hover:border-brand-gold/30',
     hover: 'hover:shadow-xl hover:-translate-y-1 hover:bg-gray-700',
     clickable: 'cursor-pointer',
     focus: 'focus:outline-none focus:ring-2 focus:ring-brand-gold focus:ring-offset-2 focus:ring-offset-gray-900'
@@ -49,14 +62,17 @@ export const interactive = {
 
   // Image interactions
   image: {
+    container: 'aspect-video overflow-hidden',
+    responsive: 'w-full h-full object-cover group-hover:scale-105 transition-transform duration-300',
     hover: 'transition-transform duration-300 hover:scale-105',
     thumbnail: 'cursor-pointer opacity-70 hover:opacity-100 transition-opacity duration-300',
     active: 'ring-2 ring-brand-gold opacity-100'
   },
 
   // Transitions
-  transitions: {
+  transition: {
     fast: 'transition-all duration-200',
+    medium: 'transition-all duration-300',
     base: 'transition-all duration-300',
     slow: 'transition-all duration-500',
     transform: 'transition-transform duration-300',

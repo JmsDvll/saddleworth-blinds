@@ -10,7 +10,12 @@ export const typography = {
   h6: 'text-base lg:text-lg font-semibold',
 
   // Body text
-  body: {
+  body: 'text-base lg:text-lg leading-relaxed',
+  bodyLarge: 'text-lg lg:text-xl leading-relaxed',
+  bodySmall: 'text-sm lg:text-base leading-relaxed',
+  
+  // Legacy body object for compatibility
+  bodyObj: {
     large: 'text-lg lg:text-xl leading-relaxed',
     base: 'text-base lg:text-lg leading-relaxed',
     small: 'text-sm lg:text-base leading-relaxed',
@@ -21,6 +26,7 @@ export const typography = {
   lead: 'text-xl lg:text-2xl text-gray-300 leading-relaxed',
   caption: 'text-sm text-gray-400',
   overline: 'text-sm uppercase tracking-wider text-gray-400',
+  quote: 'text-2xl lg:text-3xl font-semibold',
 
   // Colors
   colors: {
