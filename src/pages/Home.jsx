@@ -4,7 +4,7 @@ import FAQSection from '../components/FAQSection'
 import ReviewsSection from '../components/ReviewsSection'
 import ProductImageCarousel from '../components/ProductImageCarousel'
 import HeroCarousel from '../components/HeroCarousel'
-import { typography, spacing, colors, interactive } from '../styles'
+import { Button, Card, Section, Heading, Text, Grid } from '../components/ui'
 
 const Home = () => {
   const homeFaqs = [
