@@ -67,7 +67,7 @@ const Curtains = () => {
 
             <div className="relative">
               <img
-                src="/images/optimized/vision-viale-linen-1600.jpg"
+                src="/images/optimized/roller-birdsong-colour-1600.jpg"
                 alt="Beautiful made-to-measure curtains in a Saddleworth home"
                 className="w-full h-auto rounded-lg shadow-2xl"
                 loading="eager"

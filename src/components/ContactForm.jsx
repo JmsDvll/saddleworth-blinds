@@ -14,6 +14,7 @@ const ContactForm = () => {
   })
 
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState({ type: '', message: '' })
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target
@@ -47,7 +48,10 @@ const ContactForm = () => {
 
       if (response.ok) {
         // Success
-        alert('Thank you for your message! We\'ll get back to you within 24 hours.')
+        setSubmitStatus({
+          type: 'success',
+          message: 'Thank you for your message! We\'ll get back to you within 24 hours.'
+        })
         
         // Reset form
         setFormData({
@@ -61,13 +65,22 @@ const ContactForm = () => {
           contactMethod: 'phone',
           marketing: false
         })
+        
+        // Clear success message after 5 seconds
+        setTimeout(() => setSubmitStatus({ type: '', message: '' }), 5000)
       } else {
         // Error
-        alert('Sorry, there was an error sending your message. Please call us on 01457 597091.')
+        setSubmitStatus({
+          type: 'error',
+          message: 'Sorry, there was an error sending your message. Please call us on 01457 597091.'
+        })
       }
     } catch (error) {
       console.error('Form submission error:', error)
-      alert('Sorry, there was an error sending your message. Please call us on 01457 597091.')
+      setSubmitStatus({
+        type: 'error',
+        message: 'Sorry, there was an error sending your message. Please call us on 01457 597091.'
+      })
     } finally {
       setIsSubmitting(false)
     }
@@ -75,6 +88,19 @@ const ContactForm = () => {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
+      {/* Status Messages */}
+      {submitStatus.message && (
+        <div
+          className={`p-4 rounded-lg ${
+            submitStatus.type === 'success'
+              ? 'bg-green-900/20 border border-green-600 text-green-400'
+              : 'bg-red-900/20 border border-red-600 text-red-400'
+          }`}
+          role="alert"
+        >
+          <p className="font-medium">{submitStatus.message}</p>
+        </div>
+      )}
       <div>
         <label htmlFor="name" className="block text-sm font-medium text-white mb-2">
           Your Name *
@@ -262,9 +288,19 @@ const ContactForm = () => {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="w-full btn btn-primary text-lg py-4 disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-full btn btn-primary text-lg py-4 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
       >
-        {isSubmitting ? 'Sending...' : 'Send Message'}
+        {isSubmitting ? (
+          <>
+            <svg className="animate-spin h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            <span>Sending...</span>
+          </>
+        ) : (
+          'Send Message'
+        )}
       </button>
     </form>
   )

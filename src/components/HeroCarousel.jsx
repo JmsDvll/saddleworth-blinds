@@ -39,9 +39,8 @@ const HeroCarousel = ({
   return (
     <CarouselContainer
       className={CAROUSEL_HEIGHTS.hero}
-      autoPlay={autoRotate}
-      interval={interval}
-      pauseOnHover={true}
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
     >
       {/* Main Image */}
       <div className="relative w-full h-full">

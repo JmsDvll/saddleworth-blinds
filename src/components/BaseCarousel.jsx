@@ -4,24 +4,16 @@ import React, { useState, useEffect } from 'react'
 export const CarouselContainer = ({
   children,
   className = '',
-  autoPlay = false,
-  interval = 5000,
-  pauseOnHover = true
+  onMouseEnter,
+  onMouseLeave
 }) => {
-  const [isPaused, setIsPaused] = useState(false)
-
   return (
     <div
       className={`relative w-full overflow-hidden rounded-lg shadow-2xl ${className}`}
-      onMouseEnter={() => pauseOnHover && setIsPaused(true)}
-      onMouseLeave={() => pauseOnHover && setIsPaused(false)}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
     >
-      {React.cloneElement(children, {
-        autoPlay,
-        interval,
-        isPaused,
-        setIsPaused
-      })}
+      {children}
     </div>
   )
 }

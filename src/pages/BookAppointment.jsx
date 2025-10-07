@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { typography, spacing, colors, interactive } from '../styles'
 
 const BookAppointment = () => {
   const [formData, setFormData] = useState({
@@ -19,6 +20,7 @@ const BookAppointment = () => {
   })
 
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState({ type: '', message: '' })
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target
@@ -65,7 +67,16 @@ const BookAppointment = () => {
 
       if (response.ok) {
         // Success - show success message and reset form
-        alert('Thank you for booking! We\'ll contact you within 24 hours to arrange your free consultation.')
+        setSubmitStatus({
+          type: 'success',
+          message: 'Thank you for booking! We\'ll contact you within 24 hours to arrange your free consultation.'
+        })
+        
+        // Scroll to top to show success message
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+        
+        // Clear success message after 10 seconds
+        setTimeout(() => setSubmitStatus({ type: '', message: '' }), 10000)
         
         // Reset form
         setFormData({
@@ -86,25 +97,45 @@ const BookAppointment = () => {
         })
       } else {
         // Error
-        alert('Sorry, there was an error sending your booking. Please call us on 01457 597091.')
+        setSubmitStatus({
+          type: 'error',
+          message: 'Sorry, there was an error sending your booking. Please call us on 01457 597091.'
+        })
       }
     } catch (error) {
       console.error('Form submission error:', error)
-      alert('Sorry, there was an error sending your booking. Please call us on 01457 597091.')
+      setSubmitStatus({
+        type: 'error',
+        message: 'Sorry, there was an error sending your booking. Please call us on 01457 597091.'
+      })
     } finally {
       setIsSubmitting(false)
     }
   }
 
   return (
-    <div className="container py-20">
+    <div className={`${spacing.container.default} ${spacing.section.py}`}>
       <div className="max-w-4xl mx-auto">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl lg:text-5xl font-bold mb-6">Book Your Free Consultation</h1>
-          <p className="text-xl text-gray-300 leading-relaxed">
+        <div className={`text-center ${spacing.margin.bottomXl}`}>
+          <h1 className={`${typography.h1} ${spacing.margin.bottomLg}`}>Book Your Free Consultation</h1>
+          <p className={`${typography.lead} ${colors.text.lightGray}`}>
             Tell us a bit about yourself and we'll get back to you to arrange your free home visit. The more you can tell us, the better we can help!
           </p>
         </div>
+
+        {/* Status Messages */}
+        {submitStatus.message && (
+          <div
+            className={`p-4 rounded-lg mb-8 ${
+              submitStatus.type === 'success'
+                ? 'bg-green-900/20 border border-green-600 text-green-400'
+                : 'bg-red-900/20 border border-red-600 text-red-400'
+            }`}
+            role="alert"
+          >
+            <p className="font-medium text-lg">{submitStatus.message}</p>
+          </div>
+        )}
 
         <div className="grid lg:grid-cols-3 gap-12">
           <div className="lg:col-span-2">
@@ -379,9 +410,19 @@ const BookAppointment = () => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-brand-gold hover:bg-yellow-500 text-gray-900 font-semibold py-4 px-8 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full bg-brand-gold hover:bg-yellow-500 text-gray-900 font-semibold py-4 px-8 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
               >
-                {isSubmitting ? 'Sending...' : 'Book Your Free Consultation'}
+                {isSubmitting ? (
+                  <>
+                    <svg className="animate-spin h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    <span>Sending...</span>
+                  </>
+                ) : (
+                  'Book Your Free Consultation'
+                )}
               </button>
 
               <p className="text-sm text-gray-400 text-center">

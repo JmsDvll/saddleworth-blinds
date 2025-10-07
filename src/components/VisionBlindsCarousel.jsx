@@ -40,7 +40,7 @@ const VisionBlindsCarousel = ({ showTitle = true, showDescription = true }) => {
     { src: 'vision-setosa-ivory-400.jpg', alt: 'Setosa Ivory Vision Blind', title: 'Setosa Ivory' },
     { src: 'vision-setosa-pewter-400.jpg', alt: 'Setosa Pewter Vision Blind', title: 'Setosa Pewter' },
     { src: 'vision-trento-beige-400.jpg', alt: 'Trento Beige Vision Blind', title: 'Trento Beige' },
-    { src: 'vision-viale-linen-400.jpg', alt: 'Viale Linen Vision Blind', title: 'Viale Linen' },
+    { src: 'vision-lusso-pebble-400.jpg', alt: 'Lusso Pebble Vision Blind', title: 'Lusso Pebble' },
     { src: 'vision-viale-mauve-400.jpg', alt: 'Viale Mauve Vision Blind', title: 'Viale Mauve' }
   ]
 

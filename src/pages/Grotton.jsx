@@ -2,23 +2,23 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import HeroCarousel from '../components/HeroCarousel'
 
-const Grasscroft = () => {
+const Grotton = () => {
   const areaHeroImages = [
     {
       src: 'vision-lusso-pebble-1600.jpg',
-      alt: 'Beautiful window blinds in a Grasscroft home',
-      title: 'Grasscroft Style',
+      alt: 'Beautiful window blinds in a Grotton home',
+      title: 'Grotton Style',
       description: 'Elegant blinds for village homes'
     },
     {
       src: 'vision-firenze-walnut-1600.jpg',
-      alt: 'Premium blinds showcasing natural wood tones in Grasscroft',
+      alt: 'Premium blinds showcasing natural wood tones in Grotton',
       title: 'Natural Wood',
       description: 'Warm tones for traditional homes'
     },
     {
       src: 'roller-zen-kiwi-1600.jpg',
-      alt: 'Modern roller blinds adding vibrant color to Grasscroft interiors',
+      alt: 'Modern roller blinds adding vibrant color to Grotton interiors',
       title: 'Contemporary',
       description: 'Clean modern aesthetics'
     }
@@ -73,7 +73,7 @@ const Grasscroft = () => {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg>
                   </div>
-                  <p className="text-sm font-medium">Local Grasscroft Experts</p>
+                  <p className="text-sm font-medium">Local Grotton Experts</p>
                 </div>
                 <div className="text-center">
                   <div className="w-12 h-12 bg-brand-gold rounded-full flex items-center justify-center mx-auto mb-3">
@@ -135,7 +135,7 @@ const Grasscroft = () => {
               </div>
               <h3 className="text-xl font-semibold mb-4">20+ Years Local Experience</h3>
               <p className="text-gray-300">
-                Trusted by Grasscroft homeowners for over two decades. We know the local area and understand what works best for your home.
+                Trusted by Grotton homeowners for over two decades. We know the local area and understand what works best for your home.
               </p>
             </div>
           </div>
@@ -167,4 +167,4 @@ const Grasscroft = () => {
   )
 }
 
-export default Grasscroft
+export default Grotton

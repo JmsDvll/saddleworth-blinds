@@ -1,27 +1,29 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import ContactForm from '../components/ContactForm'
+import { typography, spacing, colors, interactive } from '../styles'
 
 const Contact = () => {
   return (
-    <div className="container py-20">
+    <div className={`${spacing.container.default} ${spacing.section.py}`}>
       <div className="max-w-6xl mx-auto">
-        <h1 className="text-4xl lg:text-5xl font-bold mb-8">Contact Us</h1>
-        <p className="text-xl text-gray-300 leading-relaxed mb-12">
+        <h1 className={`${typography.h1} ${spacing.margin.bottomLg}`}>Contact Us</h1>
+        <p className={`${typography.lead} ${colors.text.lightGray} ${spacing.margin.bottomXl}`}>
           Get in touch with Saddleworth's trusted window blind specialists. Call, email, or visit our Shaw showroom for expert advice and free quotes.
         </p>
 
-        <div className="grid lg:grid-cols-2 gap-12">
+        <div className={`${spacing.layout.grid} ${spacing.layout.gridCols2} ${spacing.gap.xl}`}>
           {/* Contact Form */}
-          <div className="bg-gray-900 rounded-lg p-8">
-            <h2 className="text-2xl font-semibold mb-6">Send Us a Message</h2>
+          <div className={`${colors.background.dark} rounded-lg ${spacing.padding.xl}`}>
+            <h2 className={`${typography.h2} ${spacing.margin.bottomLg}`}>Send Us a Message</h2>
             <ContactForm />
           </div>
 
           {/* Contact Information */}
           <div className="space-y-8">
             <div>
-              <h2 className="text-2xl font-semibold mb-6">Get In Touch</h2>
-              <div className="space-y-6">
+              <h2 className={`${typography.h2} ${spacing.margin.bottomLg}`}>Get In Touch</h2>
+              <div className={spacing.stack.lg}>
                 <div className="bg-gray-800 rounded-lg p-6">
                   <h3 className="text-lg font-medium text-white mb-2 flex items-center gap-2">
                     <svg className="w-5 h-5 text-brand-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -29,7 +31,7 @@ const Contact = () => {
                     </svg>
                     Call Us
                   </h3>
-                  <a href="tel:01457597091" className="text-brand-gold hover:text-brand-green transition-colors text-lg font-semibold">
+                  <a href="tel:01457597091" className={`${interactive.link.accent} ${typography.bodyLarge} font-semibold`}>
                     01457 597091
                   </a>
                   <p className="text-gray-400 text-sm mt-1">Mon-Fri: 9am-5pm | Saturday: 10am-4pm</p>
@@ -42,7 +44,7 @@ const Contact = () => {
                     </svg>
                     Email Us
                   </h3>
-                  <a href="mailto:sales@saddleworthblinds.co.uk" className="text-brand-gold hover:text-brand-green transition-colors">
+                  <a href="mailto:sales@saddleworthblinds.co.uk" className={interactive.link.accent}>
                     sales@saddleworthblinds.co.uk
                   </a>
                 </div>

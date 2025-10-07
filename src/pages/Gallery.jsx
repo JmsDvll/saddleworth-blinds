@@ -6,7 +6,7 @@ const Gallery = () => {
     {
       category: 'Vision Blinds',
       images: [
-        { src: '/images/optimized/vision-viale-linen-400.jpg', alt: 'Vision Viale Linen blinds in bedroom', title: 'Vision Viale Linen' },
+        { src: '/images/optimized/vision-lusso-pebble-400.jpg', alt: 'Vision Lusso Pebble blinds in bedroom', title: 'Vision Lusso Pebble' },
         { src: '/images/optimized/vision-setosa-ivory-400.jpg', alt: 'Vision Setosa Ivory blinds', title: 'Vision Setosa Ivory' },
         { src: '/images/optimized/vision-ferrara-anthracite-400.jpg', alt: 'Vision Ferrara Anthracite blinds', title: 'Vision Ferrara Anthracite' }
       ]

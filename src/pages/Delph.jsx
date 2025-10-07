@@ -23,14 +23,14 @@ const Delph = () => {
                   className="btn btn-primary text-lg px-8 py-4 text-center"
                 >
                   Book Free Quote in Delph
-            </Link>
-            <a
-              href="tel:01457597091"
-              className="btn btn-secondary text-lg px-8 py-4 flex items-center justify-center gap-2"
-            >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-              </svg>
+                </Link>
+                <a
+                  href="tel:01457597091"
+                  className="btn btn-secondary text-lg px-8 py-4 flex items-center justify-center gap-2"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  </svg>
                   Call 01457 597091
                 </a>
               </div>
@@ -77,10 +77,7 @@ const Delph = () => {
       </section>
 
       <div className="container py-20">
-        <div className="max-w-4xl mx-auto">
-
-        {/* Content Sections */}
-        <div className="space-y-16">
+        <div className="max-w-4xl mx-auto space-y-16">
           <div className="text-center">
             <h2 className="text-3xl lg:text-4xl font-bold mb-6">Window Blinds for Delph Homes</h2>
             <p className="text-xl text-gray-300 leading-relaxed max-w-3xl mx-auto">
@@ -158,10 +155,9 @@ const Delph = () => {
             <li><strong>Comprehensive Warranty:</strong> Full warranty on all products and installation</li>
             <li><strong>Fair Pricing:</strong> Competitive prices with no hidden fees</li>
           </ul>
-        </div>
 
-        {/* CTA Section */}
-        <div className="mt-16 text-center">
+          {/* CTA Section */}
+          <div className="mt-16 text-center">
           <h2 className="text-3xl font-bold mb-6">Ready to Transform Your Delph Home?</h2>
           <p className="text-xl text-gray-300 mb-8">
             Let's make your windows beautiful together. We'll come to you, measure up, and show you exactly what's possible in your Delph home.
@@ -203,7 +199,7 @@ const Delph = () => {
               <span className="text-sm">Covering Delph</span>
             </div>
           </div>
-        </div>
+          </div>
         </div>
       </div>
     </div>
