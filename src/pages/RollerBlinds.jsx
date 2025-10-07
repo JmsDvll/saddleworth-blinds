@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import RollerBlindsCarousel from '../components/RollerBlindsCarousel'
 
 const RollerBlinds = () => {
   return (
@@ -65,12 +66,7 @@ const RollerBlinds = () => {
             </div>
 
             <div className="relative">
-              <img
-                src="/images/optimized/roller-zen-kiwi-1600.jpg"
-                alt="Premium roller blinds in a modern Saddleworth living room"
-                className="w-full h-auto rounded-lg shadow-2xl"
-                loading="eager"
-              />
+              <RollerBlindsCarousel showTitle={false} showDescription={false} />
             </div>
           </div>
         </div>
@@ -81,11 +77,41 @@ const RollerBlinds = () => {
 
         {/* Content Sections */}
         <div className="space-y-16">
-          <div className="text-center">
-            <h2 className="text-3xl lg:text-4xl font-bold mb-6">Why Roller Blinds Are Perfect for Saddleworth Homes</h2>
-            <p className="text-xl text-gray-300 leading-relaxed max-w-3xl mx-auto">
-              Simple, stylish and incredibly practical - discover why roller blinds have become the go-to choice for homeowners across Saddleworth. Whether you're looking to control the morning sun streaming into your Diggle kitchen or create the perfect sleep environment in your Delph bedroom, our made-to-measure roller blinds offer the ideal solution.
-            </p>
+          <div className="text-center relative">
+            <div className="absolute inset-0 bg-gradient-to-r from-brand-gold/10 via-transparent to-brand-gold/10 rounded-3xl -mx-8"></div>
+            <div className="relative z-10">
+              <div className="w-24 h-1 bg-gradient-to-r from-brand-gold to-yellow-400 mx-auto mb-6 rounded-full"></div>
+              <h2 className="text-4xl lg:text-5xl font-bold mb-6 bg-gradient-to-r from-brand-gold to-yellow-400 bg-clip-text text-transparent">
+                Why Roller Blinds Are Perfect for Saddleworth Homes
+              </h2>
+              <div className="w-24 h-1 bg-gradient-to-r from-brand-gold to-yellow-400 mx-auto mb-8 rounded-full"></div>
+              <div className="grid md:grid-cols-2 gap-8 items-center max-w-5xl mx-auto">
+                <div className="space-y-4">
+                  <p className="text-lg text-gray-300 leading-relaxed">
+                    Simple, stylish and incredibly practical - discover why roller blinds have become the go-to choice for homeowners across Saddleworth.
+                  </p>
+                  <p className="text-lg text-gray-300 leading-relaxed">
+                    Whether you're looking to control the morning sun streaming into your Diggle kitchen or create the perfect sleep environment in your Delph bedroom, our made-to-measure roller blinds offer the ideal solution.
+                  </p>
+                </div>
+                <div className="bg-gray-800/50 rounded-lg p-6 border border-brand-gold/20">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-12 h-12 bg-brand-gold rounded-full flex items-center justify-center">
+                      <svg className="w-6 h-6 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-white">Made-to-Measure</h3>
+                      <p className="text-sm text-gray-400">Perfect fit guaranteed</p>
+                    </div>
+                  </div>
+                  <p className="text-gray-300">
+                    Every roller blind is custom-made to fit your windows perfectly, ensuring a professional finish every time.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div>
@@ -223,55 +249,9 @@ const RollerBlinds = () => {
           </div>
         </div>
 
-        {/* Gallery Section */}
+        {/* Roller Blinds Carousel */}
         <div className="mt-16">
-          <h2 className="text-3xl font-bold mb-8 text-center">Roller Blind Inspiration Gallery</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="bg-gray-800 rounded-lg overflow-hidden">
-              <img
-                src="/images/optimized/roller-zen-kiwi-400.jpg"
-                alt="Zen Kiwi roller blind"
-                className="w-full h-48 object-cover"
-              />
-              <div className="p-4">
-                <h3 className="font-semibold text-white">Zen Kiwi</h3>
-                <p className="text-sm text-gray-400">Adding a pop of colour to modern interiors</p>
-              </div>
-            </div>
-            <div className="bg-gray-800 rounded-lg overflow-hidden">
-              <img
-                src="/images/optimized/roller-blind-modern-400.jpg"
-                alt="Modern roller blind"
-                className="w-full h-48 object-cover"
-              />
-              <div className="p-4">
-                <h3 className="font-semibold text-white">Clean & Contemporary</h3>
-                <p className="text-sm text-gray-400">Perfect for minimalist interiors</p>
-              </div>
-            </div>
-            <div className="bg-gray-800 rounded-lg overflow-hidden">
-              <img
-                src="/images/optimized/blind-sample-400.jpg"
-                alt="Premium roller blind texture"
-                className="w-full h-48 object-cover"
-              />
-              <div className="p-4">
-                <h3 className="font-semibold text-white">Premium Textures</h3>
-                <p className="text-sm text-gray-400">Quality fabrics that look and feel luxurious</p>
-              </div>
-            </div>
-            <div className="bg-gray-800 rounded-lg overflow-hidden">
-              <img
-                src="/images/optimized/motorised-celeste-400.jpg"
-                alt="Motorised roller blind"
-                className="w-full h-48 object-cover"
-              />
-              <div className="p-4">
-                <h3 className="font-semibold text-white">Smart Motorised Options</h3>
-                <p className="text-sm text-gray-400">Control your blinds with ease</p>
-              </div>
-            </div>
-          </div>
+          <RollerBlindsCarousel />
         </div>
 
         {/* CTA Section */}

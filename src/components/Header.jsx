@@ -34,7 +34,7 @@ const Header = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-8" role="navigation" aria-label="Main navigation">
+          <nav className="hidden lg:flex items-center space-x-6" role="navigation" aria-label="Main navigation">
             <Link to="/" className="text-white hover:text-brand-gold transition-colors">
               Home
             </Link>
@@ -204,15 +204,15 @@ const Header = () => {
           </nav>
 
           {/* Header CTA */}
-          <div className="hidden lg:flex items-center space-x-4">
+          <div className="hidden lg:flex items-center space-x-3">
             <a
               href="tel:01457597091"
-              className="flex items-center space-x-2 text-white hover:text-brand-gold transition-colors"
+              className="btn btn-secondary flex items-center space-x-2 text-white border-brand-gold hover:bg-brand-gold hover:text-gray-900 transition-all duration-200"
             >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
               </svg>
-              <span>01457 597091</span>
+              <span className="font-medium">01457 597091</span>
             </a>
             <Link to="/book-appointment" className="btn btn-primary">
               Book Free Quote

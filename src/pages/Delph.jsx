@@ -66,7 +66,7 @@ const Delph = () => {
 
             <div className="relative">
               <img
-                src="/images/optimized/vision-ferrara-anthracite-1600.jpg"
+                src="/images/optimized/vision-floreale-rosa-1600.jpg"
                 alt="Beautiful window blinds in a Delph home"
                 className="w-full h-auto rounded-lg shadow-2xl"
                 loading="eager"

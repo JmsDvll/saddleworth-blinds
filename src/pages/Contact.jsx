@@ -74,16 +74,20 @@ const Contact = () => {
 
             <div className="bg-gray-800 rounded-lg p-6">
               <h2 className="text-xl font-semibold mb-4">Areas We Cover</h2>
-              <ul className="grid grid-cols-2 gap-2">
+              <div className="grid grid-cols-2 gap-2">
                 {['Uppermill', 'Diggle', 'Delph', 'Greenfield', 'Dobcross', 'Lydgate', 'Denshaw', 'Friezland', 'Grasscroft', 'Grotton', 'Springhead', 'Lees'].map((area) => (
-                  <li key={area} className="text-gray-300 flex items-center gap-2">
-                    <svg className="w-4 h-4 text-brand-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <Link
+                    key={area}
+                    to={`/areas/${area.toLowerCase()}`}
+                    className="text-gray-300 hover:text-brand-gold transition-colors flex items-center gap-2"
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                     {area}
-                  </li>
+                  </Link>
                 ))}
-              </ul>
+              </div>
             </div>
           </div>
         </div>

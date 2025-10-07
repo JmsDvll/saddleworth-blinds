@@ -66,7 +66,7 @@ const About = () => {
 
             <div className="relative">
               <img
-                src="/images/optimized/vision-ferrara-anthracite-1600.jpg"
+                src="/images/optimized/vision-palermo-silver-1600.jpg"
                 alt="Sunshine Blinds Saddleworth showroom and team"
                 className="w-full h-auto rounded-lg shadow-2xl"
                 loading="eager"

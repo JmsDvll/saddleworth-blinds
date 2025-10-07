@@ -2,8 +2,84 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import FAQSection from '../components/FAQSection'
 import ReviewsSection from '../components/ReviewsSection'
+import ProductImageCarousel from '../components/ProductImageCarousel'
+import HeroCarousel from '../components/HeroCarousel'
 
 const Home = () => {
+  const homeFaqs = [
+    {
+      question: "What areas do you cover in Saddleworth?",
+      answer: "We serve all Saddleworth villages including Uppermill, Diggle, Delph, Greenfield, Dobcross, Lydgate, and surrounding areas. Our local knowledge ensures we understand the unique character of each village and can recommend the perfect blinds for your home."
+    },
+    {
+      question: "How long does it take to get blinds fitted?",
+      answer: "From consultation to fitting typically takes 2-3 weeks. We offer free home consultations within 48 hours, provide a detailed quote the same day, and schedule fitting at a time that suits you. Express fitting is available for urgent requirements."
+    },
+    {
+      question: "Do you offer a guarantee on your blinds?",
+      answer: "Yes! All our blinds come with a comprehensive 5-year guarantee covering manufacturing defects and installation issues. We also offer ongoing support and can provide replacement parts if needed. Our blinds are built to last."
+    },
+    {
+      question: "Can you help with measuring and choosing the right blinds?",
+      answer: "Absolutely! Our free consultation includes professional measuring and expert advice on the best blinds for your windows, room, and style preferences. We'll bring samples and help you visualize how different options will look in your home."
+    },
+    {
+      question: "What payment options do you offer?",
+      answer: "We accept all major credit cards, bank transfers, and cash. You can pay a deposit when you place your order and the balance on completion. We also offer interest-free payment plans for larger orders over £500."
+    }
+  ]
+
+  const heroImages = [
+    {
+      src: 'vision-firenze-walnut-1600.jpg',
+      alt: 'Beautiful Firenze Walnut vision blinds in a contemporary Saddleworth home',
+      title: 'Premium Vision Blinds',
+      description: 'Beautiful wood tones for modern interiors'
+    },
+    {
+      src: 'vision-floreale-rosa-1600.jpg',
+      alt: 'Elegant Floreale Rosa vision blinds showcasing floral elegance',
+      title: 'Floral Inspiration',
+      description: 'Soft, elegant patterns for traditional homes'
+    },
+    {
+      src: 'vision-lusso-pebble-1600.jpg',
+      alt: 'Modern Lusso Pebble vision blinds in neutral tones',
+      title: 'Contemporary Style',
+      description: 'Clean, modern aesthetics for urban living'
+    },
+    {
+      src: 'vision-palermo-silver-1600.jpg',
+      alt: 'Sophisticated Palermo Silver vision blinds',
+      title: 'Luxury Finishes',
+      description: 'Premium materials for discerning homeowners'
+    },
+    {
+      src: 'roller-zen-kiwi-1600.jpg',
+      alt: 'Zen Kiwi roller blinds adding vibrant color',
+      title: 'Bold Colors',
+      description: 'Vibrant patterns for modern spaces'
+    },
+    {
+      src: 'roller-carnival-bubblegum-1600.jpg',
+      alt: 'Carnival Bubblegum roller blinds with fun patterns',
+      title: 'Playful Designs',
+      description: 'Fun, colorful options for every room'
+    },
+    {
+      src: 'vertical-savanna-zebra-1600.jpg',
+      alt: 'Savanna Zebra vertical blinds with modern pattern',
+      title: 'Modern Patterns',
+      description: 'Contemporary designs for large windows'
+    },
+    {
+      src: 'shutters-cotton-89mm-1600.jpg',
+      alt: 'Cotton plantation shutters with 89mm louvres',
+      title: 'Luxury Shutters',
+      description: 'Premium shutters that add real value'
+    }
+  ]
+
   return (
     <>
       {/* Hero Section */}
@@ -76,55 +152,68 @@ const Home = () => {
             </div>
 
             <div className="relative">
-              <img
-                src="/images/optimized/vision-ferrara-anthracite-1600.jpg"
-                alt="Premium Ferrara Anthracite vision blinds in a contemporary Saddleworth home"
-                className="w-full h-auto rounded-lg shadow-2xl"
-                loading="eager"
-              />
+              <HeroCarousel images={heroImages} autoRotate={true} interval={6000} />
             </div>
           </div>
         </div>
       </section>
 
       {/* Services Grid */}
-      <section className="py-20 bg-gray-800">
+      <section className="py-20 bg-gradient-to-br from-gray-800 via-gray-900 to-gray-800">
         <div className="container">
           <div className="text-center mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold mb-4">Discover Your Dream Blinds</h2>
-            <p className="text-xl text-gray-300">"We Put Other companies in the shade"</p>
+            <h2 className="text-4xl lg:text-5xl font-bold mb-6 bg-gradient-to-r from-brand-gold to-yellow-400 bg-clip-text text-transparent">
+              Discover Your Dream Blinds
+            </h2>
+            <div className="relative">
+              <p className="text-2xl lg:text-3xl font-semibold text-brand-gold italic mb-4">
+                "We Put Other Companies in the Shade"
+              </p>
+              <div className="w-24 h-1 bg-gradient-to-r from-brand-gold to-yellow-400 mx-auto rounded-full"></div>
+            </div>
+            <p className="text-lg text-gray-300 mt-6 max-w-2xl mx-auto">
+              From cosy cottages in Uppermill to modern homes in Greenfield, we understand what suits the unique charm of Saddleworth
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               { name: 'Roller Blinds', description: 'Simple, stylish and practical - roller blinds work brilliantly in any room.', link: '/roller-blinds', image: '/images/optimized/roller-zen-kiwi-400.jpg' },
               { name: 'Venetian Blinds', description: 'The classic choice that never goes out of style. Perfect light control with a twist of the wand.', link: '/venetian-blinds', image: '/images/optimized/venetian-starwood-400.jpg' },
-              { name: 'Vertical Blinds', description: 'Got big windows or patio doors? Vertical blinds are your best friend.', link: '/vertical-blinds', image: '/images/optimized/vertical-grey-400.jpg' },
+              { name: 'Vertical Blinds', description: 'Got big windows or patio doors? Vertical blinds are your best friend.', link: '/vertical-blinds', image: '/images/optimized/vertical-savanna-zebra-400.jpg' },
               { name: 'Vision Blinds', description: 'The clever choice! Vision blinds give you privacy when you need it and beautiful views when you want them.', link: '/vision-blinds', image: '/images/optimized/vision-capri-concrete-400.jpg' },
               { name: 'Perfect Fit Blinds', description: 'Hate the thought of drilling holes in your window frames? Perfect Fit blinds clip right into your UPVC windows.', link: '/perfect-fit-blinds', image: '/images/optimized/perfectfit-monet-flower-400.jpg' },
               { name: 'Shutters', description: 'Want to add real wow factor? Plantation shutters are the ultimate luxury.', link: '/shutters', image: '/images/optimized/shutters-cotton-89mm-400.jpg' },
-              { name: 'Roman Blinds', description: 'For a touch of elegance and sophistication, Roman blinds are perfect.', link: '/roman-blinds', image: '/images/optimized/vision-viale-linen-400.jpg' },
-              { name: 'Curtains', description: 'Sometimes nothing beats the classic look of curtains.', link: '/curtains', image: '/images/optimized/vision-viale-linen-400.jpg' },
-              { name: 'Allusion Blinds', description: 'Experience contemporary elegance with flowing fabric panels that combine curtains with blinds.', link: '/allusion-blinds', image: '/images/optimized/vision-viale-linen-400.jpg' }
+              { name: 'Roman Blinds', description: 'For a touch of elegance and sophistication, Roman blinds are perfect.', link: '/roman-blinds', image: '/images/optimized/vision-viale-linen-400.jpg', comingSoon: true },
+              { name: 'Curtains', description: 'Sometimes nothing beats the classic look of curtains.', link: '/curtains', image: '/images/optimized/vision-viale-linen-400.jpg', comingSoon: true },
+              { name: 'Allusion Blinds', description: 'Experience contemporary elegance with flowing fabric panels that combine curtains with blinds.', link: '/allusion-blinds', image: '/images/optimized/allusion-vista-snow-400.jpg' }
             ].map((service) => (
               <Link
                 key={service.name}
                 to={service.link}
-                className="group bg-gray-900 rounded-lg overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                className="group bg-gray-900 rounded-2xl overflow-hidden hover:shadow-2xl hover:shadow-brand-gold/20 transition-all duration-300 hover:-translate-y-2 border border-gray-800 hover:border-brand-gold/30"
               >
-                <div className="aspect-video overflow-hidden">
+                <div className="aspect-video overflow-hidden relative">
                   <img
                     src={service.image}
                     alt={service.name}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     loading="lazy"
                   />
+                  {service.comingSoon && (
+                    <div className="absolute top-4 right-4 bg-gradient-to-r from-brand-gold to-yellow-400 text-gray-900 px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
+                      Coming Soon
+                    </div>
+                  )}
                 </div>
                 <div className="p-6">
-                  <h3 className="text-xl font-semibold mb-3 text-white group-hover:text-brand-gold transition-colors">
+                  <h3 className="text-xl font-bold mb-3 text-white group-hover:text-brand-gold transition-colors">
                     {service.name}
+                    {service.comingSoon && (
+                      <span className="ml-2 text-sm text-brand-gold font-medium">(Coming Soon)</span>
+                    )}
                   </h3>
-                  <p className="text-gray-400 text-sm leading-relaxed">
+                  <p className="text-gray-300 text-sm leading-relaxed">
                     {service.description}
                   </p>
                 </div>
@@ -133,6 +222,14 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* FAQ Section */}
+      <FAQSection
+        title="Frequently Asked Questions"
+        description="Everything you need to know about choosing the perfect blinds for your Saddleworth home"
+        faqs={homeFaqs}
+        className="bg-gray-900"
+      />
 
       {/* CTA Section */}
       <section className="py-20 bg-brand-gold">

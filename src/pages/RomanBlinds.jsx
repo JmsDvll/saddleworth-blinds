@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import ProductImageCarousel from '../components/ProductImageCarousel'
 
 const RomanBlinds = () => {
   return (
@@ -78,6 +79,35 @@ const RomanBlinds = () => {
 
       <div className="container py-20">
         <div className="max-w-4xl mx-auto">
+
+        {/* Coming Soon Section */}
+        <div className="text-center mb-16">
+          <div className="bg-gradient-to-br from-brand-gold/10 to-brand-gold/5 rounded-2xl p-12 border border-brand-gold/20">
+            <div className="w-24 h-24 bg-brand-gold rounded-full flex items-center justify-center mx-auto mb-6">
+              <svg className="w-12 h-12 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <h2 className="text-3xl lg:text-4xl font-bold mb-6">Roman Blinds - Coming Soon!</h2>
+            <p className="text-xl text-gray-300 leading-relaxed max-w-3xl mx-auto mb-8">
+              We're currently expanding our Roman blinds collection. In the meantime, explore our extensive range of other blind types below to see the quality and variety we offer.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a
+                href="/book-appointment"
+                className="btn btn-primary text-lg px-8 py-4"
+              >
+                Register Interest
+              </a>
+              <a
+                href="tel:01457597091"
+                className="btn btn-secondary text-lg px-8 py-4"
+              >
+                Call for Details
+              </a>
+            </div>
+          </div>
+        </div>
 
         {/* Content Sections */}
         <div className="space-y-16">
@@ -234,56 +264,6 @@ const RomanBlinds = () => {
           </div>
         </div>
 
-        {/* Gallery Section */}
-        <div className="mt-16">
-          <h2 className="text-3xl font-bold mb-8 text-center">Roman Blinds Gallery</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="bg-gray-800 rounded-lg overflow-hidden group hover:shadow-xl transition-all duration-300">
-              <img
-                src="/images/optimized/vision-viale-linen-400.jpg"
-                alt="Elegant Roman blinds with classic linen in a Saddleworth living room"
-                className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-              />
-              <div className="p-4">
-                <h3 className="font-semibold text-white mb-2">Classic Linen</h3>
-                <p className="text-sm text-gray-400">Elegant neutral tones for traditional homes</p>
-              </div>
-            </div>
-            <div className="bg-gray-800 rounded-lg overflow-hidden group hover:shadow-xl transition-all duration-300">
-              <img
-                src="/images/optimized/vision-ferrara-anthracite-400.jpg"
-                alt="Patterned Roman blinds with beautiful texture"
-                className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-              />
-              <div className="p-4">
-                <h3 className="font-semibold text-white mb-2">Textured Weave</h3>
-                <p className="text-sm text-gray-400">Beautiful texture and depth for character</p>
-              </div>
-            </div>
-            <div className="bg-gray-800 rounded-lg overflow-hidden group hover:shadow-xl transition-all duration-300">
-              <img
-                src="/images/optimized/roller-zen-kiwi-400.jpg"
-                alt="Modern Roman blinds with contemporary style"
-                className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-              />
-              <div className="p-4">
-                <h3 className="font-semibold text-white mb-2">Contemporary Style</h3>
-                <p className="text-sm text-gray-400">Clean modern lines for contemporary homes</p>
-              </div>
-            </div>
-            <div className="bg-gray-800 rounded-lg overflow-hidden group hover:shadow-xl transition-all duration-300">
-              <img
-                src="/images/optimized/vision-capri-concrete-400.jpg"
-                alt="Premium Roman blinds in neutral concrete tones"
-                className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-              />
-              <div className="p-4">
-                <h3 className="font-semibold text-white mb-2">Premium Fabrics</h3>
-                <p className="text-sm text-gray-400">Luxury materials for discerning homeowners</p>
-              </div>
-            </div>
-          </div>
-        </div>
 
         {/* CTA Section */}
         <div className="mt-16 text-center">

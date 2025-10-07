@@ -238,7 +238,7 @@ const PerfectFitBlinds = () => {
             </div>
             <div className="bg-gray-800 rounded-lg overflow-hidden group hover:shadow-xl transition-all duration-300">
               <img
-                src="/images/optimized/vision-capri-concrete-400.jpg"
+                src="/images/optimized/perfectfit-blind-white-400.jpg"
                 alt="Perfect Fit blinds in neutral concrete tones"
                 className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
               />

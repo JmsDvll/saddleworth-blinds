@@ -1,7 +1,31 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import VisionBlindsCarousel from '../components/VisionBlindsCarousel'
+import FAQSection from '../components/FAQSection'
 
 const VisionBlinds = () => {
+  const visionFaqs = [
+    {
+      question: "What makes Vision blinds different from other blinds?",
+      answer: "Vision blinds feature innovative dual-layer fabric technology that allows you to have complete privacy when the layers are aligned, or beautiful diffused light when separated. Unlike traditional blinds, they offer the perfect balance of privacy and natural light control."
+    },
+    {
+      question: "Are Vision blinds suitable for all window types?",
+      answer: "Vision blinds are incredibly versatile and can be fitted to most window types including casement windows, sash windows, and even conservatories. They're particularly popular for larger windows and patio doors where you want both privacy and view options."
+    },
+    {
+      question: "How do I clean and maintain Vision blinds?",
+      answer: "Vision blinds are very low maintenance. The fabric can be gently vacuumed with a soft brush attachment, or spot cleaned with a damp cloth. Avoid harsh chemicals or soaking. Regular light cleaning will keep them looking pristine for years."
+    },
+    {
+      question: "Can Vision blinds be motorised?",
+      answer: "Absolutely! We offer motorised Vision blinds with remote control operation. This is perfect for hard-to-reach windows or for the ultimate convenience. Motorisation also allows for smart home integration and automated scheduling."
+    },
+    {
+      question: "What's the difference between Vision blinds and other day/night blinds?",
+      answer: "Vision blinds are a premium alternative to standard day/night blinds. They feature superior fabric quality, smoother operation, and more precise light control. The dual-layer system provides better insulation and a more refined aesthetic than basic alternatives."
+    }
+  ]
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -66,12 +90,7 @@ const VisionBlinds = () => {
             </div>
 
             <div className="relative">
-              <img
-                src="/images/optimized/vision-capri-concrete-1600.jpg"
-                alt="Vision blinds installed in a contemporary Saddleworth home"
-                className="w-full h-auto rounded-lg shadow-2xl"
-                loading="eager"
-              />
+              <VisionBlindsCarousel showTitle={false} showDescription={false} />
             </div>
           </div>
         </div>
@@ -82,11 +101,41 @@ const VisionBlinds = () => {
 
         {/* Content Sections */}
         <div className="space-y-16">
-          <div className="text-center">
-            <h2 className="text-3xl lg:text-4xl font-bold mb-6">Why Vision Blinds Are Perfect for Saddleworth Homes</h2>
-            <p className="text-xl text-gray-300 leading-relaxed max-w-3xl mx-auto">
-              Vision blinds represent the pinnacle of modern window treatment technology. These innovative blinds feature dual layers of fabric that can be aligned to provide complete privacy or separated to allow natural light while maintaining your view. Perfect for contemporary homes in Diggle and modern extensions in Uppermill.
-            </p>
+          <div className="text-center relative">
+            <div className="absolute inset-0 bg-gradient-to-r from-brand-gold/10 via-transparent to-brand-gold/10 rounded-3xl -mx-8"></div>
+            <div className="relative z-10">
+              <div className="w-24 h-1 bg-gradient-to-r from-brand-gold to-yellow-400 mx-auto mb-6 rounded-full"></div>
+              <h2 className="text-4xl lg:text-5xl font-bold mb-6 bg-gradient-to-r from-brand-gold to-yellow-400 bg-clip-text text-transparent">
+                Why Vision Blinds Are Perfect for Saddleworth Homes
+              </h2>
+              <div className="w-24 h-1 bg-gradient-to-r from-brand-gold to-yellow-400 mx-auto mb-8 rounded-full"></div>
+              <div className="grid md:grid-cols-2 gap-8 items-center max-w-5xl mx-auto">
+                <div className="space-y-4">
+                  <p className="text-lg text-gray-300 leading-relaxed">
+                    Vision blinds represent the pinnacle of modern window treatment technology. These innovative blinds feature dual layers of fabric that can be aligned to provide complete privacy or separated to allow natural light while maintaining your view.
+                  </p>
+                  <p className="text-lg text-gray-300 leading-relaxed">
+                    Perfect for contemporary homes in Diggle and modern extensions in Uppermill, they combine functionality with contemporary aesthetics.
+                  </p>
+                </div>
+                <div className="bg-gray-800/50 rounded-lg p-6 border border-brand-gold/20">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-12 h-12 bg-brand-gold rounded-full flex items-center justify-center">
+                      <svg className="w-6 h-6 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-white">Innovative Technology</h3>
+                      <p className="text-sm text-gray-400">Dual-layer fabric system</p>
+                    </div>
+                  </div>
+                  <p className="text-gray-300">
+                    Our Vision blinds use cutting-edge fabric technology that gives you complete control over light and privacy.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div>
@@ -131,8 +180,13 @@ const VisionBlinds = () => {
             </div>
           </div>
 
-          <div className="bg-gray-800 rounded-lg p-8">
-            <h2 className="text-2xl font-bold mb-6 text-center">Technical Excellence</h2>
+          <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-8 border border-brand-gold/20">
+            <div className="text-center mb-8">
+              <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-brand-gold to-yellow-400 bg-clip-text text-transparent">
+                Technical Excellence
+              </h2>
+              <div className="w-16 h-1 bg-gradient-to-r from-brand-gold to-yellow-400 mx-auto rounded-full"></div>
+            </div>
             <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-6">
               <div className="text-center">
                 <div className="w-12 h-12 bg-brand-gold rounded-full flex items-center justify-center mx-auto mb-3 text-gray-900 font-bold text-lg">1</div>
@@ -196,55 +250,9 @@ const VisionBlinds = () => {
           </div>
         </div>
 
-        {/* Gallery Section */}
+        {/* Vision Blinds Carousel */}
         <div className="mt-16">
-          <h2 className="text-3xl font-bold mb-8 text-center">Vision Blinds Inspiration Gallery</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="bg-gray-800 rounded-lg overflow-hidden group hover:shadow-xl transition-all duration-300">
-              <img
-                src="/images/optimized/vision-capri-concrete-400.jpg"
-                alt="Capri Concrete Vision blinds providing modern privacy in Saddleworth home"
-                className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-              />
-              <div className="p-4">
-                <h3 className="font-semibold text-white mb-2">Capri Concrete</h3>
-                <p className="text-sm text-gray-400">Contemporary concrete tones for modern interiors</p>
-              </div>
-            </div>
-            <div className="bg-gray-800 rounded-lg overflow-hidden group hover:shadow-xl transition-all duration-300">
-              <img
-                src="/images/optimized/vision-viale-linen-400.jpg"
-                alt="Viale Linen Vision blinds with soft linen texture"
-                className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-              />
-              <div className="p-4">
-                <h3 className="font-semibold text-white mb-2">Viale Linen</h3>
-                <p className="text-sm text-gray-400">Soft linen texture for elegant spaces</p>
-              </div>
-            </div>
-            <div className="bg-gray-800 rounded-lg overflow-hidden group hover:shadow-xl transition-all duration-300">
-              <img
-                src="/images/optimized/vision-setosa-ivory-400.jpg"
-                alt="Setosa Ivory Vision blinds offering classic ivory elegance"
-                className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-              />
-              <div className="p-4">
-                <h3 className="font-semibold text-white mb-2">Setosa Ivory</h3>
-                <p className="text-sm text-gray-400">Classic ivory elegance for traditional homes</p>
-              </div>
-            </div>
-            <div className="bg-gray-800 rounded-lg overflow-hidden group hover:shadow-xl transition-all duration-300">
-              <img
-                src="/images/optimized/vision-ferrara-anthracite-400.jpg"
-                alt="Ferrara Anthracite Vision blinds in sophisticated dark tones"
-                className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-              />
-              <div className="p-4">
-                <h3 className="font-semibold text-white mb-2">Ferrara Anthracite</h3>
-                <p className="text-sm text-gray-400">Sophisticated dark tones for contemporary styling</p>
-              </div>
-            </div>
-          </div>
+          <VisionBlindsCarousel />
         </div>
 
         {/* CTA Section */}
@@ -291,6 +299,14 @@ const VisionBlinds = () => {
             </div>
           </div>
         </div>
+
+        {/* Vision Blinds FAQ */}
+        <FAQSection
+          title="Vision Blinds Questions"
+          description="Everything you need to know about Vision blinds for your Saddleworth home"
+          faqs={visionFaqs}
+          className="bg-gray-900"
+        />
         </div>
       </div>
     </div>

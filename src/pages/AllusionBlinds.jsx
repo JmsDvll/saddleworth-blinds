@@ -66,7 +66,7 @@ const AllusionBlinds = () => {
 
             <div className="relative">
               <img
-                src="/images/optimized/vision-setosa-ivory-1600.jpg"
+                src="/images/optimized/allusion-vista-snow-1600.jpg"
                 alt="Allusion blinds in a contemporary Saddleworth home"
                 className="w-full h-auto rounded-lg shadow-2xl"
                 loading="eager"
@@ -222,7 +222,7 @@ const AllusionBlinds = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div className="bg-gray-800 rounded-lg overflow-hidden group hover:shadow-xl transition-all duration-300">
               <img
-                src="/images/optimized/vision-viale-linen-400.jpg"
+                src="/images/optimized/allusion-vista-snow-400.jpg"
                 alt="Contemporary Allusion blinds in a modern Saddleworth home"
                 className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
               />
@@ -233,7 +233,7 @@ const AllusionBlinds = () => {
             </div>
             <div className="bg-gray-800 rounded-lg overflow-hidden group hover:shadow-xl transition-all duration-300">
               <img
-                src="/images/optimized/vision-ferrara-anthracite-400.jpg"
+                src="/images/optimized/allusion-shadow-sand-400.jpg"
                 alt="Allusion blinds providing perfect light control in living room"
                 className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
               />
@@ -244,7 +244,7 @@ const AllusionBlinds = () => {
             </div>
             <div className="bg-gray-800 rounded-lg overflow-hidden group hover:shadow-xl transition-all duration-300">
               <img
-                src="/images/optimized/vision-setosa-ivory-400.jpg"
+                src="/images/optimized/allusion-vista-snow-400.jpg"
                 alt="Allusion blinds showing beautiful fabric texture and flow"
                 className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
               />
@@ -255,7 +255,7 @@ const AllusionBlinds = () => {
             </div>
             <div className="bg-gray-800 rounded-lg overflow-hidden group hover:shadow-xl transition-all duration-300">
               <img
-                src="/images/optimized/vision-capri-concrete-400.jpg"
+                src="/images/optimized/allusion-shadow-sand-400.jpg"
                 alt="Contemporary Allusion blinds in neutral tones"
                 className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
               />

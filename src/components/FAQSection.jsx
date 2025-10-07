@@ -1,139 +1,103 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
 
-const FAQSection = () => {
-  const [openItems, setOpenItems] = useState([])
-
-  const faqs = [
-    {
-      question: "How much do window blinds cost in Saddleworth?",
-      answer: "Our blinds start from around £30 per window for basic roller blinds, up to £300+ for premium shutters. The exact cost depends on your window size, the type of blind, and the fabric you choose. We always provide a free, no-obligation quote so you know exactly what to expect."
-    },
-    {
-      question: "How long does it take to get blinds fitted?",
-      answer: "Typically, it takes 2-3 weeks from measurement to fitting. We measure your windows during our free consultation, then your made-to-measure blinds are manufactured specifically for you. Once ready, we'll arrange a convenient fitting appointment - usually completed within an hour or two."
-    },
-    {
-      question: "Do you fit blinds yourself or use contractors?",
-      answer: "All our fittings are carried out by our own experienced team - never subcontractors. We've been fitting blinds in Saddleworth homes for over 20 years, so you can trust us to do the job properly and treat your home with respect."
-    },
-    {
-      question: "What's the difference between ready-made and made-to-measure blinds?",
-      answer: "Ready-made blinds come in standard sizes and often don't fit properly, leaving gaps that let in light. Our made-to-measure blinds are crafted specifically for your windows, ensuring a perfect fit, better light control, and a professional finish that adds value to your home."
-    },
-    {
-      question: "Which blinds are best for privacy?",
-      answer: "For maximum privacy, we recommend blackout roller blinds, Vision blinds (which have adjustable fabric strips), or shutters. Venetian blinds also offer excellent privacy control as you can angle the slats. We'll help you choose the best option for each room during your consultation."
-    },
-    {
-      question: "Do you offer any guarantees?",
-      answer: "Yes! All our blinds come with a comprehensive manufacturer's warranty (typically 1-5 years depending on the product). Our fitting is also guaranteed - if anything's not right, we'll come back and fix it free of charge. Your satisfaction is our priority."
-    },
-    {
-      question: "Can you fit blinds to UPVC windows without drilling?",
-      answer: "Absolutely! Our Perfect Fit blinds are designed specifically for UPVC windows and doors. They clip directly into the window frame - no drilling, no screws, no damage. They're perfect for conservatories and rental properties."
-    },
-    {
-      question: "Do you remove old blinds?",
-      answer: "Yes, we'll happily remove and dispose of your old blinds when we fit your new ones. Just let us know when booking and we'll take care of everything - there's no extra charge for this service."
-    },
-    {
-      question: "What areas do you cover?",
-      answer: "We cover all of Saddleworth and surrounding areas including Uppermill, Diggle, Delph, Greenfield, Dobcross, Lydgate, Denshaw, Friezland, and nearby parts of Oldham. If you're not sure if we cover your area, just give us a call!"
-    },
-    {
-      question: "Can I see samples before ordering?",
-      answer: "Of course! During your free home consultation, we bring a wide range of samples so you can see and feel the fabrics in your own home. This helps you see how they look in your lighting and match your décor perfectly."
-    }
-  ]
+const FAQSection = ({
+  title = "Frequently Asked Questions",
+  description = "Find answers to common questions about our blinds and shutters",
+  faqs = [],
+  className = ""
+}) => {
+  const [openItems, setOpenItems] = useState({})
 
   const toggleItem = (index) => {
-    setOpenItems(prev => 
-      prev.includes(index) 
-        ? prev.filter(i => i !== index)
-        : [...prev, index]
-    )
-  }
-
-  // Generate FAQ schema markup
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": faqs.map(faq => ({
-      "@type": "Question",
-      "name": faq.question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faq.answer
-      }
+    setOpenItems(prev => ({
+      ...prev,
+      [index]: !prev[index]
     }))
   }
 
+  if (!faqs || faqs.length === 0) {
+    return null
+  }
+
   return (
-    <section className="py-16 bg-gray-800 rounded-lg">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-      
+    <section className={`py-16 ${className}`}>
       <div className="container">
-        <div className="max-w-3xl mx-auto">
-          <h2 className="text-3xl lg:text-4xl font-bold text-center mb-12">
-            Frequently Asked Questions
-          </h2>
-          
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-12 relative">
+            <div className="w-24 h-1 bg-gradient-to-r from-brand-gold to-yellow-400 mx-auto mb-6 rounded-full"></div>
+            <h2 className="text-4xl lg:text-5xl font-bold mb-6 bg-gradient-to-r from-brand-gold to-yellow-400 bg-clip-text text-transparent">
+              {title}
+            </h2>
+            <div className="w-24 h-1 bg-gradient-to-r from-brand-gold to-yellow-400 mx-auto mb-6 rounded-full"></div>
+            {description && (
+              <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+                {description}
+              </p>
+            )}
+          </div>
+
           <div className="space-y-4">
             {faqs.map((faq, index) => (
-              <div 
-                key={index}
-                className="bg-gray-900 rounded-lg overflow-hidden"
-              >
+              <div key={index} className="bg-gray-800 rounded-lg overflow-hidden">
                 <button
                   onClick={() => toggleItem(index)}
-                  className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-800 transition-colors"
-                  aria-expanded={openItems.includes(index)}
-                  aria-controls={`faq-answer-${index}`}
+                  className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-700 transition-colors"
                 >
-                  <h3 className="text-lg font-medium text-white pr-4">
+                  <h3 className="text-lg font-semibold text-white pr-4">
                     {faq.question}
                   </h3>
-                  <svg 
-                    className={`w-5 h-5 text-brand-gold flex-shrink-0 transition-transform ${openItems.includes(index) ? 'rotate-180' : ''}`}
-                    fill="none" 
-                    stroke="currentColor" 
+                  <svg
+                    className={`w-5 h-5 text-brand-gold transition-transform duration-200 flex-shrink-0 ${
+                      openItems[index] ? 'rotate-180' : ''
+                    }`}
+                    fill="none"
+                    stroke="currentColor"
                     viewBox="0 0 24 24"
                   >
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                   </svg>
                 </button>
-                
-                <div 
-                  id={`faq-answer-${index}`}
-                  className={`px-6 transition-all duration-300 ${openItems.includes(index) ? 'py-4' : 'max-h-0 overflow-hidden'}`}
-                  style={{ maxHeight: openItems.includes(index) ? '500px' : '0' }}
-                >
-                  <p className="text-gray-300 leading-relaxed">
-                    {faq.answer}
-                  </p>
-                </div>
+
+                {openItems[index] && (
+                  <div className="px-6 pb-6">
+                    <div className="border-t border-gray-700 pt-4">
+                      <p className="text-gray-300 leading-relaxed">
+                        {faq.answer}
+                      </p>
+                    </div>
+                  </div>
+                )}
               </div>
             ))}
           </div>
-          
-          <div className="mt-12 text-center">
-            <p className="text-gray-300 mb-6">
-              Still have questions? We're here to help!
+
+          <div className="mt-12 text-center bg-gray-800 rounded-2xl p-8 border border-brand-gold/20">
+            <div className="mb-6">
+              <div className="w-16 h-16 bg-brand-gold rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg className="w-8 h-8 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <h3 className="text-2xl font-bold mb-4 text-brand-gold">
+                Still Have Questions?
+              </h3>
+            </div>
+            <p className="text-gray-300 mb-8 text-lg">
+              Our expert team is here to help with any questions about blinds, shutters, or window treatments for your Saddleworth home.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href="tel:01457597091"
-                className="btn btn-primary"
+                href="/book-appointment"
+                className="btn btn-primary text-lg px-8 py-4"
               >
-                Call 01457 597091
+                Book Free Consultation
               </a>
-              <Link
-                to="/contact"
-                className="btn btn-secondary"
+              <a
+                href="/contact"
+                className="btn btn-secondary text-lg px-8 py-4"
               >
-                Send us a message
-              </Link>
+                Contact Us
+              </a>
             </div>
           </div>
         </div>

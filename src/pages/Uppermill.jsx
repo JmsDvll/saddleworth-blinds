@@ -1,7 +1,29 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import HeroCarousel from '../components/HeroCarousel'
 
 const Uppermill = () => {
+  const areaHeroImages = [
+    {
+      src: 'vision-floreale-rosa-1600.jpg',
+      alt: 'Beautiful window blinds in an Uppermill home',
+      title: 'Uppermill Style',
+      description: 'Elegant blinds for Victorian terraces'
+    },
+    {
+      src: 'vision-firenze-walnut-1600.jpg',
+      alt: 'Premium blinds showcasing beautiful wood tones in Uppermill',
+      title: 'Natural Wood',
+      description: 'Warm tones for traditional homes'
+    },
+    {
+      src: 'vision-lusso-pebble-1600.jpg',
+      alt: 'Modern blinds in neutral tones for Uppermill interiors',
+      title: 'Contemporary',
+      description: 'Clean modern aesthetics'
+    }
+  ]
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -65,12 +87,7 @@ const Uppermill = () => {
             </div>
 
             <div className="relative">
-              <img
-                src="/images/optimized/vision-ferrara-anthracite-1600.jpg"
-                alt="Beautiful window blinds in an Uppermill home"
-                className="w-full h-auto rounded-lg shadow-2xl"
-                loading="eager"
-              />
+              <HeroCarousel images={areaHeroImages} autoRotate={true} interval={6000} />
             </div>
           </div>
         </div>

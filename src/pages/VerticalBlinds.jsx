@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import VerticalBlindsCarousel from '../components/VerticalBlindsCarousel'
 
 const VerticalBlinds = () => {
   return (
@@ -65,12 +66,7 @@ const VerticalBlinds = () => {
             </div>
 
             <div className="relative">
-              <img
-                src="/images/optimized/vertical-grey-1600.jpg"
-                alt="Vertical blinds installed in a Saddleworth home with large windows"
-                className="w-full h-auto rounded-lg shadow-2xl"
-                loading="eager"
-              />
+              <VerticalBlindsCarousel showTitle={false} showDescription={false} />
             </div>
           </div>
         </div>
@@ -175,55 +171,9 @@ const VerticalBlinds = () => {
           </div>
         </div>
 
-        {/* Gallery Section */}
+        {/* Vertical Blinds Carousel */}
         <div className="mt-16">
-          <h2 className="text-3xl font-bold mb-8 text-center">Vertical Blinds Gallery</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="bg-gray-800 rounded-lg overflow-hidden group hover:shadow-xl transition-all duration-300">
-              <img
-                src="/images/optimized/vertical-grey-400.jpg"
-                alt="Oxford Grey Marle vertical blinds for large windows in Saddleworth"
-                className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-              />
-              <div className="p-4">
-                <h3 className="font-semibold text-white mb-2">Oxford Grey Marle</h3>
-                <p className="text-sm text-gray-400">Contemporary grey tones for modern homes</p>
-              </div>
-            </div>
-            <div className="bg-gray-800 rounded-lg overflow-hidden group hover:shadow-xl transition-all duration-300">
-              <img
-                src="/images/optimized/vertical-blind-grey-400.jpg"
-                alt="Modern vertical blinds providing clean aesthetics"
-                className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-              />
-              <div className="p-4">
-                <h3 className="font-semibold text-white mb-2">Clean & Modern</h3>
-                <p className="text-sm text-gray-400">Perfect for contemporary spaces</p>
-              </div>
-            </div>
-            <div className="bg-gray-800 rounded-lg overflow-hidden group hover:shadow-xl transition-all duration-300">
-              <img
-                src="/images/optimized/vertical-blind-grey-400.jpg"
-                alt="Large window vertical blinds solution for wide openings"
-                className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-              />
-              <div className="p-4">
-                <h3 className="font-semibold text-white mb-2">Large Window Solution</h3>
-                <p className="text-sm text-gray-400">Perfect for wide windows and patio doors</p>
-              </div>
-            </div>
-            <div className="bg-gray-800 rounded-lg overflow-hidden group hover:shadow-xl transition-all duration-300">
-              <img
-                src="/images/optimized/roller-zen-kiwi-400.jpg"
-                alt="Vertical blinds in neutral tones for versatile styling"
-                className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-              />
-              <div className="p-4">
-                <h3 className="font-semibold text-white mb-2">Versatile Styling</h3>
-                <p className="text-sm text-gray-400">Neutral colors that complement any interior</p>
-              </div>
-            </div>
-          </div>
+          <VerticalBlindsCarousel />
         </div>
 
         {/* CTA Section */}

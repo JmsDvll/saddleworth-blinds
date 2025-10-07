@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import ShuttersCarousel from '../components/ShuttersCarousel'
 
 const Shutters = () => {
   return (
@@ -65,12 +66,7 @@ const Shutters = () => {
             </div>
 
             <div className="relative">
-              <img
-                src="/images/optimized/shutters-cotton-89mm-1600.jpg"
-                alt="Luxury plantation shutters in a Saddleworth home"
-                className="w-full h-auto rounded-lg shadow-2xl"
-                loading="eager"
-              />
+              <ShuttersCarousel showTitle={false} showDescription={false} />
             </div>
           </div>
         </div>
@@ -241,55 +237,9 @@ const Shutters = () => {
           </div>
         </div>
 
-        {/* Gallery Section */}
+        {/* Shutters Carousel */}
         <div className="mt-16">
-          <h2 className="text-3xl font-bold mb-8 text-center">Plantation Shutters Gallery</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="bg-gray-800 rounded-lg overflow-hidden group hover:shadow-xl transition-all duration-300">
-              <img
-                src="/images/optimized/shutters-cotton-89mm-400.jpg"
-                alt="Cotton plantation shutters with 89mm louvres in a Saddleworth home"
-                className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-              />
-              <div className="p-4">
-                <h3 className="font-semibold text-white mb-2">Cotton 89mm</h3>
-                <p className="text-sm text-gray-400">Premium plantation shutters for maximum light control</p>
-              </div>
-            </div>
-            <div className="bg-gray-800 rounded-lg overflow-hidden group hover:shadow-xl transition-all duration-300">
-              <img
-                src="/images/optimized/shutters-cotton-63mm-400.jpg"
-                alt="Cotton plantation shutters with 63mm louvres"
-                className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-              />
-              <div className="p-4">
-                <h3 className="font-semibold text-white mb-2">Cotton 63mm</h3>
-                <p className="text-sm text-gray-400">Classic white shutters for contemporary homes</p>
-              </div>
-            </div>
-            <div className="bg-gray-800 rounded-lg overflow-hidden group hover:shadow-xl transition-all duration-300">
-              <img
-                src="/images/optimized/shutters-white-classic-400.jpg"
-                alt="Classic white plantation shutters"
-                className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-              />
-              <div className="p-4">
-                <h3 className="font-semibold text-white mb-2">Classic White</h3>
-                <p className="text-sm text-gray-400">Timeless elegance for traditional properties</p>
-              </div>
-            </div>
-            <div className="bg-gray-800 rounded-lg overflow-hidden group hover:shadow-xl transition-all duration-300">
-              <img
-                src="/images/optimized/shutters-white-400.jpg"
-                alt="Premium white plantation shutters"
-                className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-              />
-              <div className="p-4">
-                <h3 className="font-semibold text-white mb-2">Premium White</h3>
-                <p className="text-sm text-gray-400">Luxury shutters for discerning homeowners</p>
-              </div>
-            </div>
-          </div>
+          <ShuttersCarousel />
         </div>
 
         {/* CTA Section */}

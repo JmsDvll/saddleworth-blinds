@@ -66,7 +66,7 @@ const Greenfield = () => {
 
             <div className="relative">
               <img
-                src="/images/optimized/vision-ferrara-anthracite-1600.jpg"
+                src="/images/optimized/vision-lusso-pebble-1600.jpg"
                 alt="Beautiful window blinds in a Greenfield home"
                 className="w-full h-auto rounded-lg shadow-2xl"
                 loading="eager"

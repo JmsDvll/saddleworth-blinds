@@ -96,25 +96,30 @@ const Footer = () => {
           {/* Areas Section */}
           <div>
             <h3 className="text-lg font-semibold text-white mb-4">Areas We Cover</h3>
-            <ul className="space-y-2">
+            <div className="grid grid-cols-2 gap-2">
               {[
                 'Uppermill',
                 'Diggle',
                 'Delph',
                 'Greenfield',
                 'Dobcross',
-                'Lydgate'
+                'Lydgate',
+                'Denshaw',
+                'Friezland',
+                'Grasscroft',
+                'Grotton',
+                'Springhead',
+                'Lees'
               ].map((area) => (
-                <li key={area}>
-                  <Link
-                    to={`/areas/${area.toLowerCase()}`}
-                    className="text-gray-400 hover:text-brand-gold transition-colors text-sm"
-                  >
-                    {area}
-                  </Link>
-                </li>
+                <Link
+                  key={area}
+                  to={`/areas/${area.toLowerCase()}`}
+                  className="text-gray-400 hover:text-brand-gold transition-colors text-sm"
+                >
+                  {area}
+                </Link>
               ))}
-            </ul>
+            </div>
           </div>
 
           {/* Contact Section */}
