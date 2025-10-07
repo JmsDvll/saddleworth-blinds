@@ -1,10 +1,27 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 
 // Base carousel component for consistent styling
-export const CarouselContainer = ({ children, className = '' }) => {
+export const CarouselContainer = ({
+  children,
+  className = '',
+  autoPlay = false,
+  interval = 5000,
+  pauseOnHover = true
+}) => {
+  const [isPaused, setIsPaused] = useState(false)
+
   return (
-    <div className={`relative w-full overflow-hidden rounded-lg shadow-2xl ${className}`}>
-      {children}
+    <div
+      className={`relative w-full overflow-hidden rounded-lg shadow-2xl ${className}`}
+      onMouseEnter={() => pauseOnHover && setIsPaused(true)}
+      onMouseLeave={() => pauseOnHover && setIsPaused(false)}
+    >
+      {React.cloneElement(children, {
+        autoPlay,
+        interval,
+        isPaused,
+        setIsPaused
+      })}
     </div>
   )
 }
@@ -93,4 +110,51 @@ export const ASPECT_RATIOS = {
   standard: 'aspect-[4/3]',
   square: 'aspect-square',
   product: 'aspect-[16/10]'
+}
+
+// Inspiration Card Component for breaking up text-heavy content
+export const InspirationCard = ({
+  image,
+  title,
+  description,
+  ctaText,
+  ctaLink,
+  className = ''
+}) => {
+  return (
+    <div className={`bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 ${className}`}>
+      <div className="aspect-[16/10] overflow-hidden">
+        <img
+          src={`/images/optimized/${image}`}
+          alt={title}
+          className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+          loading="lazy"
+        />
+      </div>
+      <div className="p-6">
+        <h3 className="text-xl font-bold text-white mb-3">{title}</h3>
+        <p className="text-gray-300 mb-4 leading-relaxed">{description}</p>
+        {ctaText && ctaLink && (
+          <a
+            href={ctaLink}
+            className="inline-flex items-center text-brand-gold hover:text-yellow-400 font-semibold transition-colors"
+          >
+            {ctaText}
+            <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </a>
+        )}
+      </div>
+    </div>
+  )
+}
+
+// Section Break Component for visual separation
+export const SectionBreak = ({ className = '' }) => {
+  return (
+    <div className={`py-16 ${className}`}>
+      <div className="w-24 h-1 bg-gradient-to-r from-brand-gold to-yellow-400 mx-auto rounded-full"></div>
+    </div>
+  )
 }

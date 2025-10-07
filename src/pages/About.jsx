@@ -80,6 +80,9 @@ const About = () => {
         <div className="max-w-4xl mx-auto">
           <div className="space-y-16">
             <div className="text-center">
+              <div className="mb-8">
+                <div className="w-16 h-1 bg-gradient-to-r from-brand-gold to-yellow-400 mx-auto mb-6 rounded-full"></div>
+              </div>
               <h2 className="text-3xl lg:text-4xl font-bold mb-6">Our Saddleworth Story</h2>
               <p className="text-xl text-gray-300 leading-relaxed max-w-3xl mx-auto">
             Over 20 years of bringing beautiful blinds to local families. We started our journey in 2003 with a simple mission: to bring quality window blinds and exceptional service to Saddleworth families.

@@ -162,6 +162,9 @@ const Home = () => {
       <section className="py-20 bg-gradient-to-br from-gray-800 via-gray-900 to-gray-800">
         <div className="container">
           <div className="text-center mb-16">
+            <div className="mb-8">
+              <div className="w-16 h-1 bg-gradient-to-r from-brand-gold to-yellow-400 mx-auto mb-6 rounded-full"></div>
+            </div>
             <h2 className="text-4xl lg:text-5xl font-bold mb-6 bg-gradient-to-r from-brand-gold to-yellow-400 bg-clip-text text-transparent">
               Discover Your Dream Blinds
             </h2>
@@ -205,6 +208,8 @@ const Home = () => {
                       Coming Soon
                     </div>
                   )}
+                  {/* Overlay gradient for better text readability */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </div>
                 <div className="p-6">
                   <h3 className="text-xl font-bold mb-3 text-white group-hover:text-brand-gold transition-colors">
@@ -216,6 +221,12 @@ const Home = () => {
                   <p className="text-gray-300 text-sm leading-relaxed">
                     {service.description}
                   </p>
+                  {/* Subtle visual indicator */}
+                  <div className="mt-4 pt-4 border-t border-gray-800 group-hover:border-brand-gold/30 transition-colors duration-300">
+                    <span className="text-brand-gold text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      Explore →
+                    </span>
+                  </div>
                 </div>
               </Link>
             ))}
@@ -244,38 +255,49 @@ const Home = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Link
               to="/book-appointment"
-              className="btn bg-gray-900 text-white hover:bg-gray-800 text-lg px-8 py-4"
+              className="btn bg-gray-900 text-white hover:bg-gray-800 text-lg px-8 py-4 relative overflow-hidden"
             >
-              Book Your Free Visit
+              <span className="relative z-10">Book Your Free Visit</span>
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
             </Link>
             <a
               href="tel:01457597091"
-              className="btn bg-transparent border-2 border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white text-lg px-8 py-4"
+              className="btn bg-transparent border-2 border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white text-lg px-8 py-4 flex items-center gap-2"
             >
-              Call for a Chat
+              <svg className="w-5 h-5 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+              </svg>
+              <span>Call for a Chat</span>
             </a>
           </div>
 
           <div className="flex justify-center items-center gap-8 mt-8 text-gray-800">
             <div className="flex items-center gap-2">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
               <span className="text-sm font-medium">Completely Free</span>
             </div>
             <div className="flex items-center gap-2">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
               </svg>
               <span className="text-sm font-medium">No Obligation</span>
             </div>
             <div className="flex items-center gap-2">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
               <span className="text-sm font-medium">Covering All Saddleworth</span>
             </div>
+          </div>
+
+          {/* Urgency element */}
+          <div className="mt-6 p-4 bg-yellow-100 border border-yellow-300 rounded-lg text-center">
+            <p className="text-yellow-800 text-sm font-medium">
+              ⚡ Limited availability - Book your free consultation this week!
+            </p>
           </div>
         </div>
       </section>

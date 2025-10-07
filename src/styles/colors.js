@@ -74,11 +74,34 @@ export const colorGuidelines = {
       'One key element per section'
     ]
   },
-  
+
   consistency: {
     primary: 'Use brand-gold for primary actions',
     secondary: 'Use gray tones for secondary elements',
     hover: 'Consistent hover states across similar elements',
     contrast: 'Ensure WCAG AA contrast ratios'
+  }
+}
+
+// Visual hierarchy guidelines
+export const visualHierarchy = {
+  sectionBreaks: {
+    use: 'Use section breaks to create visual rhythm',
+    spacing: '16px minimum between sections',
+    backgrounds: 'Alternate background colors for visual separation'
+  },
+
+  inspirationCards: {
+    purpose: 'Break up text-heavy content with visual elements',
+    placement: 'Place after 200-300 words of content',
+    styling: 'Use consistent card styling with hover effects',
+    content: 'Mix practical and aspirational content'
+  },
+
+  ctaStrategy: {
+    primary: 'One main CTA per section',
+    secondary: 'Micro-CTAs for engagement',
+    placement: 'Place CTAs at natural reading breaks',
+    visual: 'Make CTAs visually distinct with color and spacing'
   }
 }

@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { CarouselContainer, CarouselImage, CarouselButton, CarouselDots, CAROUSEL_HEIGHTS } from './BaseCarousel'
 
-const HeroCarousel = ({ images, autoRotate = false, interval = 6000 }) => {
+const HeroCarousel = ({
+  images,
+  autoRotate = false,
+  interval = 6000,
+  showOverlay = true,
+  showCounter = true
+}) => {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
 
@@ -24,10 +30,6 @@ const HeroCarousel = ({ images, autoRotate = false, interval = 6000 }) => {
     setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length)
   }
 
-  const goToSlide = (index) => {
-    setCurrentIndex(index)
-  }
-
   const currentImage = images[currentIndex]
 
   if (!images || images.length === 0) {
@@ -35,10 +37,11 @@ const HeroCarousel = ({ images, autoRotate = false, interval = 6000 }) => {
   }
 
   return (
-    <CarouselContainer 
+    <CarouselContainer
       className={CAROUSEL_HEIGHTS.hero}
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
+      autoPlay={autoRotate}
+      interval={interval}
+      pauseOnHover={true}
     >
       {/* Main Image */}
       <div className="relative w-full h-full">
@@ -49,7 +52,9 @@ const HeroCarousel = ({ images, autoRotate = false, interval = 6000 }) => {
         />
 
         {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+        {showOverlay && (
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+        )}
 
         {/* Content Overlay */}
         {currentImage.title && (
@@ -69,47 +74,30 @@ const HeroCarousel = ({ images, autoRotate = false, interval = 6000 }) => {
       {/* Navigation Arrows */}
       {images.length > 1 && (
         <>
-          <button
+          <CarouselButton
             onClick={prevSlide}
-            className="absolute left-6 top-1/2 transform -translate-y-1/2 bg-brand-gold hover:bg-yellow-500 text-gray-900 p-3 rounded-full transition-all duration-200 hover:scale-110 shadow-lg z-10"
-            aria-label="Previous image"
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M15 19l-7-7 7-7" />
-            </svg>
-          </button>
-          <button
+            direction="left"
+            className="bg-brand-gold"
+          />
+          <CarouselButton
             onClick={nextSlide}
-            className="absolute right-6 top-1/2 transform -translate-y-1/2 bg-brand-gold hover:bg-yellow-500 text-gray-900 p-3 rounded-full transition-all duration-200 hover:scale-110 shadow-lg z-10"
-            aria-label="Next image"
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
+            direction="right"
+            className="bg-brand-gold"
+          />
         </>
       )}
 
       {/* Dot Indicators */}
       {images.length > 1 && (
-        <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-3 bg-black/30 rounded-full px-4 py-2">
-          {images.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => goToSlide(index)}
-              className={`transition-all duration-200 rounded-full ${
-                index === currentIndex
-                  ? 'w-8 h-3 bg-brand-gold'
-                  : 'w-3 h-3 bg-white/60 hover:bg-white/80 hover:scale-110'
-              }`}
-              aria-label={`Go to slide ${index + 1}`}
-            />
-          ))}
-        </div>
+        <CarouselDots
+          total={images.length}
+          current={currentIndex}
+          onSelect={setCurrentIndex}
+        />
       )}
 
       {/* Slide Counter */}
-      {images.length > 1 && (
+      {showCounter && images.length > 1 && (
         <div className="absolute top-4 right-4 bg-black/70 text-white px-3 py-1 rounded-full text-sm">
           {currentIndex + 1} / {images.length}
         </div>

@@ -59,6 +59,18 @@ export const spacing = {
     button: 'px-6 py-3 lg:px-8 lg:py-4',
     input: 'px-4 py-3',
     badge: 'px-3 py-1'
+  },
+
+  // Height utilities
+  height: {
+    screen: 'min-h-screen',
+    full: 'h-full',
+    auto: 'h-auto'
+  },
+
+  // Flex utilities
+  flex: {
+    minHeight: 'min-h-screen'
   }
 }
 
