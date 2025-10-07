@@ -1,0 +1,84 @@
+// Unified color system
+
+export const colors = {
+  // Brand colors
+  brand: {
+    gold: 'brand-gold', // #CABC32
+    goldHover: 'yellow-500',
+    green: 'brand-green', // #059669
+    greenHover: 'green-600'
+  },
+
+  // Background colors
+  background: {
+    primary: 'bg-gray-900',
+    secondary: 'bg-gray-800',
+    tertiary: 'bg-gray-700',
+    overlay: 'bg-black/50',
+    overlayDark: 'bg-black/70',
+    card: 'bg-gray-800',
+    cardHover: 'bg-gray-700'
+  },
+
+  // Text colors
+  text: {
+    primary: 'text-white',
+    secondary: 'text-gray-300',
+    muted: 'text-gray-400',
+    accent: 'text-brand-gold',
+    link: 'text-brand-gold hover:text-yellow-500'
+  },
+
+  // Border colors
+  border: {
+    default: 'border-gray-700',
+    light: 'border-gray-600',
+    dark: 'border-gray-800',
+    accent: 'border-brand-gold',
+    subtle: 'border-brand-gold/20'
+  },
+
+  // Gradient usage (use sparingly!)
+  gradients: {
+    // Only use for key CTAs and special emphasis
+    brandButton: 'bg-gradient-to-r from-brand-gold to-yellow-400',
+    textAccent: 'bg-gradient-to-r from-brand-gold to-yellow-400 bg-clip-text text-transparent',
+    
+    // Subtle background gradients
+    subtleBg: 'bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900',
+    overlayGradient: 'bg-gradient-to-t from-black/60 via-black/20 to-transparent'
+  },
+
+  // State colors
+  states: {
+    hover: 'hover:bg-gray-700',
+    focus: 'focus:ring-2 focus:ring-brand-gold focus:ring-offset-2 focus:ring-offset-gray-900',
+    active: 'bg-gray-700',
+    disabled: 'opacity-50 cursor-not-allowed'
+  }
+}
+
+// Color patterns to avoid
+export const colorGuidelines = {
+  gradients: {
+    avoid: [
+      'Gradient text on every heading',
+      'Multiple gradients in one section',
+      'Gradient backgrounds with gradient text',
+      'Decorative gradient lines everywhere'
+    ],
+    use: [
+      'Primary CTA buttons',
+      'Hero section accents',
+      'Special promotional elements',
+      'One key element per section'
+    ]
+  },
+  
+  consistency: {
+    primary: 'Use brand-gold for primary actions',
+    secondary: 'Use gray tones for secondary elements',
+    hover: 'Consistent hover states across similar elements',
+    contrast: 'Ensure WCAG AA contrast ratios'
+  }
+}

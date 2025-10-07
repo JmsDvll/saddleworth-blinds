@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { CarouselContainer, CarouselImage, CarouselButton, CarouselDots, CAROUSEL_HEIGHTS } from './BaseCarousel'
 
 const HeroCarousel = ({ images, autoRotate = false, interval = 6000 }) => {
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -34,18 +35,17 @@ const HeroCarousel = ({ images, autoRotate = false, interval = 6000 }) => {
   }
 
   return (
-    <div
-      className="relative w-full h-[400px] md:h-[500px] lg:h-[600px] overflow-hidden rounded-lg shadow-2xl"
+    <CarouselContainer 
+      className={CAROUSEL_HEIGHTS.hero}
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
       {/* Main Image */}
       <div className="relative w-full h-full">
-        <img
+        <CarouselImage
           src={`/images/optimized/${currentImage.src}`}
           alt={currentImage.alt}
-          className="w-full h-full object-cover transition-opacity duration-500"
-          loading="eager"
+          eager={true}
         />
 
         {/* Gradient Overlay */}
@@ -114,7 +114,7 @@ const HeroCarousel = ({ images, autoRotate = false, interval = 6000 }) => {
           {currentIndex + 1} / {images.length}
         </div>
       )}
-    </div>
+    </CarouselContainer>
   )
 }
 
