@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react'
-import { CarouselContainer, CarouselImage, CarouselButton, CarouselDots, CarouselThumbnail, CAROUSEL_HEIGHTS, ASPECT_RATIOS } from './BaseCarousel'
+import { Heading, Text, Stack, Badge, Flex } from './ui'
+import { CarouselContainer, CarouselImage, CarouselButton, CarouselDots, CarouselThumbnail, ASPECT_RATIOS } from './BaseCarousel'
 
 const RollerBlindsCarousel = ({
   showTitle = true,
   showDescription = true,
   autoPlay = true,
-  interval = 6000,
-  isPaused = false,
-  setIsPaused
+  interval = 6000
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0)
+  const [isPaused, setIsPaused] = useState(false)
 
   const rollerImages = [
     { src: 'roller-birdsong-colour-400.jpg', alt: 'Birdsong Colour Roller Blind', title: 'Birdsong Colour' },
@@ -44,86 +44,85 @@ const RollerBlindsCarousel = ({
   }, [autoPlay, interval, isPaused, rollerImages.length])
 
   return (
-    <CarouselContainer
-      className={`${colors.background.secondary}`}
-      autoPlay={true}
-      interval={6000}
-      pauseOnHover={true}
-    >
+    <div className="bg-gray-800 rounded-lg overflow-hidden">
       {showTitle && (
-        <div className={`${spacing.padding.lg} text-center`}>
-          <h3 className={`${typography.h2} ${colors.text.gold} ${spacing.margin.bottomSm}`}>
+        <Stack spacing="small" className="p-6 text-center">
+          <Heading as="h3" size="2xl" color="gold">
             Roller Blinds Collection ({rollerImages.length} styles)
-          </h3>
+          </Heading>
           {showDescription && (
-            <p className={colors.text.secondary}>
+            <Text color="light">
               Browse through our complete roller blinds collection to find your perfect style
-            </p>
+            </Text>
+          )}
+        </Stack>
+      )}
+
+      <CarouselContainer
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
+      >
+        <div className="relative">
+          {/* Main Image Display */}
+          <div className={ASPECT_RATIOS.product}>
+            <CarouselImage
+              src={`/images/optimized/${currentImage.src}`}
+              alt={currentImage.alt}
+            />
+          </div>
+
+          {/* Navigation Arrows */}
+          {rollerImages.length > 1 && (
+            <>
+              <CarouselButton
+                onClick={prevSlide}
+                direction="left"
+                className="bg-brand-gold"
+              />
+              <CarouselButton
+                onClick={nextSlide}
+                direction="right"
+                className="bg-brand-gold"
+              />
+            </>
+          )}
+
+          {/* Image Counter and Title */}
+          <div className="absolute bottom-4 left-4">
+            <Badge variant="ghost" size="small">
+              {currentIndex + 1} / {rollerImages.length} - {currentImage.title}
+            </Badge>
+          </div>
+
+          {/* Dot Indicators */}
+          {rollerImages.length > 1 && (
+            <CarouselDots
+              total={rollerImages.length}
+              current={currentIndex}
+              onSelect={setCurrentIndex}
+            />
           )}
         </div>
-      )}
-
-      <div className="relative">
-        {/* Main Image Display */}
-        <div className="aspect-[16/10]">
-          <CarouselImage
-            src={`/images/optimized/${currentImage.src}`}
-            alt={currentImage.alt}
-          />
-        </div>
-
-        {/* Navigation Arrows */}
-        {rollerImages.length > 1 && (
-          <>
-            <CarouselButton
-              onClick={prevSlide}
-              direction="left"
-              className="bg-brand-gold"
-            />
-            <CarouselButton
-              onClick={nextSlide}
-              direction="right"
-              className="bg-brand-gold"
-            />
-          </>
-        )}
-
-        {/* Image Counter and Title */}
-        <div className="absolute bottom-4 left-4 bg-black/70 text-white px-3 py-1 rounded">
-          <span className="text-sm">
-            {currentIndex + 1} / {rollerImages.length} - {currentImage.title}
-          </span>
-        </div>
-      </div>
-
-      {/* Dot Indicators */}
-      {rollerImages.length > 1 && (
-        <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2">
-          <CarouselDots
-            total={rollerImages.length}
-            current={currentIndex}
-            onSelect={setCurrentIndex}
-          />
-        </div>
-      )}
+      </CarouselContainer>
 
       {/* Thumbnail Navigation */}
       {rollerImages.length > 1 && (
         <div className="p-6 bg-gray-900 border-t border-gray-800">
-          <div className="flex gap-3 overflow-x-auto pb-2 justify-center">
+          <Flex gap="medium" className="overflow-x-auto pb-2" justify="center">
             {rollerImages.map((image, index) => (
-              <CarouselThumbnail
-                key={index}
-                src={`/images/optimized/${image.src}`}
-                alt={image.alt}
-                isActive={index === currentIndex}
-                onClick={() => setCurrentIndex(index)}
-              />
+              <div key={index} className="w-20 h-20 flex-shrink-0">
+                <CarouselThumbnail
+                  src={`/images/optimized/${image.src}`}
+                  alt={image.alt}
+                  isActive={index === currentIndex}
+                  onClick={() => setCurrentIndex(index)}
+                />
+              </div>
             ))}
-          </div>
+          </Flex>
         </div>
       )}
-    </CarouselContainer>
+    </div>
   )
 }
 

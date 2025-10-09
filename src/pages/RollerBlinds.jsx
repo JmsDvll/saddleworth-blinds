@@ -1,278 +1,463 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import {
+  Section,
+  Container,
+  Grid,
+  Heading,
+  Text,
+  Button,
+  Card,
+  Icon,
+  Link,
+  Image,
+  Stack,
+  Flex,
+  Badge
+} from '../components/ui'
 import RollerBlindsCarousel from '../components/RollerBlindsCarousel'
-import { colors, spacing, typography, interactive } from '../styles'
 
-const RollerBlinds = () => {
+const RollerBlindsStandardized = () => {
+  const features = [
+    { icon: 'checkCircle', title: '5 Year Guarantee' },
+    { icon: 'mapPin', title: 'Local Saddleworth Experts' },
+    { icon: 'calendar', title: 'Free Home Consultation' }
+  ]
+
+  const benefits = [
+    {
+      icon: 'home',
+      title: 'Perfect for Every Room',
+      description: 'From sunny kitchens to cosy bedrooms, roller blinds work brilliantly throughout your home.'
+    },
+    {
+      icon: 'currency',
+      title: 'Exceptional Value',
+      description: 'High-quality blinds that won\'t break the bank - perfect for updating multiple rooms.'
+    },
+    {
+      icon: 'shield',
+      title: 'Child Safe Options',
+      description: 'Cordless and motorised options available for complete peace of mind.'
+    },
+    {
+      icon: 'clock',
+      title: 'Quick Installation',
+      description: 'Professional fitting typically takes just 30 minutes per blind.'
+    }
+  ]
+
+  const blindTypes = [
+    {
+      name: 'Blackout Blinds',
+      description: 'Perfect darkness for better sleep',
+      features: [
+        'Blocks 100% of light',
+        'Thermal properties for insulation',
+        'Ideal for bedrooms and nurseries',
+        'Reduces outside noise'
+      ],
+      recommended: 'Bedrooms, Nurseries, Media Rooms'
+    },
+    {
+      name: 'Sunscreen Blinds',
+      description: 'Filter light while maintaining your view',
+      features: [
+        'UV protection for furniture',
+        'Maintains outside view',
+        'Reduces glare on screens',
+        'Privacy during daylight'
+      ],
+      recommended: 'Living Rooms, Offices, Conservatories'
+    },
+    {
+      name: 'Decorative Fabrics',
+      description: 'Express your style with pattern and colour',
+      features: [
+        'Hundreds of designs available',
+        'Match any interior style',
+        'Light filtering options',
+        'Easy to coordinate'
+      ],
+      recommended: 'Any Room, Feature Windows'
+    }
+  ]
+
+  const processSteps = [
+    {
+      number: '1',
+      title: 'Book Your Free Consultation',
+      description: 'Call us or book online - we\'ll visit at a time that suits you'
+    },
+    {
+      number: '2',
+      title: 'Expert Measuring & Advice',
+      description: 'We\'ll measure your windows and show you samples in your home'
+    },
+    {
+      number: '3',
+      title: 'Made to Measure',
+      description: 'Your blinds are crafted to fit your windows perfectly'
+    },
+    {
+      number: '4',
+      title: 'Professional Installation',
+      description: 'Our fitters install your blinds with minimal disruption'
+    }
+  ]
+
+  const localAreas = [
+    'Uppermill', 'Diggle', 'Delph', 'Greenfield', 
+    'Dobcross', 'Lydgate', 'Springhead'
+  ]
+
   return (
-    <div className="min-h-screen">
-      <section className={`relative ${colors.background.gradient} ${colors.text.white}`}>
-        <div className="container py-20 lg:py-32">
-          <div className={`grid lg:grid-cols-2 ${spacing.gap.xl} items-center`}>
-            <div className={spacing.stack.xl}>
-              <h1 className={typography.h1}>
+    <>
+      {/* Hero Section */}
+      <Section background="gradient" padding="large">
+        <Container>
+          <Grid cols={2} gap="xlarge" align="center">
+            <Stack spacing="xlarge">
+              <Heading.H1>
                 Premium Roller Blinds for
-                <span className={`${colors.text.gold} block`}>Saddleworth Homes</span>
-              </h1>
-              <p className={`${typography.lead} ${colors.text.lightGray}`}>
-                Transform your windows with our stunning made-to-measure roller blinds. From cosy cottages in Uppermill to modern homes in Greenfield, we've got the perfect solution for every room in your house.
-              </p>
-
-              <div className={`flex flex-col sm:flex-row ${spacing.gap.md}`}>
-                <Link
-                  to="/book-appointment"
-                  className={`${interactive.button.primary} ${interactive.button.large}`}
-                >
+                <Text as="span" color="gold" className="block">
+                  Saddleworth Homes
+                </Text>
+              </Heading.H1>
+              
+              <Text.Lead>
+                Transform your windows with our stunning made-to-measure roller blinds. 
+                From cosy cottages in Uppermill to modern homes in Greenfield, we've got 
+                the perfect solution for every room in your house.
+              </Text.Lead>
+              
+              <Flex gap="medium">
+                <Button to="/book-appointment" variant="primary" size="xlarge">
                   Get Your Free Quote
-                </Link>
-                <a
-                  href="tel:01457597091"
-                  className={`${interactive.button.secondary} ${interactive.button.large} flex items-center justify-center ${spacing.gap.xs}`}
+                </Button>
+                <Button 
+                  href="tel:01457597091" 
+                  variant="secondary" 
+                  size="xlarge"
+                  iconLeft={<Icon name="phone" />}
                 >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                  </svg>
-                  <span className="font-medium">01457 597091</span>
-                </a>
-              </div>
-
-              <div className={`grid grid-cols-3 ${spacing.gap.lg} ${spacing.margin.topLg}`}>
-                <div className="text-center">
-                  <div className={`w-12 h-12 ${colors.background.gold} rounded-full flex items-center justify-center mx-auto ${spacing.margin.bottomMd}`}>
-                    <svg className={`w-6 h-6 ${colors.text.dark}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                  </div>
-                  <p className={`${typography.bodySmall} font-medium`}>5 Year Guarantee</p>
-                </div>
-                <div className="text-center">
-                  <div className={`w-12 h-12 ${colors.background.gold} rounded-full flex items-center justify-center mx-auto ${spacing.margin.bottomMd}`}>
-                    <svg className={`w-6 h-6 ${colors.text.dark}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                    </svg>
-                  </div>
-                  <p className={`${typography.bodySmall} font-medium`}>Local Saddleworth Experts</p>
-                </div>
-                <div className="text-center">
-                  <div className={`w-12 h-12 ${colors.background.gold} rounded-full flex items-center justify-center mx-auto ${spacing.margin.bottomMd}`}>
-                    <svg className={`w-6 h-6 ${colors.text.dark}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 2v4m8-4v4M3 10h18M5 4h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2z" />
-                    </svg>
-                  </div>
-                  <p className={`${typography.bodySmall} font-medium`}>Free Home Consultation</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="relative">
+                  01457 597091
+                </Button>
+              </Flex>
+              
+              <Grid cols={3} gap="large">
+                {features.map((feature, index) => (
+                  <Flex key={index} direction="col" align="center" gap="small">
+                    <Flex
+                      className="w-12 h-12 bg-brand-gold rounded-full"
+                      align="center"
+                      justify="center"
+                    >
+                      <Icon name={feature.icon} size="large" color="black" />
+                    </Flex>
+                    <Text size="small" weight="medium" align="center">
+                      {feature.title}
+                    </Text>
+                  </Flex>
+                ))}
+              </Grid>
+            </Stack>
+            
+            <div>
               <RollerBlindsCarousel showTitle={false} showDescription={false} />
             </div>
-          </div>
-        </div>
-      </section>
+          </Grid>
+        </Container>
+      </Section>
 
-      <section className={`${spacing.section.py} ${colors.background.dark}`}>
-        <div className="container">
-          <div className={`max-w-4xl mx-auto ${spacing.stack.xl}`}>
-            <div className="text-center relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-brand-gold/10 via-transparent to-brand-gold/10 rounded-3xl -mx-8"></div>
+      {/* Why Roller Blinds Section */}
+      <Section background="dark" padding="large">
+        <Container size="medium">
+          <Stack spacing="xlarge">
+            {/* Header with decorative elements */}
+            <Stack spacing="large" className="text-center relative">
+              <div className="absolute inset-0 bg-gradient-to-r from-brand-gold/10 via-transparent to-brand-gold/10 rounded-3xl -mx-8" />
               <div className="relative z-10">
-                <div className={`w-24 h-1 ${colors.gradients.brandButton} mx-auto ${spacing.margin.bottomLg} rounded-full`}></div>
-                <h2 className={`${typography.h2} ${spacing.margin.bottomLg} ${colors.gradients.textAccent}`}>
+                <div className="w-24 h-1 bg-gradient-to-r from-brand-gold to-yellow-400 mx-auto rounded-full" />
+                <Heading.H2 color="gradient" marginBottom="large">
                   Why Roller Blinds Are Perfect for Saddleworth Homes
-                </h2>
-                <div className={`w-24 h-1 ${colors.gradients.brandButton} mx-auto ${spacing.margin.bottomXl} rounded-full`}></div>
-                <div className={`grid md:grid-cols-2 ${spacing.gap.lg} items-center max-w-5xl mx-auto`}>
-                <div className="space-y-4">
-                  <p className="text-lg text-gray-300 leading-relaxed">
-                    Simple, stylish and incredibly practical - discover why roller blinds have become the go-to choice for homeowners across Saddleworth.
-                  </p>
-                  <p className="text-lg text-gray-300 leading-relaxed">
-                    Whether you're looking to control the morning sun streaming into your Diggle kitchen or create the perfect sleep environment in your Delph bedroom, our made-to-measure roller blinds offer the ideal solution.
-                  </p>
-                </div>
-                <div className={`${colors.background.secondary}/50 rounded-lg ${spacing.padding.lg} border ${colors.border.accent}/20`}>
-                  <div className={`flex items-center ${spacing.gap.md} ${spacing.margin.bottomMd}`}>
-                    <div className={`w-12 h-12 ${colors.background.gold} rounded-full flex items-center justify-center`}>
-                      <svg className={`w-6 h-6 ${colors.text.dark}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
+                </Heading.H2>
+                <div className="w-24 h-1 bg-gradient-to-r from-brand-gold to-yellow-400 mx-auto rounded-full" />
+              </div>
+            </Stack>
+            
+            <Grid cols={2} gap="large" align="center">
+              <Stack spacing="medium">
+                <Text size="large" color="light">
+                  Simple, stylish and incredibly practical - discover why roller blinds 
+                  have become the go-to choice for homeowners across Saddleworth.
+                </Text>
+                <Text size="large" color="light">
+                  Whether you're looking to control the morning sun streaming into your 
+                  Diggle kitchen or create the perfect sleep environment in your Delph 
+                  bedroom, our made-to-measure roller blinds offer the ideal solution.
+                </Text>
+              </Stack>
+              
+              <Card variant="elevated" className="bg-gray-800/50 border border-brand-gold/20">
+                <Stack spacing="medium">
+                  <Flex gap="medium" align="center">
+                    <Flex
+                      className="w-12 h-12 bg-brand-gold rounded-full flex-shrink-0"
+                      align="center"
+                      justify="center"
+                    >
+                      <Icon name="checkCircle" size="large" color="black" />
+                    </Flex>
+                    <Text size="large" weight="semibold">
+                      Why Choose Roller Blinds?
+                    </Text>
+                  </Flex>
+                  <Text color="light" className="italic">
+                    "The simplicity of roller blinds makes them perfect for the varied 
+                    window styles found in Saddleworth homes - from traditional sash 
+                    windows to modern bi-folds."
+                  </Text>
+                  <Text size="small" color="muted" align="right">
+                    - Sarah, Lead Designer
+                  </Text>
+                </Stack>
+              </Card>
+            </Grid>
+          </Stack>
+        </Container>
+      </Section>
+
+      {/* Benefits Grid */}
+      <Section background="darker" padding="large">
+        <Container>
+          <Stack spacing="xlarge">
+            <Stack spacing="medium" className="text-center">
+              <Heading.H2>The Benefits You'll Love</Heading.H2>
+              <Text.Lead>
+                Discover why thousands of Saddleworth homeowners choose roller blinds
+              </Text.Lead>
+            </Stack>
+            
+            <Grid cols={4} gap="large">
+              {benefits.map((benefit, index) => (
+                <Card key={index} variant="default" hover="lift" className="text-center">
+                  <Stack spacing="medium">
+                    <Flex justify="center">
+                      <Flex
+                        className="w-16 h-16 bg-brand-gold/20 rounded-full"
+                        align="center"
+                        justify="center"
+                      >
+                        <Icon name={benefit.icon} size="xlarge" color="gold" />
+                      </Flex>
+                    </Flex>
+                    <Heading.H4>{benefit.title}</Heading.H4>
+                    <Text color="light" size="small">
+                      {benefit.description}
+                    </Text>
+                  </Stack>
+                </Card>
+              ))}
+            </Grid>
+          </Stack>
+        </Container>
+      </Section>
+
+      {/* Blind Types Section */}
+      <Section background="gradient" padding="large">
+        <Container>
+          <Stack spacing="xlarge">
+            <Stack spacing="medium" className="text-center">
+              <Heading.H2>Choose Your Perfect Style</Heading.H2>
+              <Text.Lead>
+                From complete darkness to gentle light filtering, we have options for every need
+              </Text.Lead>
+            </Stack>
+            
+            <Grid cols={3} gap="large">
+              {blindTypes.map((type, index) => (
+                <Card key={index} variant="elevated" hover="glow">
+                  <Stack spacing="large">
+                    <Stack spacing="small">
+                      <Heading.H3>{type.name}</Heading.H3>
+                      <Text color="gold" weight="medium">
+                        {type.description}
+                      </Text>
+                    </Stack>
+                    
+                    <Stack spacing="small">
+                      {type.features.map((feature, idx) => (
+                        <Flex key={idx} gap="small" align="start">
+                          <Icon name="check" size="small" color="gold" className="mt-0.5 flex-shrink-0" />
+                          <Text size="small" color="light">{feature}</Text>
+                        </Flex>
+                      ))}
+                    </Stack>
+                    
+                    <div className="pt-4 border-t border-gray-700">
+                      <Text size="small" weight="medium" color="muted">
+                        Recommended for:
+                      </Text>
+                      <Text size="small" color="light">
+                        {type.recommended}
+                      </Text>
                     </div>
-                    <div>
-                      <h3 className={`${typography.body} font-semibold ${colors.text.white}`}>Made-to-Measure</h3>
-                      <p className={`${typography.bodySmall} ${colors.text.muted}`}>Perfect fit guaranteed</p>
-                    </div>
-                  </div>
-                  <p className={`${colors.text.secondary}`}>
-                    Every roller blind is custom-made to fit your windows perfectly, ensuring a professional finish every time.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
+                  </Stack>
+                </Card>
+              ))}
+            </Grid>
+          </Stack>
+        </Container>
+      </Section>
 
-          <div>
-            <h2 className={`${typography.h2} ${spacing.margin.bottomXl} text-center`}>Choose Your Perfect Roller Blind</h2>
-            <div className={`${spacing.layout.grid} md:grid-cols-3 ${spacing.gap.lg}`}>
-              <div className={`${colors.background.secondary} rounded-lg ${spacing.padding.lg}`}>
-                <div className={`w-16 h-16 ${colors.background.gold} rounded-full flex items-center justify-center mx-auto ${spacing.margin.bottomMd}`}>
-                  <svg className={`w-8 h-8 ${colors.text.dark}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                  </svg>
-                </div>
-                <h3 className={`${typography.h3} ${spacing.margin.bottomMd} text-center`}>Blackout Roller Blinds</h3>
-                <p className={`${colors.text.secondary} ${spacing.margin.bottomMd}`}>
-                  Perfect for bedrooms and nurseries across Saddleworth. Our blackout fabrics block 100% of light, helping you get a great night's sleep. Particularly popular in Uppermill where streetlights can be an issue.
-                </p>
-                <ul className={`${spacing.stack.sm} ${typography.bodySmall} ${colors.text.muted}`}>
-                  <li>• Complete darkness for better sleep</li>
-                  <li>• Reduces noise from outside</li>
-                  <li>• Helps regulate room temperature</li>
-                  <li>• Perfect for shift workers</li>
-                </ul>
-              </div>
+      {/* Local Expertise Section */}
+      <Section background="dark" padding="large">
+        <Container size="medium">
+          <Grid cols={2} gap="xlarge" align="center">
+            <Image
+              src="/images/optimized/roller-carnival-bubblegum-1600.jpg"
+              alt="Beautiful roller blinds in a Saddleworth home"
+              aspectRatio="landscape"
+              className="rounded-lg shadow-2xl"
+            />
+            
+            <Stack spacing="large">
+              <Heading.H2>
+                Your Local Roller Blind
+                <Text as="span" color="gold" className="block">
+                  Experts Since 2003
+                </Text>
+              </Heading.H2>
+              
+              <Text.Lead>
+                We've been fitting roller blinds throughout Saddleworth for over 20 years. 
+                We know the unique challenges of local properties - from stone cottages 
+                with deep window reveals to modern extensions with bi-fold doors.
+              </Text.Lead>
+              
+              <Stack spacing="small">
+                <Text weight="semibold">Proudly serving all Saddleworth villages:</Text>
+                <Flex gap="small" wrap={true}>
+                  {localAreas.map((area) => (
+                    <Link key={area} to={`/areas/${area.toLowerCase()}`}>
+                      <Badge variant="ghost">{area}</Badge>
+                    </Link>
+                  ))}
+                </Flex>
+              </Stack>
+              
+              <Button to="/about" variant="secondary" size="large">
+                Learn More About Us
+              </Button>
+            </Stack>
+          </Grid>
+        </Container>
+      </Section>
 
-              <div className={`${colors.background.secondary} rounded-lg ${spacing.padding.lg}`}>
-                <div className={`w-16 h-16 ${colors.background.gold} rounded-full flex items-center justify-center mx-auto ${spacing.margin.bottomMd}`}>
-                  <svg className={`w-8 h-8 ${colors.text.dark}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                  </svg>
-                </div>
-                <h3 className={`${typography.h3} ${spacing.margin.bottomMd} text-center`}>Sunscreen Roller Blinds</h3>
-                <p className={`${colors.text.secondary} ${spacing.margin.bottomMd}`}>
-                  Ideal for living spaces where you want to maintain your view whilst reducing glare. These clever blinds are a favourite in Diggle properties with stunning countryside views.
-                </p>
-                <ul className={`${spacing.stack.sm} ${typography.bodySmall} ${colors.text.muted}`}>
-                  <li>• Reduces glare without blocking views</li>
-                  <li>• Protects furniture from UV damage</li>
-                  <li>• Maintains privacy during the day</li>
-                  <li>• Energy efficient - reduces heat gain</li>
-                </ul>
-              </div>
+      {/* Process Section */}
+      <Section background="darker" padding="large">
+        <Container>
+          <Stack spacing="xlarge">
+            <Stack spacing="medium" className="text-center">
+              <Heading.H2 color="gradient">
+                How It Works
+              </Heading.H2>
+              <Text.Lead>
+                From first contact to perfect installation - we make it easy
+              </Text.Lead>
+            </Stack>
+            
+            <Grid cols={4} gap="large">
+              {processSteps.map((step, index) => (
+                <Stack key={index} spacing="medium" className="text-center">
+                  <Flex justify="center">
+                    <Flex
+                      className="w-16 h-16 bg-brand-gold rounded-full"
+                      align="center"
+                      justify="center"
+                    >
+                      <Text size="xlarge" weight="bold" color="black">
+                        {step.number}
+                      </Text>
+                    </Flex>
+                  </Flex>
+                  <Heading.H4>{step.title}</Heading.H4>
+                  <Text color="light" size="small">
+                    {step.description}
+                  </Text>
+                </Stack>
+              ))}
+            </Grid>
+          </Stack>
+        </Container>
+      </Section>
 
-              <div className={`${colors.background.secondary} rounded-lg ${spacing.padding.lg}`}>
-                <div className={`w-16 h-16 ${colors.background.gold} rounded-full flex items-center justify-center mx-auto ${spacing.margin.bottomMd}`}>
-                  <svg className={`w-8 h-8 ${colors.text.dark}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
-                  </svg>
-                </div>
-                <h3 className={`${typography.h3} ${spacing.margin.bottomMd} text-center`}>Decorative Roller Blinds</h3>
-                <p className={`${colors.text.secondary} ${spacing.margin.bottomMd}`}>
-                  Add personality to any room with our extensive range of patterns and textures. From contemporary designs perfect for modern Dobcross developments to traditional patterns.
-                </p>
-                <ul className={`${spacing.stack.sm} ${typography.bodySmall} ${colors.text.muted}`}>
-                  <li>• Hundreds of designs to choose from</li>
-                  <li>• Match any interior style</li>
-                  <li>• Light filtering or room darkening options</li>
-                  <li>• Wipeable and washable fabrics available</li>
-                </ul>
-              </div>
-            </div>
-          </div>
+      {/* Product Showcase */}
+      <Section padding="large">
+        <Container>
+          <Stack spacing="xlarge">
+            <Stack spacing="medium" className="text-center">
+              <Heading.H2>Browse Our Roller Blind Collection</Heading.H2>
+              <Text.Lead>
+                Hundreds of fabrics and patterns to choose from
+              </Text.Lead>
+            </Stack>
+            
+            <RollerBlindsCarousel />
+          </Stack>
+        </Container>
+      </Section>
 
-          <div className={`${colors.background.secondary} rounded-lg ${spacing.padding.xl}`}>
-            <h2 className={`${typography.h2} ${spacing.margin.bottomLg} text-center`}>Your Local Roller Blind Experts</h2>
-            <p className={`${colors.text.secondary} text-center ${spacing.margin.bottomXl}`}>
-              Every village in Saddleworth has its own character, and we've worked in them all. From Victorian terraces in Uppermill to converted barns in Diggle, we've fitted blinds in every type of Saddleworth home.
-            </p>
-
-            <div className={`${spacing.layout.grid} md:grid-cols-4 ${spacing.gap.lg}`}>
-              <div className="text-center">
-                <div className={`w-16 h-16 ${colors.background.gold} rounded-full flex items-center justify-center mx-auto ${spacing.margin.bottomMd}`}>
-                  <svg className={`w-8 h-8 ${colors.text.dark}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                  </svg>
-                </div>
-                <h3 className={`${typography.body} font-semibold ${colors.text.white} ${spacing.margin.bottomSm}`}>Uppermill & Diggle</h3>
-                <p className={`${typography.bodySmall} ${colors.text.muted}`}>From Victorian terraces to stone cottages</p>
-              </div>
-              <div className="text-center">
-                <div className={`w-16 h-16 ${colors.background.gold} rounded-full flex items-center justify-center mx-auto ${spacing.margin.bottomMd}`}>
-                  <svg className={`w-8 h-8 ${colors.text.dark}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                  </svg>
-                </div>
-                <h3 className={`${typography.body} font-semibold ${colors.text.white} ${spacing.margin.bottomSm}`}>Delph & Greenfield</h3>
-                <p className={`${typography.bodySmall} ${colors.text.muted}`}>Family homes and new builds</p>
-              </div>
-              <div className="text-center">
-                <div className={`w-16 h-16 ${colors.background.gold} rounded-full flex items-center justify-center mx-auto ${spacing.margin.bottomMd}`}>
-                  <svg className={`w-8 h-8 ${colors.text.dark}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                  </svg>
-                </div>
-                <h3 className={`${typography.body} font-semibold ${colors.text.white} ${spacing.margin.bottomSm}`}>Dobcross & Lydgate</h3>
-                <p className={`${typography.bodySmall} ${colors.text.muted}`}>Conversions and period properties</p>
-              </div>
-              <div className="text-center">
-                <div className={`w-16 h-16 ${colors.background.gold} rounded-full flex items-center justify-center mx-auto ${spacing.margin.bottomMd}`}>
-                  <svg className={`w-8 h-8 ${colors.text.dark}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                  </svg>
-                </div>
-                <h3 className={`${typography.body} font-semibold ${colors.text.white} ${spacing.margin.bottomSm}`}>20+ Years Experience</h3>
-                <p className={`${typography.bodySmall} ${colors.text.muted}`}>Trusted local expertise</p>
-              </div>
-            </div>
-          </div>
-
-          <div className={`${colors.background.secondary} rounded-lg ${spacing.padding.xl}`}>
-            <h2 className={`${typography.h2} ${spacing.margin.bottomLg} text-center`}>How We Make It Easy</h2>
-            <p className={`${colors.text.secondary} text-center ${spacing.margin.bottomXl}`}>
-              From consultation to installation, we handle everything
-            </p>
-            <div className={`${spacing.layout.grid} md:grid-cols-4 ${spacing.gap.lg}`}>
-              <div className="text-center">
-                <div className={`w-12 h-12 ${colors.background.gold} rounded-full flex items-center justify-center mx-auto ${spacing.margin.bottomMd} ${colors.text.dark} font-bold text-lg`}>1</div>
-                <h3 className={`${typography.body} font-semibold ${colors.text.white} ${spacing.margin.bottomSm}`}>Free Consultation</h3>
-                <p className={`${typography.bodySmall} ${colors.text.muted}`}>We'll visit your home, measure up, and give honest advice</p>
-              </div>
-              <div className="text-center">
-                <div className={`w-12 h-12 ${colors.background.gold} rounded-full flex items-center justify-center mx-auto ${spacing.margin.bottomMd} ${colors.text.dark} font-bold text-lg`}>2</div>
-                <h3 className={`${typography.body} font-semibold ${colors.text.white} ${spacing.margin.bottomSm}`}>Made to Measure</h3>
-                <p className={`${typography.bodySmall} ${colors.text.muted}`}>Your blinds manufactured to exact specifications</p>
-              </div>
-              <div className="text-center">
-                <div className={`w-12 h-12 ${colors.background.gold} rounded-full flex items-center justify-center mx-auto ${spacing.margin.bottomMd} ${colors.text.dark} font-bold text-lg`}>3</div>
-                <h3 className={`${typography.body} font-semibold ${colors.text.white} ${spacing.margin.bottomSm}`}>Professional Fitting</h3>
-                <p className={`${typography.bodySmall} ${colors.text.muted}`}>Expert installation included in every quote</p>
-              </div>
-              <div className="text-center">
-                <div className={`w-12 h-12 ${colors.background.gold} rounded-full flex items-center justify-center mx-auto ${spacing.margin.bottomMd} ${colors.text.dark} font-bold text-lg`}>4</div>
-                <h3 className={`${typography.body} font-semibold ${colors.text.white} ${spacing.margin.bottomSm}`}>Aftercare Support</h3>
-                <p className={`${typography.bodySmall} ${colors.text.muted}`}>5-year guarantee and ongoing support</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-
-        <div className={`${spacing.margin.topXl} text-center`}>
-          <h2 className={`${typography.h2} ${spacing.margin.bottomLg}`}>Ready to Transform Your Windows?</h2>
-          <p className={`${typography.lead} ${colors.text.lightGray} ${spacing.margin.bottomXl}`}>
-            Join hundreds of happy customers across Saddleworth who've chosen Sunshine Blinds for their roller blinds. From initial consultation to perfect installation, we make the whole process easy.
-          </p>
-
-          <div className={`flex flex-col sm:flex-row ${spacing.gap.md} justify-center`}>
-            <Link
-              to="/book-appointment"
-              className={`${interactive.button.primary} ${interactive.button.large}`}
-            >
-              Book Your Free Consultation
-            </Link>
-            <a
-              href="tel:01457597091"
-              className={`${interactive.button.secondary} ${interactive.button.large}`}
-            >
-              <span className="font-medium">01457 597091</span>
-            </a>
-          </div>
-        </div>
-        </div>
-      </section>
-    </div>
+      {/* Final CTA */}
+      <Section background="gold" textColor="dark" padding="large">
+        <Container size="narrow">
+          <Stack spacing="large" className="text-center">
+            <Heading.H2>
+              Ready to Transform Your Windows?
+            </Heading.H2>
+            <Text size="large" className="text-gray-800">
+              Join hundreds of happy Saddleworth customers who've discovered the perfect 
+              roller blinds for their homes. Book your free consultation today and let's 
+              find the ideal solution for you.
+            </Text>
+            
+            <Flex gap="medium" justify="center">
+              <Button 
+                to="/book-appointment" 
+                size="xlarge"
+                className="bg-gray-900 hover:bg-gray-800 text-white"
+              >
+                Book Free Consultation
+              </Button>
+              <Button 
+                href="tel:01457597091" 
+                size="xlarge"
+                className="bg-transparent border-2 border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white"
+                iconLeft={<Icon name="phone" />}
+              >
+                Call Now
+              </Button>
+            </Flex>
+            
+            <Flex justify="center" gap="large">
+              <Flex align="center" gap="small">
+                <Icon name="checkCircle" color="success" />
+                <Text weight="medium">Free Measuring</Text>
+              </Flex>
+              <Flex align="center" gap="small">
+                <Icon name="star" className="text-yellow-600" />
+                <Text weight="medium">5 Year Guarantee</Text>
+              </Flex>
+              <Flex align="center" gap="small">
+                <Icon name="shield" className="text-blue-600" />
+                <Text weight="medium">Fully Insured</Text>
+              </Flex>
+            </Flex>
+          </Stack>
+        </Container>
+      </Section>
+    </>
   )
 }
 
-export default RollerBlinds
+export default RollerBlindsStandardized

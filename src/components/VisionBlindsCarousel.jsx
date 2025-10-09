@@ -1,8 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
+import ProductCarousel from './ProductCarousel'
 
 const VisionBlindsCarousel = ({ showTitle = true, showDescription = true }) => {
-  const [currentIndex, setCurrentIndex] = useState(0)
-
   const visionImages = [
     { src: 'vision-albero-silver-400.jpg', alt: 'Albero Silver Vision Blind', title: 'Albero Silver' },
     { src: 'vision-arezzo-beige-400.jpg', alt: 'Arezzo Beige Vision Blind', title: 'Arezzo Beige' },
@@ -44,100 +43,15 @@ const VisionBlindsCarousel = ({ showTitle = true, showDescription = true }) => {
     { src: 'vision-viale-mauve-400.jpg', alt: 'Viale Mauve Vision Blind', title: 'Viale Mauve' }
   ]
 
-  const nextSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % visionImages.length)
-  }
-
-  const prevSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + visionImages.length) % visionImages.length)
-  }
-
-  const currentImage = visionImages[currentIndex]
-
   return (
-    <div className="bg-gray-800 rounded-lg overflow-hidden">
-      {showTitle && (
-        <div className="p-6 text-center">
-          <h3 className="text-2xl font-bold text-brand-gold mb-2">
-            Vision Blinds Collection ({visionImages.length} styles)
-          </h3>
-          {showDescription && (
-            <p className="text-gray-300">
-              Browse through our complete Vision blinds collection to find your perfect style
-            </p>
-          )}
-        </div>
-      )}
-
-      <div className="relative">
-        {/* Main Image Display */}
-        <div className="aspect-[16/10] bg-gray-900">
-          <img
-            src={`/images/optimized/${currentImage.src}`}
-            alt={currentImage.alt}
-            className="w-full h-full object-cover"
-            loading="lazy"
-          />
-        </div>
-
-        {/* Navigation Arrows */}
-        {visionImages.length > 1 && (
-          <>
-            <button
-              onClick={prevSlide}
-              className="absolute left-6 top-1/2 transform -translate-y-1/2 bg-brand-gold hover:bg-yellow-500 text-gray-900 p-3 rounded-full transition-all duration-200 hover:scale-110 shadow-lg z-10"
-              aria-label="Previous image"
-            >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M15 19l-7-7 7-7" />
-              </svg>
-            </button>
-            <button
-              onClick={nextSlide}
-              className="absolute right-6 top-1/2 transform -translate-y-1/2 bg-brand-gold hover:bg-yellow-500 text-gray-900 p-3 rounded-full transition-all duration-200 hover:scale-110 shadow-lg z-10"
-              aria-label="Next image"
-            >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M9 5l7 7-7 7" />
-              </svg>
-            </button>
-          </>
-        )}
-
-        {/* Image Counter and Title */}
-        <div className="absolute bottom-4 left-4 bg-black/70 text-white px-3 py-1 rounded">
-          <span className="text-sm">
-            {currentIndex + 1} / {visionImages.length} - {currentImage.title}
-          </span>
-        </div>
-      </div>
-
-      {/* Thumbnail Navigation */}
-      {visionImages.length > 1 && (
-        <div className="p-6 bg-gray-900 border-t border-gray-800">
-          <div className="flex gap-3 overflow-x-auto pb-2 justify-center">
-            {visionImages.map((image, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentIndex(index)}
-                className={`flex-shrink-0 w-20 h-20 rounded-lg border-2 transition-all duration-200 overflow-hidden ${
-                  index === currentIndex
-                    ? 'border-brand-gold shadow-lg shadow-brand-gold/20'
-                    : 'border-gray-600 hover:border-brand-gold/50 hover:shadow-md'
-                }`}
-              >
-                <img
-                  src={`/images/optimized/${image.src}`}
-                  alt={image.alt}
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                />
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
-    </div>
+    <ProductCarousel
+      title="Vision Blinds Collection"
+      description="Browse through our complete Vision blinds collection to find your perfect style"
+      images={visionImages}
+      showTitle={showTitle}
+      showDescription={showDescription}
+      autoPlay={true}
+    />
   )
 }
 

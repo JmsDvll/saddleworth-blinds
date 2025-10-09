@@ -1,5 +1,17 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import {
+  Section,
+  Container,
+  Heading,
+  Text,
+  Button,
+  Grid,
+  Stack,
+  Center,
+  Flex,
+  Link,
+  Image
+} from './ui'
 
 const ProductImageCarousel = () => {
   const [activeTab, setActiveTab] = useState('vision')
@@ -109,85 +121,92 @@ const ProductImageCarousel = () => {
   }
 
   return (
-    <div className="bg-gray-900 py-16">
-      <div className="container">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl lg:text-4xl font-bold mb-4">Explore Our Full Range</h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Browse through our complete collection of blinds and shutters. Each category showcases the quality and variety we offer to help you find your perfect window treatment.
-          </p>
-        </div>
+    <Section background="darker" padding="large">
+      <Container>
+        <Stack spacing="xlarge">
+          {/* Header */}
+          <Center>
+            <Stack spacing="medium" align="center">
+              <Heading as="h2" size="3xl" lgSize="4xl">Explore Our Full Range</Heading>
+              <Text size="xlarge" color="light" align="center" className="max-w-3xl">
+                Browse through our complete collection of blinds and shutters. Each category showcases the quality and variety we offer to help you find your perfect window treatment.
+              </Text>
+            </Stack>
+          </Center>
 
-        {/* Category Tabs */}
-        <div className="flex flex-wrap justify-center gap-2 mb-8">
-          {Object.entries(productCategories).map(([key, category]) => (
-            <button
-              key={key}
-              onClick={() => setActiveTab(key)}
-              className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                activeTab === key
-                  ? 'bg-brand-gold text-gray-900'
-                  : 'bg-gray-800 text-white hover:bg-gray-700'
-              }`}
-            >
-              {category.name} ({category.images.length})
-            </button>
-          ))}
-        </div>
+          {/* Category Tabs */}
+          <Flex justify="center" wrap="wrap" gap="small">
+            {Object.entries(productCategories).map(([key, category]) => (
+              <Button
+                key={key}
+                onClick={() => setActiveTab(key)}
+                variant={activeTab === key ? 'primary' : 'secondary'}
+                size="medium"
+              >
+                {category.name} ({category.images.length})
+              </Button>
+            ))}
+          </Flex>
 
-        {/* Active Category Display */}
-        <div className="text-center mb-8">
-          <h3 className="text-2xl font-bold text-brand-gold mb-2">
-            {productCategories[activeTab].name}
-          </h3>
-          <p className="text-gray-300">
-            {productCategories[activeTab].description}
-          </p>
-        </div>
+          {/* Active Category Display */}
+          <Center>
+            <Stack spacing="small" align="center">
+              <Heading as="h3" size="2xl" color="gold">
+                {productCategories[activeTab].name}
+              </Heading>
+              <Text color="light">
+                {productCategories[activeTab].description}
+              </Text>
+            </Stack>
+          </Center>
 
-        {/* Image Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-          {productCategories[activeTab].images.map((image, index) => (
-            <div key={index} className="group">
-              <div className="aspect-square bg-gray-800 rounded-lg overflow-hidden">
-                <img
-                  src={`/images/optimized/${image}`}
-                  alt={`${productCategories[activeTab].name} option ${index + 1}`}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  loading="lazy"
-                />
-              </div>
-              <div className="mt-2 text-center">
-                <p className="text-sm text-gray-400">
+          {/* Image Grid */}
+          <Grid cols={2} mdCols={3} lgCols={4} xlCols={5} gap="medium">
+            {productCategories[activeTab].images.map((image, index) => (
+              <Stack key={index} spacing="small">
+                <div className="aspect-square bg-gray-800 rounded-lg overflow-hidden group">
+                  <Image
+                    src={`/images/optimized/${image}`}
+                    alt={`${productCategories[activeTab].name} option ${index + 1}`}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+                <Text size="small" color="muted" align="center">
                   Style #{index + 1}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
+                </Text>
+              </Stack>
+            ))}
+          </Grid>
 
-        {/* Call to Action */}
-        <div className="text-center mt-12">
-          <p className="text-gray-300 mb-6">
-            See something you like? We'd love to help you find the perfect blinds for your home.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              to="/book-appointment"
-              className="btn btn-primary text-lg px-8 py-4"
-            >
-              Book Free Consultation
-            </Link>
-            <Link
-              to="/gallery"
-              className="btn btn-secondary text-lg px-8 py-4"
-            >
-              View Full Gallery
-            </Link>
-          </div>
-        </div>
-      </div>
-    </div>
+          {/* Call to Action */}
+          <Center>
+            <Stack spacing="medium" align="center">
+              <Text color="light">
+                See something you like? We'd love to help you find the perfect blinds for your home.
+              </Text>
+              <Flex direction="column" smDirection="row" gap="medium">
+                <Button
+                  as={Link}
+                  to="/book-appointment"
+                  variant="primary"
+                  size="xlarge"
+                >
+                  Book Free Consultation
+                </Button>
+                <Button
+                  as={Link}
+                  to="/gallery"
+                  variant="secondary"
+                  size="xlarge"
+                >
+                  View Full Gallery
+                </Button>
+              </Flex>
+            </Stack>
+          </Center>
+        </Stack>
+      </Container>
+    </Section>
   )
 }
 

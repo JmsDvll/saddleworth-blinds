@@ -1,6 +1,17 @@
 import React, { useState } from 'react'
+import { 
+  Button, 
+  Card, 
+  Text, 
+  FormInput, 
+  FormTextarea, 
+  FormCheckbox, 
+  FormRadio,
+  FormGroup,
+  FormRow 
+} from './ui'
 
-const ContactForm = () => {
+const ContactFormNew = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -28,17 +39,13 @@ const ContactForm = () => {
     e.preventDefault()
     setIsSubmitting(true)
 
-    // Create FormData object to send to PHP
     const formDataToSend = new FormData()
-    
-    // Add all form fields
     Object.keys(formData).forEach(key => {
       formDataToSend.append(key, formData[key])
     })
     
-    // Add anti-spam fields
     formDataToSend.append('form_start_time', Math.floor(Date.now() / 1000) - 10)
-    formDataToSend.append('website', '') // Honeypot field
+    formDataToSend.append('website', '') // Honeypot
 
     try {
       const response = await fetch('/process-contact.php', {
@@ -47,7 +54,6 @@ const ContactForm = () => {
       })
 
       if (response.ok) {
-        // Success
         setSubmitStatus({
           type: 'success',
           message: 'Thank you for your message! We\'ll get back to you within 24 hours.'
@@ -66,10 +72,8 @@ const ContactForm = () => {
           marketing: false
         })
         
-        // Clear success message after 5 seconds
         setTimeout(() => setSubmitStatus({ type: '', message: '' }), 5000)
       } else {
-        // Error
         setSubmitStatus({
           type: 'error',
           message: 'Sorry, there was an error sending your message. Please call us on 01457 597091.'
@@ -87,223 +91,170 @@ const ContactForm = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
-      {/* Status Messages */}
-      {submitStatus.message && (
-        <div
-          className={`p-4 rounded-lg ${
-            submitStatus.type === 'success'
-              ? 'bg-green-900/20 border border-green-600 text-green-400'
-              : 'bg-red-900/20 border border-red-600 text-red-400'
-          }`}
-          role="alert"
-        >
-          <p className="font-medium">{submitStatus.message}</p>
-        </div>
-      )}
-      <div>
-        <label htmlFor="name" className="block text-sm font-medium text-white mb-2">
-          Your Name *
-        </label>
-        <input
-          type="text"
-          id="name"
+    <form onSubmit={handleSubmit}>
+      <FormGroup>
+        {/* Status Messages - Using our Card component */}
+        {submitStatus.message && (
+          <Card 
+            variant="default" 
+            className={
+              submitStatus.type === 'success'
+                ? 'bg-green-900/20 border-green-600'
+                : 'bg-red-900/20 border-red-600'
+            }
+          >
+            <Text 
+              color={submitStatus.type === 'success' ? 'success' : 'error'} 
+              weight="medium"
+            >
+              {submitStatus.message}
+            </Text>
+          </Card>
+        )}
+
+        {/* Name Input */}
+        <FormInput
+          label="Your Name"
           name="name"
           value={formData.name}
           onChange={handleInputChange}
           required
-          className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:ring-2 focus:ring-brand-gold focus:border-transparent"
-          placeholder="John Smith"
+          placeholder="Enter your full name"
         />
-      </div>
 
-      <div className="grid md:grid-cols-2 gap-6">
-        <div>
-          <label htmlFor="email" className="block text-sm font-medium text-white mb-2">
-            Email Address *
-          </label>
-          <input
-          type="email"
-          id="email"
-          name="email"
-          value={formData.email}
-          onChange={handleInputChange}
-          required
-          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-            className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:ring-2 focus:ring-brand-gold focus:border-transparent"
-            placeholder="john@example.com"
+        {/* Email and Phone in a row */}
+        <FormRow>
+          <FormInput
+            label="Email Address"
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleInputChange}
+            required
+            placeholder="your@email.com"
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
           />
-        </div>
-
-        <div>
-          <label htmlFor="phone" className="block text-sm font-medium text-white mb-2">
-            Phone Number *
-          </label>
-          <input
+          
+          <FormInput
+            label="Phone Number"
             type="tel"
-            id="phone"
             name="phone"
             value={formData.phone}
             onChange={handleInputChange}
             required
+            placeholder="01457 123456"
             pattern="[0-9\s()+-]+"
-            minLength="10"
-            className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:ring-2 focus:ring-brand-gold focus:border-transparent"
-            placeholder="01457 597091"
+            helperText="We'll only call during business hours"
           />
-        </div>
-      </div>
+        </FormRow>
 
-      <div>
-        <label htmlFor="address" className="block text-sm font-medium text-white mb-2">
-          Your Address
-        </label>
-        <input
-          type="text"
-          id="address"
-          name="address"
-          value={formData.address}
-          onChange={handleInputChange}
-          className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:ring-2 focus:ring-brand-gold focus:border-transparent"
-          placeholder="123 High Street, Uppermill"
-        />
-      </div>
+        {/* Address and Postcode */}
+        <FormRow>
+          <FormInput
+            label="Address"
+            name="address"
+            value={formData.address}
+            onChange={handleInputChange}
+            placeholder="Your street address"
+            helperText="Optional - helps us understand your area"
+          />
+          
+          <FormInput
+            label="Postcode"
+            name="postcode"
+            value={formData.postcode}
+            onChange={handleInputChange}
+            placeholder="OL3 5AA"
+            pattern="[A-Za-z]{1,2}[0-9]{1,2}[A-Za-z]?\s?[0-9][A-Za-z]{2}"
+          />
+        </FormRow>
 
-      <div>
-        <label htmlFor="postcode" className="block text-sm font-medium text-white mb-2">
-          Postcode
-        </label>
-        <input
-          type="text"
-          id="postcode"
-          name="postcode"
-          value={formData.postcode}
-          onChange={handleInputChange}
-          className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:ring-2 focus:ring-brand-gold focus:border-transparent"
-          placeholder="OL3 6AA"
-        />
-      </div>
-
-      <div>
-        <label htmlFor="subject" className="block text-sm font-medium text-white mb-2">
-          Subject
-        </label>
-        <select
-          id="subject"
+        {/* Subject */}
+        <FormInput
+          label="Subject"
           name="subject"
           value={formData.subject}
           onChange={handleInputChange}
-          className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:ring-2 focus:ring-brand-gold focus:border-transparent"
-        >
-          <option value="">What's this about?</option>
-          <option value="quote">Request a Quote</option>
-          <option value="general">General Enquiry</option>
-          <option value="existing">Existing Order</option>
-          <option value="complaint">Complaint</option>
-          <option value="other">Other</option>
-        </select>
-      </div>
+          required
+          placeholder="What's this about?"
+          helperText="e.g., 'Quote for living room blinds'"
+        />
 
-      <div>
-        <label htmlFor="message" className="block text-sm font-medium text-white mb-2">
-          Your Message *
-        </label>
-        <textarea
-          id="message"
+        {/* Message */}
+        <FormTextarea
+          label="Your Message"
           name="message"
           value={formData.message}
           onChange={handleInputChange}
           required
-          rows={5}
-          className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:ring-2 focus:ring-brand-gold focus:border-transparent resize-none"
-          placeholder="Tell us how we can help you..."
+          rows={6}
+          placeholder="Tell us about your project..."
+          helperText="The more detail you provide, the better we can help!"
         />
-      </div>
 
-      <div>
-        <label className="block text-sm font-medium text-white mb-3">
-          How would you prefer we contact you?
-        </label>
-        <div className="space-y-2">
-          <label className="flex items-center space-x-3">
-            <input
-              type="radio"
+        {/* Contact Preference */}
+        <div>
+          <Text weight="medium" className="mb-3">
+            How would you prefer we contact you?
+          </Text>
+          <div className="space-y-2">
+            <FormRadio
+              label="Phone (quickest response)"
               name="contactMethod"
               value="phone"
               checked={formData.contactMethod === 'phone'}
               onChange={handleInputChange}
-              className="w-4 h-4 text-brand-gold bg-gray-800 border-gray-600 focus:ring-brand-gold"
             />
-            <span className="text-sm text-gray-300">Phone</span>
-          </label>
-          <label className="flex items-center space-x-3">
-            <input
-              type="radio"
+            <FormRadio
+              label="Email"
               name="contactMethod"
               value="email"
               checked={formData.contactMethod === 'email'}
               onChange={handleInputChange}
-              className="w-4 h-4 text-brand-gold bg-gray-800 border-gray-600 focus:ring-brand-gold"
             />
-            <span className="text-sm text-gray-300">Email</span>
-          </label>
-          <label className="flex items-center space-x-3">
-            <input
-              type="radio"
+            <FormRadio
+              label="Either is fine"
               name="contactMethod"
               value="either"
               checked={formData.contactMethod === 'either'}
               onChange={handleInputChange}
-              className="w-4 h-4 text-brand-gold bg-gray-800 border-gray-600 focus:ring-brand-gold"
             />
-            <span className="text-sm text-gray-300">Either is fine</span>
-          </label>
+          </div>
         </div>
-      </div>
 
-      <div className="space-y-3">
-        <label className="flex items-start space-x-3">
-          <input
-            type="checkbox"
-            name="marketing"
-            checked={formData.marketing}
-            onChange={handleInputChange}
-            className="w-4 h-4 mt-1 text-brand-gold bg-gray-800 border-gray-600 rounded focus:ring-brand-gold"
-          />
-          <span className="text-sm text-gray-300">
-            I'd like to receive occasional updates about new products and special offers
-          </span>
-        </label>
-      </div>
+        {/* Marketing Consent */}
+        <FormCheckbox
+          label="I'd like to receive occasional updates about special offers and new products"
+          name="marketing"
+          checked={formData.marketing}
+          onChange={handleInputChange}
+        />
 
-      {/* Honeypot field for spam protection */}
-      <input
-        type="text"
-        name="website"
-        style={{ display: 'none' }}
-        tabIndex="-1"
-        autoComplete="off"
-      />
+        {/* Honeypot field (hidden) */}
+        <input
+          type="text"
+          name="website"
+          value=""
+          onChange={() => {}}
+          style={{ display: 'none' }}
+          tabIndex="-1"
+          autoComplete="off"
+        />
 
-      <button
-        type="submit"
-        disabled={isSubmitting}
-        className="w-full btn btn-primary text-lg py-4 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
-      >
-        {isSubmitting ? (
-          <>
-            <svg className="animate-spin h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-            </svg>
-            <span>Sending...</span>
-          </>
-        ) : (
-          'Send Message'
-        )}
-      </button>
+        {/* Submit Button */}
+        <Button
+          type="submit"
+          variant="primary"
+          size="large"
+          fullWidth
+          disabled={isSubmitting}
+          loading={isSubmitting}
+        >
+          Send Message
+        </Button>
+      </FormGroup>
     </form>
   )
 }
 
-export default ContactForm
+export default ContactFormNew

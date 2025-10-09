@@ -1,8 +1,16 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-import { colors, spacing, typography, interactive } from '../styles'
+import {
+  Container,
+  Flex,
+  Icon,
+  Link,
+  Button,
+  Text,
+  Stack,
+  Card
+} from './ui'
 
-const Header = () => {
+const HeaderStandardized = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isBlindsDropdownOpen, setIsBlindsDropdownOpen] = useState(false)
   const [isAreasDropdownOpen, setIsAreasDropdownOpen] = useState(false)
@@ -21,559 +29,337 @@ const Header = () => {
     setIsBlindsDropdownOpen(false)
   }
 
+  const blindsMenu = [
+    { name: 'Roller Blinds', path: '/roller-blinds' },
+    { name: 'Venetian Blinds', path: '/venetian-blinds' },
+    { name: 'Vertical Blinds', path: '/vertical-blinds' },
+    { name: 'Vision Blinds', path: '/vision-blinds' },
+    { name: 'Perfect Fit Blinds', path: '/perfect-fit-blinds' },
+    { name: 'Shutters', path: '/shutters' },
+    { name: 'Roman Blinds', path: '/roman-blinds' },
+    { name: 'Curtains', path: '/curtains' },
+    { name: 'Allusion Blinds', path: '/allusion-blinds' }
+  ]
+
+  const areasMenu = [
+    { name: 'Uppermill', path: '/areas/uppermill' },
+    { name: 'Diggle', path: '/areas/diggle' },
+    { name: 'Delph', path: '/areas/delph' },
+    { name: 'Greenfield', path: '/areas/greenfield' },
+    { name: 'Dobcross', path: '/areas/dobcross' },
+    { name: 'Lydgate', path: '/areas/lydgate' },
+    { name: 'Denshaw', path: '/areas/denshaw' },
+    { name: 'Friezland', path: '/areas/friezland' },
+    { name: 'Grasscroft', path: '/areas/grasscroft' },
+    { name: 'Grotton', path: '/areas/grotton' },
+    { name: 'Springhead', path: '/areas/springhead' },
+    { name: 'Lees', path: '/areas/lees' }
+  ]
+
+  const mainNav = [
+    { name: 'Home', path: '/' },
+    { name: 'Gallery', path: '/gallery' },
+    { name: 'Contact', path: '/contact' }
+  ]
+
   return (
-    <header className={`${colors.background.primary} ${colors.border.dark} border-b sticky top-0 z-50`}>
-      <div className={`${spacing.container.narrow}`}>
-        <div className={`flex items-center justify-between ${spacing.padding.xl} min-h-[80px]`}>
+    <header className="bg-gray-900 border-b border-gray-800 sticky top-0 z-50">
+      <Container padding="none">
+        <Flex justify="between" align="center" className="min-h-[80px] px-4 md:px-6 lg:px-8">
           {/* Logo */}
-          <Link to="/" className={`flex items-center ${spacing.gap.lg} ${interactive.transition.transform} ${interactive.focus.ring}`}>
-            <img src="/images/sunshine-logo.svg" alt="Sunshine Blinds Logo" className="w-16 h-12 object-contain" />
-            <div className="flex flex-col">
-              <div className={`font-bold ${colors.text.gold} text-xl lg:text-2xl leading-tight`}>
-                Sunshine<br />Blinds
-              </div>
-              <div className={`${colors.text.muted} text-sm font-medium`}>
-                Saddleworth
-              </div>
-            </div>
+          <Link to="/" variant="plain">
+            <Flex gap="medium" align="center">
+              <img 
+                src="/images/sunshine-logo.svg" 
+                alt="Sunshine Blinds Logo" 
+                className="w-16 h-12 object-contain" 
+              />
+              <Stack spacing="none">
+                <Text 
+                  size="xlarge" 
+                  weight="bold" 
+                  color="gold" 
+                  className="leading-tight"
+                >
+                  Sunshine<br />Blinds
+                </Text>
+                <Text size="small" weight="medium" color="muted">
+                  Saddleworth
+                </Text>
+              </Stack>
+            </Flex>
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className={`hidden lg:flex items-center ${spacing.gap.xl}`} role="navigation" aria-label="Main navigation">
-            <Link
-              to="/"
-              className={`group relative px-4 py-2 ${colors.text.white} ${interactive.transition.colors} ${interactive.focus.ring} hover:${colors.text.gold} font-medium`}
-            >
-              <span className="relative z-10">Home</span>
-              <div className={`absolute inset-0 ${colors.background.tertiary} opacity-0 group-hover:opacity-100 ${interactive.transition.opacity} rounded-lg -z-0`}></div>
-            </Link>
+          <nav 
+            className="hidden lg:flex items-center gap-8" 
+            role="navigation" 
+            aria-label="Main navigation"
+          >
+            {/* Home Link */}
+            <Link.Nav to="/" className="font-medium">
+              Home
+            </Link.Nav>
 
+            {/* Blinds Dropdown */}
             <div className="relative">
               <button
                 onClick={toggleBlindsDropdown}
-                className={`group relative flex items-center ${spacing.gap.sm} px-4 py-2 ${colors.text.white} ${interactive.transition.colors} ${interactive.focus.ring} hover:${colors.text.gold} font-medium rounded-lg`}
+                className="group relative flex items-center gap-2 px-4 py-2 text-white hover:text-brand-gold transition-colors font-medium rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-gold focus:ring-offset-2 focus:ring-offset-gray-900"
                 aria-expanded={isBlindsDropdownOpen}
                 aria-haspopup="true"
               >
                 <span className="relative z-10">Our Blinds</span>
-                <svg
-                  className={`w-4 h-4 transition-transform duration-200 ${isBlindsDropdownOpen ? 'rotate-180' : ''} relative z-10`}
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-                <div className={`absolute inset-0 ${colors.background.tertiary} opacity-0 group-hover:opacity-100 ${interactive.transition.opacity} rounded-lg -z-0`}></div>
+                <Icon 
+                  name="chevronDown" 
+                  size="small"
+                  className={`transition-transform duration-200 ${isBlindsDropdownOpen ? 'rotate-180' : ''} relative z-10`}
+                />
+                <div className="absolute inset-0 bg-gray-800 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg -z-0" />
               </button>
 
+              {/* Blinds Dropdown Menu */}
               {isBlindsDropdownOpen && (
-                <div className={`absolute top-full left-1/2 transform -translate-x-1/2 mt-3 w-80 ${colors.background.card} ${colors.border.light} border rounded-2xl shadow-2xl py-4 z-50 backdrop-blur-sm`}>
-                  <div className="px-3 mb-3">
-                    <h3 className={`text-sm font-semibold ${colors.text.gold} uppercase tracking-wider`}>Our Products</h3>
-                  </div>
-                  <div className="grid grid-cols-1 gap-2">
-                    <Link
-                      to="/roller-blinds"
-                      className={`group flex items-center ${spacing.gap.sm} px-4 py-3 mx-2 ${colors.text.white} hover:${colors.background.tertiary} hover:${colors.text.gold} ${interactive.transition.colors} rounded-xl ${interactive.focus.ring} font-medium`}
-                      onClick={() => setIsBlindsDropdownOpen(false)}
-                    >
-                      <div className={`w-2 h-2 ${colors.background.gold} rounded-full group-hover:scale-125 ${interactive.transition.transform}`}></div>
-                      <span>Roller Blinds</span>
-                    </Link>
-                    <Link
-                      to="/venetian-blinds"
-                      className={`group flex items-center ${spacing.gap.sm} px-4 py-3 mx-2 ${colors.text.white} hover:${colors.background.tertiary} hover:${colors.text.gold} ${interactive.transition.colors} rounded-xl ${interactive.focus.ring} font-medium`}
-                      onClick={() => setIsBlindsDropdownOpen(false)}
-                    >
-                      <div className={`w-2 h-2 ${colors.background.gold} rounded-full group-hover:scale-125 ${interactive.transition.transform}`}></div>
-                      <span>Venetian Blinds</span>
-                    </Link>
-                    <Link
-                      to="/vertical-blinds"
-                      className={`group flex items-center ${spacing.gap.sm} px-4 py-3 mx-2 ${colors.text.white} hover:${colors.background.tertiary} hover:${colors.text.gold} ${interactive.transition.colors} rounded-xl ${interactive.focus.ring} font-medium`}
-                      onClick={() => setIsBlindsDropdownOpen(false)}
-                    >
-                      <div className={`w-2 h-2 ${colors.background.gold} rounded-full group-hover:scale-125 ${interactive.transition.transform}`}></div>
-                      <span>Vertical Blinds</span>
-                    </Link>
-                    <Link
-                      to="/vision-blinds"
-                      className={`group flex items-center ${spacing.gap.sm} px-4 py-3 mx-2 ${colors.text.white} hover:${colors.background.tertiary} hover:${colors.text.gold} ${interactive.transition.colors} rounded-xl ${interactive.focus.ring} font-medium`}
-                      onClick={() => setIsBlindsDropdownOpen(false)}
-                    >
-                      <div className={`w-2 h-2 ${colors.background.gold} rounded-full group-hover:scale-125 ${interactive.transition.transform}`}></div>
-                      <span>Vision Blinds</span>
-                    </Link>
-                    <Link
-                      to="/perfect-fit-blinds"
-                      className={`group flex items-center ${spacing.gap.sm} px-4 py-3 mx-2 ${colors.text.white} hover:${colors.background.tertiary} hover:${colors.text.gold} ${interactive.transition.colors} rounded-xl ${interactive.focus.ring} font-medium`}
-                      onClick={() => setIsBlindsDropdownOpen(false)}
-                    >
-                      <div className={`w-2 h-2 ${colors.background.gold} rounded-full group-hover:scale-125 ${interactive.transition.transform}`}></div>
-                      <span>Perfect Fit Blinds</span>
-                    </Link>
-                    <Link
-                      to="/shutters"
-                      className={`group flex items-center ${spacing.gap.sm} px-4 py-3 mx-2 ${colors.text.white} hover:${colors.background.tertiary} hover:${colors.text.gold} ${interactive.transition.colors} rounded-xl ${interactive.focus.ring} font-medium`}
-                      onClick={() => setIsBlindsDropdownOpen(false)}
-                    >
-                      <div className={`w-2 h-2 ${colors.background.gold} rounded-full group-hover:scale-125 ${interactive.transition.transform}`}></div>
-                      <span>Shutters</span>
-                    </Link>
-                    <Link
-                      to="/roman-blinds"
-                      className={`group flex items-center ${spacing.gap.sm} px-4 py-3 mx-2 ${colors.text.white} hover:${colors.background.tertiary} hover:${colors.text.gold} ${interactive.transition.colors} rounded-xl ${interactive.focus.ring} font-medium`}
-                      onClick={() => setIsBlindsDropdownOpen(false)}
-                    >
-                      <div className={`w-2 h-2 ${colors.background.gold} rounded-full group-hover:scale-125 ${interactive.transition.transform}`}></div>
-                      <span>Roman Blinds</span>
-                    </Link>
-                    <Link
-                      to="/curtains"
-                      className={`group flex items-center ${spacing.gap.sm} px-4 py-3 mx-2 ${colors.text.white} hover:${colors.background.tertiary} hover:${colors.text.gold} ${interactive.transition.colors} rounded-xl ${interactive.focus.ring} font-medium`}
-                      onClick={() => setIsBlindsDropdownOpen(false)}
-                    >
-                      <div className={`w-2 h-2 ${colors.background.gold} rounded-full group-hover:scale-125 ${interactive.transition.transform}`}></div>
-                      <span>Curtains</span>
-                    </Link>
-                    <Link
-                      to="/allusion-blinds"
-                      className={`group flex items-center ${spacing.gap.sm} px-4 py-3 mx-2 ${colors.text.white} hover:${colors.background.tertiary} hover:${colors.text.gold} ${interactive.transition.colors} rounded-xl ${interactive.focus.ring} font-medium`}
-                      onClick={() => setIsBlindsDropdownOpen(false)}
-                    >
-                      <div className={`w-2 h-2 ${colors.background.gold} rounded-full group-hover:scale-125 ${interactive.transition.transform}`}></div>
-                      <span>Allusion Blinds</span>
-                    </Link>
-                  </div>
-                </div>
+                <Card 
+                  variant="elevated" 
+                  className="absolute top-full left-1/2 transform -translate-x-1/2 mt-3 w-80 backdrop-blur-sm"
+                >
+                  <Stack spacing="small">
+                    <Text size="small" weight="semibold" color="gold" className="uppercase tracking-wider px-4">
+                      Our Products
+                    </Text>
+                    <Stack spacing="tiny" className="pb-2">
+                      {blindsMenu.map((item) => (
+                        <Link
+                          key={item.name}
+                          to={item.path}
+                          variant="nav"
+                          className="group flex items-center gap-3 px-4 py-3 mx-2 hover:bg-gray-800 rounded-xl transition-colors"
+                          onClick={() => setIsBlindsDropdownOpen(false)}
+                        >
+                          <div className="w-2 h-2 bg-brand-gold rounded-full group-hover:scale-125 transition-transform" />
+                          <Text>{item.name}</Text>
+                        </Link>
+                      ))}
+                    </Stack>
+                  </Stack>
+                </Card>
               )}
             </div>
 
+            {/* Areas Dropdown */}
             <div className="relative">
               <button
                 onClick={toggleAreasDropdown}
-                className={`group relative flex items-center ${spacing.gap.sm} px-4 py-2 ${colors.text.white} ${interactive.transition.colors} ${interactive.focus.ring} hover:${colors.text.gold} font-medium rounded-lg`}
+                className="group relative flex items-center gap-2 px-4 py-2 text-white hover:text-brand-gold transition-colors font-medium rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-gold focus:ring-offset-2 focus:ring-offset-gray-900"
                 aria-expanded={isAreasDropdownOpen}
                 aria-haspopup="true"
               >
                 <span className="relative z-10">Areas</span>
-                <svg
-                  className={`w-4 h-4 transition-transform duration-200 ${isAreasDropdownOpen ? 'rotate-180' : ''} relative z-10`}
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-                <div className={`absolute inset-0 ${colors.background.tertiary} opacity-0 group-hover:opacity-100 ${interactive.transition.opacity} rounded-lg -z-0`}></div>
+                <Icon 
+                  name="chevronDown" 
+                  size="small"
+                  className={`transition-transform duration-200 ${isAreasDropdownOpen ? 'rotate-180' : ''} relative z-10`}
+                />
+                <div className="absolute inset-0 bg-gray-800 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg -z-0" />
               </button>
 
+              {/* Areas Dropdown Menu */}
               {isAreasDropdownOpen && (
-                <div className={`absolute top-full left-1/2 transform -translate-x-1/2 mt-3 w-64 ${colors.background.card} ${colors.border.light} border rounded-2xl shadow-2xl py-4 z-50 backdrop-blur-sm`}>
-                  <div className="px-3 mb-3">
-                    <h3 className={`text-sm font-semibold ${colors.text.gold} uppercase tracking-wider`}>Service Areas</h3>
-                  </div>
-                  <div className={`${spacing.stack.xs}`}>
-                    <Link
-                      to="/areas/uppermill"
-                      className={`group flex items-center ${spacing.gap.sm} px-4 py-3 mx-2 ${colors.text.white} hover:${colors.background.tertiary} hover:${colors.text.gold} ${interactive.transition.colors} rounded-xl ${interactive.focus.ring} font-medium`}
-                      onClick={() => setIsAreasDropdownOpen(false)}
-                    >
-                      <div className={`w-2 h-2 ${colors.background.gold} rounded-full group-hover:scale-125 ${interactive.transition.transform}`}></div>
-                      <span>Uppermill</span>
-                    </Link>
-                    <Link
-                      to="/areas/diggle"
-                      className={`group flex items-center ${spacing.gap.sm} px-4 py-3 mx-2 ${colors.text.white} hover:${colors.background.tertiary} hover:${colors.text.gold} ${interactive.transition.colors} rounded-xl ${interactive.focus.ring} font-medium`}
-                      onClick={() => setIsAreasDropdownOpen(false)}
-                    >
-                      <div className={`w-2 h-2 ${colors.background.gold} rounded-full group-hover:scale-125 ${interactive.transition.transform}`}></div>
-                      <span>Diggle</span>
-                    </Link>
-                    <Link
-                      to="/areas/delph"
-                      className={`group flex items-center ${spacing.gap.sm} px-4 py-3 mx-2 ${colors.text.white} hover:${colors.background.tertiary} hover:${colors.text.gold} ${interactive.transition.colors} rounded-xl ${interactive.focus.ring} font-medium`}
-                      onClick={() => setIsAreasDropdownOpen(false)}
-                    >
-                      <div className={`w-2 h-2 ${colors.background.gold} rounded-full group-hover:scale-125 ${interactive.transition.transform}`}></div>
-                      <span>Delph</span>
-                    </Link>
-                    <Link
-                      to="/areas/greenfield"
-                      className={`group flex items-center ${spacing.gap.sm} px-4 py-3 mx-2 ${colors.text.white} hover:${colors.background.tertiary} hover:${colors.text.gold} ${interactive.transition.colors} rounded-xl ${interactive.focus.ring} font-medium`}
-                      onClick={() => setIsAreasDropdownOpen(false)}
-                    >
-                      <div className={`w-2 h-2 ${colors.background.gold} rounded-full group-hover:scale-125 ${interactive.transition.transform}`}></div>
-                      <span>Greenfield</span>
-                    </Link>
-                    <Link
-                      to="/areas/dobcross"
-                      className={`group flex items-center ${spacing.gap.sm} px-4 py-3 mx-2 ${colors.text.white} hover:${colors.background.tertiary} hover:${colors.text.gold} ${interactive.transition.colors} rounded-xl ${interactive.focus.ring} font-medium`}
-                      onClick={() => setIsAreasDropdownOpen(false)}
-                    >
-                      <div className={`w-2 h-2 ${colors.background.gold} rounded-full group-hover:scale-125 ${interactive.transition.transform}`}></div>
-                      <span>Dobcross</span>
-                    </Link>
-                    <Link
-                      to="/areas/lydgate"
-                      className={`group flex items-center ${spacing.gap.sm} px-4 py-3 mx-2 ${colors.text.white} hover:${colors.background.tertiary} hover:${colors.text.gold} ${interactive.transition.colors} rounded-xl ${interactive.focus.ring} font-medium`}
-                      onClick={() => setIsAreasDropdownOpen(false)}
-                    >
-                      <div className={`w-2 h-2 ${colors.background.gold} rounded-full group-hover:scale-125 ${interactive.transition.transform}`}></div>
-                      <span>Lydgate</span>
-                    </Link>
-                  </div>
-                </div>
+                <Card 
+                  variant="elevated" 
+                  className="absolute top-full left-1/2 transform -translate-x-1/2 mt-3 w-72 backdrop-blur-sm"
+                >
+                  <Stack spacing="small">
+                    <Text size="small" weight="semibold" color="gold" className="uppercase tracking-wider px-4">
+                      Areas We Cover
+                    </Text>
+                    <div className="grid grid-cols-2 gap-1 pb-2 px-2">
+                      {areasMenu.map((area) => (
+                        <Link
+                          key={area.name}
+                          to={area.path}
+                          variant="nav"
+                          className="flex items-center gap-2 px-3 py-2 hover:bg-gray-800 rounded-lg transition-colors text-sm"
+                          onClick={() => setIsAreasDropdownOpen(false)}
+                        >
+                          <Icon name="mapPin" size="tiny" color="gold" />
+                          <Text size="small">{area.name}</Text>
+                        </Link>
+                      ))}
+                    </div>
+                  </Stack>
+                </Card>
               )}
             </div>
 
-            <Link
-              to="/gallery"
-              className={`group relative px-4 py-2 ${colors.text.white} ${interactive.transition.colors} ${interactive.focus.ring} hover:${colors.text.gold} font-medium`}
-            >
-              <span className="relative z-10">Gallery</span>
-              <div className={`absolute inset-0 ${colors.background.tertiary} opacity-0 group-hover:opacity-100 ${interactive.transition.opacity} rounded-lg -z-0`}></div>
-            </Link>
-            <Link
-              to="/book-appointment"
-              className={`group relative px-4 py-2 ${colors.text.white} ${interactive.transition.colors} ${interactive.focus.ring} hover:${colors.text.gold} font-medium`}
-            >
-              <span className="relative z-10">Book Appointment</span>
-              <div className={`absolute inset-0 ${colors.background.tertiary} opacity-0 group-hover:opacity-100 ${interactive.transition.opacity} rounded-lg -z-0`}></div>
-            </Link>
-            <Link
-              to="/contact"
-              className={`group relative px-4 py-2 ${colors.text.white} ${interactive.transition.colors} ${interactive.focus.ring} hover:${colors.text.gold} font-medium`}
-            >
-              <span className="relative z-10">Contact</span>
-              <div className={`absolute inset-0 ${colors.background.tertiary} opacity-0 group-hover:opacity-100 ${interactive.transition.opacity} rounded-lg -z-0`}></div>
-            </Link>
+            {/* Other Nav Items */}
+            <Link.Nav to="/gallery" className="font-medium">
+              Gallery
+            </Link.Nav>
+            <Link.Nav to="/contact" className="font-medium">
+              Contact
+            </Link.Nav>
+
+            {/* CTA Buttons */}
+            <Flex gap="small" align="center">
+              <Button 
+                to="/book-appointment" 
+                variant="primary" 
+                size="small"
+                className="shadow-lg shadow-brand-gold/20"
+              >
+                Free Quote
+              </Button>
+              <Button 
+                href="tel:01457597091" 
+                variant="ghost" 
+                size="small"
+                iconLeft={<Icon name="phone" size="small" />}
+              >
+                <span className="hidden xl:inline">01457 597091</span>
+                <span className="xl:hidden">Call</span>
+              </Button>
+            </Flex>
           </nav>
 
-          {/* Header CTA */}
-          <div className={`hidden lg:flex items-center ${spacing.gap.lg}`}>
-            <a
-              href="tel:01457597091"
-              className={`flex items-center ${spacing.gap.sm} px-4 py-3 ${colors.text.white} ${colors.border.accent} border-2 hover:${colors.background.gold} hover:${colors.text.dark} ${interactive.transition.colors} ${interactive.focus.ring} rounded-lg font-semibold`}
-            >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-              </svg>
-              <span className="font-semibold">01457 597091</span>
-            </a>
-            <Link
-              to="/book-appointment"
-              className={`px-6 py-3 ${colors.gradients.brandButton} ${colors.text.dark} hover:shadow-lg hover:scale-105 ${interactive.transition.medium} ${interactive.focus.ring} rounded-lg font-semibold`}
-            >
-              Book Free Quote
-            </Link>
-          </div>
-
-          {/* Mobile Menu Toggle */}
+          {/* Mobile Menu Button */}
           <button
             onClick={toggleMobileMenu}
-            className={`lg:hidden p-3 rounded-lg ${colors.background.secondary} ${interactive.transition.colors} ${interactive.focus.ring} hover:${colors.background.tertiary}`}
-            aria-label="Toggle mobile menu"
+            className="lg:hidden p-2 text-white hover:text-brand-gold transition-colors focus:outline-none focus:ring-2 focus:ring-brand-gold focus:ring-offset-2 focus:ring-offset-gray-900 rounded-lg"
+            aria-label="Toggle menu"
             aria-expanded={isMobileMenuOpen}
           >
-            <svg
-              className={`w-6 h-6 transition-transform duration-200 ${isMobileMenuOpen ? 'rotate-90' : ''}`}
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              {isMobileMenuOpen ? (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              )}
-            </svg>
+            <Icon name={isMobileMenuOpen ? 'close' : 'menu'} size="large" />
           </button>
-        </div>
+        </Flex>
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className={`lg:hidden ${colors.border.dark} border-t ${colors.background.primary}`}>
-            <nav className={`${spacing.padding.lg} ${spacing.stack.sm}`}>
+          <nav className="lg:hidden border-t border-gray-800">
+            <Stack spacing="none" className="py-4">
+              {/* Mobile Home Link */}
               <Link
                 to="/"
-                className={`block ${spacing.padding.lg} ${colors.text.white} ${colors.background.secondary} ${interactive.transition.colors} ${interactive.focus.ring} rounded-lg font-medium`}
+                variant="nav"
+                className="block px-6 py-3 hover:bg-gray-800 transition-colors font-medium"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Home
               </Link>
+
+              {/* Mobile Blinds Section */}
+              <div>
+                <button
+                  onClick={toggleBlindsDropdown}
+                  className="w-full flex items-center justify-between px-6 py-3 hover:bg-gray-800 transition-colors font-medium"
+                >
+                  <span>Our Blinds</span>
+                  <Icon 
+                    name="chevronDown" 
+                    size="small"
+                    className={`transition-transform ${isBlindsDropdownOpen ? 'rotate-180' : ''}`}
+                  />
+                </button>
+                {isBlindsDropdownOpen && (
+                  <Stack spacing="none" className="bg-gray-800/50">
+                    {blindsMenu.map((item) => (
+                      <Link
+                        key={item.name}
+                        to={item.path}
+                        variant="nav"
+                        className="block pl-12 pr-6 py-2 hover:bg-gray-700 transition-colors text-sm"
+                        onClick={() => {
+                          setIsMobileMenuOpen(false)
+                          setIsBlindsDropdownOpen(false)
+                        }}
+                      >
+                        {item.name}
+                      </Link>
+                    ))}
+                  </Stack>
+                )}
+              </div>
+
+              {/* Mobile Areas Section */}
+              <div>
+                <button
+                  onClick={toggleAreasDropdown}
+                  className="w-full flex items-center justify-between px-6 py-3 hover:bg-gray-800 transition-colors font-medium"
+                >
+                  <span>Areas</span>
+                  <Icon 
+                    name="chevronDown" 
+                    size="small"
+                    className={`transition-transform ${isAreasDropdownOpen ? 'rotate-180' : ''}`}
+                  />
+                </button>
+                {isAreasDropdownOpen && (
+                  <div className="bg-gray-800/50 px-6 py-2">
+                    <div className="grid grid-cols-2 gap-1">
+                      {areasMenu.map((area) => (
+                        <Link
+                          key={area.name}
+                          to={area.path}
+                          variant="nav"
+                          className="block px-3 py-2 hover:bg-gray-700 rounded transition-colors text-sm"
+                          onClick={() => {
+                            setIsMobileMenuOpen(false)
+                            setIsAreasDropdownOpen(false)
+                          }}
+                        >
+                          {area.name}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Other Mobile Links */}
               <Link
                 to="/gallery"
-                className={`block ${spacing.padding.lg} ${colors.text.white} ${colors.background.secondary} ${interactive.transition.colors} ${interactive.focus.ring} rounded-lg font-medium`}
+                variant="nav"
+                className="block px-6 py-3 hover:bg-gray-800 transition-colors font-medium"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Gallery
               </Link>
-              <div className={`${spacing.padding.lg} ${colors.background.secondary} rounded-lg`}>
-                <button
-                  onClick={toggleBlindsDropdown}
-                  className={`flex items-center justify-between w-full ${colors.text.white} ${interactive.transition.colors} ${interactive.focus.ring} font-medium py-2`}
-                  aria-expanded={isBlindsDropdownOpen}
-                >
-                  <span>Our Blinds</span>
-                  <svg
-                    className={`w-4 h-4 transition-transform duration-200 ${isBlindsDropdownOpen ? 'rotate-180' : ''}`}
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
-                {isBlindsDropdownOpen && (
-                  <div className={`${spacing.margin.topSm} ${spacing.stack.xs}`}>
-                    <div className="px-3 mb-2">
-                      <h4 className={`text-xs font-semibold ${colors.text.gold} uppercase tracking-wider`}>Our Products</h4>
-                    </div>
-                    <Link
-                      to="/roller-blinds"
-                      className={`group flex items-center ${spacing.gap.sm} ${spacing.padding.sm} ${colors.text.secondary} hover:${colors.text.white} hover:${colors.background.tertiary} ${interactive.transition.colors} ${interactive.focus.ring} rounded-lg`}
-                      onClick={() => {
-                        setIsBlindsDropdownOpen(false)
-                        setIsMobileMenuOpen(false)
-                      }}
-                    >
-                      <div className={`w-1.5 h-1.5 ${colors.background.gold} rounded-full group-hover:scale-125 ${interactive.transition.transform}`}></div>
-                      <span>Roller Blinds</span>
-                    </Link>
-                    <Link
-                      to="/venetian-blinds"
-                      className={`group flex items-center ${spacing.gap.sm} ${spacing.padding.sm} ${colors.text.secondary} hover:${colors.text.white} hover:${colors.background.tertiary} ${interactive.transition.colors} ${interactive.focus.ring} rounded-lg`}
-                      onClick={() => {
-                        setIsBlindsDropdownOpen(false)
-                        setIsMobileMenuOpen(false)
-                      }}
-                    >
-                      <div className={`w-1.5 h-1.5 ${colors.background.gold} rounded-full group-hover:scale-125 ${interactive.transition.transform}`}></div>
-                      <span>Venetian Blinds</span>
-                    </Link>
-                    <Link
-                      to="/vertical-blinds"
-                      className={`group flex items-center ${spacing.gap.sm} ${spacing.padding.sm} ${colors.text.secondary} hover:${colors.text.white} hover:${colors.background.tertiary} ${interactive.transition.colors} ${interactive.focus.ring} rounded-lg`}
-                      onClick={() => {
-                        setIsBlindsDropdownOpen(false)
-                        setIsMobileMenuOpen(false)
-                      }}
-                    >
-                      <div className={`w-1.5 h-1.5 ${colors.background.gold} rounded-full group-hover:scale-125 ${interactive.transition.transform}`}></div>
-                      <span>Vertical Blinds</span>
-                    </Link>
-                    <Link
-                      to="/vision-blinds"
-                      className={`group flex items-center ${spacing.gap.sm} ${spacing.padding.sm} ${colors.text.secondary} hover:${colors.text.white} hover:${colors.background.tertiary} ${interactive.transition.colors} ${interactive.focus.ring} rounded-lg`}
-                      onClick={() => {
-                        setIsBlindsDropdownOpen(false)
-                        setIsMobileMenuOpen(false)
-                      }}
-                    >
-                      <div className={`w-1.5 h-1.5 ${colors.background.gold} rounded-full group-hover:scale-125 ${interactive.transition.transform}`}></div>
-                      <span>Vision Blinds</span>
-                    </Link>
-                    <Link
-                      to="/perfect-fit-blinds"
-                      className={`group flex items-center ${spacing.gap.sm} ${spacing.padding.sm} ${colors.text.secondary} hover:${colors.text.white} hover:${colors.background.tertiary} ${interactive.transition.colors} ${interactive.focus.ring} rounded-lg`}
-                      onClick={() => {
-                        setIsBlindsDropdownOpen(false)
-                        setIsMobileMenuOpen(false)
-                      }}
-                    >
-                      <div className={`w-1.5 h-1.5 ${colors.background.gold} rounded-full group-hover:scale-125 ${interactive.transition.transform}`}></div>
-                      <span>Perfect Fit Blinds</span>
-                    </Link>
-                    <Link
-                      to="/shutters"
-                      className={`group flex items-center ${spacing.gap.sm} ${spacing.padding.sm} ${colors.text.secondary} hover:${colors.text.white} hover:${colors.background.tertiary} ${interactive.transition.colors} ${interactive.focus.ring} rounded-lg`}
-                      onClick={() => {
-                        setIsBlindsDropdownOpen(false)
-                        setIsMobileMenuOpen(false)
-                      }}
-                    >
-                      <div className={`w-1.5 h-1.5 ${colors.background.gold} rounded-full group-hover:scale-125 ${interactive.transition.transform}`}></div>
-                      <span>Shutters</span>
-                    </Link>
-                    <Link
-                      to="/roman-blinds"
-                      className={`group flex items-center ${spacing.gap.sm} ${spacing.padding.sm} ${colors.text.secondary} hover:${colors.text.white} hover:${colors.background.tertiary} ${interactive.transition.colors} ${interactive.focus.ring} rounded-lg`}
-                      onClick={() => {
-                        setIsBlindsDropdownOpen(false)
-                        setIsMobileMenuOpen(false)
-                      }}
-                    >
-                      <div className={`w-1.5 h-1.5 ${colors.background.gold} rounded-full group-hover:scale-125 ${interactive.transition.transform}`}></div>
-                      <span>Roman Blinds</span>
-                    </Link>
-                    <Link
-                      to="/curtains"
-                      className={`group flex items-center ${spacing.gap.sm} ${spacing.padding.sm} ${colors.text.secondary} hover:${colors.text.white} hover:${colors.background.tertiary} ${interactive.transition.colors} ${interactive.focus.ring} rounded-lg`}
-                      onClick={() => {
-                        setIsBlindsDropdownOpen(false)
-                        setIsMobileMenuOpen(false)
-                      }}
-                    >
-                      <div className={`w-1.5 h-1.5 ${colors.background.gold} rounded-full group-hover:scale-125 ${interactive.transition.transform}`}></div>
-                      <span>Curtains</span>
-                    </Link>
-                    <Link
-                      to="/allusion-blinds"
-                      className={`group flex items-center ${spacing.gap.sm} ${spacing.padding.sm} ${colors.text.secondary} hover:${colors.text.white} hover:${colors.background.tertiary} ${interactive.transition.colors} ${interactive.focus.ring} rounded-lg`}
-                      onClick={() => {
-                        setIsBlindsDropdownOpen(false)
-                        setIsMobileMenuOpen(false)
-                      }}
-                    >
-                      <div className={`w-1.5 h-1.5 ${colors.background.gold} rounded-full group-hover:scale-125 ${interactive.transition.transform}`}></div>
-                      <span>Allusion Blinds</span>
-                    </Link>
-                  </div>
-                )}
-              </div>
-
-              <div className={`${spacing.padding.lg} ${colors.background.secondary} rounded-lg`}>
-                <button
-                  onClick={toggleAreasDropdown}
-                  className={`flex items-center justify-between w-full ${colors.text.white} ${interactive.transition.colors} ${interactive.focus.ring} font-medium py-2`}
-                  aria-expanded={isAreasDropdownOpen}
-                >
-                  <span>Areas</span>
-                  <svg
-                    className={`w-4 h-4 transition-transform duration-200 ${isAreasDropdownOpen ? 'rotate-180' : ''}`}
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
-                {isAreasDropdownOpen && (
-                  <div className={`${spacing.margin.topSm} ${spacing.stack.xs}`}>
-                    <div className="px-3 mb-2">
-                      <h4 className={`text-xs font-semibold ${colors.text.gold} uppercase tracking-wider`}>Service Areas</h4>
-                    </div>
-                    <Link
-                      to="/areas/uppermill"
-                      className={`group flex items-center ${spacing.gap.sm} ${spacing.padding.sm} ${colors.text.secondary} hover:${colors.text.white} hover:${colors.background.tertiary} ${interactive.transition.colors} ${interactive.focus.ring} rounded-lg`}
-                      onClick={() => {
-                        setIsAreasDropdownOpen(false)
-                        setIsMobileMenuOpen(false)
-                      }}
-                    >
-                      <div className={`w-1.5 h-1.5 ${colors.background.gold} rounded-full group-hover:scale-125 ${interactive.transition.transform}`}></div>
-                      <span>Uppermill</span>
-                    </Link>
-                    <Link
-                      to="/areas/diggle"
-                      className={`group flex items-center ${spacing.gap.sm} ${spacing.padding.sm} ${colors.text.secondary} hover:${colors.text.white} hover:${colors.background.tertiary} ${interactive.transition.colors} ${interactive.focus.ring} rounded-lg`}
-                      onClick={() => {
-                        setIsAreasDropdownOpen(false)
-                        setIsMobileMenuOpen(false)
-                      }}
-                    >
-                      <div className={`w-1.5 h-1.5 ${colors.background.gold} rounded-full group-hover:scale-125 ${interactive.transition.transform}`}></div>
-                      <span>Diggle</span>
-                    </Link>
-                    <Link
-                      to="/areas/delph"
-                      className={`group flex items-center ${spacing.gap.sm} ${spacing.padding.sm} ${colors.text.secondary} hover:${colors.text.white} hover:${colors.background.tertiary} ${interactive.transition.colors} ${interactive.focus.ring} rounded-lg`}
-                      onClick={() => {
-                        setIsAreasDropdownOpen(false)
-                        setIsMobileMenuOpen(false)
-                      }}
-                    >
-                      <div className={`w-1.5 h-1.5 ${colors.background.gold} rounded-full group-hover:scale-125 ${interactive.transition.transform}`}></div>
-                      <span>Delph</span>
-                    </Link>
-                    <Link
-                      to="/areas/greenfield"
-                      className={`group flex items-center ${spacing.gap.sm} ${spacing.padding.sm} ${colors.text.secondary} hover:${colors.text.white} hover:${colors.background.tertiary} ${interactive.transition.colors} ${interactive.focus.ring} rounded-lg`}
-                      onClick={() => {
-                        setIsAreasDropdownOpen(false)
-                        setIsMobileMenuOpen(false)
-                      }}
-                    >
-                      <div className={`w-1.5 h-1.5 ${colors.background.gold} rounded-full group-hover:scale-125 ${interactive.transition.transform}`}></div>
-                      <span>Greenfield</span>
-                    </Link>
-                    <Link
-                      to="/areas/dobcross"
-                      className={`group flex items-center ${spacing.gap.sm} ${spacing.padding.sm} ${colors.text.secondary} hover:${colors.text.white} hover:${colors.background.tertiary} ${interactive.transition.colors} ${interactive.focus.ring} rounded-lg`}
-                      onClick={() => {
-                        setIsAreasDropdownOpen(false)
-                        setIsMobileMenuOpen(false)
-                      }}
-                    >
-                      <div className={`w-1.5 h-1.5 ${colors.background.gold} rounded-full group-hover:scale-125 ${interactive.transition.transform}`}></div>
-                      <span>Dobcross</span>
-                    </Link>
-                    <Link
-                      to="/areas/lydgate"
-                      className={`group flex items-center ${spacing.gap.sm} ${spacing.padding.sm} ${colors.text.secondary} hover:${colors.text.white} hover:${colors.background.tertiary} ${interactive.transition.colors} ${interactive.focus.ring} rounded-lg`}
-                      onClick={() => {
-                        setIsAreasDropdownOpen(false)
-                        setIsMobileMenuOpen(false)
-                      }}
-                    >
-                      <div className={`w-1.5 h-1.5 ${colors.background.gold} rounded-full group-hover:scale-125 ${interactive.transition.transform}`}></div>
-                      <span>Lydgate</span>
-                    </Link>
-                  </div>
-                )}
-              </div>
-              <Link
-                to="/book-appointment"
-                className={`block ${spacing.padding.lg} ${colors.text.white} ${colors.background.secondary} ${interactive.transition.colors} ${interactive.focus.ring} rounded-lg font-medium`}
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Book Appointment
-              </Link>
               <Link
                 to="/contact"
-                className={`block ${spacing.padding.lg} ${colors.text.white} ${colors.background.secondary} ${interactive.transition.colors} ${interactive.focus.ring} rounded-lg font-medium`}
+                variant="nav"
+                className="block px-6 py-3 hover:bg-gray-800 transition-colors font-medium"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Contact
               </Link>
-              <div className={`${spacing.padding.lg} ${spacing.stack.sm} ${colors.background.tertiary} rounded-lg`}>
-                <a
-                  href="tel:01457597091"
-                  className={`flex items-center ${spacing.gap.sm} ${colors.text.white} ${interactive.transition.colors} ${interactive.focus.ring} p-3 rounded-lg hover:${colors.background.secondary}`}
-                >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                  </svg>
-                  <span className="font-semibold">01457 597091</span>
-                </a>
-                <Link
-                  to="/book-appointment"
-                  className={`w-full ${colors.gradients.brandButton} ${colors.text.dark} ${interactive.transition.medium} ${interactive.focus.ring} rounded-lg font-semibold text-center px-6 py-4 hover:shadow-lg`}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  Book Free Quote
-                </Link>
-              </div>
-            </nav>
-          </div>
-        )}
-      </div>
 
-      {/* Click outside to close dropdowns */}
-      {(isBlindsDropdownOpen || isAreasDropdownOpen) && (
-        <div
-          className="fixed inset-0 z-40"
-          onClick={() => {
-            setIsBlindsDropdownOpen(false)
-            setIsAreasDropdownOpen(false)
-          }}
-          aria-hidden="true"
-        />
-      )}
+              {/* Mobile CTA Buttons */}
+              <Stack spacing="small" className="px-6 pt-4 mt-4 border-t border-gray-800">
+                <Button 
+                  to="/book-appointment" 
+                  variant="primary" 
+                  size="medium"
+                  fullWidth
+                >
+                  Get Free Quote
+                </Button>
+                <Button 
+                  href="tel:01457597091" 
+                  variant="secondary" 
+                  size="medium"
+                  fullWidth
+                  iconLeft={<Icon name="phone" />}
+                >
+                  Call 01457 597091
+                </Button>
+              </Stack>
+            </Stack>
+          </nav>
+        )}
+      </Container>
     </header>
   )
 }
 
-export default Header
+export default HeaderStandardized

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Heading, Text, Stack, Badge } from './ui'
 import { CarouselContainer, CarouselImage, CarouselButton, CarouselDots, CAROUSEL_HEIGHTS } from './BaseCarousel'
 
 const HeroCarousel = ({
@@ -57,15 +58,17 @@ const HeroCarousel = ({
 
         {/* Content Overlay */}
         {currentImage.title && (
-          <div className="absolute bottom-6 left-6 right-6 text-white">
-            <h3 className="text-lg md:text-xl font-semibold mb-1">
-              {currentImage.title}
-            </h3>
-            {currentImage.description && (
-              <p className="text-sm md:text-base text-gray-200">
-                {currentImage.description}
-              </p>
-            )}
+          <div className="absolute bottom-6 left-6 right-6">
+            <Stack spacing="small">
+              <Heading as="h3" size="lg" mdSize="xl" color="white">
+                {currentImage.title}
+              </Heading>
+              {currentImage.description && (
+                <Text size="small" mdSize="medium" className="text-gray-200">
+                  {currentImage.description}
+                </Text>
+              )}
+            </Stack>
           </div>
         )}
       </div>
@@ -97,8 +100,10 @@ const HeroCarousel = ({
 
       {/* Slide Counter */}
       {showCounter && images.length > 1 && (
-        <div className="absolute top-4 right-4 bg-black/70 text-white px-3 py-1 rounded-full text-sm">
-          {currentIndex + 1} / {images.length}
+        <div className="absolute top-4 right-4">
+          <Badge variant="ghost" size="small">
+            {currentIndex + 1} / {images.length}
+          </Badge>
         </div>
       )}
     </CarouselContainer>

@@ -1,4 +1,13 @@
 import React, { useState, useEffect } from 'react'
+import {
+  Button,
+  Card,
+  Heading,
+  Text,
+  Stack,
+  Flex,
+  Container
+} from './ui'
 
 const CookieConsent = () => {
   const [isVisible, setIsVisible] = useState(false)
@@ -26,13 +35,13 @@ const CookieConsent = () => {
 
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 bg-gray-900 border-t border-brand-gold p-4 shadow-lg">
-      <div className="container">
-        <div className="flex flex-col lg:flex-row items-start lg:items-center gap-4">
-          <div className="flex-1">
-            <h3 className="text-lg font-semibold text-white mb-2">
+      <Container>
+        <Flex direction="column" lgDirection="row" align="start" lgAlign="center" gap="medium">
+          <Stack spacing="small" className="flex-1">
+            <Heading as="h3" size="lg">
               🍪 Cookie Consent
-            </h3>
-            <p className="text-gray-300 text-sm mb-2">
+            </Heading>
+            <Text color="light" size="small">
               We use cookies to enhance your browsing experience and analyze our website traffic.
               {!showDetails && (
                 <button
@@ -42,45 +51,55 @@ const CookieConsent = () => {
                   View Details
                 </button>
               )}
-            </p>
+            </Text>
 
             {showDetails && (
-              <div className="bg-gray-800 rounded-lg p-4 mb-4">
-                <h4 className="font-semibold text-white mb-2">Cookie Categories:</h4>
-                <ul className="text-sm text-gray-300 space-y-1 mb-3">
-                  <li><strong>Necessary:</strong> Required for website functionality</li>
-                  <li><strong>Analytics:</strong> Help us understand how visitors use our site</li>
-                  <li><strong>Marketing:</strong> Used to deliver relevant advertisements</li>
-                </ul>
-                <p className="text-sm text-gray-400">
-                  You can change your preferences at any time in our Privacy Policy.
-                </p>
-              </div>
+              <Card variant="elevated" padding="medium" className="mt-2">
+                <Stack spacing="small">
+                  <Heading as="h4" size="base">Cookie Categories:</Heading>
+                  <Stack spacing="small" as="ul">
+                    <Text as="li" size="small" color="light">
+                      <Text as="span" weight="semibold">Necessary:</Text> Required for website functionality
+                    </Text>
+                    <Text as="li" size="small" color="light">
+                      <Text as="span" weight="semibold">Analytics:</Text> Help us understand how visitors use our site
+                    </Text>
+                    <Text as="li" size="small" color="light">
+                      <Text as="span" weight="semibold">Marketing:</Text> Used to deliver relevant advertisements
+                    </Text>
+                  </Stack>
+                  <Text size="small" color="muted">
+                    You can change your preferences at any time in our Privacy Policy.
+                  </Text>
+                </Stack>
+              </Card>
             )}
-          </div>
+          </Stack>
 
-          <div className="flex flex-col sm:flex-row gap-3">
-            <button
+          <Flex direction="column" smDirection="row" gap="medium">
+            <Button
               onClick={acceptAll}
-              className="btn btn-primary text-sm px-6 py-2"
+              variant="primary"
+              size="small"
             >
               Accept All Cookies
-            </button>
-            <button
+            </Button>
+            <Button
               onClick={acceptNecessary}
-              className="btn btn-secondary text-sm px-6 py-2"
+              variant="secondary"
+              size="small"
             >
               Necessary Only
-            </button>
+            </Button>
             <button
               onClick={() => setShowDetails(!showDetails)}
               className="text-gray-400 hover:text-white transition-colors text-sm underline"
             >
               {showDetails ? 'Hide Details' : 'Cookie Settings'}
             </button>
-          </div>
-        </div>
-      </div>
+          </Flex>
+        </Flex>
+      </Container>
     </div>
   )
 }
