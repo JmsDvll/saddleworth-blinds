@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { colors, spacing, typography, interactive } from '../styles'
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -21,32 +22,28 @@ const Header = () => {
   }
 
   return (
-    <header className="bg-gray-900 border-b border-gray-800">
+    <header className={`${colors.background.primary} border-b ${colors.border.dark}`}>
       <div className="container">
-        <div className="flex items-center justify-between py-4">
+        <div className={`flex items-center justify-between ${spacing.padding.lg}`}>
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-3">
+          <Link to="/" className={`flex items-center ${spacing.gap.md}`}>
             <img src="/images/sunshine-logo.svg" alt="Sunshine Blinds Logo" className="w-15 h-11" />
             <div>
-              <div className="text-xl font-bold text-brand-gold">Sunshine Blinds</div>
-              <div className="text-sm text-gray-400">Saddleworth</div>
+              <div className={`${typography.h3} font-bold ${colors.text.gold}`}>Sunshine Blinds</div>
+              <div className={`${typography.bodySmall} ${colors.text.muted}`}>Saddleworth</div>
             </div>
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-6" role="navigation" aria-label="Main navigation">
-            <Link to="/" className="text-white hover:text-brand-gold transition-colors">
+          <nav className={`hidden lg:flex items-center ${spacing.gap.lg}`} role="navigation" aria-label="Main navigation">
+            <Link to="/" className={`${colors.text.white} ${interactive.transition.colors}`}>
               Home
-            </Link>
-
-            <Link to="/about" className="text-white hover:text-brand-gold transition-colors">
-              About
             </Link>
 
             <div className="relative">
               <button
                 onClick={toggleBlindsDropdown}
-                className="flex items-center space-x-1 text-white hover:text-brand-gold transition-colors"
+                className={`flex items-center ${spacing.gap.xs} ${colors.text.white} ${interactive.transition.colors}`}
               >
                 <span>Our Blinds</span>
                 <svg
@@ -131,7 +128,7 @@ const Header = () => {
             <div className="relative">
               <button
                 onClick={toggleAreasDropdown}
-                className="flex items-center space-x-1 text-white hover:text-brand-gold transition-colors"
+                className={`flex items-center ${spacing.gap.xs} ${colors.text.white} ${interactive.transition.colors}`}
               >
                 <span>Areas</span>
                 <svg
@@ -192,29 +189,29 @@ const Header = () => {
               )}
             </div>
 
-            <Link to="/gallery" className="text-white hover:text-brand-gold transition-colors">
+            <Link to="/gallery" className={`${colors.text.white} ${interactive.transition.colors}`}>
               Gallery
             </Link>
-            <Link to="/book-appointment" className="text-white hover:text-brand-gold transition-colors">
+            <Link to="/book-appointment" className={`${colors.text.white} ${interactive.transition.colors}`}>
               Book Appointment
             </Link>
-            <Link to="/contact" className="text-white hover:text-brand-gold transition-colors">
+            <Link to="/contact" className={`${colors.text.white} ${interactive.transition.colors}`}>
               Contact
             </Link>
           </nav>
 
           {/* Header CTA */}
-          <div className="hidden lg:flex items-center space-x-3">
+          <div className={`hidden lg:flex items-center ${spacing.gap.md}`}>
             <a
               href="tel:01457597091"
-              className="btn btn-secondary flex items-center space-x-2 text-white border-brand-gold hover:bg-brand-gold hover:text-gray-900 transition-all duration-200"
+              className={`${interactive.button.secondary} flex items-center ${spacing.gap.xs} ${colors.text.white} border-brand-gold hover:bg-brand-gold hover:text-gray-900 ${interactive.transition.colors}`}
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
               </svg>
               <span className="font-medium">01457 597091</span>
             </a>
-            <Link to="/book-appointment" className="btn btn-primary">
+            <Link to="/book-appointment" className={interactive.button.primary}>
               Book Free Quote
             </Link>
           </div>
@@ -222,7 +219,7 @@ const Header = () => {
           {/* Mobile Menu Toggle */}
           <button
             onClick={toggleMobileMenu}
-            className="lg:hidden p-2 rounded-md hover:bg-gray-800 transition-colors"
+            className={`lg:hidden ${spacing.padding.sm} rounded-md ${colors.background.secondary} ${interactive.transition.colors}`}
             aria-label="Toggle mobile menu"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -233,33 +230,26 @@ const Header = () => {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="lg:hidden border-t border-gray-800">
-            <nav className="py-4 space-y-2">
+          <div className={`lg:hidden border-t ${colors.border.dark}`}>
+            <nav className={`${spacing.padding.lg} ${spacing.stack.sm}`}>
               <Link
                 to="/"
-                className="block px-4 py-2 text-white hover:bg-gray-800 hover:text-brand-gold transition-colors"
+                className={`block ${spacing.padding.md} ${colors.text.white} ${colors.background.secondary} ${interactive.transition.colors}`}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Home
               </Link>
               <Link
-                to="/about"
-                className="block px-4 py-2 text-white hover:bg-gray-800 hover:text-brand-gold transition-colors"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                About
-              </Link>
-              <Link
                 to="/gallery"
-                className="block px-4 py-2 text-white hover:bg-gray-800 hover:text-brand-gold transition-colors"
+                className={`block ${spacing.padding.md} ${colors.text.white} ${colors.background.secondary} ${interactive.transition.colors}`}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Gallery
               </Link>
-              <div className="px-4 py-2">
+              <div className={spacing.padding.md}>
                 <button
                   onClick={toggleBlindsDropdown}
-                  className="flex items-center justify-between w-full text-white hover:text-brand-gold transition-colors"
+                  className={`flex items-center justify-between w-full ${colors.text.white} ${interactive.transition.colors}`}
                 >
                   <span>Our Blinds</span>
                   <svg
@@ -272,10 +262,10 @@ const Header = () => {
                   </svg>
                 </button>
                 {isBlindsDropdownOpen && (
-                  <div className="mt-2 ml-4 space-y-1">
+                  <div className={`${spacing.margin.topXs} ml-4 ${spacing.stack.xs}`}>
                     <Link
                       to="/roller-blinds"
-                      className="block py-2 text-gray-300 hover:text-white"
+                      className={`block ${spacing.padding.sm} ${colors.text.secondary} ${interactive.transition.colors}`}
                       onClick={() => {
                         setIsBlindsDropdownOpen(false)
                         setIsMobileMenuOpen(false)
@@ -285,7 +275,7 @@ const Header = () => {
                     </Link>
                     <Link
                       to="/venetian-blinds"
-                      className="block py-2 text-gray-300 hover:text-white"
+                      className={`block ${spacing.padding.sm} ${colors.text.secondary} ${interactive.transition.colors}`}
                       onClick={() => {
                         setIsBlindsDropdownOpen(false)
                         setIsMobileMenuOpen(false)
@@ -295,7 +285,7 @@ const Header = () => {
                     </Link>
                     <Link
                       to="/vertical-blinds"
-                      className="block py-2 text-gray-300 hover:text-white"
+                      className={`block ${spacing.padding.sm} ${colors.text.secondary} ${interactive.transition.colors}`}
                       onClick={() => {
                         setIsBlindsDropdownOpen(false)
                         setIsMobileMenuOpen(false)
@@ -305,7 +295,7 @@ const Header = () => {
                     </Link>
                     <Link
                       to="/vision-blinds"
-                      className="block py-2 text-gray-300 hover:text-white"
+                      className={`block ${spacing.padding.sm} ${colors.text.secondary} ${interactive.transition.colors}`}
                       onClick={() => {
                         setIsBlindsDropdownOpen(false)
                         setIsMobileMenuOpen(false)
@@ -315,7 +305,7 @@ const Header = () => {
                     </Link>
                     <Link
                       to="/perfect-fit-blinds"
-                      className="block py-2 text-gray-300 hover:text-white"
+                      className={`block ${spacing.padding.sm} ${colors.text.secondary} ${interactive.transition.colors}`}
                       onClick={() => {
                         setIsBlindsDropdownOpen(false)
                         setIsMobileMenuOpen(false)
@@ -325,7 +315,7 @@ const Header = () => {
                     </Link>
                     <Link
                       to="/shutters"
-                      className="block py-2 text-gray-300 hover:text-white"
+                      className={`block ${spacing.padding.sm} ${colors.text.secondary} ${interactive.transition.colors}`}
                       onClick={() => {
                         setIsBlindsDropdownOpen(false)
                         setIsMobileMenuOpen(false)
@@ -335,7 +325,7 @@ const Header = () => {
                     </Link>
                     <Link
                       to="/roman-blinds"
-                      className="block py-2 text-gray-300 hover:text-white"
+                      className={`block ${spacing.padding.sm} ${colors.text.secondary} ${interactive.transition.colors}`}
                       onClick={() => {
                         setIsBlindsDropdownOpen(false)
                         setIsMobileMenuOpen(false)
@@ -345,7 +335,7 @@ const Header = () => {
                     </Link>
                     <Link
                       to="/curtains"
-                      className="block py-2 text-gray-300 hover:text-white"
+                      className={`block ${spacing.padding.sm} ${colors.text.secondary} ${interactive.transition.colors}`}
                       onClick={() => {
                         setIsBlindsDropdownOpen(false)
                         setIsMobileMenuOpen(false)
@@ -355,7 +345,7 @@ const Header = () => {
                     </Link>
                     <Link
                       to="/allusion-blinds"
-                      className="block py-2 text-gray-300 hover:text-white"
+                      className={`block ${spacing.padding.sm} ${colors.text.secondary} ${interactive.transition.colors}`}
                       onClick={() => {
                         setIsBlindsDropdownOpen(false)
                         setIsMobileMenuOpen(false)
@@ -367,10 +357,10 @@ const Header = () => {
                 )}
               </div>
 
-              <div className="px-4 py-2">
+              <div className={spacing.padding.md}>
                 <button
                   onClick={toggleAreasDropdown}
-                  className="flex items-center justify-between w-full text-white hover:text-brand-gold transition-colors"
+                  className={`flex items-center justify-between w-full ${colors.text.white} ${interactive.transition.colors}`}
                 >
                   <span>Areas</span>
                   <svg
@@ -383,10 +373,10 @@ const Header = () => {
                   </svg>
                 </button>
                 {isAreasDropdownOpen && (
-                  <div className="mt-2 ml-4 space-y-1">
+                  <div className={`${spacing.margin.topXs} ml-4 ${spacing.stack.xs}`}>
                     <Link
                       to="/areas/uppermill"
-                      className="block py-2 text-gray-300 hover:text-white"
+                      className={`block ${spacing.padding.sm} ${colors.text.secondary} ${interactive.transition.colors}`}
                       onClick={() => {
                         setIsAreasDropdownOpen(false)
                         setIsMobileMenuOpen(false)
@@ -396,7 +386,7 @@ const Header = () => {
                     </Link>
                     <Link
                       to="/areas/diggle"
-                      className="block py-2 text-gray-300 hover:text-white"
+                      className={`block ${spacing.padding.sm} ${colors.text.secondary} ${interactive.transition.colors}`}
                       onClick={() => {
                         setIsAreasDropdownOpen(false)
                         setIsMobileMenuOpen(false)
@@ -406,7 +396,7 @@ const Header = () => {
                     </Link>
                     <Link
                       to="/areas/delph"
-                      className="block py-2 text-gray-300 hover:text-white"
+                      className={`block ${spacing.padding.sm} ${colors.text.secondary} ${interactive.transition.colors}`}
                       onClick={() => {
                         setIsAreasDropdownOpen(false)
                         setIsMobileMenuOpen(false)
@@ -416,7 +406,7 @@ const Header = () => {
                     </Link>
                     <Link
                       to="/areas/greenfield"
-                      className="block py-2 text-gray-300 hover:text-white"
+                      className={`block ${spacing.padding.sm} ${colors.text.secondary} ${interactive.transition.colors}`}
                       onClick={() => {
                         setIsAreasDropdownOpen(false)
                         setIsMobileMenuOpen(false)
@@ -426,7 +416,7 @@ const Header = () => {
                     </Link>
                     <Link
                       to="/areas/dobcross"
-                      className="block py-2 text-gray-300 hover:text-white"
+                      className={`block ${spacing.padding.sm} ${colors.text.secondary} ${interactive.transition.colors}`}
                       onClick={() => {
                         setIsAreasDropdownOpen(false)
                         setIsMobileMenuOpen(false)
@@ -436,7 +426,7 @@ const Header = () => {
                     </Link>
                     <Link
                       to="/areas/lydgate"
-                      className="block py-2 text-gray-300 hover:text-white"
+                      className={`block ${spacing.padding.sm} ${colors.text.secondary} ${interactive.transition.colors}`}
                       onClick={() => {
                         setIsAreasDropdownOpen(false)
                         setIsMobileMenuOpen(false)
@@ -449,22 +439,22 @@ const Header = () => {
               </div>
               <Link
                 to="/book-appointment"
-                className="block px-4 py-2 text-white hover:bg-gray-800 hover:text-brand-gold transition-colors"
+                className={`block ${spacing.padding.md} ${colors.text.white} ${colors.background.secondary} ${interactive.transition.colors}`}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Book Appointment
               </Link>
               <Link
                 to="/contact"
-                className="block px-4 py-2 text-white hover:bg-gray-800 hover:text-brand-gold transition-colors"
+                className={`block ${spacing.padding.md} ${colors.text.white} ${colors.background.secondary} ${interactive.transition.colors}`}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Contact
               </Link>
-              <div className="px-4 py-2 space-y-2">
+              <div className={`${spacing.padding.md} ${spacing.stack.sm}`}>
                 <a
                   href="tel:01457597091"
-                  className="flex items-center space-x-2 text-white hover:text-brand-gold transition-colors"
+                  className={`flex items-center ${spacing.gap.xs} ${colors.text.white} ${interactive.transition.colors}`}
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
@@ -473,7 +463,7 @@ const Header = () => {
                 </a>
                 <Link
                   to="/book-appointment"
-                  className="btn btn-primary w-full text-center"
+                  className={`${interactive.button.primary} w-full text-center`}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   Book Free Quote

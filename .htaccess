@@ -49,12 +49,7 @@ RewriteEngine On
 # - Existing PHP files
 # - Webhook files
 
-# Allow webhook files
-RewriteCond %{REQUEST_URI} ^/webhook-deploy\.php$
-RewriteRule ^ - [L]
-
-RewriteCond %{REQUEST_URI} ^/webhook-config\.php$
-RewriteRule ^ - [L]
+# Webhook deployment removed as it's not compatible with React build process
 
 # Allow existing PHP files
 RewriteCond %{REQUEST_URI} \.php$
@@ -97,9 +92,6 @@ RewriteRule ^privacy-policy/?$ /privacy-policy.html [R=301,L]
 RewriteRule ^terms-conditions/?$ /terms-conditions.html [R=301,L]
 
 # Security: Block access to sensitive files
-<Files "webhook-config.php">
-    Require all denied
-</Files>
 
 <Files "form_submissions.log">
     Require all denied

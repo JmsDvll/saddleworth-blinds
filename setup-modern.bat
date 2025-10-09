@@ -46,21 +46,7 @@ if errorlevel 1 (
 echo ✅ Project built successfully
 echo.
 
-REM Copy webhook files to build directory
-echo 🔗 Setting up webhook deployment...
-if exist webhook-deploy.php (
-    copy webhook-deploy.php dist\ >nul
-    echo ✅ Copied webhook-deploy.php
-) else (
-    echo ⚠️  webhook-deploy.php not found
-)
-
-if exist webhook-config.php (
-    copy webhook-config.php dist\ >nul
-    echo ✅ Copied webhook-config.php
-) else (
-    echo ⚠️  webhook-config.php not found ^(this is expected^)
-)
+REM Note: Webhook deployment removed as it's not compatible with React build process
 
 REM Copy other necessary files
 if exist .htaccess (
@@ -105,8 +91,8 @@ echo.
 echo 📋 Next Steps:
 echo 1. Test the build: npm run preview
 echo 2. Deploy the 'dist' folder to your web server
-echo 3. Update your webhook to point to the new structure
-echo 4. Keep your existing webhook-config.php and webhook-deploy.php files
+echo 3. Upload all files from the 'dist' folder to your public_html directory
+echo 4. Ensure .htaccess file is in the root directory for proper routing
 echo.
 echo ✨ Your website is now modernized with:
 echo    • React for interactive UI
@@ -115,5 +101,6 @@ echo    • Modern build system with Vite
 echo    • Better performance and SEO
 echo    • Mobile-responsive design
 echo    • TypeScript-ready structure
+echo    • Centralized styling system
 echo.
 pause

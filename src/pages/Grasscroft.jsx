@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import HeroCarousel from '../components/HeroCarousel'
+import { colors, spacing, typography, interactive } from '../styles'
 
 const Grasscroft = () => {
   const areaHeroImages = [

@@ -5,6 +5,7 @@ import ReviewsSection from '../components/ReviewsSection'
 import ProductImageCarousel from '../components/ProductImageCarousel'
 import HeroCarousel from '../components/HeroCarousel'
 import { Button, Card, Section, Heading, Text, Grid } from '../components/ui'
+import { colors, spacing, typography, interactive } from '../styles'
 
 const Home = () => {
   const homeFaqs = [
@@ -85,8 +86,8 @@ const Home = () => {
     <>
       {/* Hero Section */}
       <section className={`relative ${colors.background.gradient} ${colors.text.white}`}>
-        <div className={spacing.section.py}>
-          <div className={`${spacing.layout.grid} ${spacing.layout.gridCols2} ${spacing.gap.xl} items-center`}>
+        <div className="container py-20 lg:py-32">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className={spacing.stack.lg}>
               <h1 className={typography.h1}>
                 Beautiful Blinds for Your
@@ -161,19 +162,19 @@ const Home = () => {
 
       {/* Services Grid */}
       <section className={`${spacing.section.py} ${colors.background.gradientDark}`}>
-        <div className={spacing.container.default}>
+        <div className="container">
           <div className={`text-center ${spacing.margin.bottomXl}`}>
             <div className={spacing.margin.bottomLg}>
-              <div className={`w-16 h-1 ${colors.background.goldGradient} mx-auto ${spacing.margin.bottomLg} rounded-full`}></div>
+              <div className={`w-16 h-1 ${colors.gradients.brandButton} mx-auto ${spacing.margin.bottomLg} rounded-full`}></div>
             </div>
-            <h2 className={`${typography.h2} ${spacing.margin.bottomLg} ${colors.background.goldGradient} bg-clip-text text-transparent`}>
+            <h2 className={`${typography.h2} ${spacing.margin.bottomLg} ${colors.gradients.textAccent}`}>
               Discover Your Dream Blinds
             </h2>
             <div className="relative">
               <p className={`${typography.quote} ${colors.text.gold} italic ${spacing.margin.bottomMd}`}>
                 "We Put Other Companies in the Shade"
               </p>
-              <div className={`w-24 h-1 ${colors.background.goldGradient} mx-auto rounded-full`}></div>
+              <div className={`w-24 h-1 ${colors.gradients.brandButton} mx-auto rounded-full`}></div>
             </div>
             <p className={`${typography.bodyLarge} ${colors.text.lightGray} ${spacing.margin.topLg} max-w-2xl mx-auto`}>
               From cosy cottages in Uppermill to modern homes in Greenfield, we understand what suits the unique charm of Saddleworth
@@ -264,118 +265,10 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Inspiration Section - Before/After Style */}
-      <section className={`${spacing.section.py} ${colors.background.dark}`}>
-        <div className={spacing.container.default}>
-          <div className={`text-center ${spacing.margin.bottomXl}`}>
-            <h2 className={`${typography.h2} ${spacing.margin.bottomMd}`}>
-              Transform Your Space
-            </h2>
-            <p className={`${typography.lead} ${colors.text.lightGray} max-w-3xl mx-auto`}>
-              See how the right blinds can completely change the look and feel of your rooms
-            </p>
-          </div>
-          
-          <div className={`${spacing.layout.grid} ${spacing.layout.gridCols2} ${spacing.gap.xl}`}>
-            {/* Living Room Transformation */}
-            <div className={`${interactive.card.base} overflow-hidden`}>
-              <div className="relative">
-                <img 
-                  src="/images/optimized/vision-lusso-pebble-800.jpg" 
-                  alt="Modern living room with Vision blinds"
-                  className={`${interactive.image.responsive} h-64 object-cover`}
-                />
-                <div className={`absolute top-4 left-4 ${colors.background.gold} ${colors.text.dark} px-3 py-1 rounded-full ${typography.bodySmall} font-semibold`}>
-                  Living Rooms
-                </div>
-              </div>
-              <div className={spacing.padding.lg}>
-                <h3 className={`${typography.h3} ${spacing.margin.bottomMd}`}>Create the Perfect Ambiance</h3>
-                <p className={`${typography.body} ${colors.text.lightGray} ${spacing.margin.bottomMd}`}>
-                  Vision blinds offer the perfect balance of privacy and natural light, ideal for Saddleworth's variable weather.
-                </p>
-                <ul className={`${typography.bodySmall} ${colors.text.lightGray} ${spacing.stack.sm}`}>
-                  <li className="flex items-start gap-2">
-                    <svg className={`w-4 h-4 ${colors.text.gold} mt-0.5 flex-shrink-0`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                    <span>Control light without losing your view</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <svg className={`w-4 h-4 ${colors.text.gold} mt-0.5 flex-shrink-0`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                    <span>Reduce glare on TV screens</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <svg className={`w-4 h-4 ${colors.text.gold} mt-0.5 flex-shrink-0`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                    <span>Protect furniture from UV damage</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            {/* Bedroom Transformation */}
-            <div className={`${interactive.card.base} overflow-hidden`}>
-              <div className="relative">
-                <img 
-                  src="/images/optimized/roller-carnival-bubblegum-800.jpg" 
-                  alt="Cozy bedroom with blackout roller blinds"
-                  className={`${interactive.image.responsive} h-64 object-cover`}
-                />
-                <div className={`absolute top-4 left-4 ${colors.background.gold} ${colors.text.dark} px-3 py-1 rounded-full ${typography.bodySmall} font-semibold`}>
-                  Bedrooms
-                </div>
-              </div>
-              <div className={spacing.padding.lg}>
-                <h3 className={`${typography.h3} ${spacing.margin.bottomMd}`}>Sleep Better, Wake Happier</h3>
-                <p className={`${typography.body} ${colors.text.lightGray} ${spacing.margin.bottomMd}`}>
-                  Blackout roller blinds ensure peaceful sleep, even during those long summer evenings in Saddleworth.
-                </p>
-                <ul className={`${typography.bodySmall} ${colors.text.lightGray} ${spacing.stack.sm}`}>
-                  <li className="flex items-start gap-2">
-                    <svg className={`w-4 h-4 ${colors.text.gold} mt-0.5 flex-shrink-0`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                    <span>Complete darkness for better sleep</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <svg className={`w-4 h-4 ${colors.text.gold} mt-0.5 flex-shrink-0`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                    <span>Thermal properties keep rooms cozy</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <svg className={`w-4 h-4 ${colors.text.gold} mt-0.5 flex-shrink-0`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                    <span>Child-safe cordless options available</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          {/* Mini CTA */}
-          <div className={`${spacing.margin.topXl} text-center`}>
-            <p className={`${typography.bodyLarge} ${colors.text.lightGray} ${spacing.margin.bottomMd}`}>
-              Ready to transform your home? Let's find the perfect blinds for every room.
-            </p>
-            <Link
-              to="/gallery"
-              className={`${interactive.button.secondary} ${interactive.button.medium}`}
-            >
-              View More Transformations
-            </Link>
-          </div>
-        </div>
-      </section>
 
       {/* Trust Indicators Section */}
       <section className={`${spacing.section.py} ${colors.background.gradient}`}>
-        <div className={spacing.container.default}>
+        <div className="container">
           <div className={`${spacing.layout.grid} grid-cols-2 lg:grid-cols-4 ${spacing.gap.lg}`}>
             <div className={`${colors.background.dark} rounded-xl ${spacing.padding.lg} text-center ${interactive.card.hover}`}>
               <div className={`${typography.h2} ${colors.text.gold} ${spacing.margin.bottomSm}`}>20+</div>
@@ -402,12 +295,12 @@ const Home = () => {
         title="Frequently Asked Questions"
         description="Everything you need to know about choosing the perfect blinds for your Saddleworth home"
         faqs={homeFaqs}
-        className="bg-gray-900"
+        className={`${colors.background.primary}`}
       />
 
       {/* CTA Section */}
       <section className={`${spacing.section.py} ${colors.background.gold}`}>
-        <div className={`${spacing.container.default} text-center`}>
+        <div className="container text-center">
           <h2 className={`${typography.h2} ${spacing.margin.bottomLg} ${colors.text.dark}`}>
             Ready to Transform Your Home?
           </h2>
@@ -467,12 +360,16 @@ const Home = () => {
 
       {/* Reviews Section */}
       <section className={`${spacing.section.py} ${colors.background.dark}`}>
-        <ReviewsSection />
+        <div className="container">
+          <ReviewsSection />
+        </div>
       </section>
 
       {/* FAQ Section */}
       <section className={spacing.section.py}>
-        <FAQSection />
+        <div className="container">
+          <FAQSection />
+        </div>
       </section>
     </>
   )

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { colors, spacing, typography, interactive } from '../styles'
 
 const VenetianBlinds = () => {
   return (
@@ -68,7 +69,7 @@ const VenetianBlinds = () => {
               <img
                 src="/images/optimized/venetian-wood-natural-1600.jpg"
                 alt="Premium venetian blinds in a Saddleworth living room"
-                className="w-full h-auto rounded-lg shadow-2xl"
+                className={`${interactive.image.responsive} rounded-lg shadow-2xl`}
                 loading="eager"
               />
             </div>

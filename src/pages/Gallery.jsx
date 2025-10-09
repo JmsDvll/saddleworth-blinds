@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { colors, spacing, typography, interactive } from '../styles'
 
 const Gallery = () => {
   const galleryImages = [

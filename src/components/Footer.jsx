@@ -168,14 +168,6 @@ const Footer = () => {
             <ul className="flex space-x-6 mt-4 md:mt-0">
               <li>
                 <Link
-                  to="/about"
-                  className="text-gray-400 hover:text-brand-gold transition-colors text-sm"
-                >
-                  About
-                </Link>
-              </li>
-              <li>
-                <Link
                   to="/privacy-policy"
                   className="text-gray-400 hover:text-brand-gold transition-colors text-sm"
                 >

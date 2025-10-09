@@ -6,6 +6,15 @@ $targetDir = "images\optimized"
 
 Write-Host "Starting image optimization..." -ForegroundColor Green
 
+# Check if Sharp is installed
+try {
+    Import-Module -Name "sharp" -ErrorAction Stop
+    Write-Host "Sharp module loaded successfully" -ForegroundColor Green
+} catch {
+    Write-Host "Sharp module not found. Installing globally..." -ForegroundColor Yellow
+    npm install -g sharp-cli
+}
+
 # Get all images in the to-optimize folder
 $images = Get-ChildItem $sourceDir -Name "*.jpg"
 

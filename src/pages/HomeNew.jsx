@@ -3,6 +3,7 @@ import { Button, Card, Section, Heading, Text, Grid } from '../components/ui'
 import FAQSection from '../components/FAQSection'
 import ReviewsSection from '../components/ReviewsSection'
 import HeroCarousel from '../components/HeroCarousel'
+import { colors, spacing, typography, interactive } from '../styles'
 
 const HomeNew = () => {
   const heroImages = [

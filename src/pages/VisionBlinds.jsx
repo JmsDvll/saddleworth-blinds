@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import VisionBlindsCarousel from '../components/VisionBlindsCarousel'
 import FAQSection from '../components/FAQSection'
+import { colors, spacing, typography, interactive } from '../styles'
 
 const VisionBlinds = () => {
   const visionFaqs = [
@@ -139,112 +140,112 @@ const VisionBlinds = () => {
           </div>
 
           <div>
-            <h2 className="text-3xl font-bold mb-8 text-center">The Vision Blind Advantage</h2>
-            <div className="grid md:grid-cols-3 gap-8">
-              <div className="bg-gray-800 rounded-lg p-6 text-center">
-                <div className="w-16 h-16 bg-brand-gold rounded-full flex items-center justify-center mx-auto mb-4">
-                  <svg className="w-8 h-8 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <h2 className={`${typography.h2} ${spacing.margin.bottomXl} text-center`}>The Vision Blind Advantage</h2>
+            <div className={`${spacing.layout.grid} md:grid-cols-3 ${spacing.gap.lg}`}>
+              <div className={`${colors.background.secondary} rounded-lg ${spacing.padding.lg} text-center`}>
+                <div className={`w-16 h-16 ${colors.background.gold} rounded-full flex items-center justify-center mx-auto ${spacing.margin.bottomMd}`}>
+                  <svg className={`w-8 h-8 ${colors.text.dark}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-semibold mb-4">Privacy When You Need It</h3>
-                <p className="text-gray-300">
+                <h3 className={`${typography.h3} ${spacing.margin.bottomMd}`}>Privacy When You Need It</h3>
+                <p className={colors.text.secondary}>
                   When the fabric layers are aligned, Vision blinds provide complete privacy from the outside while allowing you to see out clearly. Perfect for ground floor windows in busy Saddleworth streets.
                 </p>
               </div>
 
-              <div className="bg-gray-800 rounded-lg p-6 text-center">
-                <div className="w-16 h-16 bg-brand-gold rounded-full flex items-center justify-center mx-auto mb-4">
-                  <svg className="w-8 h-8 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className={`${colors.background.secondary} rounded-lg ${spacing.padding.lg} text-center`}>
+                <div className={`w-16 h-16 ${colors.background.gold} rounded-full flex items-center justify-center mx-auto ${spacing.margin.bottomMd}`}>
+                  <svg className={`w-8 h-8 ${colors.text.dark}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-semibold mb-4">Light Control at Your Fingertips</h3>
-                <p className="text-gray-300">
+                <h3 className={`${typography.h3} ${spacing.margin.bottomMd}`}>Light Control at Your Fingertips</h3>
+                <p className={colors.text.secondary}>
                   Adjust the blind to let in exactly the right amount of light. From complete blackout for bedrooms to soft diffused light for living spaces - you have total control.
                 </p>
               </div>
 
-              <div className="bg-gray-800 rounded-lg p-6 text-center">
-                <div className="w-16 h-16 bg-brand-gold rounded-full flex items-center justify-center mx-auto mb-4">
-                  <svg className="w-8 h-8 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className={`${colors.background.secondary} rounded-lg ${spacing.padding.lg} text-center`}>
+                <div className={`w-16 h-16 ${colors.background.gold} rounded-full flex items-center justify-center mx-auto ${spacing.margin.bottomMd}`}>
+                  <svg className={`w-8 h-8 ${colors.text.dark}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-semibold mb-4">Modern Aesthetic</h3>
-                <p className="text-gray-300">
+                <h3 className={`${typography.h3} ${spacing.margin.bottomMd}`}>Modern Aesthetic</h3>
+                <p className={colors.text.secondary}>
                   Clean lines and contemporary styling make Vision blinds the perfect choice for modern homes. Available in a wide range of fabrics and colors to complement any interior design.
                 </p>
               </div>
             </div>
           </div>
 
-          <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-8 border border-brand-gold/20">
-            <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-brand-gold to-yellow-400 bg-clip-text text-transparent">
+          <div className={`${colors.background.gradientSubtle} rounded-2xl ${spacing.padding.xl} border ${colors.border.accent}/20`}>
+            <div className={`text-center ${spacing.margin.bottomXl}`}>
+              <h2 className={`${typography.h2} ${spacing.margin.bottomMd} ${colors.gradients.textAccent}`}>
                 Technical Excellence
               </h2>
-              <div className="w-16 h-1 bg-gradient-to-r from-brand-gold to-yellow-400 mx-auto rounded-full"></div>
+              <div className={`w-16 h-1 ${colors.gradients.brandButton} mx-auto rounded-full`}></div>
             </div>
-            <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-6">
+            <div className={`${spacing.layout.grid} md:grid-cols-3 lg:grid-cols-5 ${spacing.gap.lg}`}>
               <div className="text-center">
-                <div className="w-12 h-12 bg-brand-gold rounded-full flex items-center justify-center mx-auto mb-3 text-gray-900 font-bold text-lg">1</div>
-                <h3 className="font-semibold text-white mb-2">Dual Layer System</h3>
-                <p className="text-sm text-gray-400">Innovative fabric layers that align or separate</p>
+                <div className={`w-12 h-12 ${colors.background.gold} rounded-full flex items-center justify-center mx-auto ${spacing.margin.bottomMd} ${colors.text.dark} font-bold text-lg`}>1</div>
+                <h3 className={`${typography.body} font-semibold ${colors.text.white} ${spacing.margin.bottomSm}`}>Dual Layer System</h3>
+                <p className={`${typography.bodySmall} ${colors.text.muted}`}>Innovative fabric layers that align or separate</p>
               </div>
               <div className="text-center">
-                <div className="w-12 h-12 bg-brand-gold rounded-full flex items-center justify-center mx-auto mb-3 text-gray-900 font-bold text-lg">2</div>
-                <h3 className="font-semibold text-white mb-2">Child Safe</h3>
-                <p className="text-sm text-gray-400">No cords or chains - safe for families</p>
+                <div className={`w-12 h-12 ${colors.background.gold} rounded-full flex items-center justify-center mx-auto ${spacing.margin.bottomMd} ${colors.text.dark} font-bold text-lg`}>2</div>
+                <h3 className={`${typography.body} font-semibold ${colors.text.white} ${spacing.margin.bottomSm}`}>Child Safe</h3>
+                <p className={`${typography.bodySmall} ${colors.text.muted}`}>No cords or chains - safe for families</p>
               </div>
               <div className="text-center">
-                <div className="w-12 h-12 bg-brand-gold rounded-full flex items-center justify-center mx-auto mb-3 text-gray-900 font-bold text-lg">3</div>
-                <h3 className="font-semibold text-white mb-2">Easy Operation</h3>
-                <p className="text-sm text-gray-400">Smooth, reliable mechanism</p>
+                <div className={`w-12 h-12 ${colors.background.gold} rounded-full flex items-center justify-center mx-auto ${spacing.margin.bottomMd} ${colors.text.dark} font-bold text-lg`}>3</div>
+                <h3 className={`${typography.body} font-semibold ${colors.text.white} ${spacing.margin.bottomSm}`}>Easy Operation</h3>
+                <p className={`${typography.bodySmall} ${colors.text.muted}`}>Smooth, reliable mechanism</p>
               </div>
               <div className="text-center">
-                <div className="w-12 h-12 bg-brand-gold rounded-full flex items-center justify-center mx-auto mb-3 text-gray-900 font-bold text-lg">4</div>
-                <h3 className="font-semibold text-white mb-2">Motorised Options</h3>
-                <p className="text-sm text-gray-400">Remote control and smart home integration</p>
+                <div className={`w-12 h-12 ${colors.background.gold} rounded-full flex items-center justify-center mx-auto ${spacing.margin.bottomMd} ${colors.text.dark} font-bold text-lg`}>4</div>
+                <h3 className={`${typography.body} font-semibold ${colors.text.white} ${spacing.margin.bottomSm}`}>Motorised Options</h3>
+                <p className={`${typography.bodySmall} ${colors.text.muted}`}>Remote control and smart home integration</p>
               </div>
               <div className="text-center">
-                <div className="w-12 h-12 bg-brand-gold rounded-full flex items-center justify-center mx-auto mb-3 text-gray-900 font-bold text-lg">5</div>
-                <h3 className="font-semibold text-white mb-2">UV Protection</h3>
-                <p className="text-sm text-gray-400">Protects furniture and flooring from sun damage</p>
+                <div className={`w-12 h-12 ${colors.background.gold} rounded-full flex items-center justify-center mx-auto ${spacing.margin.bottomMd} ${colors.text.dark} font-bold text-lg`}>5</div>
+                <h3 className={`${typography.body} font-semibold ${colors.text.white} ${spacing.margin.bottomSm}`}>UV Protection</h3>
+                <p className={`${typography.bodySmall} ${colors.text.muted}`}>Protects furniture and flooring from sun damage</p>
               </div>
             </div>
           </div>
 
-          <div className="bg-gray-800 rounded-lg p-8">
-            <h2 className="text-2xl font-bold mb-6 text-center">Perfect for Saddleworth Properties</h2>
-            <p className="text-gray-300 text-center mb-8">
+          <div className={`${colors.background.secondary} rounded-lg ${spacing.padding.xl}`}>
+            <h2 className={`${typography.h2} ${spacing.margin.bottomLg} text-center`}>Perfect for Saddleworth Properties</h2>
+            <p className={`${colors.text.secondary} text-center ${spacing.margin.bottomXl}`}>
               Vision blinds are particularly well-suited to Saddleworth's diverse architectural styles. From period cottages requiring privacy solutions to modern barn conversions needing contemporary styling, Vision blinds bridge the gap beautifully.
             </p>
           </div>
 
-          <div className="bg-gray-800 rounded-lg p-8">
-            <h2 className="text-2xl font-bold mb-6 text-center">Our Installation Process</h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className={`${colors.background.secondary} rounded-lg ${spacing.padding.xl}`}>
+            <h2 className={`${typography.h2} ${spacing.margin.bottomLg} text-center`}>Our Installation Process</h2>
+            <div className={`${spacing.layout.grid} md:grid-cols-2 lg:grid-cols-4 ${spacing.gap.lg}`}>
               <div className="text-center">
-                <div className="w-12 h-12 bg-brand-gold rounded-full flex items-center justify-center mx-auto mb-3 text-gray-900 font-bold text-lg">1</div>
-                <h3 className="font-semibold text-white mb-2">Free Consultation</h3>
-                <p className="text-sm text-gray-400">We visit your home to discuss your requirements and show samples</p>
+                <div className={`w-12 h-12 ${colors.background.gold} rounded-full flex items-center justify-center mx-auto ${spacing.margin.bottomMd} ${colors.text.dark} font-bold text-lg`}>1</div>
+                <h3 className={`${typography.body} font-semibold ${colors.text.white} ${spacing.margin.bottomSm}`}>Free Consultation</h3>
+                <p className={`${typography.bodySmall} ${colors.text.muted}`}>We visit your home to discuss your requirements and show samples</p>
               </div>
               <div className="text-center">
-                <div className="w-12 h-12 bg-brand-gold rounded-full flex items-center justify-center mx-auto mb-3 text-gray-900 font-bold text-lg">2</div>
-                <h3 className="font-semibold text-white mb-2">Precise Measuring</h3>
-                <p className="text-sm text-gray-400">Accurate measurements ensure perfect fitting</p>
+                <div className={`w-12 h-12 ${colors.background.gold} rounded-full flex items-center justify-center mx-auto ${spacing.margin.bottomMd} ${colors.text.dark} font-bold text-lg`}>2</div>
+                <h3 className={`${typography.body} font-semibold ${colors.text.white} ${spacing.margin.bottomSm}`}>Precise Measuring</h3>
+                <p className={`${typography.bodySmall} ${colors.text.muted}`}>Accurate measurements ensure perfect fitting</p>
               </div>
               <div className="text-center">
-                <div className="w-12 h-12 bg-brand-gold rounded-full flex items-center justify-center mx-auto mb-3 text-gray-900 font-bold text-lg">3</div>
-                <h3 className="font-semibold text-white mb-2">Quality Manufacturing</h3>
-                <p className="text-sm text-gray-400">Your Vision blinds are made to order</p>
+                <div className={`w-12 h-12 ${colors.background.gold} rounded-full flex items-center justify-center mx-auto ${spacing.margin.bottomMd} ${colors.text.dark} font-bold text-lg`}>3</div>
+                <h3 className={`${typography.body} font-semibold ${colors.text.white} ${spacing.margin.bottomSm}`}>Quality Manufacturing</h3>
+                <p className={`${typography.bodySmall} ${colors.text.muted}`}>Your Vision blinds are made to order</p>
               </div>
               <div className="text-center">
-                <div className="w-12 h-12 bg-brand-gold rounded-full flex items-center justify-center mx-auto mb-3 text-gray-900 font-bold text-lg">4</div>
-                <h3 className="font-semibold text-white mb-2">Professional Installation</h3>
-                <p className="text-sm text-gray-400">Expert fitting with minimal disruption</p>
+                <div className={`w-12 h-12 ${colors.background.gold} rounded-full flex items-center justify-center mx-auto ${spacing.margin.bottomMd} ${colors.text.dark} font-bold text-lg`}>4</div>
+                <h3 className={`${typography.body} font-semibold ${colors.text.white} ${spacing.margin.bottomSm}`}>Professional Installation</h3>
+                <p className={`${typography.bodySmall} ${colors.text.muted}`}>Expert fitting with minimal disruption</p>
               </div>
             </div>
           </div>
@@ -277,25 +278,25 @@ const VisionBlinds = () => {
             </a>
           </div>
 
-          <div className="flex justify-center items-center gap-8 mt-8 text-gray-400">
-            <div className="flex items-center gap-2">
+          <div className={`flex justify-center items-center ${spacing.gap.lg} ${spacing.margin.topLg} ${colors.text.muted}`}>
+            <div className={`flex items-center ${spacing.gap.xs}`}>
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
-              <span className="text-sm">Completely Free</span>
+              <span className={`${typography.bodySmall} font-medium`}>Completely Free</span>
             </div>
-            <div className="flex items-center gap-2">
+            <div className={`flex items-center ${spacing.gap.xs}`}>
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
               </svg>
-              <span className="text-sm">No Obligation</span>
+              <span className={`${typography.bodySmall} font-medium`}>No Obligation</span>
             </div>
-            <div className="flex items-center gap-2">
+            <div className={`flex items-center ${spacing.gap.xs}`}>
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
-              <span className="text-sm">Saddleworth Specialists</span>
+              <span className={`${typography.bodySmall} font-medium`}>Saddleworth Specialists</span>
             </div>
           </div>
         </div>
@@ -305,7 +306,7 @@ const VisionBlinds = () => {
           title="Vision Blinds Questions"
           description="Everything you need to know about Vision blinds for your Saddleworth home"
           faqs={visionFaqs}
-          className="bg-gray-900"
+          className={`${colors.background.primary}`}
         />
         </div>
       </div>

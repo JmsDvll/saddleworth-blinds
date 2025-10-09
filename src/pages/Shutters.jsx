@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import ShuttersCarousel from '../components/ShuttersCarousel'
+import { colors, spacing, typography, interactive } from '../styles'
 
 const Shutters = () => {
   return (

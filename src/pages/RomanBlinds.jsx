@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import ProductImageCarousel from '../components/ProductImageCarousel'
+import { colors, spacing, typography, interactive } from '../styles'
 
 const RomanBlinds = () => {
   return (
@@ -66,12 +67,17 @@ const RomanBlinds = () => {
             </div>
 
             <div className="relative">
-              <img
-                src="/images/optimized/roller-petal-white-1600.jpg"
-                alt="Elegant Roman blinds in a Saddleworth home"
-                className="w-full h-auto rounded-lg shadow-2xl"
-                loading="eager"
-              />
+              <div className={`${interactive.image.responsive} rounded-lg shadow-2xl ${colors.background.secondary} flex items-center justify-center`}>
+                <div className="text-center p-8">
+                  <div className={`w-24 h-24 ${colors.background.gold} rounded-full flex items-center justify-center mx-auto mb-4`}>
+                    <svg className={`w-12 h-12 ${colors.text.dark}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <h3 className={`${typography.h3} ${colors.text.white} mb-2`}>Coming Soon</h3>
+                  <p className={`${typography.body} ${colors.text.secondary}`}>Roman blinds collection launching soon</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>

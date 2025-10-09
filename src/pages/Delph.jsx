@@ -1,5 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import HeroCarousel from '../components/HeroCarousel'
+import { colors, spacing, typography, interactive } from '../styles'
 
 const Delph = () => {
   return (
@@ -68,7 +70,7 @@ const Delph = () => {
               <img
                 src="/images/optimized/vision-floreale-rosa-1600.jpg"
                 alt="Beautiful window blinds in a Delph home"
-                className="w-full h-auto rounded-lg shadow-2xl"
+                className={`${interactive.image.responsive} rounded-lg shadow-2xl`}
                 loading="eager"
               />
             </div>

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { colors, spacing, typography, interactive } from '../styles'
 
 const Lydgate = () => {
   return (
@@ -68,7 +69,7 @@ const Lydgate = () => {
               <img
                 src="/images/optimized/vision-lusso-pebble-1600.jpg"
                 alt="Beautiful window blinds in a Lydgate home"
-                className="w-full h-auto rounded-lg shadow-2xl"
+                className={`${interactive.image.responsive} rounded-lg shadow-2xl`}
                 loading="eager"
               />
             </div>

@@ -45,18 +45,18 @@ const RollerBlindsCarousel = ({
 
   return (
     <CarouselContainer
-      className="bg-gray-800"
+      className={`${colors.background.secondary}`}
       autoPlay={true}
       interval={6000}
       pauseOnHover={true}
     >
       {showTitle && (
-        <div className="p-6 text-center">
-          <h3 className="text-2xl font-bold text-brand-gold mb-2">
+        <div className={`${spacing.padding.lg} text-center`}>
+          <h3 className={`${typography.h2} ${colors.text.gold} ${spacing.margin.bottomSm}`}>
             Roller Blinds Collection ({rollerImages.length} styles)
           </h3>
           {showDescription && (
-            <p className="text-gray-300">
+            <p className={colors.text.secondary}>
               Browse through our complete roller blinds collection to find your perfect style
             </p>
           )}

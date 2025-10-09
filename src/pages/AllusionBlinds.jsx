@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { colors, spacing, typography, interactive } from '../styles'
 
 const AllusionBlinds = () => {
   return (
@@ -68,7 +69,7 @@ const AllusionBlinds = () => {
               <img
                 src="/images/optimized/allusion-vista-snow-1600.jpg"
                 alt="Allusion blinds in a contemporary Saddleworth home"
-                className="w-full h-auto rounded-lg shadow-2xl"
+                className={`${interactive.image.responsive} rounded-lg shadow-2xl`}
                 loading="eager"
               />
             </div>

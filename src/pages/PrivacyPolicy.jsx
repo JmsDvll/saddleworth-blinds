@@ -1,4 +1,5 @@
 import React from 'react'
+import { colors, spacing, typography } from '../styles'
 
 const PrivacyPolicy = () => {
   return (

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { colors, spacing, typography, interactive } from '../styles'
 
 const Dobcross = () => {
   return (
@@ -68,7 +69,7 @@ const Dobcross = () => {
               <img
                 src="/images/optimized/vision-palermo-silver-1600.jpg"
                 alt="Beautiful window blinds in a Dobcross home"
-                className="w-full h-auto rounded-lg shadow-2xl"
+                className={`${interactive.image.responsive} rounded-lg shadow-2xl`}
                 loading="eager"
               />
             </div>

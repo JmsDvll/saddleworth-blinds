@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import VerticalBlindsCarousel from '../components/VerticalBlindsCarousel'
+import { colors, spacing, typography, interactive } from '../styles'
 
 const VerticalBlinds = () => {
   return (
