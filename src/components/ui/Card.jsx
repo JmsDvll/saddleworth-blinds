@@ -43,6 +43,13 @@ const cardStyles = {
       after:animate-shimmer
       overflow-hidden
     `,
+    link: `
+      bg-brand-dark/90
+      backdrop-blur-sm
+      border border-brand-gold/20
+      hover:bg-brand-dark hover:border-brand-gold/40
+      transition-all duration-300
+    `,
     premium: `
       bg-gradient-to-br from-brand-dark to-brand-dark-light
       border border-brand-gold/40

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { Stack, Heading, Text, Badge, Button, Icon } from './ui'
+import { Stack, Heading, Text, Badge, Button, Icon, Container, Box, Flex, Grid, Center, ProgressBar, Card } from './ui'
 import { CarouselContainer, CarouselImage, CarouselButton, CarouselDots, CAROUSEL_HEIGHTS } from './BaseCarousel'
 
 const HeroCarousel = () => {
@@ -82,40 +82,57 @@ const HeroCarousel = () => {
   const currentSlideData = slides[currentSlide]
 
   return (
-    <div className="relative">
+    <Box position="relative">
       <CarouselContainer
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
-        className="group"
       >
-        <div className={`${CAROUSEL_HEIGHTS.hero} relative overflow-hidden`}>
+        <Box 
+          className={CAROUSEL_HEIGHTS.hero}
+          position="relative"
+          overflow="hidden"
+        >
           {/* Background image with parallax effect */}
-          <div className="absolute inset-0 scale-110">
+          <Box position="absolute" inset="0" scale="110">
             <CarouselImage
               src={`/images/optimized/${currentSlideData.image}`}
               alt={currentSlideData.alt}
               eager={true}
             />
-            {/* Premium gradient overlays */}
-            <div className="absolute inset-0 bg-gradient-to-r from-brand-dark/90 via-brand-dark/50 to-transparent"></div>
-            <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/80 via-transparent to-transparent"></div>
-          </div>
+            {/* Premium gradient overlays using inline styles for complex gradients */}
+            <Box 
+              position="absolute" 
+              inset="0" 
+              style={{ background: 'linear-gradient(to right, rgba(10, 10, 10, 0.9), rgba(10, 10, 10, 0.5), transparent)' }}
+            />
+            <Box 
+              position="absolute" 
+              inset="0" 
+              style={{ background: 'linear-gradient(to top, rgba(10, 10, 10, 0.8), transparent, transparent)' }}
+            />
+          </Box>
 
           {/* Content overlay with animations */}
-          <div className="absolute inset-0 flex items-center">
-            <div className="container mx-auto px-4 md:px-6 lg:px-8">
-              <div className="max-w-2xl">
-                <Stack spacing="large" className={`
-                  transition-all duration-700 transform
-                  ${isTransitioning ? 'opacity-0 translate-y-8' : 'opacity-100 translate-y-0'}
-                `}>
+          <Center className="absolute inset-0">
+            <Container>
+              <Box maxWidth="2xl">
+                <Stack 
+                  spacing="large" 
+                  style={{
+                    transition: 'all 0.7s cubic-bezier(0.4, 0, 0.2, 1)',
+                    transform: isTransitioning ? 'translateY(2rem)' : 'translateY(0)',
+                    opacity: isTransitioning ? 0 : 1
+                  }}
+                >
                   {/* Animated badge */}
-                  <div className="inline-block">
-                    <Badge variant="primary" glow className="animate-pulse-glow">
-                      <Icon name="sparkle" size="tiny" className="mr-1" />
-                      Saddleworth's Premium Blind Specialists
+                  <Box display="inlineBlock">
+                    <Badge variant="primary" glow>
+                      <Flex align="center" gap="small">
+                        <Icon name="sparkle" size="tiny" />
+                        Saddleworth's Premium Blind Specialists
+                      </Flex>
                     </Badge>
-                  </div>
+                  </Box>
 
                   {/* Main heading with gradient */}
                   <Heading 
@@ -124,21 +141,33 @@ const HeroCarousel = () => {
                     mdSize="6xl"
                     color="white"
                     effect="glow"
-                    className="font-display"
                   >
                     {currentSlideData.title}
-                    <span className="block text-3xl md:text-4xl mt-2 bg-gradient-to-r from-brand-gold to-brand-gold-light bg-clip-text text-transparent animate-shimmer bg-[length:200%_auto]">
+                    <Text 
+                      as="span" 
+                      className="block"
+                      style={{
+                        fontSize: 'clamp(1.875rem, 4vw, 2.25rem)',
+                        marginTop: '0.5rem',
+                        background: 'linear-gradient(to right, #D4AF37, #F4E5B2)',
+                        WebkitBackgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent',
+                        backgroundClip: 'text'
+                      }}
+                    >
                       {currentSlideData.subtitle}
-                    </span>
+                    </Text>
                   </Heading>
 
                   {/* Description */}
-                  <Text size="xlarge" color="light" className="max-w-xl">
-                    {currentSlideData.description}
-                  </Text>
+                  <Box maxWidth="xl">
+                    <Text size="xlarge" color="light">
+                      {currentSlideData.description}
+                    </Text>
+                  </Box>
 
-                  {/* CTA Buttons with hover effects */}
-                  <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                  {/* CTA Buttons */}
+                  <Flex direction="column" smDirection="row" gap="medium" style={{ paddingTop: '1rem' }}>
                     <Button
                       as={Link}
                       to={currentSlideData.cta.link}
@@ -146,7 +175,6 @@ const HeroCarousel = () => {
                       variant="primary"
                       glow
                       iconRight={<Icon name="arrowRight" />}
-                      className="group"
                     >
                       {currentSlideData.cta.text}
                     </Button>
@@ -159,79 +187,111 @@ const HeroCarousel = () => {
                     >
                       Call Now
                     </Button>
-                  </div>
+                  </Flex>
                 </Stack>
-              </div>
-            </div>
-          </div>
+              </Box>
+            </Container>
+          </Center>
 
-          {/* Navigation arrows with premium styling */}
+          {/* Navigation arrows */}
           <CarouselButton
             onClick={prevSlide}
             direction="left"
-            className="opacity-0 group-hover:opacity-100 -translate-x-4 group-hover:translate-x-0"
           />
           <CarouselButton
             onClick={nextSlide}
             direction="right"
-            className="opacity-0 group-hover:opacity-100 translate-x-4 group-hover:translate-x-0"
           />
 
           {/* Enhanced slide counter */}
-          <div className="absolute bottom-8 right-8 hidden md:block">
-            <Badge variant="ghost" size="large" className="backdrop-blur-md bg-brand-dark/60">
-              <span className="text-brand-gold font-display text-2xl">{String(currentSlide + 1).padStart(2, '0')}</span>
-              <span className="mx-2 text-gray-500">/</span>
-              <span className="text-gray-400">{String(slides.length).padStart(2, '0')}</span>
+          <Box 
+            position="absolute"
+            style={{ bottom: '2rem', right: '2rem', display: 'none' }}
+            className="md:block"
+          >
+            <Badge variant="ghost" size="large">
+              <Flex align="center" gap="small">
+                <Text style={{ color: '#D4AF37', fontFamily: 'Playfair Display, serif', fontSize: '1.5rem' }}>
+                  {String(currentSlide + 1).padStart(2, '0')}
+                </Text>
+                <Text color="muted">/</Text>
+                <Text color="mutedDark">
+                  {String(slides.length).padStart(2, '0')}
+                </Text>
+              </Flex>
             </Badge>
-          </div>
+          </Box>
 
-          {/* Premium dot indicators */}
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
+          {/* Dot indicators */}
+          <Box 
+            position="absolute"
+            style={{ bottom: '2rem', left: '50%', transform: 'translateX(-50%)' }}
+          >
             <CarouselDots
               total={slides.length}
               current={currentSlide}
               onSelect={goToSlide}
             />
-          </div>
+          </Box>
 
-          {/* Auto-play progress bar */}
-          <div className="absolute bottom-0 left-0 right-0 h-1 bg-brand-dark/50">
-            <div 
-              className={`h-full bg-gradient-to-r from-brand-gold to-brand-gold-light transition-all ${isPaused ? 'pause-animation' : ''}`}
-              style={{
-                width: `${((currentSlide + 1) / slides.length) * 100}%`,
+          {/* Progress bar */}
+          <Box 
+            position="absolute"
+            style={{ bottom: 0, left: 0, right: 0 }}
+          >
+            <ProgressBar
+              value={currentSlide + 1}
+              max={slides.length}
+              size="medium"
+              containerVariant="dark"
+              variant="primary"
+              barStyle={{
                 transition: isPaused ? 'none' : 'width 5s linear'
               }}
             />
-          </div>
-        </div>
+          </Box>
+        </Box>
       </CarouselContainer>
 
-      {/* Quick links section below carousel */}
-      <div className="absolute -bottom-16 left-0 right-0 z-20">
-        <div className="container mx-auto px-4 md:px-6 lg:px-8">
-          <div className="grid grid-cols-3 gap-4 max-w-3xl mx-auto">
-            {[
-              { icon: 'home', text: 'Free Home Visit', href: '/book-appointment' },
-              { icon: 'currency', text: 'Best Prices', href: '/roller-blinds' },
-              { icon: 'shield', text: '5 Year Guarantee', href: '/about' }
-            ].map((item, index) => (
-              <a
-                key={index}
-                href={item.href}
-                className="group bg-brand-dark/90 backdrop-blur-sm border border-brand-gold/20 rounded-lg p-4 text-center hover:bg-brand-dark hover:border-brand-gold/40 transition-all duration-300 hover:scale-105"
-              >
-                <Icon name={item.icon} size="large" className="text-brand-gold mx-auto mb-2 group-hover:scale-110 transition-transform" />
-                <Text size="small" weight="medium" className="text-gray-300 group-hover:text-white">
-                  {item.text}
-                </Text>
-              </a>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
+      {/* Quick links section */}
+      <Box 
+        position="absolute"
+        style={{ bottom: '-4rem', left: 0, right: 0, zIndex: 20 }}
+      >
+        <Container>
+          <Box maxWidth="3xl" style={{ margin: '0 auto' }}>
+            <Grid cols={3} gap="medium">
+              {[
+                { icon: 'home', text: 'Free Home Visit', href: '/book-appointment' },
+                { icon: 'currency', text: 'Best Prices', href: '/roller-blinds' },
+                { icon: 'shield', text: '5 Year Guarantee', href: '/about' }
+              ].map((item, index) => (
+                <Card
+                  key={index}
+                  as="a"
+                  href={item.href}
+                  variant="link"
+                  hover="scale"
+                  padding="medium"
+                  style={{ display: 'block', textAlign: 'center' }}
+                >
+                  <Stack spacing="small" align="center">
+                    <Icon 
+                      name={item.icon}
+                      size="large"
+                      style={{ color: '#D4AF37' }}
+                    />
+                    <Text size="small" weight="medium" color="light">
+                      {item.text}
+                    </Text>
+                  </Stack>
+                </Card>
+              ))}
+            </Grid>
+          </Box>
+        </Container>
+      </Box>
+    </Box>
   )
 }
 
