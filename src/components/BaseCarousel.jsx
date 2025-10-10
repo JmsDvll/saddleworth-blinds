@@ -11,9 +11,10 @@ export const CarouselContainer = ({
   return (
     <div
       className={`
-        relative w-full overflow-hidden rounded-xl
-        shadow-2xl shadow-black/50
-        bg-gradient-to-br from-brand-dark-lighter to-brand-dark
+        relative w-full overflow-hidden rounded-sm
+        shadow-luxury
+        bg-gradient-to-br from-brand-dark to-brand-dark-light
+        border border-brand-gold/20
         group
         ${className}
       `}
