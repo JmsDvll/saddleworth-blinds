@@ -44,3 +44,25 @@ export {
   MobileToggle 
 } from './HeaderWrapper'
 export { AnnouncementBar } from './AnnouncementBar'
+export {
+  CarouselContainer,
+  CarouselSlide,
+  CarouselNavButton,
+  CarouselDots,
+  CarouselOverlay,
+  CarouselContent,
+  CarouselImageWrapper,
+  CarouselProgress,
+  CarouselCounter
+} from './CarouselWrapper'
+export {
+  HeroSection,
+  HeroContent,
+  HeroImage,
+  HeroOverlay,
+  HeroTitle,
+  HeroSubtitle,
+  HeroDescription,
+  HeroCTA,
+  HeroBadge
+} from './HeroSection'

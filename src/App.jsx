@@ -1,14 +1,14 @@
 import React, { Suspense, lazy, useState, useEffect } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import Header from './components/Header'
-import Footer from './components/Footer'
+import FooterLuxury from './components/FooterLuxury'
 import CookieConsent from './components/CookieConsent'
 import ErrorBoundary from './components/ErrorBoundary'
 import LoadingScreen from './components/LoadingScreen'
 import { AnimatePresence, motion } from 'framer-motion'
 
 // Lazy load pages for better performance
-const Home = lazy(() => import('./pages/Home'))
+const Home = lazy(() => import('./pages/HomeLuxury'))
 const Contact = lazy(() => import('./pages/Contact'))
 const Gallery = lazy(() => import('./pages/Gallery'))
 const BookAppointment = lazy(() => import('./pages/BookAppointment'))
@@ -152,7 +152,7 @@ function App() {
             </Suspense>
           </AnimatePresence>
         </main>
-        <Footer />
+        <FooterLuxury />
         <CookieConsent />
       </div>
     </ErrorBoundary>
