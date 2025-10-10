@@ -11,65 +11,45 @@ const sectionStyles = {
   
   background: {
     transparent: 'bg-transparent',
+    cream: 'bg-brand-cream',
     white: 'bg-white',
-    light: 'bg-gray-50',
-    yellow: 'bg-brand-yellow text-brand-black',
-    charcoal: 'bg-brand-charcoal text-white',
-    gradient: 'bg-yellow-to-black text-white',
-    gradientReverse: 'bg-black-to-yellow text-white',
+    dark: 'bg-brand-dark text-brand-cream',
+    luxury: 'bg-gradient-to-br from-brand-dark via-brand-dark-light to-brand-dark text-brand-cream',
+    gold: 'bg-gradient-to-r from-brand-gold to-brand-gold-light text-brand-dark',
+    pattern: `
+      bg-brand-cream
+      relative
+      before:absolute before:inset-0
+      before:bg-[url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23D4AF37' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")]
+    `,
   },
   
   textColor: {
-    light: 'text-gray-300',
-    dark: 'text-gray-900',
     inherit: '',
+    dark: 'text-brand-dark',
+    light: 'text-brand-cream',
+    gold: 'text-brand-gold',
   },
-  
-  // Special effects
-  effects: {
-    none: '',
-    particles: `
-      before:absolute before:inset-0
-      before:bg-[url("data:image/svg+xml,%3Csvg width='200' height='200' viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='50' cy='50' r='1' fill='%23D4AF37' opacity='0.3'%3E%3Canimate attributeName='cy' values='50;180;50' dur='20s' repeatCount='indefinite'/%3E%3C/circle%3E%3Ccircle cx='150' cy='150' r='1' fill='%23D4AF37' opacity='0.3'%3E%3Canimate attributeName='cy' values='150;20;150' dur='15s' repeatCount='indefinite'/%3E%3C/circle%3E%3C/svg%3E")]
-    `,
-    waves: `
-      after:absolute after:bottom-0 after:left-0 after:right-0
-      after:h-px after:bg-gradient-to-r
-      after:from-transparent after:via-brand-gold/50 after:to-transparent
-    `
-  }
 }
 
-export const Section = forwardRef(({
-  children,
-  padding = 'large',
+export const Section = forwardRef(({ 
+  children, 
+  padding = 'medium',
   background = 'transparent',
-  textColor = 'light',
-  effect = 'none',
+  textColor = 'inherit',
   className = '',
-  animate = true,
-  ...props
+  ...props 
 }, ref) => {
   const classes = `
     ${sectionStyles.padding[padding]}
     ${sectionStyles.background[background]}
     ${sectionStyles.textColor[textColor]}
-    ${sectionStyles.effects[effect]}
-    ${animate ? 'animate-fade-in' : ''}
-    relative
     ${className}
   `.trim()
 
   return (
-    <section
-      ref={ref}
-      className={classes}
-      {...props}
-    >
-      {/* Content wrapper for proper z-indexing */}
-      <div className="relative z-10">
-        {children}
-      </div>
+    <section ref={ref} className={classes} {...props}>
+      {children}
     </section>
   )
 })
@@ -77,17 +57,21 @@ export const Section = forwardRef(({
 Section.displayName = 'Section'
 
 // Section container for consistent max-width
-Section.Container = ({ children, maxWidth = 'large', className = '' }) => {
-  const widths = {
-    small: 'max-w-3xl',
-    medium: 'max-w-5xl',
-    large: 'max-w-7xl',
-    full: 'max-w-full',
+export const SectionContainer = ({ children, className = '', size = 'default', ...props }) => {
+  const sizes = {
+    small: 'max-w-4xl',
+    default: 'max-w-7xl',
+    large: 'max-w-screen-2xl',
+    full: 'max-w-none',
   }
 
   return (
-    <div className={`${widths[maxWidth]} mx-auto px-4 sm:px-6 lg:px-8 ${className}`}>
+    <div className={`mx-auto px-4 sm:px-6 lg:px-8 ${sizes[size]} ${className}`} {...props}>
       {children}
     </div>
   )
 }
+
+SectionContainer.displayName = 'SectionContainer'
+
+Section.Container = SectionContainer

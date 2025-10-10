@@ -8,11 +8,11 @@ const progressBarStyles = {
       medium: 'h-1',
       large: 'h-2',
     },
-    variants: {
-      default: 'bg-gray-800',
-      dark: 'bg-brand-dark/50',
-      light: 'bg-brand-dark-lighter',
-    },
+        variants: {
+          default: 'bg-brand-cream border border-brand-gold/20',
+          dark: 'bg-brand-dark/50',
+          light: 'bg-white/50',
+        },
     rounded: {
       none: '',
       small: 'rounded-sm',

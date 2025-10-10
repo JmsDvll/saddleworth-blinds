@@ -11,19 +11,19 @@ const badgeStyles = {
   
   variants: {
     default: `
-      bg-gray-100 text-brand-charcoal
-      border border-gray-300
-      hover:bg-gray-200
+      bg-brand-cream text-brand-dark
+      border border-brand-gold/20
+      hover:bg-white hover:border-brand-gold/40
     `,
     primary: `
-      bg-brand-yellow
-      text-brand-black font-semibold
-      hover:bg-brand-yellow-dark
+      bg-gradient-to-r from-brand-gold to-brand-gold-light
+      text-brand-dark font-semibold
+      hover:shadow-gold
     `,
     secondary: `
-      bg-brand-charcoal text-white
-      border border-brand-charcoal
-      hover:bg-gray-800
+      bg-brand-dark text-brand-gold
+      border border-brand-gold
+      hover:bg-brand-dark-light
     `,
     success: `
       bg-gradient-to-r from-emerald-900/80 to-emerald-800/80

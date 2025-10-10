@@ -72,21 +72,21 @@ const HeaderStandardized = () => {
   return (
     <header 
       className={`
-        sticky top-0 z-40 transition-all duration-300 bg-white
+        sticky top-0 z-40 transition-all duration-500
         ${isScrolled 
-          ? 'shadow-hard border-b border-gray-200' 
-          : 'shadow-soft border-b border-gray-100'
+          ? 'bg-white/95 backdrop-blur-lg shadow-luxury border-b border-brand-gold/20' 
+          : 'bg-brand-cream shadow-soft border-b border-brand-gold/10'
         }
       `}
       role="navigation"
     >
-      {/* Announcement bar */}
-      <div className="bg-brand-yellow text-brand-black py-2 text-center text-sm font-semibold">
+      {/* Luxury announcement bar */}
+      <div className="bg-gradient-to-r from-brand-gold to-brand-gold-light text-brand-dark py-3 text-center text-sm font-medium tracking-wide">
         <Container>
           <Flex justify="center" align="center" gap="small">
-            <Icon name="sparkle" size="tiny" />
-            <span>Special Offer: 20% off all Perfect Fit Blinds this month!</span>
-            <Icon name="sparkle" size="tiny" />
+            <Icon name="sparkle" size="tiny" className="animate-pulse" />
+            <span className="uppercase">Exclusive Offer: 20% off all Perfect Fit Blinds</span>
+            <Icon name="sparkle" size="tiny" className="animate-pulse" />
           </Flex>
         </Container>
       </div>
@@ -207,12 +207,12 @@ const HeaderStandardized = () => {
           <Flex gap="medium" className="hidden lg:flex">
             <a 
               href="tel:01457597091" 
-              className="flex items-center gap-2 text-brand-charcoal hover:text-brand-yellow transition-all duration-300 group"
+              className="flex items-center gap-3 text-brand-dark hover:text-brand-gold transition-all duration-300 group"
             >
-              <Icon name="phone" size="medium" className="text-brand-yellow" />
+              <Icon name="phone" size="medium" className="text-brand-gold" />
               <Stack spacing="none">
-                <Text size="small" color="muted">Call Now</Text>
-                <Text weight="bold" color="charcoal">01457 597091</Text>
+                <Text size="small" color="muted" tracking="wide">Call Now</Text>
+                <Text weight="semibold" color="dark">01457 597091</Text>
               </Stack>
             </a>
             

@@ -1,38 +1,32 @@
 import React, { forwardRef } from 'react'
 
 const headingStyles = {
-  // Base styles with premium typography
-  base: `
-    font-display font-bold
-    tracking-tight
-    leading-tight
-    transition-all duration-300
-  `,
+  base: 'font-display font-bold leading-tight tracking-wide',
   
-  // Enhanced sizes with better scaling
+  // Luxury size scale
   sizes: {
-    xs: 'text-sm md:text-base',
-    sm: 'text-base md:text-lg',
-    base: 'text-lg md:text-xl',
-    lg: 'text-xl md:text-2xl',
-    xl: 'text-2xl md:text-3xl',
-    '2xl': 'text-3xl md:text-4xl',
-    '3xl': 'text-4xl md:text-5xl',
-    '4xl': 'text-5xl md:text-6xl',
-    '5xl': 'text-6xl md:text-7xl',
-    '6xl': 'text-7xl md:text-8xl',
+    xs: 'text-lg md:text-xl',
+    sm: 'text-xl md:text-2xl',
+    base: 'text-2xl md:text-3xl',
+    lg: 'text-3xl md:text-4xl',
+    xl: 'text-4xl md:text-5xl',
+    '2xl': 'text-5xl md:text-6xl',
+    '3xl': 'text-6xl md:text-7xl',
+    '4xl': 'text-7xl md:text-8xl',
+    '5xl': 'text-8xl md:text-9xl',
   },
   
   // Color options
   colors: {
     inherit: '',
-    white: 'text-white',
-    charcoal: 'text-brand-charcoal',
-    yellow: 'text-brand-yellow',
-    black: 'text-brand-black',
+    dark: 'text-brand-dark',
+    light: 'text-brand-cream',
+    gold: 'text-brand-gold',
     gradient: `
-      bg-gradient-to-r from-brand-yellow to-brand-yellow-light
+      bg-gradient-to-r from-brand-gold via-brand-gold-light to-brand-gold
       bg-clip-text text-transparent
+      bg-[length:200%_auto]
+      animate-shimmer
     `,
   },
   
@@ -43,107 +37,91 @@ const headingStyles = {
     right: 'text-right',
   },
   
-  // Margin bottom options
+  // Special effects
+  effects: {
+    none: '',
+    shadow: 'text-shadow-luxury',
+    goldShadow: 'text-shadow-gold',
+    underline: `
+      relative
+      after:absolute after:bottom-0 after:left-0
+      after:w-full after:h-0.5
+      after:bg-gradient-to-r after:from-brand-gold after:to-brand-gold-light
+      after:transform after:scale-x-0 after:origin-left
+      after:transition-transform after:duration-500
+      hover:after:scale-x-100
+    `,
+  },
+  
+  // Margin bottom
   marginBottom: {
     none: '',
     small: 'mb-2',
     medium: 'mb-4',
     large: 'mb-6',
-  },
-  
-  // Special effects
-  effects: {
-    none: '',
-    glow: `
-      drop-shadow-[0_0_20px_rgba(212,175,55,0.5)]
-      hover:drop-shadow-[0_0_30px_rgba(212,175,55,0.7)]
-    `,
-    shadow: 'drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]',
-    underline: `
-      relative
-      after:absolute after:bottom-0 after:left-0
-      after:w-full after:h-0.5
-      after:bg-gold-gradient
-      after:transform after:scale-x-0
-      after:origin-left
-      after:transition-transform after:duration-500
-      hover:after:scale-x-100
-    `,
+    xlarge: 'mb-8',
   }
 }
 
-const createHeading = (as) => {
-  return forwardRef(({
-    children,
-    size,
-    color = 'inherit',
-    align = 'left',
-    marginBottom = 'medium',
-    effect = 'none',
-    className = '',
-    animate = false,
-    mdSize,
-    lgSize,
-    ...props
-  }, ref) => {
-    // Default sizes based on heading level
-    const defaultSizes = {
-      h1: '4xl',
-      h2: '3xl',
-      h3: '2xl',
-      h4: 'xl',
-      h5: 'lg',
-      h6: 'base',
-    }
-    
-    const finalSize = size || defaultSizes[as] || 'base'
-    
-    const classes = `
-      ${headingStyles.base}
-      ${headingStyles.sizes[finalSize]}
-      ${mdSize ? `md:${headingStyles.sizes[mdSize].split(' ')[1]}` : ''}
-      ${lgSize ? `lg:${headingStyles.sizes[lgSize].split(' ')[1]}` : ''}
-      ${headingStyles.colors[color]}
-      ${headingStyles.align[align]}
-      ${headingStyles.marginBottom[marginBottom]}
-      ${headingStyles.effects[effect]}
-      ${animate ? 'animate-slide-down' : ''}
-      ${className}
-    `.trim()
+export const Heading = forwardRef(({ 
+  as: Component = 'h2',
+  size,
+  color = 'inherit',
+  align = 'left',
+  effect = 'none',
+  marginBottom = 'medium',
+  className = '',
+  children,
+  ...props 
+}, ref) => {
+  // Auto-size based on component type if not specified
+  const autoSize = size || {
+    h1: '4xl',
+    h2: '3xl',
+    h3: '2xl',
+    h4: 'xl',
+    h5: 'lg',
+    h6: 'base',
+  }[Component] || 'base'
 
-    const Component = as
+  const classes = `
+    ${headingStyles.base}
+    ${headingStyles.sizes[autoSize]}
+    ${headingStyles.colors[color]}
+    ${headingStyles.align[align]}
+    ${headingStyles.effects[effect]}
+    ${headingStyles.marginBottom[marginBottom]}
+    ${className}
+  `.trim()
 
-    return (
-      <Component
-        ref={ref}
-        className={classes}
-        {...props}
-      >
-        {children}
-      </Component>
-    )
-  })
-}
+  return (
+    <Component ref={ref} className={classes} {...props}>
+      {children}
+    </Component>
+  )
+})
 
-// Main Heading component
-export const Heading = createHeading('h2')
 Heading.displayName = 'Heading'
 
-// Convenience components for each heading level
-Heading.H1 = createHeading('h1')
-Heading.H1.displayName = 'Heading.H1'
+// Convenience components
+export const H1 = forwardRef((props, ref) => <Heading ref={ref} as="h1" {...props} />)
+export const H2 = forwardRef((props, ref) => <Heading ref={ref} as="h2" {...props} />)
+export const H3 = forwardRef((props, ref) => <Heading ref={ref} as="h3" {...props} />)
+export const H4 = forwardRef((props, ref) => <Heading ref={ref} as="h4" {...props} />)
+export const H5 = forwardRef((props, ref) => <Heading ref={ref} as="h5" {...props} />)
+export const H6 = forwardRef((props, ref) => <Heading ref={ref} as="h6" {...props} />)
 
-Heading.H2 = createHeading('h2')
-Heading.H2.displayName = 'Heading.H2'
+H1.displayName = 'H1'
+H2.displayName = 'H2'
+H3.displayName = 'H3'
+H4.displayName = 'H4'
+H5.displayName = 'H5'
+H6.displayName = 'H6'
 
-Heading.H3 = createHeading('h3')
-Heading.H3.displayName = 'Heading.H3'
-
-Heading.H4 = createHeading('h4')
-Heading.H4.displayName = 'Heading.H4'
-
-Heading.H5 = createHeading('h5')
-Heading.H5.displayName = 'Heading.H5'
-
-Heading.H6 = createHeading('h6')
-Heading.H6.displayName = 'Heading.H6'
+// Attach convenience components
+Heading.H1 = H1
+Heading.H2 = H2
+Heading.H3 = H3
+Heading.H4 = H4
+Heading.H5 = H5
+Heading.H6 = H6

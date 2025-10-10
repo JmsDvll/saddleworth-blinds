@@ -14,14 +14,14 @@ const spinnerStyles = {
     base: 'absolute inset-0 border-4 rounded-full',
     variants: {
       default: {
-        outer: 'border-gray-300',
-        inner: 'border-gray-400',
-        spinner: 'border-gray-500 border-t-brand-yellow',
+        outer: 'border-brand-gold/20',
+        inner: 'border-brand-gold/40',
+        spinner: 'border-brand-gold/60 border-t-brand-gold',
       },
-      yellow: {
-        outer: 'border-brand-yellow/20',
-        inner: 'border-brand-yellow/40',
-        spinner: 'border-brand-yellow/60 border-t-brand-yellow',
+      gold: {
+        outer: 'border-brand-gold/30',
+        inner: 'border-brand-gold/50',
+        spinner: 'border-brand-gold/70 border-t-brand-gold-light',
       },
       white: {
         outer: 'border-white/20',

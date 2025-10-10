@@ -7,33 +7,66 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Sunshine Blinds Brand Colors
-        'brand-yellow': {
-          DEFAULT: '#CABC32', // Main brand yellow
-          light: '#E0D250',
-          dark: '#B0A428',
+        // Premium Luxury Color Palette
+        'brand-gold': {
+          DEFAULT: '#D4AF37', // Luxury gold
+          light: '#F4E5A1',
+          dark: '#B8941F',
+          muted: '#E8D574',
         },
-        'brand-charcoal': '#242424', // Brand dark
+        'brand-dark': {
+          DEFAULT: '#1A1A1A', // Rich black
+          light: '#2D2D2D',
+          lighter: '#404040',
+        },
+        'brand-cream': {
+          DEFAULT: '#FAF7F0', // Luxury cream
+          light: '#FFFEF9',
+          dark: '#F0E6D2',
+        },
+        'brand-charcoal': '#242424',
         'brand-black': '#000000',
-        'brand-grey': '#C5C5C5',
-        // Keep some accent colors for variety
+        'brand-white': '#FFFFFF',
+        'brand-grey': {
+          DEFAULT: '#8A8A8A',
+          light: '#C5C5C5',
+          dark: '#5A5A5A',
+        },
+        // Accent colors for luxury feel
         'accent': {
-          coral: '#FF6B6B',
-          teal: '#4ECDC4',
-          purple: '#9B59B6',
-          blue: '#3498DB'
+          burgundy: '#800020',
+          emerald: '#50C878',
+          sapphire: '#0F52BA',
+          pearl: '#FBFCF8',
         },
       },
       fontFamily: {
         'sans': ['Inter', 'system-ui', 'sans-serif'],
-        'display': ['Montserrat', 'sans-serif'], // Clean, modern display font
+        'display': ['Playfair Display', 'serif'], // Luxury serif font
+        'body': ['Montserrat', 'sans-serif'],
+      },
+      fontSize: {
+        'xs': ['0.75rem', { lineHeight: '1rem' }],
+        'sm': ['0.875rem', { lineHeight: '1.25rem' }],
+        'base': ['1rem', { lineHeight: '1.75rem' }],
+        'lg': ['1.125rem', { lineHeight: '1.875rem' }],
+        'xl': ['1.25rem', { lineHeight: '2rem' }],
+        '2xl': ['1.5rem', { lineHeight: '2.25rem' }],
+        '3xl': ['1.875rem', { lineHeight: '2.5rem' }],
+        '4xl': ['2.25rem', { lineHeight: '2.75rem' }],
+        '5xl': ['3rem', { lineHeight: '1.2' }],
+        '6xl': ['3.75rem', { lineHeight: '1.1' }],
+        '7xl': ['4.5rem', { lineHeight: '1.1' }],
+        '8xl': ['6rem', { lineHeight: '1' }],
+        '9xl': ['8rem', { lineHeight: '1' }],
       },
       backgroundImage: {
-        // Brand gradients
-        'yellow-to-black': 'linear-gradient(175deg, #CABC32 66%, #000000 66%)',
-        'black-to-yellow': 'linear-gradient(175deg, #000000 66%, #CABC32 66%)',
-        'yellow-gradient': 'linear-gradient(135deg, #B0A428 0%, #CABC32 50%, #E0D250 100%)',
-        'charcoal-gradient': 'linear-gradient(180deg, #242424 0%, #1A1A1A 100%)',
+        // Luxury gradients
+        'gold-gradient': 'linear-gradient(135deg, #B8941F 0%, #D4AF37 50%, #F4E5A1 100%)',
+        'dark-gradient': 'linear-gradient(180deg, #1A1A1A 0%, #2D2D2D 100%)',
+        'cream-gradient': 'linear-gradient(135deg, #F0E6D2 0%, #FAF7F0 50%, #FFFEF9 100%)',
+        'luxury-gradient': 'linear-gradient(135deg, #1A1A1A 0%, #2D2D2D 25%, #D4AF37 75%, #F4E5A1 100%)',
+        'shimmer-gradient': 'linear-gradient(105deg, transparent 40%, rgba(212, 175, 55, 0.7) 50%, transparent 60%)',
       },
       animation: {
         'float': 'float 6s ease-in-out infinite',
@@ -41,7 +74,9 @@ export default {
         'slide-down': 'slideDown 0.5s ease-out',
         'fade-in': 'fadeIn 0.6s ease-out',
         'scale-in': 'scaleIn 0.5s ease-out',
-        'spin-slow': 'spin 3s linear infinite',
+        'shimmer': 'shimmer 2s ease-in-out infinite',
+        'glow': 'glow 2s ease-in-out infinite',
+        'pulse-gold': 'pulseGold 2s ease-in-out infinite',
       },
       keyframes: {
         float: {
@@ -64,11 +99,29 @@ export default {
           '0%': { transform: 'scale(0.9)', opacity: '0' },
           '100%': { transform: 'scale(1)', opacity: '1' },
         },
+        shimmer: {
+          '0%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(100%)' },
+        },
+        glow: {
+          '0%, 100%': { opacity: '0.5' },
+          '50%': { opacity: '1' },
+        },
+        pulseGold: {
+          '0%, 100%': { boxShadow: '0 0 0 0 rgba(212, 175, 55, 0)' },
+          '50%': { boxShadow: '0 0 0 20px rgba(212, 175, 55, 0.1)' },
+        },
       },
       boxShadow: {
-        'yellow': '0 10px 40px -10px rgba(202, 188, 50, 0.3)',
-        'soft': '0 2px 15px -5px rgba(0, 0, 0, 0.1)',
-        'hard': '0 10px 25px -5px rgba(0, 0, 0, 0.2)',
+        'luxury': '0 10px 40px -10px rgba(0, 0, 0, 0.5)',
+        'gold': '0 10px 40px -10px rgba(212, 175, 55, 0.3)',
+        'soft': '0 2px 20px -5px rgba(0, 0, 0, 0.1)',
+        'hard': '0 10px 30px -5px rgba(0, 0, 0, 0.3)',
+        'inner-glow': 'inset 0 0 20px rgba(212, 175, 55, 0.2)',
+      },
+      letterSpacing: {
+        'luxury': '0.15em',
+        'wide': '0.1em',
       },
       container: {
         center: true,

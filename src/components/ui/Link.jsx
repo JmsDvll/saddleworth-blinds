@@ -11,20 +11,25 @@ const linkStyles = {
   
   variants: {
     default: `
-      text-brand-yellow hover:text-brand-yellow-dark
+      text-brand-gold hover:text-brand-gold-light
       after:absolute after:bottom-0 after:left-0
       after:w-full after:h-px
-      after:bg-brand-yellow
+      after:bg-gradient-to-r after:from-brand-gold after:to-brand-gold-light
       after:scale-x-0 after:origin-left
       after:transition-transform after:duration-300
       hover:after:scale-x-100
     `,
     nav: `
-      text-brand-charcoal hover:text-brand-yellow
-      px-3 py-2 rounded-lg
-      hover:bg-brand-yellow/10
-      font-medium
+      text-brand-dark hover:text-brand-gold
+      px-3 py-2
+      font-medium tracking-wide
       transition-all duration-300
+      relative
+      after:absolute after:bottom-0 after:left-3 after:right-3
+      after:h-0.5 after:bg-brand-gold
+      after:transform after:scale-x-0
+      after:transition-transform after:duration-300
+      hover:after:scale-x-100
     `,
     subtle: `
       text-gray-400 hover:text-gray-200

@@ -33,7 +33,7 @@ const FooterStandardized = () => {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="bg-brand-charcoal text-white border-t border-gray-800 mt-16" role="contentinfo">
+    <footer className="bg-brand-dark text-brand-cream border-t border-brand-gold/20 mt-16" role="contentinfo">
       <Container padding="large">
         <Stack spacing="xlarge">
           {/* Main Footer Content */}

@@ -32,7 +32,7 @@ const LoadingScreen = ({ onLoadComplete }) => {
       position="fixed"
       inset="0"
       className={`
-        z-50 bg-white
+        z-50 bg-brand-cream
         transition-all duration-500
         ${isExiting ? 'opacity-0 scale-110' : 'opacity-100 scale-100'}
       `}

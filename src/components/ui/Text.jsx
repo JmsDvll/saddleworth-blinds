@@ -1,17 +1,19 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 
-// Centralized text styles
 const textStyles = {
+  base: 'font-body',
+  
   // Sizes
   sizes: {
-    small: 'text-sm lg:text-base',
-    medium: 'text-base lg:text-lg',
-    large: 'text-lg lg:text-xl',
-    xlarge: 'text-xl lg:text-2xl',
+    small: 'text-sm',
+    medium: 'text-base',
+    large: 'text-lg',
+    xlarge: 'text-xl',
   },
   
   // Weights
   weights: {
+    light: 'font-light',
     normal: 'font-normal',
     medium: 'font-medium',
     semibold: 'font-semibold',
@@ -21,14 +23,12 @@ const textStyles = {
   // Colors
   colors: {
     inherit: '',
-    white: 'text-white',
-    charcoal: 'text-brand-charcoal',
-    yellow: 'text-brand-yellow',
-    black: 'text-brand-black',
-    muted: 'text-gray-600',
-    light: 'text-gray-700',
+    dark: 'text-brand-dark',
+    light: 'text-brand-cream',
+    gold: 'text-brand-gold',
+    muted: 'text-brand-grey',
     error: 'text-red-600',
-    success: 'text-green-600',
+    success: 'text-emerald-600',
   },
   
   // Line height
@@ -36,57 +36,82 @@ const textStyles = {
     tight: 'leading-tight',
     normal: 'leading-normal',
     relaxed: 'leading-relaxed',
+    loose: 'leading-loose',
   },
   
-  // Alignment
+  // Text alignment
   align: {
     left: 'text-left',
     center: 'text-center',
     right: 'text-right',
     justify: 'text-justify',
   },
+  
+  // Letter spacing
+  tracking: {
+    normal: '',
+    wide: 'tracking-wide',
+    wider: 'tracking-wider',
+    luxury: 'tracking-luxury',
+  }
 }
 
-export const Text = ({
+export const Text = forwardRef(({ 
   as: Component = 'p',
   size = 'medium',
   weight = 'normal',
   color = 'inherit',
-  leading = 'relaxed',
+  leading = 'normal',
   align = 'left',
-  children,
+  tracking = 'normal',
   className = '',
-  ...props
-}) => {
-  const classes = [
-    textStyles.sizes[size],
-    textStyles.weights[weight],
-    textStyles.colors[color],
-    textStyles.leading[leading],
-    textStyles.align[align],
-    className,
-  ].filter(Boolean).join(' ')
-  
+  children,
+  ...props 
+}, ref) => {
+  const classes = `
+    ${textStyles.base}
+    ${textStyles.sizes[size]}
+    ${textStyles.weights[weight]}
+    ${textStyles.colors[color]}
+    ${textStyles.leading[leading]}
+    ${textStyles.align[align]}
+    ${textStyles.tracking[tracking]}
+    ${className}
+  `.trim()
+
   return (
-    <Component className={classes} {...props}>
+    <Component ref={ref} className={classes} {...props}>
       {children}
     </Component>
   )
-}
+})
 
-// Specialized text components
-Text.Lead = (props) => (
-  <Text size="xlarge" color="light" weight="normal" {...props} />
-)
+Text.displayName = 'Text'
 
-Text.Caption = (props) => (
-  <Text size="small" color="muted" {...props} />
-)
+// Convenience components
+export const Lead = forwardRef((props, ref) => (
+  <Text ref={ref} as="p" size="xlarge" weight="light" leading="relaxed" {...props} />
+))
 
-Text.Error = (props) => (
-  <Text color="error" weight="medium" {...props} />
-)
+export const Caption = forwardRef((props, ref) => (
+  <Text ref={ref} as="span" size="small" color="muted" {...props} />
+))
 
-Text.Success = (props) => (
-  <Text color="success" weight="medium" {...props} />
-)
+export const Error = forwardRef((props, ref) => (
+  <Text ref={ref} as="span" size="small" color="error" weight="medium" {...props} />
+))
+
+export const Success = forwardRef((props, ref) => (
+  <Text ref={ref} as="span" size="small" color="success" weight="medium" {...props} />
+))
+
+Lead.displayName = 'Lead'
+Caption.displayName = 'Caption'
+Error.displayName = 'Error'
+Success.displayName = 'Success'
+
+// Attach convenience components
+Text.Lead = Lead
+Text.Caption = Caption
+Text.Error = Error
+Text.Success = Success

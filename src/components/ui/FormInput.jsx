@@ -4,21 +4,20 @@ import React, { forwardRef } from 'react'
 const inputStyles = {
   base: `
     w-full
-    bg-brand-dark-lighter
-    border-2 border-gray-700/50
-    rounded-lg
-    text-white placeholder-gray-500
+    bg-white
+    border border-brand-gold/20
+    rounded-sm
+    text-brand-dark placeholder-brand-grey
     transition-all duration-300
-    focus:outline-none focus:ring-2 focus:ring-brand-gold/50 focus:border-brand-gold/50
-    hover:border-gray-600/50
-    backdrop-blur-sm
+    focus:outline-none focus:ring-2 focus:ring-brand-gold focus:border-brand-gold
+    hover:border-brand-gold/40
     relative
   `,
   
   variants: {
     default: `
-      focus:bg-brand-dark-light
-      focus:shadow-[0_0_20px_rgba(212,175,55,0.1)]
+      focus:bg-white
+      focus:shadow-gold
     `,
     error: `
       border-red-500/50 
@@ -40,7 +39,8 @@ const inputStyles = {
   
   // Premium label styles
   label: `
-    block text-sm font-medium text-gray-300 mb-2
+    block text-sm font-medium text-brand-dark mb-2
+    tracking-wide uppercase
     transition-colors duration-300
   `,
   

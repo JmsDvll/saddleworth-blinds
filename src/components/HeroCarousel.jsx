@@ -103,12 +103,12 @@ const HeroCarousel = () => {
             <Box 
               position="absolute" 
               inset="0" 
-              style={{ background: 'linear-gradient(to right, rgba(10, 10, 10, 0.9), rgba(10, 10, 10, 0.5), transparent)' }}
+              style={{ background: 'linear-gradient(to right, rgba(26, 26, 26, 0.9), rgba(26, 26, 26, 0.5), transparent)' }}
             />
             <Box 
               position="absolute" 
               inset="0" 
-              style={{ background: 'linear-gradient(to top, rgba(10, 10, 10, 0.8), transparent, transparent)' }}
+              style={{ background: 'linear-gradient(to top, rgba(26, 26, 26, 0.8), transparent, transparent)' }}
             />
           </Box>
 
