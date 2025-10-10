@@ -1,4 +1,4 @@
-import { createProductPage } from '../utils/createProductPage'
+import { createProductPageLuxury } from '../utils/createProductPageLuxury'
 import RollerBlindsCarousel from '../components/RollerBlindsCarousel'
 
-export default createProductPage('roller-blinds', RollerBlindsCarousel)
+export default createProductPageLuxury('roller-blinds', null)

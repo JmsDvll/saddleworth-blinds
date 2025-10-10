@@ -1,4 +1,4 @@
-import { createProductPage } from '../utils/createProductPage'
+import { createProductPageLuxury } from '../utils/createProductPageLuxury'
 import AllusionCarousel from '../components/AllusionCarousel'
 
-export default createProductPage('allusion-blinds', AllusionCarousel)
+export default createProductPageLuxury('allusion-blinds', null)

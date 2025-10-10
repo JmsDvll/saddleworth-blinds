@@ -1,4 +1,4 @@
-import { createProductPage } from '../utils/createProductPage'
+import { createProductPageLuxury } from '../utils/createProductPageLuxury'
 import PerfectFitCarousel from '../components/PerfectFitCarousel'
 
-export default createProductPage('perfect-fit-blinds', PerfectFitCarousel)
+export default createProductPageLuxury('perfect-fit-blinds', null)

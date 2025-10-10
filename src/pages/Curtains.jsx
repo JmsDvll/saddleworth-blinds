@@ -1,3 +1,3 @@
-import { createProductPage } from '../utils/createProductPage'
+import { createProductPageLuxury } from '../utils/createProductPageLuxury'
 
-export default createProductPage('curtains', null)
+export default createProductPageLuxury('curtains', null)

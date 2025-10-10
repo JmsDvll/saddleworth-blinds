@@ -1,3 +1,3 @@
-import { createAreaPage } from '../utils/createAreaPage'
+import { createAreaPageLuxury } from '../utils/createAreaPageLuxury'
 
-export default createAreaPage('Dobcross')
+export default createAreaPageLuxury('Dobcross')

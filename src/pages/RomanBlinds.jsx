@@ -1,3 +1,3 @@
-import { createProductPage } from '../utils/createProductPage'
+import { createProductPageLuxury } from '../utils/createProductPageLuxury'
 
-export default createProductPage('roman-blinds', null)
+export default createProductPageLuxury('roman-blinds', null)

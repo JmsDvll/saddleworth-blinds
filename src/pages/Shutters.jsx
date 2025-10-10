@@ -1,4 +1,4 @@
-import { createProductPage } from '../utils/createProductPage'
+import { createProductPageLuxury } from '../utils/createProductPageLuxury'
 import ShuttersCarousel from '../components/ShuttersCarousel'
 
-export default createProductPage('shutters', ShuttersCarousel)
+export default createProductPageLuxury('shutters', null)
