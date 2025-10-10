@@ -54,10 +54,8 @@ const BookAppointment = () => {
     e.preventDefault()
     setIsSubmitting(true)
 
-    // Create FormData object to send to PHP
     const formDataToSend = new FormData()
     
-    // Add all form fields
     formDataToSend.append('firstName', formData.firstName)
     formDataToSend.append('lastName', formData.lastName)
     formDataToSend.append('email', formData.email)
@@ -70,14 +68,12 @@ const BookAppointment = () => {
     formDataToSend.append('message', formData.message)
     formDataToSend.append('blindType', formData.blindType || '')
     
-    // Add preferred times as array
     formData.preferredTime.forEach(time => {
       formDataToSend.append('preferredTime[]', time)
     })
     
-    // Add anti-spam fields
-    formDataToSend.append('form_start_time', Math.floor(Date.now() / 1000) - 10) // Started 10 seconds ago
-    formDataToSend.append('website', '') // Honeypot field
+    formDataToSend.append('form_start_time', Math.floor(Date.now() / 1000) - 10)
+    formDataToSend.append('website', '')
 
     try {
       const response = await fetch('/process-booking.php', {
@@ -86,19 +82,14 @@ const BookAppointment = () => {
       })
 
       if (response.ok) {
-        // Success - show success message and reset form
         setSubmitStatus({
           type: 'success',
           message: 'Thank you for booking! We\'ll contact you within 24 hours to arrange your free consultation.'
         })
         
-        // Scroll to top to show success message
         window.scrollTo({ top: 0, behavior: 'smooth' })
-        
-        // Clear success message after 10 seconds
         setTimeout(() => setSubmitStatus({ type: '', message: '' }), 10000)
         
-        // Reset form
         setFormData({
           firstName: '',
           lastName: '',
@@ -116,318 +107,376 @@ const BookAppointment = () => {
           privacy: false
         })
       } else {
-        // Error
         setSubmitStatus({
           type: 'error',
-          message: 'Sorry, there was an error sending your booking. Please call us on 01457 597091.'
+          message: 'Sorry, there was an error processing your booking. Please call us on 01457 597091.'
         })
       }
     } catch (error) {
       console.error('Form submission error:', error)
       setSubmitStatus({
         type: 'error',
-        message: 'Sorry, there was an error sending your booking. Please call us on 01457 597091.'
+        message: 'Sorry, there was an error processing your booking. Please call us on 01457 597091.'
       })
     } finally {
       setIsSubmitting(false)
     }
   }
 
-  return (
-    <Section padding="large">
-      <Container maxWidth="medium">
-        <Stack spacing="xlarge">
-          {/* Hero Section */}
-          <Center>
-            <Stack spacing="medium" align="center" className="max-w-3xl">
-              <Heading as="h1" size="4xl" mdSize="5xl">Book Your Free Consultation</Heading>
-              <Text size="xlarge" color="light" leading="relaxed" align="center">
-                Tell us a bit about yourself and we'll get back to you to arrange your free home visit. The more you can tell us, the better we can help!
-              </Text>
-            </Stack>
-          </Center>
+  const processSteps = [
+    { icon: 'calendar', title: 'Book Online', description: 'Fill out the simple form' },
+    { icon: 'phone', title: 'We Call You', description: 'Within 24 hours to confirm' },
+    { icon: 'home', title: 'Home Visit', description: 'Free consultation at your home' },
+    { icon: 'check', title: 'Installation', description: 'Professional fitting included' }
+  ]
 
-          {/* Status Messages */}
+  const benefits = [
+    { icon: 'clock', text: 'Appointments 7 days a week' },
+    { icon: 'currency', text: 'Completely free - no obligation' },
+    { icon: 'home', text: 'We come to you' },
+    { icon: 'shield', text: 'No pushy sales tactics' }
+  ]
+
+  return (
+    <>
+      {/* Hero Section - Dark theme */}
+      <Section background="dark" padding="large">
+        <Container>
+          <Stack spacing="large" align="center">
+            <Heading as="h1" size="4xl" mdSize="5xl" align="center">
+              Book Your Free Consultation
+              <Text as="span" color="gold" className="block text-2xl md:text-3xl mt-2">
+                No Obligation Home Visit
+              </Text>
+            </Heading>
+            
+            <Text size="xlarge" color="light" align="center" className="max-w-2xl">
+              Let us visit your home, measure your windows, and show you exactly what's possible. 
+              Evening and weekend appointments available.
+            </Text>
+
+            {/* Process Steps */}
+            <Grid cols={2} mdCols={4} gap="medium" className="mt-8">
+              {processSteps.map((step, index) => (
+                <Stack key={index} spacing="small" align="center">
+                  <div className="w-14 h-14 bg-brand-gold/10 rounded-full flex items-center justify-center">
+                    <Icon name={step.icon} size="medium" className="text-brand-gold" />
+                  </div>
+                  <Text weight="semibold" align="center">{step.title}</Text>
+                  <Text size="small" color="muted" align="center">{step.description}</Text>
+                </Stack>
+              ))}
+            </Grid>
+          </Stack>
+        </Container>
+      </Section>
+
+      {/* Form Section - Darker background */}
+      <Section background="darker" padding="large">
+        <Container maxWidth="large">
+          {/* Success/Error Messages */}
           {submitStatus.message && (
-            <Alert
-              variant={submitStatus.type === 'success' ? 'success' : 'error'}
-              size="large"
-            >
-              {submitStatus.message}
-            </Alert>
+            <div className="mb-8">
+              <Alert 
+                variant={submitStatus.type} 
+                size="large"
+                onClose={() => setSubmitStatus({ type: '', message: '' })}
+              >
+                {submitStatus.message}
+              </Alert>
+            </div>
           )}
 
-          <Grid cols={1} lgCols={3} gap="xlarge">
-            <div className="lg:col-span-2">
-              <form onSubmit={handleSubmit}>
-                <Stack spacing="large">
-                  <FormRow>
-                    <FormGroup>
+          <Grid cols={1} mdCols={3} gap="xlarge">
+            {/* Main Form - 2 columns */}
+            <div className="md:col-span-2">
+              <Card variant="elevated" padding="xlarge">
+                <form onSubmit={handleSubmit}>
+                  <FormGroup>
+                    <Stack spacing="medium">
+                      <Heading as="h2" size="3xl">Your Details</Heading>
+                      <Text color="light">
+                        Tell us a bit about yourself and your project
+                      </Text>
+                    </Stack>
+
+                    {/* Name Fields */}
+                    <FormRow>
                       <FormInput
-                        label="What's your first name?"
+                        label="First Name"
                         name="firstName"
                         value={formData.firstName}
                         onChange={handleInputChange}
                         required
-                        placeholder="Enter your first name"
+                        placeholder="John"
                       />
-                    </FormGroup>
-                    <FormGroup>
                       <FormInput
-                        label="And your last name?"
+                        label="Last Name"
                         name="lastName"
                         value={formData.lastName}
                         onChange={handleInputChange}
                         required
-                        placeholder="Enter your last name"
+                        placeholder="Smith"
                       />
-                    </FormGroup>
-                  </FormRow>
+                    </FormRow>
 
-                  <FormRow>
-                    <FormGroup>
+                    {/* Contact Fields */}
+                    <FormRow>
                       <FormInput
+                        label="Email Address"
                         type="email"
-                        label="Your email address"
                         name="email"
                         value={formData.email}
                         onChange={handleInputChange}
                         required
-                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-                        placeholder="your@email.com"
+                        placeholder="john@example.com"
                       />
-                    </FormGroup>
-                    <FormGroup>
                       <FormInput
+                        label="Phone Number"
                         type="tel"
-                        label="Best phone number to reach you"
                         name="phone"
                         value={formData.phone}
                         onChange={handleInputChange}
                         required
-                        pattern="[0-9\s()+-]+"
-                        minLength="10"
-                        placeholder="01457 597091"
+                        placeholder="07123 456789"
                       />
-                    </FormGroup>
-                  </FormRow>
+                    </FormRow>
 
-                  <FormGroup>
+                    {/* Address Fields */}
                     <FormInput
-                      label="Where would you like us to visit?"
+                      label="Address"
                       name="address"
                       value={formData.address}
                       onChange={handleInputChange}
                       required
-                      placeholder="Your street address"
+                      placeholder="123 High Street, Uppermill"
                     />
-                  </FormGroup>
 
-                  <FormRow>
-                    <FormGroup>
+                    <FormInput
+                      label="Postcode"
+                      name="postcode"
+                      value={formData.postcode}
+                      onChange={handleInputChange}
+                      required
+                      placeholder="OL3 6AA"
+                      className="max-w-xs"
+                    />
+
+                    {/* Project Details */}
+                    <Stack spacing="medium" className="mt-8">
+                      <Heading as="h3" size="2xl">Project Details</Heading>
+                      <Text color="light">
+                        Help us prepare for your consultation
+                      </Text>
+                    </Stack>
+
+                    <FormRow>
                       <FormInput
-                        label="Postcode"
-                        name="postcode"
-                        value={formData.postcode}
-                        onChange={handleInputChange}
-                        required
-                        placeholder="OL3 5AA"
-                      />
-                    </FormGroup>
-                    <FormGroup>
-                      <FormSelect
-                        label="How many windows are we talking about?"
+                        label="Number of Windows/Rooms"
+                        type="number"
                         name="rooms"
                         value={formData.rooms}
                         onChange={handleInputChange}
-                      >
-                        <option value="">Just give us a rough idea</option>
-                        <option value="1">1 window</option>
-                        <option value="2-3">2-3 windows</option>
-                        <option value="4-6">4-6 windows</option>
-                        <option value="7+">7+ windows</option>
-                      </FormSelect>
-                    </FormGroup>
-                  </FormRow>
-
-                  <FormRow>
-                    <FormGroup>
+                        required
+                        min="1"
+                        placeholder="e.g., 5"
+                      />
                       <FormSelect
-                        label="When are you hoping to get them fitted?"
+                        label="Timeframe"
                         name="timeframe"
                         value={formData.timeframe}
                         onChange={handleInputChange}
+                        required
                       >
-                        <option value="">When suits you?</option>
+                        <option value="">Select timeframe</option>
                         <option value="asap">As soon as possible</option>
-                        <option value="1-2-weeks">1-2 weeks</option>
-                        <option value="1-month">Within a month</option>
-                        <option value="flexible">I'm flexible</option>
+                        <option value="1month">Within 1 month</option>
+                        <option value="3months">Within 3 months</option>
+                        <option value="planning">Just planning</option>
                       </FormSelect>
-                    </FormGroup>
-                    <FormGroup>
+                    </FormRow>
+
+                    <FormRow>
                       <FormSelect
-                        label="Any idea of budget? (Don't worry if not!)"
+                        label="Budget Range"
                         name="budget"
                         value={formData.budget}
                         onChange={handleInputChange}
+                        helperText="Helps us show relevant options"
+                      >
+                        <option value="">Prefer not to say</option>
+                        <option value="under1000">Under £1,000</option>
+                        <option value="1000-2500">£1,000 - £2,500</option>
+                        <option value="2500-5000">£2,500 - £5,000</option>
+                        <option value="over5000">Over £5,000</option>
+                      </FormSelect>
+                      <FormSelect
+                        label="Interested In"
+                        name="blindType"
+                        value={formData.blindType}
+                        onChange={handleInputChange}
                       >
                         <option value="">Not sure yet</option>
-                        <option value="under-500">Under £500</option>
-                        <option value="500-1000">£500 - £1,000</option>
-                        <option value="1000-2000">£1,000 - £2,000</option>
-                        <option value="2000+">£2,000+</option>
+                        <option value="roller">Roller Blinds</option>
+                        <option value="venetian">Venetian Blinds</option>
+                        <option value="vertical">Vertical Blinds</option>
+                        <option value="vision">Vision Blinds</option>
+                        <option value="perfect-fit">Perfect Fit Blinds</option>
+                        <option value="shutters">Plantation Shutters</option>
+                        <option value="multiple">Multiple Types</option>
                       </FormSelect>
-                    </FormGroup>
-                  </FormRow>
+                    </FormRow>
 
-                  <FormGroup>
-                    <FormSelect
-                      label="What type of blinds are you interested in?"
-                      name="blindType"
-                      value={formData.blindType}
-                      onChange={handleInputChange}
-                    >
-                      <option value="">Not sure yet</option>
-                      <option value="roller">Roller Blinds</option>
-                      <option value="venetian">Venetian Blinds</option>
-                      <option value="vertical">Vertical Blinds</option>
-                      <option value="vision">Vision Blinds</option>
-                      <option value="perfect-fit">Perfect Fit Blinds</option>
-                      <option value="shutters">Shutters</option>
-                      <option value="roman">Roman Blinds</option>
-                      <option value="curtains">Curtains</option>
-                      <option value="allusion">Allusion Blinds</option>
-                      <option value="multiple">A mix of different types</option>
-                    </FormSelect>
-                  </FormGroup>
-
-                  <FormGroup>
-                    <label className="block text-sm font-medium text-white mb-3">
-                      When's good for you? (Tick any that work)
-                    </label>
-                    <Grid cols={1} mdCols={2} gap="small">
-                      {[
-                        { id: 'weekday-morning', label: 'Weekday mornings (9am-12pm)' },
-                        { id: 'weekday-afternoon', label: 'Weekday afternoons (1pm-5pm)' },
-                        { id: 'weekday-evening', label: 'Weekday evenings (5pm-7pm)' },
-                        { id: 'saturday', label: 'Saturdays' }
-                      ].map((time) => (
-                        <FormCheckbox
-                          key={time.id}
-                          id={time.id}
-                          checked={formData.preferredTime.includes(time.id)}
-                          onChange={(e) => {
-                            const { checked, id } = e.target
-                            setFormData(prev => ({
-                              ...prev,
-                              preferredTime: checked
-                                ? [...prev.preferredTime, id]
-                                : prev.preferredTime.filter(t => t !== id)
-                            }))
-                          }}
-                          label={time.label}
-                        />
-                      ))}
-                    </Grid>
-                  </FormGroup>
-
-                  <FormGroup>
                     <FormTextarea
-                      label="Anything else you'd like to tell us?"
+                      label="Additional Information"
                       name="message"
                       value={formData.message}
                       onChange={handleInputChange}
                       rows={4}
-                      placeholder="Tell us about your rooms, any tricky windows, what style you like, or just say hello!"
-                    />
-                  </FormGroup>
-
-                  <Stack spacing="small">
-                    <FormCheckbox
-                      name="marketing"
-                      checked={formData.marketing}
-                      onChange={handleInputChange}
-                      label="Keep me posted about special offers and new products"
+                      placeholder="Tell us about any specific requirements or questions you have..."
+                      helperText="Optional - anything else we should know?"
                     />
 
-                    <FormCheckbox
-                      name="privacy"
-                      checked={formData.privacy}
-                      onChange={handleInputChange}
-                      required
-                      label={
-                        <>
-                          I'm happy for you to contact me about this enquiry and agree to the{' '}
-                          <Link to="/privacy-policy" variant="subtle">
-                            Privacy Policy
-                          </Link>
-                        </>
-                      }
-                    />
-                  </Stack>
-
-                  <Button
-                    type="submit"
-                    variant="primary"
-                    size="xlarge"
-                    fullWidth
-                    loading={isSubmitting}
-                  >
-                    Book Your Free Consultation
-                  </Button>
-
-                  <Text size="small" color="muted" align="center">
-                    We'll get back to you during business hours to arrange a time that suits you. Your details stay private - we never share them with anyone else.
-                  </Text>
-                </Stack>
-              </form>
-            </div>
-
-            <div className="lg:col-span-1">
-              <Card variant="elevated" padding="large">
-                <Stack spacing="medium">
-                  <Heading as="h3" size="xl">Why Book With Us?</Heading>
-                  <Stack spacing="small">
-                    <Flex align="start" gap="small">
-                      <Icon name="checkCircle" size="small" color="gold" className="flex-shrink-0 mt-0.5" />
-                      <Text size="small" color="light">Completely free consultation</Text>
-                    </Flex>
-                    <Flex align="start" gap="small">
-                      <Icon name="lock" size="small" color="gold" className="flex-shrink-0 mt-0.5" />
-                      <Text size="small" color="light">No obligation to buy</Text>
-                    </Flex>
-                    <Flex align="start" gap="small">
-                      <Icon name="location" size="small" color="gold" className="flex-shrink-0 mt-0.5" />
-                      <Text size="small" color="light">Covering all Saddleworth</Text>
-                    </Flex>
-                    <Flex align="start" gap="small">
-                      <Icon name="checkCircle" size="small" color="gold" className="flex-shrink-0 mt-0.5" />
-                      <Text size="small" color="light">20+ years local experience</Text>
-                    </Flex>
-                  </Stack>
-
-                  <Card variant="highlight" padding="medium">
-                    <Stack spacing="small">
-                      <Text size="small" color="muted">Sometimes talking is easier than filling out forms.</Text>
-                      <Button
-                        as="a"
-                        href="tel:01457597091"
-                        variant="ghost"
-                        iconLeft={<Icon name="phone" />}
-                        fullWidth
-                      >
-                        Call 01457 597091
-                      </Button>
+                    {/* Checkboxes */}
+                    <Stack spacing="medium">
+                      <FormCheckbox
+                        label="I'm happy to receive special offers and news by email"
+                        name="marketing"
+                        checked={formData.marketing}
+                        onChange={handleInputChange}
+                      />
+                      <FormCheckbox
+                        label="I've read and agree to the privacy policy"
+                        name="privacy"
+                        checked={formData.privacy}
+                        onChange={handleInputChange}
+                        required
+                      />
                     </Stack>
-                  </Card>
-                </Stack>
+
+                    {/* Honeypot */}
+                    <input
+                      type="text"
+                      name="website"
+                      value=""
+                      onChange={() => {}}
+                      style={{ display: 'none' }}
+                      tabIndex="-1"
+                      autoComplete="off"
+                    />
+
+                    {/* Submit Button */}
+                    <Button
+                      type="submit"
+                      variant="primary"
+                      size="xlarge"
+                      fullWidth
+                      disabled={isSubmitting}
+                      loading={isSubmitting}
+                    >
+                      Book My Free Consultation
+                    </Button>
+                  </FormGroup>
+                </form>
               </Card>
             </div>
+
+            {/* Sidebar */}
+            <Stack spacing="large">
+              {/* Benefits */}
+              <Card variant="elevated" padding="large">
+                <Stack spacing="medium">
+                  <Heading as="h3" size="xl" color="gold">What Happens Next?</Heading>
+                  <Stack spacing="small">
+                    {benefits.map((benefit, index) => (
+                      <Flex key={index} align="center" gap="small">
+                        <Icon name={benefit.icon} size="small" className="text-brand-gold" />
+                        <Text size="small">{benefit.text}</Text>
+                      </Flex>
+                    ))}
+                  </Stack>
+                </Stack>
+              </Card>
+
+              {/* Testimonial */}
+              <Card variant="elevated" padding="large">
+                <Stack spacing="medium">
+                  <Flex className="text-yellow-400">
+                    {[...Array(5)].map((_, i) => (
+                      <Icon key={i} name="star" size="small" />
+                    ))}
+                  </Flex>
+                  <Text className="italic">
+                    "The consultation was so helpful - no pressure, just honest advice. 
+                    They showed us options we hadn't even considered!"
+                  </Text>
+                  <Text size="small" color="muted">
+                    Sarah M., Uppermill
+                  </Text>
+                </Stack>
+              </Card>
+
+              {/* Contact Alternative */}
+              <Card variant="highlight" padding="large">
+                <Stack spacing="medium" align="center">
+                  <Icon name="phone" size="large" className="text-brand-gold" />
+                  <Heading as="h3" size="lg" align="center">Prefer to Call?</Heading>
+                  <Text align="center">
+                    Speak to our friendly team
+                  </Text>
+                  <Button
+                    as="a"
+                    href="tel:01457597091"
+                    variant="secondary"
+                    size="large"
+                    iconLeft={<Icon name="phone" />}
+                  >
+                    01457 597091
+                  </Button>
+                </Stack>
+              </Card>
+            </Stack>
           </Grid>
-        </Stack>
-      </Container>
-    </Section>
+        </Container>
+      </Section>
+
+      {/* Trust Section - Gradient */}
+      <Section background="gradient" padding="large">
+        <Container>
+          <Stack spacing="large" align="center">
+            <Heading as="h2" size="3xl" align="center">
+              Why Book With Us?
+            </Heading>
+            
+            <Grid cols={1} mdCols={3} gap="large" className="max-w-4xl">
+              <Stack spacing="small" align="center">
+                <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center">
+                  <Icon name="calendar" size="large" className="text-white" />
+                </div>
+                <Heading as="h3" size="lg" align="center">20+ Years Experience</Heading>
+                <Text align="center">Trusted by thousands of Saddleworth homeowners</Text>
+              </Stack>
+              
+              <Stack spacing="small" align="center">
+                <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center">
+                  <Icon name="shield" size="large" className="text-white" />
+                </div>
+                <Heading as="h3" size="lg" align="center">No Pressure Sales</Heading>
+                <Text align="center">Honest advice with time to think</Text>
+              </Stack>
+              
+              <Stack spacing="small" align="center">
+                <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center">
+                  <Icon name="currency" size="large" className="text-white" />
+                </div>
+                <Heading as="h3" size="lg" align="center">Best Price Promise</Heading>
+                <Text align="center">Quality products at fair prices</Text>
+              </Stack>
+            </Grid>
+          </Stack>
+        </Container>
+      </Section>
+    </>
   )
 }
 
