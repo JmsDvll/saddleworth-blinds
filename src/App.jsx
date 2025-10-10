@@ -2,9 +2,9 @@ import { Suspense, lazy, useState, useEffect } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import Header from './components/Header'
 import FooterLuxury from './components/FooterLuxury'
-import CookieConsent from './components/CookieConsent'
-import ErrorBoundary from './components/ErrorBoundary'
-import LoadingScreen from './components/LoadingScreen'
+import CookieConsentLuxury from './components/CookieConsentLuxury'
+import ErrorBoundaryLuxury from './components/ErrorBoundaryLuxury'
+import LoadingScreenLuxury from './components/LoadingScreenLuxury'
 import { AnimatePresence } from 'framer-motion'
 import { PageLoader, AppWrapper, MainContent, ScrollToTopButton } from './components/ui/PageLoader'
 import { SkipLink } from './components/ui/SkipLink'
@@ -17,14 +17,14 @@ const Gallery = lazy(() => import('./pages/GalleryLuxury'))
 const BookAppointment = lazy(() => import('./pages/BookAppointmentLuxury'))
 const RollerBlinds = lazy(() => import('./pages/RollerBlindsLuxury'))
 const VenetianBlinds = lazy(() => import('./pages/VenetianBlindsLuxury'))
-const VisionBlinds = lazy(() => import('./pages/VisionBlinds'))
-const VerticalBlinds = lazy(() => import('./pages/VerticalBlinds'))
-const PerfectFitBlinds = lazy(() => import('./pages/PerfectFitBlinds'))
-const Shutters = lazy(() => import('./pages/Shutters'))
-const RomanBlinds = lazy(() => import('./pages/RomanBlinds'))
-const Curtains = lazy(() => import('./pages/Curtains'))
-const AllusionBlinds = lazy(() => import('./pages/AllusionBlinds'))
-const Uppermill = lazy(() => import('./pages/Uppermill'))
+const VisionBlinds = lazy(() => import('./pages/VisionBlindsLuxury'))
+const VerticalBlinds = lazy(() => import('./pages/VerticalBlindsLuxury'))
+const PerfectFitBlinds = lazy(() => import('./pages/PerfectFitBlindsLuxury'))
+const Shutters = lazy(() => import('./pages/ShuttersLuxury'))
+const RomanBlinds = lazy(() => import('./pages/RomanBlindsLuxury'))
+const Curtains = lazy(() => import('./pages/CurtainsLuxury'))
+const AllusionBlinds = lazy(() => import('./pages/AllusionBlindsLuxury'))
+const Uppermill = lazy(() => import('./pages/UppermillLuxury'))
 const Diggle = lazy(() => import('./pages/Diggle'))
 const Delph = lazy(() => import('./pages/Delph'))
 const Greenfield = lazy(() => import('./pages/Greenfield'))
@@ -68,7 +68,7 @@ function App() {
   }, [])
 
   if (isLoading) {
-    return <LoadingScreen />
+    return <LoadingScreenLuxury />
   }
 
   const scrollToTop = () => {
@@ -76,7 +76,7 @@ function App() {
   }
 
   return (
-    <ErrorBoundary>
+    <ErrorBoundaryLuxury>
       <AppWrapper>
         <SkipLink />
         <Header />
@@ -117,10 +117,10 @@ function App() {
           </AnimatePresence>
         </MainContent>
         <FooterLuxury />
-        <CookieConsent />
+        <CookieConsentLuxury />
         <ScrollToTopButton show={showScrollTop} onClick={scrollToTop} />
       </AppWrapper>
-    </ErrorBoundary>
+    </ErrorBoundaryLuxury>
   )
 }
 
