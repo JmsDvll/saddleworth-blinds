@@ -1,187 +1,475 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import {
+  Section,
+  Container,
+  Grid,
+  Heading,
+  Text,
+  Button,
+  Card,
+  Icon,
+  Link,
+  Image,
+  Stack,
+  Flex,
+  Badge,
+  Alert
+} from '../components/ui'
+import FAQSection from '../components/FAQSection'
+import ReviewsSection from '../components/ReviewsSection'
+import HeroCarousel from '../components/HeroCarousel'
 
-const Home = () => {
+const HomeStandardized = () => {
+  const heroImages = [
+    {
+      src: 'vision-firenze-walnut-1600.jpg',
+      alt: 'Beautiful Firenze Walnut vision blinds in a contemporary Saddleworth home',
+      title: 'Premium Vision Blinds',
+      description: 'Beautiful wood tones for modern interiors'
+    },
+    {
+      src: 'vision-floreale-rosa-1600.jpg',
+      alt: 'Elegant Floreale Rosa vision blinds showcasing floral elegance',
+      title: 'Floral Inspiration',
+      description: 'Soft, elegant patterns for traditional homes'
+    },
+    {
+      src: 'vision-lusso-pebble-1600.jpg',
+      alt: 'Modern Lusso Pebble vision blinds in neutral tones',
+      title: 'Contemporary Style',
+      description: 'Clean, modern aesthetics for urban living'
+    },
+    {
+      src: 'vision-palermo-silver-1600.jpg',
+      alt: 'Sophisticated Palermo Silver vision blinds',
+      title: 'Luxury Finishes',
+      description: 'Premium materials for discerning homeowners'
+    }
+  ]
+
+  const services = [
+    { 
+      name: 'Roller Blinds', 
+      description: 'Simple, stylish and practical - roller blinds work brilliantly in any room.', 
+      link: '/roller-blinds', 
+      image: 'roller-zen-kiwi-400.jpg' 
+    },
+    { 
+      name: 'Venetian Blinds', 
+      description: 'The classic choice that never goes out of style. Perfect light control with a twist of the wand.', 
+      link: '/venetian-blinds', 
+      image: 'venetian-starwood-400.jpg' 
+    },
+    { 
+      name: 'Vertical Blinds', 
+      description: 'Got big windows or patio doors? Vertical blinds are your best friend.', 
+      link: '/vertical-blinds', 
+      image: 'vertical-savanna-zebra-400.jpg' 
+    },
+    { 
+      name: 'Vision Blinds', 
+      description: 'The clever choice! Vision blinds give you privacy when you need it and beautiful views when you want them.', 
+      link: '/vision-blinds', 
+      image: 'vision-capri-concrete-400.jpg' 
+    },
+    { 
+      name: 'Perfect Fit Blinds', 
+      description: 'Hate the thought of drilling holes in your window frames? Perfect Fit blinds clip right into your UPVC windows.', 
+      link: '/perfect-fit-blinds', 
+      image: 'perfectfit-monet-flower-400.jpg' 
+    },
+    { 
+      name: 'Shutters', 
+      description: 'Want to add real wow factor? Plantation shutters are the ultimate luxury.', 
+      link: '/shutters', 
+      image: 'shutters-cotton-89mm-400.jpg' 
+    },
+    { 
+      name: 'Roman Blinds', 
+      description: 'For a touch of elegance and sophistication, Roman blinds are perfect.', 
+      link: '/roman-blinds', 
+      image: 'roller-petal-white-400.jpg', 
+      comingSoon: true 
+    },
+    { 
+      name: 'Curtains', 
+      description: 'Sometimes nothing beats the classic look of curtains.', 
+      link: '/curtains', 
+      image: 'roller-birdsong-colour-400.jpg', 
+      comingSoon: true 
+    },
+    { 
+      name: 'Allusion Blinds', 
+      description: 'Experience contemporary elegance with flowing fabric panels that combine curtains with blinds.', 
+      link: '/allusion-blinds', 
+      image: 'allusion-vista-snow-400.jpg' 
+    }
+  ]
+
+  const features = [
+    { icon: 'checkCircle', title: 'Free No Obligation Quotation' },
+    { icon: 'star', title: '5 Star Reviewed' },
+    { icon: 'pound', title: 'Fair & Honest Prices' }
+  ]
+
+  const stats = [
+    { value: '20+', label: 'Years of Experience' },
+    { value: '1000+', label: 'Happy Customers' },
+    { value: '5★', label: 'Average Rating' },
+    { value: '100%', label: 'Local Business' }
+  ]
+
   return (
     <>
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white">
-        <div className="container py-20 lg:py-32">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-8">
-              <h1 className="text-4xl lg:text-6xl font-bold leading-tight">
+      {/* Hero Section - NO INLINE STYLES! */}
+      <Section background="gradient" padding="large">
+        <Container>
+          <Grid cols={2} gap="xlarge" align="center">
+            <Stack spacing="large">
+              <Heading.H1>
                 Beautiful Blinds for Your
-                <span className="text-brand-gold block">Saddleworth Home</span>
-              </h1>
-              <p className="text-xl text-gray-300 leading-relaxed">
+                <Text as="span" color="gold" className="block">
+                  Saddleworth Home
+                </Text>
+              </Heading.H1>
+              
+              <Text.Lead>
                 Searching for the ideal blinds? Since 2003, we've been helping families in{' '}
-                <Link to="/areas/uppermill" className="text-brand-gold hover:text-brand-green transition-colors">
-                  Uppermill
-                </Link>
-                ,{' '}
-                <Link to="/areas/greenfield" className="text-brand-gold hover:text-brand-green transition-colors">
-                  Greenfield
-                </Link>{' '}
+                <Link to="/areas/uppermill">Uppermill</Link>,{' '}
+                <Link to="/areas/greenfield">Greenfield</Link>{' '}
                 and{' '}
-                <Link to="/areas/diggle" className="text-brand-gold hover:text-brand-green transition-colors">
-                  Diggle
-                </Link>{' '}
-                enhance their homes. Whether it's a snug cottage or a sleek barn conversion, we understand what suits the unique charm of Saddleworth.
-              </p>
-
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Link
-                  to="/book-appointment"
-                  className="btn btn-primary text-lg px-8 py-4 text-center"
-                >
+                <Link to="/areas/diggle">Diggle</Link>{' '}
+                enhance their homes. Whether it's a snug cottage or a sleek barn conversion, 
+                we understand what suits the unique charm of Saddleworth.
+              </Text.Lead>
+              
+              <Flex gap="medium">
+                <Button to="/book-appointment" variant="primary" size="xlarge">
                   Get Free Quote
-                </Link>
-                <a
-                  href="tel:01457597091"
-                  className="btn btn-secondary text-lg px-8 py-4 text-center flex items-center justify-center gap-2"
+                </Button>
+                <Button 
+                  href="tel:01457597091" 
+                  variant="secondary" 
+                  size="xlarge"
+                  iconLeft={<Icon name="phone" />}
                 >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                  </svg>
                   Call 01457 597091
-                </a>
-              </div>
-
-              <div className="grid grid-cols-3 gap-6 pt-8">
-                <div className="text-center">
-                  <div className="w-12 h-12 bg-brand-gold rounded-full flex items-center justify-center mx-auto mb-3">
-                    <svg className="w-6 h-6 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                  </div>
-                  <p className="text-sm font-medium">Free No Obligation Quotation</p>
-                </div>
-                <div className="text-center">
-                  <div className="w-12 h-12 bg-brand-gold rounded-full flex items-center justify-center mx-auto mb-3">
-                    <svg className="w-6 h-6 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
-                    </svg>
-                  </div>
-                  <p className="text-sm font-medium">5 Star Reviewed</p>
-                </div>
-                <div className="text-center">
-                  <div className="w-12 h-12 bg-brand-gold rounded-full flex items-center justify-center mx-auto mb-3">
-                    <span className="text-gray-900 font-bold text-lg">£</span>
-                  </div>
-                  <p className="text-sm font-medium">Fair & Honest Prices</p>
-                </div>
-              </div>
+                </Button>
+              </Flex>
+              
+              {/* Feature badges */}
+              <Grid cols={3} gap="large">
+                {features.map((feature, index) => (
+                  <Flex key={index} direction="col" align="center" gap="small">
+                    <Flex
+                      className="w-12 h-12 bg-brand-gold rounded-full"
+                      align="center"
+                      justify="center"
+                    >
+                      <Icon name={feature.icon} size="large" color="black" />
+                    </Flex>
+                    <Text size="small" weight="medium" align="center">
+                      {feature.title}
+                    </Text>
+                  </Flex>
+                ))}
+              </Grid>
+            </Stack>
+            
+            <div>
+              <HeroCarousel images={heroImages} autoRotate={true} interval={6000} />
             </div>
+          </Grid>
+        </Container>
+      </Section>
 
-            <div className="relative">
-              <img
-                src="/images/optimized/vision-ferrara-anthracite-1600.jpg"
-                alt="Premium Ferrara Anthracite vision blinds in a contemporary Saddleworth home"
-                className="w-full h-auto rounded-lg shadow-2xl"
-                loading="eager"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Services Section */}
+      <Section background="darker" padding="large">
+        <Container>
+          <Stack spacing="xlarge">
+            {/* Section Header */}
+            <Stack spacing="large" className="text-center">
+              <div className="w-16 h-1 bg-gradient-to-r from-brand-gold to-yellow-400 mx-auto rounded-full" />
+              <Heading.H2 color="gradient">
+                Discover Your Dream Blinds
+              </Heading.H2>
+              <Text size="large" color="gold" className="italic">
+                "We Put Other Companies in the Shade"
+              </Text>
+              <div className="w-24 h-1 bg-gradient-to-r from-brand-gold to-yellow-400 mx-auto rounded-full" />
+              <Text.Lead className="max-w-2xl mx-auto">
+                From cosy cottages in Uppermill to modern homes in Greenfield, 
+                we understand what suits the unique charm of Saddleworth
+              </Text.Lead>
+            </Stack>
+            
+            {/* Services Grid */}
+            <Grid cols={3} gap="large">
+              {services.map((service) => (
+                <Link key={service.name} to={service.link} className="group">
+                  <Card variant="highlight" hover="lift" padding="none">
+                    <div className="relative">
+                      <Image
+                        src={`/images/optimized/${service.image}`}
+                        alt={service.name}
+                        aspectRatio="video"
+                      />
+                      {service.comingSoon && (
+                        <div className="absolute top-4 right-4">
+                          <Badge.ComingSoon />
+                        </div>
+                      )}
+                    </div>
+                    <Stack spacing="medium" className="p-6">
+                      <Heading.H3>
+                        {service.name}
+                        {service.comingSoon && (
+                          <Badge variant="warning" size="small" className="ml-2">
+                            Coming Soon
+                          </Badge>
+                        )}
+                      </Heading.H3>
+                      <Text color="light">{service.description}</Text>
+                      <div className="pt-4 border-t border-gray-800 group-hover:border-brand-gold/30 transition-colors">
+                        <Text 
+                          size="small" 
+                          color="gold" 
+                          weight="medium" 
+                          className="opacity-0 group-hover:opacity-100 transition-opacity"
+                        >
+                          Explore →
+                        </Text>
+                      </div>
+                    </Stack>
+                  </Card>
+                </Link>
+              ))}
+            </Grid>
+            
+            {/* CTA Card */}
+            <Card variant="elevated" className="max-w-4xl mx-auto text-center">
+              <Stack spacing="large">
+                <Heading.H3>
+                  Can't decide which blinds are right for you?
+                </Heading.H3>
+                <Text.Lead>
+                  No worries! We'll bring samples to your home and help you choose. 
+                  It's completely free and there's no pressure.
+                </Text.Lead>
+                <Flex gap="medium" justify="center">
+                  <Button to="/book-appointment" variant="primary" size="large">
+                    Book Free Consultation
+                  </Button>
+                  <Button 
+                    href="tel:01457597091" 
+                    variant="ghost" 
+                    size="large"
+                    iconLeft={<Icon name="phone" />}
+                  >
+                    Quick Question? Call Us
+                  </Button>
+                </Flex>
+              </Stack>
+            </Card>
+          </Stack>
+        </Container>
+      </Section>
 
-      {/* Services Grid */}
-      <section className="py-20 bg-gray-800">
-        <div className="container">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold mb-4">Discover Your Dream Blinds</h2>
-            <p className="text-xl text-gray-300">"We Put Other companies in the shade"</p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              { name: 'Roller Blinds', description: 'Simple, stylish and practical - roller blinds work brilliantly in any room.', link: '/roller-blinds', image: '/images/optimized/roller-zen-kiwi-400.jpg' },
-              { name: 'Venetian Blinds', description: 'The classic choice that never goes out of style. Perfect light control with a twist of the wand.', link: '/venetian-blinds', image: '/images/optimized/venetian-starwood-400.jpg' },
-              { name: 'Vertical Blinds', description: 'Got big windows or patio doors? Vertical blinds are your best friend.', link: '/vertical-blinds', image: '/images/optimized/vertical-grey-400.jpg' },
-              { name: 'Vision Blinds', description: 'The clever choice! Vision blinds give you privacy when you need it and beautiful views when you want them.', link: '/vision-blinds', image: '/images/optimized/vision-capri-concrete-400.jpg' },
-              { name: 'Perfect Fit Blinds', description: 'Hate the thought of drilling holes in your window frames? Perfect Fit blinds clip right into your UPVC windows.', link: '/perfect-fit-blinds', image: '/images/optimized/perfectfit-monet-flower-400.jpg' },
-              { name: 'Shutters', description: 'Want to add real wow factor? Plantation shutters are the ultimate luxury.', link: '/shutters', image: '/images/optimized/shutters-cotton-89mm-400.jpg' },
-              { name: 'Roman Blinds', description: 'For a touch of elegance and sophistication, Roman blinds are perfect.', link: '/roman-blinds', image: '/images/optimized/venetian-starwood-400.jpg' },
-              { name: 'Curtains', description: 'Sometimes nothing beats the classic look of curtains.', link: '/curtains', image: '/images/optimized/vision-viale-linen-400.jpg' },
-              { name: 'Allusion Blinds', description: 'Experience contemporary elegance with flowing fabric panels that combine curtains with blinds.', link: '/allusion-blinds', image: '/images/optimized/vision-viale-linen-400.jpg' }
-            ].map((service) => (
-              <Link
-                key={service.name}
-                to={service.link}
-                className="group bg-gray-900 rounded-lg overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
-              >
-                <div className="aspect-video overflow-hidden">
-                  <img
-                    src={service.image}
-                    alt={service.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    loading="lazy"
+      {/* Transform Your Space Section */}
+      <Section background="dark" padding="large">
+        <Container>
+          <Stack spacing="xlarge">
+            {/* Header */}
+            <Stack spacing="medium" className="text-center">
+              <Heading.H2>Transform Your Space</Heading.H2>
+              <Text.Lead className="max-w-3xl mx-auto">
+                See how the right blinds can completely change the look and feel of your rooms
+              </Text.Lead>
+            </Stack>
+            
+            {/* Room Examples */}
+            <Grid cols={2} gap="xlarge">
+              {/* Living Room Card */}
+              <Card variant="default" padding="none">
+                <div className="relative">
+                  <Image
+                    src="/images/optimized/vision-lusso-pebble-800.jpg"
+                    alt="Modern living room with Vision blinds"
+                    aspectRatio="landscape"
                   />
+                  <div className="absolute top-4 left-4">
+                    <Badge variant="primary">Living Rooms</Badge>
+                  </div>
                 </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold mb-3 text-white group-hover:text-brand-gold transition-colors">
-                    {service.name}
-                  </h3>
-                  <p className="text-gray-400 text-sm leading-relaxed">
-                    {service.description}
-                  </p>
+                <Card.Body>
+                  <Stack spacing="medium">
+                    <Heading.H3>Create the Perfect Ambiance</Heading.H3>
+                    <Text color="light">
+                      Vision blinds offer the perfect balance of privacy and natural light, 
+                      ideal for Saddleworth's variable weather.
+                    </Text>
+                    <Stack spacing="small">
+                      <Flex gap="small" align="start">
+                        <Icon name="check" color="gold" size="small" className="mt-0.5 flex-shrink-0" />
+                        <Text size="small" color="light">
+                          Control light without losing your view
+                        </Text>
+                      </Flex>
+                      <Flex gap="small" align="start">
+                        <Icon name="check" color="gold" size="small" className="mt-0.5 flex-shrink-0" />
+                        <Text size="small" color="light">
+                          Reduce glare on TV screens
+                        </Text>
+                      </Flex>
+                      <Flex gap="small" align="start">
+                        <Icon name="check" color="gold" size="small" className="mt-0.5 flex-shrink-0" />
+                        <Text size="small" color="light">
+                          Protect furniture from UV damage
+                        </Text>
+                      </Flex>
+                    </Stack>
+                  </Stack>
+                </Card.Body>
+              </Card>
+              
+              {/* Bedroom Card */}
+              <Card variant="default" padding="none">
+                <div className="relative">
+                  <Image
+                    src="/images/optimized/roller-carnival-bubblegum-800.jpg"
+                    alt="Cozy bedroom with blackout roller blinds"
+                    aspectRatio="landscape"
+                  />
+                  <div className="absolute top-4 left-4">
+                    <Badge variant="primary">Bedrooms</Badge>
+                  </div>
                 </div>
-              </Link>
+                <Card.Body>
+                  <Stack spacing="medium">
+                    <Heading.H3>Sleep Better, Wake Happier</Heading.H3>
+                    <Text color="light">
+                      Blackout roller blinds ensure peaceful sleep, even during those 
+                      long summer evenings in Saddleworth.
+                    </Text>
+                    <Stack spacing="small">
+                      <Flex gap="small" align="start">
+                        <Icon name="check" color="gold" size="small" className="mt-0.5 flex-shrink-0" />
+                        <Text size="small" color="light">
+                          Complete darkness for better sleep
+                        </Text>
+                      </Flex>
+                      <Flex gap="small" align="start">
+                        <Icon name="check" color="gold" size="small" className="mt-0.5 flex-shrink-0" />
+                        <Text size="small" color="light">
+                          Thermal properties keep rooms cozy
+                        </Text>
+                      </Flex>
+                      <Flex gap="small" align="start">
+                        <Icon name="check" color="gold" size="small" className="mt-0.5 flex-shrink-0" />
+                        <Text size="small" color="light">
+                          Child-safe cordless options available
+                        </Text>
+                      </Flex>
+                    </Stack>
+                  </Stack>
+                </Card.Body>
+              </Card>
+            </Grid>
+            
+            {/* CTA */}
+            <Stack spacing="medium" className="text-center">
+              <Text.Lead>
+                Ready to transform your home? Let's find the perfect blinds for every room.
+              </Text.Lead>
+              <Button to="/gallery" variant="secondary" size="large">
+                View More Transformations
+              </Button>
+            </Stack>
+          </Stack>
+        </Container>
+      </Section>
+
+      {/* Stats Section */}
+      <Section background="gradient" padding="medium">
+        <Container>
+          <Grid cols={4} gap="large">
+            {stats.map((stat, index) => (
+              <Card key={index} variant="default" hover="scale" className="text-center">
+                <Stack spacing="small">
+                  <Heading.H2 color="gold">{stat.value}</Heading.H2>
+                  <Text color="light">{stat.label}</Text>
+                </Stack>
+              </Card>
             ))}
-          </div>
-        </div>
-      </section>
+          </Grid>
+        </Container>
+      </Section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-brand-gold">
-        <div className="container text-center">
-          <h2 className="text-3xl lg:text-4xl font-bold mb-6 text-gray-900">
-            Ready to Transform Your Home?
-          </h2>
-          <p className="text-xl text-gray-800 mb-8 max-w-3xl mx-auto">
-            Let's make your windows beautiful together. We'll come to you, measure up, and show you exactly what's possible. No pressure, no obligation - just honest advice and a friendly chat over a cuppa.
-          </p>
+      {/* Final CTA Section */}
+      <Section background="gold" textColor="dark" padding="large">
+        <Container size="narrow">
+          <Stack spacing="large" className="text-center">
+            <Heading.H2>
+              Ready to Transform Your Home?
+            </Heading.H2>
+            <Text size="large" className="text-gray-800 max-w-3xl mx-auto">
+              Let's make your windows beautiful together. We'll come to you, measure up, 
+              and show you exactly what's possible. No pressure, no obligation - just 
+              honest advice and a friendly chat over a cuppa.
+            </Text>
+            <Flex gap="medium" justify="center" align="center">
+              <Button 
+                to="/book-appointment" 
+                variant="primary" 
+                size="xlarge" 
+                className="bg-gray-900 hover:bg-gray-800"
+              >
+                Book Your Free Visit
+              </Button>
+              <Button 
+                href="tel:01457597091" 
+                variant="secondary" 
+                size="xlarge"
+                className="bg-transparent border-2 border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white"
+                iconLeft={<Icon name="phone" effect="pulse" />}
+              >
+                Call for a Chat
+              </Button>
+            </Flex>
+            
+            <Grid cols={3} gap="large" className="text-gray-800">
+              <Flex align="center" justify="center" gap="small">
+                <Icon name="checkCircle" color="success" />
+                <Text size="small" weight="medium">Completely Free</Text>
+              </Flex>
+              <Flex align="center" justify="center" gap="small">
+                <Icon name="lock" color="info" />
+                <Text size="small" weight="medium">No Obligation</Text>
+              </Flex>
+              <Flex align="center" justify="center" gap="small">
+                <Icon name="mapPin" className="text-purple-600" />
+                <Text size="small" weight="medium">Covering All Saddleworth</Text>
+              </Flex>
+            </Grid>
+            
+            <Alert variant="warning" size="small">
+              ⚡ Limited availability - Book your free consultation this week!
+            </Alert>
+          </Stack>
+        </Container>
+      </Section>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Link
-              to="/book-appointment"
-              className="btn bg-gray-900 text-white hover:bg-gray-800 text-lg px-8 py-4"
-            >
-              Book Your Free Visit
-            </Link>
-            <a
-              href="tel:01457597091"
-              className="btn bg-transparent border-2 border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white text-lg px-8 py-4"
-            >
-              Call for a Chat
-            </a>
-          </div>
+      {/* Reviews Section */}
+      <Section background="dark" padding="large">
+        <ReviewsSection />
+      </Section>
 
-          <div className="flex justify-center items-center gap-8 mt-8 text-gray-800">
-            <div className="flex items-center gap-2">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              <span className="text-sm font-medium">Completely Free</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-              </svg>
-              <span className="text-sm font-medium">No Obligation</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-              </svg>
-              <span className="text-sm font-medium">Covering All Saddleworth</span>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* FAQ Section */}
+      <Section padding="large">
+        <FAQSection />
+      </Section>
     </>
   )
 }
 
-export default Home
+export default HomeStandardized

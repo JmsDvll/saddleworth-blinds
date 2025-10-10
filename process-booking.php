@@ -15,8 +15,10 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 $TO_EMAIL = 'sales@saddleworthblinds.co.uk';
 $FROM_EMAIL = 'hello@saddleworthblinds.co.uk';
 $SUBJECT_PREFIX = '[Website Booking] ';
-$REDIRECT_SUCCESS = '/book-appointment.html?success=1';
-$REDIRECT_ERROR = '/book-appointment.html?error=1';
+
+// Check if request is from React (expects JSON response)
+$is_ajax = isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest';
+$is_fetch = isset($_SERVER['HTTP_ACCEPT']) && strpos($_SERVER['HTTP_ACCEPT'], 'application/json') !== false;
 
 // Security headers
 header('X-Content-Type-Options: nosniff');
@@ -212,22 +214,44 @@ if (empty($errors)) {
         
         mail($email, $auto_reply_subject, $auto_reply_body, $auto_reply_headers);
         
-        // Redirect to success page
-        header('Location: ' . $REDIRECT_SUCCESS);
-        exit();
+        // Return appropriate response
+        if ($is_ajax || $is_fetch) {
+            header('Content-Type: application/json');
+            echo json_encode(['success' => true, 'message' => 'Booking request sent successfully']);
+            exit();
+        } else {
+            // Legacy redirect for non-React submissions
+            header('Location: /book-appointment?success=1');
+            exit();
+        }
     } else {
         $errors[] = 'Failed to send booking request. Please try again or call us directly on 01457 597091.';
     }
 }
 
-// If there are errors, redirect back with error message
+// If there are errors, return appropriate response
 if (!empty($errors)) {
     $error_message = implode(', ', $errors);
-    header('Location: ' . $REDIRECT_ERROR . '&msg=' . urlencode($error_message));
-    exit();
+    
+    if ($is_ajax || $is_fetch) {
+        header('Content-Type: application/json');
+        http_response_code(400);
+        echo json_encode(['success' => false, 'errors' => $errors, 'message' => $error_message]);
+        exit();
+    } else {
+        // Legacy redirect for non-React submissions
+        header('Location: /book-appointment?error=1&msg=' . urlencode($error_message));
+        exit();
+    }
 }
 
-// Fallback redirect
-header('Location: /book-appointment.html');
+// Fallback
+if ($is_ajax || $is_fetch) {
+    header('Content-Type: application/json');
+    http_response_code(400);
+    echo json_encode(['success' => false, 'message' => 'Unknown error occurred']);
+} else {
+    header('Location: /book-appointment');
+}
 exit();
 ?>

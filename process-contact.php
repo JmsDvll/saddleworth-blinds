@@ -15,8 +15,10 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 $TO_EMAIL = 'sales@saddleworthblinds.co.uk';
 $FROM_EMAIL = 'hello@saddleworthblinds.co.uk';
 $SUBJECT_PREFIX = '[Website Contact] ';
-$REDIRECT_SUCCESS = '/contact.html?success=1';
-$REDIRECT_ERROR = '/contact.html?error=1';
+
+// Check if request is from React (expects JSON response)
+$is_ajax = isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest';
+$is_fetch = isset($_SERVER['HTTP_ACCEPT']) && strpos($_SERVER['HTTP_ACCEPT'], 'application/json') !== false;
 
 // Security headers
 header('X-Content-Type-Options: nosniff');
@@ -160,22 +162,44 @@ if (empty($errors)) {
         
         mail($email, $auto_reply_subject, $auto_reply_body, $auto_reply_headers);
         
-        // Redirect to success page
-        header('Location: ' . $REDIRECT_SUCCESS);
-        exit();
+        // Return appropriate response
+        if ($is_ajax || $is_fetch) {
+            header('Content-Type: application/json');
+            echo json_encode(['success' => true, 'message' => 'Message sent successfully']);
+            exit();
+        } else {
+            // Legacy redirect for non-React submissions
+            header('Location: /contact?success=1');
+            exit();
+        }
     } else {
         $errors[] = 'Failed to send message. Please try again or call us directly.';
     }
 }
 
-// If there are errors, redirect back with error message
+// If there are errors, return appropriate response
 if (!empty($errors)) {
     $error_message = implode(', ', $errors);
-    header('Location: ' . $REDIRECT_ERROR . '&msg=' . urlencode($error_message));
-    exit();
+    
+    if ($is_ajax || $is_fetch) {
+        header('Content-Type: application/json');
+        http_response_code(400);
+        echo json_encode(['success' => false, 'errors' => $errors, 'message' => $error_message]);
+        exit();
+    } else {
+        // Legacy redirect for non-React submissions
+        header('Location: /contact?error=1&msg=' . urlencode($error_message));
+        exit();
+    }
 }
 
-// Fallback redirect
-header('Location: /contact.html');
+// Fallback
+if ($is_ajax || $is_fetch) {
+    header('Content-Type: application/json');
+    http_response_code(400);
+    echo json_encode(['success' => false, 'message' => 'Unknown error occurred']);
+} else {
+    header('Location: /contact');
+}
 exit();
 ?>

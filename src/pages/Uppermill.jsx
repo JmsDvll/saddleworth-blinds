@@ -1,227 +1,305 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { 
+  Section, 
+  Container, 
+  Grid, 
+  Heading, 
+  Text, 
+  Button, 
+  Card, 
+  Icon, 
+  Link, 
+  Stack,
+  Flex,
+  Center
+} from '../components/ui'
+import HeroCarousel from '../components/HeroCarousel'
 
 const Uppermill = () => {
-  return (
-    <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white">
-        <div className="container py-20 lg:py-32">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-8">
-              <h1 className="text-4xl lg:text-6xl font-bold leading-tight">
-                Window Blinds in
-                <span className="text-brand-gold block">Uppermill</span>
-              </h1>
-              <p className="text-xl text-gray-300 leading-relaxed">
-                Beautiful window blinds for Uppermill homes. From Victorian terraces to modern extensions, we understand what works best in this charming Saddleworth village.
-              </p>
+  const areaHeroImages = [
+    {
+      src: 'vision-floreale-rosa-1600.jpg',
+      alt: 'Beautiful window blinds in an Uppermill home',
+      title: 'Uppermill Style',
+      description: 'Elegant blinds for Victorian terraces'
+    },
+    {
+      src: 'vision-firenze-walnut-1600.jpg',
+      alt: 'Premium blinds showcasing beautiful wood tones in Uppermill',
+      title: 'Natural Wood',
+      description: 'Warm tones for traditional homes'
+    },
+    {
+      src: 'vision-lusso-pebble-1600.jpg',
+      alt: 'Modern blinds in neutral tones for Uppermill interiors',
+      title: 'Contemporary',
+      description: 'Clean modern aesthetics'
+    }
+  ]
 
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Link
-                  to="/book-appointment"
-                  className="btn btn-primary text-lg px-8 py-4 text-center"
+  return (
+    <>
+      {/* Hero Section */}
+      <Section background="gradient" padding="large">
+        <Container>
+          <Grid cols={1} mdCols={2} gap="xlarge" align="center">
+            <Stack spacing="large">
+              <Heading as="h1" size="4xl" mdSize="6xl">
+                Window Blinds in
+                <Text as="span" color="gold" className="block">Uppermill</Text>
+              </Heading>
+              
+              <Text size="xlarge" color="light" leading="relaxed">
+                Beautiful window blinds for Uppermill homes. From Victorian terraces to modern extensions, we understand what works best in this charming Saddleworth village.
+              </Text>
+
+              <Flex direction="column" smDirection="row" gap="medium">
+                <Button 
+                  as={Link} 
+                  to="/book-appointment" 
+                  variant="primary" 
+                  size="xlarge"
                 >
                   Book Free Quote in Uppermill
-                </Link>
-                <a
-                  href="tel:01457597091"
-                  className="btn btn-secondary text-lg px-8 py-4 text-center flex items-center justify-center gap-2"
+                </Button>
+                <Button 
+                  as="a" 
+                  href="tel:01457597091" 
+                  variant="secondary" 
+                  size="xlarge"
+                  iconLeft={<Icon name="phone" />}
                 >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                  </svg>
                   Call 01457 597091
-                </a>
-              </div>
+                </Button>
+              </Flex>
 
-              <div className="grid grid-cols-3 gap-6 pt-8">
-                <div className="text-center">
-                  <div className="w-12 h-12 bg-brand-gold rounded-full flex items-center justify-center mx-auto mb-3">
-                    <svg className="w-6 h-6 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                    </svg>
-                  </div>
-                  <p className="text-sm font-medium">Victorian Terraces</p>
-                </div>
-                <div className="text-center">
-                  <div className="w-12 h-12 bg-brand-gold rounded-full flex items-center justify-center mx-auto mb-3">
-                    <svg className="w-6 h-6 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                    </svg>
-                  </div>
-                  <p className="text-sm font-medium">Local Uppermill Experts</p>
-                </div>
-                <div className="text-center">
-                  <div className="w-12 h-12 bg-brand-gold rounded-full flex items-center justify-center mx-auto mb-3">
-                    <svg className="w-6 h-6 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 2v4m8-4v4M3 10h18M5 4h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2z" />
-                    </svg>
-                  </div>
-                  <p className="text-sm font-medium">20+ Years Experience</p>
-                </div>
-              </div>
-            </div>
+              <Grid cols={3} gap="medium" className="pt-8">
+                <Center>
+                  <Stack spacing="small" align="center">
+                    <div className="w-12 h-12 bg-brand-gold rounded-full flex items-center justify-center">
+                      <Icon name="building" size="medium" className="text-gray-900" />
+                    </div>
+                    <Text size="small" weight="medium">Victorian Terraces</Text>
+                  </Stack>
+                </Center>
+                <Center>
+                  <Stack spacing="small" align="center">
+                    <div className="w-12 h-12 bg-brand-gold rounded-full flex items-center justify-center">
+                      <Icon name="location" size="medium" className="text-gray-900" />
+                    </div>
+                    <Text size="small" weight="medium">Local Uppermill Experts</Text>
+                  </Stack>
+                </Center>
+                <Center>
+                  <Stack spacing="small" align="center">
+                    <div className="w-12 h-12 bg-brand-gold rounded-full flex items-center justify-center">
+                      <Icon name="calendar" size="medium" className="text-gray-900" />
+                    </div>
+                    <Text size="small" weight="medium">20+ Years Experience</Text>
+                  </Stack>
+                </Center>
+              </Grid>
+            </Stack>
 
             <div className="relative">
-              <img
-                src="/images/optimized/vision-ferrara-anthracite-1600.jpg"
-                alt="Beautiful window blinds in an Uppermill home"
-                className="w-full h-auto rounded-lg shadow-2xl"
-                loading="eager"
-              />
+              <HeroCarousel images={areaHeroImages} autoRotate={true} interval={6000} />
             </div>
-          </div>
-        </div>
-      </section>
+          </Grid>
+        </Container>
+      </Section>
 
-      <div className="container py-20">
-        <div className="max-w-4xl mx-auto">
+      <Section padding="large">
+        <Container maxWidth="medium">
+          <Stack spacing="xlarge">
+            {/* Intro Section */}
+            <Center>
+              <Stack spacing="medium" align="center" className="max-w-3xl">
+                <Heading as="h2" size="3xl" mdSize="4xl">
+                  Window Blinds for Uppermill Homes
+                </Heading>
+                <Text size="xlarge" color="light" leading="relaxed" align="center">
+                  Uppermill is the heart of Saddleworth, with its beautiful Victorian terraces, stone cottages, and modern developments along the River Tame. We've been fitting blinds in Uppermill homes for over 20 years, understanding the unique character of this historic village.
+                </Text>
+              </Stack>
+            </Center>
 
-        {/* Content Sections */}
-        <div className="space-y-16">
-          <div className="text-center">
-            <h2 className="text-3xl lg:text-4xl font-bold mb-6">Window Blinds for Uppermill Homes</h2>
-            <p className="text-xl text-gray-300 leading-relaxed max-w-3xl mx-auto">
-              Uppermill is the heart of Saddleworth, with its beautiful Victorian terraces, stone cottages, and modern developments along the River Tame. We've been fitting blinds in Uppermill homes for over 20 years, understanding the unique character of this historic village.
-            </p>
-          </div>
+            {/* Property Types */}
+            <Stack spacing="large">
+              <Heading as="h2" size="3xl" align="center">
+                Perfect Blinds for Uppermill Properties
+              </Heading>
+              
+              <Grid cols={1} mdCols={2} gap="large">
+                <Card variant="elevated" padding="large">
+                  <Stack spacing="medium" align="center">
+                    <div className="w-16 h-16 bg-brand-gold rounded-full flex items-center justify-center">
+                      <Icon name="building" size="large" className="text-gray-900" />
+                    </div>
+                    <Heading as="h3" size="xl">Victorian Terraces</Heading>
+                    <Text color="light" align="center">
+                      Many Uppermill homes are period properties with original sash windows. We specialise in solutions that preserve the character while providing modern functionality.
+                    </Text>
+                    <Stack spacing="small" className="w-full">
+                      <Text size="small" color="muted">• Wooden venetian blinds for authentic period charm</Text>
+                      <Text size="small" color="muted">• Roman blinds for elegant window treatments</Text>
+                      <Text size="small" color="muted">• Shutters that complement Victorian architecture</Text>
+                      <Text size="small" color="muted">• Motorised options for hard-to-reach windows</Text>
+                    </Stack>
+                  </Stack>
+                </Card>
 
-          <div>
-            <h2 className="text-3xl font-bold mb-8 text-center">Perfect Blinds for Uppermill Properties</h2>
-            <div className="grid md:grid-cols-2 gap-8">
-              <div className="bg-gray-800 rounded-lg p-6">
-                <div className="w-16 h-16 bg-brand-gold rounded-full flex items-center justify-center mx-auto mb-4">
-                  <svg className="w-8 h-8 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                  </svg>
-                </div>
-                <h3 className="text-xl font-semibold mb-4 text-center">Victorian Terraces</h3>
-                <p className="text-gray-300 mb-4">
-                  Many Uppermill homes are period properties with original sash windows. We specialise in solutions that preserve the character while providing modern functionality.
-                </p>
-                <ul className="space-y-2 text-sm text-gray-400">
-                  <li>• Wooden venetian blinds for authentic period charm</li>
-                  <li>• Roman blinds for elegant window treatments</li>
-                  <li>• Shutters that complement Victorian architecture</li>
-                  <li>• Motorised options for hard-to-reach windows</li>
-                </ul>
-              </div>
+                <Card variant="elevated" padding="large">
+                  <Stack spacing="medium" align="center">
+                    <div className="w-16 h-16 bg-brand-gold rounded-full flex items-center justify-center">
+                      <Icon name="grid" size="large" className="text-gray-900" />
+                    </div>
+                    <Heading as="h3" size="xl">Modern Extensions</Heading>
+                    <Text color="light" align="center">
+                      Many Uppermill homes have been extended with contemporary additions. We help bridge the gap between old and new with stylish, modern window treatments.
+                    </Text>
+                    <Stack spacing="small" className="w-full">
+                      <Text size="small" color="muted">• Sleek roller blinds for clean, modern lines</Text>
+                      <Text size="small" color="muted">• Vision blinds for open-plan living spaces</Text>
+                      <Text size="small" color="muted">• Vertical blinds for bi-fold doors and extensions</Text>
+                      <Text size="small" color="muted">• Perfect Fit blinds for UPVC windows</Text>
+                    </Stack>
+                  </Stack>
+                </Card>
+              </Grid>
+            </Stack>
 
-              <div className="bg-gray-800 rounded-lg p-6">
-                <div className="w-16 h-16 bg-brand-gold rounded-full flex items-center justify-center mx-auto mb-4">
-                  <svg className="w-8 h-8 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
-                  </svg>
-                </div>
-                <h3 className="text-xl font-semibold mb-4 text-center">Modern Extensions</h3>
-                <p className="text-gray-300 mb-4">
-                  Many Uppermill homes have been extended with contemporary additions. We help bridge the gap between old and new with stylish, modern window treatments.
-                </p>
-                <ul className="space-y-2 text-sm text-gray-400">
-                  <li>• Sleek roller blinds for clean, modern lines</li>
-                  <li>• Vision blinds for open-plan living spaces</li>
-                  <li>• Vertical blinds for bi-fold doors and extensions</li>
-                  <li>• Perfect Fit blinds for UPVC windows</li>
-                </ul>
-              </div>
-            </div>
-          </div>
+            {/* Local Expertise */}
+            <Card variant="elevated" padding="xlarge">
+              <Stack spacing="medium">
+                <Heading as="h2" size="2xl" align="center">
+                  Local Expertise
+                </Heading>
+                <Text color="light" align="center">
+                  Having fitted blinds throughout Uppermill for two decades, we understand the unique challenges and opportunities of local properties. From wonky Victorian walls to modern steel beams, we've seen it all and know how to handle it perfectly.
+                </Text>
+              </Stack>
+            </Card>
 
-          <div className="bg-gray-800 rounded-lg p-8">
-            <h2 className="text-2xl font-bold mb-6 text-center">Local Expertise</h2>
-            <p className="text-gray-300 text-center mb-8">
-              Having fitted blinds throughout Uppermill for two decades, we understand the unique challenges and opportunities of local properties. From wonky Victorian walls to modern steel beams, we've seen it all and know how to handle it perfectly.
-            </p>
-          </div>
+            {/* Service Info */}
+            <Card variant="elevated" padding="xlarge">
+              <Stack spacing="medium">
+                <Heading as="h2" size="2xl" align="center">
+                  Our Uppermill Service
+                </Heading>
+                <Text color="light" align="center">
+                  We offer completely free home consultations throughout Uppermill, including evenings and weekends to suit your schedule. Our experienced team will come to your home, measure your windows, show you samples, and provide honest advice with no obligation to buy.
+                </Text>
+              </Stack>
+            </Card>
 
-          <div className="bg-gray-800 rounded-lg p-8">
-            <h2 className="text-2xl font-bold mb-6 text-center">Our Uppermill Service</h2>
-            <p className="text-gray-300 text-center mb-8">
-              We offer completely free home consultations throughout Uppermill, including evenings and weekends to suit your schedule. Our experienced team will come to your home, measure your windows, show you samples, and provide honest advice with no obligation to buy.
-            </p>
-          </div>
+            {/* Why Choose Us */}
+            <Card variant="elevated" padding="xlarge">
+              <Stack spacing="large">
+                <Heading as="h2" size="2xl" align="center">
+                  Why Choose Us in Uppermill?
+                </Heading>
 
-          <div className="bg-gray-800 rounded-lg p-8">
-            <h2 className="text-2xl font-bold mb-6 text-center">Why Choose Us in Uppermill?</h2>
-            <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-6">
-              <div className="text-center">
-                <div className="w-12 h-12 bg-brand-gold rounded-full flex items-center justify-center mx-auto mb-3 text-gray-900 font-bold text-lg">1</div>
-                <h3 className="font-semibold text-white mb-2">Local Knowledge</h3>
-                <p className="text-sm text-gray-400">We understand Uppermill's unique architectural styles</p>
-              </div>
-              <div className="text-center">
-                <div className="w-12 h-12 bg-brand-gold rounded-full flex items-center justify-center mx-auto mb-3 text-gray-900 font-bold text-lg">2</div>
-                <h3 className="font-semibold text-white mb-2">20+ Years Experience</h3>
-                <p className="text-sm text-gray-400">Fitting blinds in hundreds of local homes</p>
-              </div>
-              <div className="text-center">
-                <div className="w-12 h-12 bg-brand-gold rounded-full flex items-center justify-center mx-auto mb-3 text-gray-900 font-bold text-lg">3</div>
-                <h3 className="font-semibold text-white mb-2">Professional Installation</h3>
-                <p className="text-sm text-gray-400">Expert fitting included in every quote</p>
-              </div>
-              <div className="text-center">
-                <div className="w-12 h-12 bg-brand-gold rounded-full flex items-center justify-center mx-auto mb-3 text-gray-900 font-bold text-lg">4</div>
-                <h3 className="font-semibold text-white mb-2">Comprehensive Warranty</h3>
-                <p className="text-sm text-gray-400">Full warranty on all products and installation</p>
-              </div>
-              <div className="text-center">
-                <div className="w-12 h-12 bg-brand-gold rounded-full flex items-center justify-center mx-auto mb-3 text-gray-900 font-bold text-lg">5</div>
-                <h3 className="font-semibold text-white mb-2">Fair Pricing</h3>
-                <p className="text-sm text-gray-400">Competitive prices with no hidden fees</p>
-              </div>
-            </div>
-          </div>
-        </div>
+                <Grid cols={1} mdCols={3} lgCols={5} gap="medium">
+                  <Center>
+                    <Stack spacing="small" align="center">
+                      <div className="w-12 h-12 bg-brand-gold rounded-full flex items-center justify-center text-gray-900 font-bold text-lg">
+                        1
+                      </div>
+                      <Heading as="h3" size="base" color="white">Local Knowledge</Heading>
+                      <Text size="small" color="muted" align="center">We understand Uppermill's unique architectural styles</Text>
+                    </Stack>
+                  </Center>
 
-        {/* CTA Section */}
-        <div className="mt-16 text-center">
-          <h2 className="text-3xl font-bold mb-6">Ready to Transform Your Uppermill Home?</h2>
-          <p className="text-xl text-gray-300 mb-8">
-            Let's make your windows beautiful together. We'll come to you, measure up, and show you exactly what's possible in your Uppermill home.
-          </p>
+                  <Center>
+                    <Stack spacing="small" align="center">
+                      <div className="w-12 h-12 bg-brand-gold rounded-full flex items-center justify-center text-gray-900 font-bold text-lg">
+                        2
+                      </div>
+                      <Heading as="h3" size="base" color="white">20+ Years Experience</Heading>
+                      <Text size="small" color="muted" align="center">Fitting blinds in hundreds of local homes</Text>
+                    </Stack>
+                  </Center>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              to="/book-appointment"
-              className="btn btn-primary text-lg px-8 py-4"
-            >
-              Book Your Free Visit
-            </Link>
-            <a
-              href="tel:01457597091"
-              className="btn btn-secondary text-lg px-8 py-4"
-            >
-              Call for a Chat
-            </a>
-          </div>
+                  <Center>
+                    <Stack spacing="small" align="center">
+                      <div className="w-12 h-12 bg-brand-gold rounded-full flex items-center justify-center text-gray-900 font-bold text-lg">
+                        3
+                      </div>
+                      <Heading as="h3" size="base" color="white">Professional Installation</Heading>
+                      <Text size="small" color="muted" align="center">Expert fitting included in every quote</Text>
+                    </Stack>
+                  </Center>
 
-          <div className="flex justify-center items-center gap-8 mt-8 text-gray-400">
-            <div className="flex items-center gap-2">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              <span className="text-sm">Completely Free</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-              </svg>
-              <span className="text-sm">No Obligation</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-              </svg>
-              <span className="text-sm">Covering Uppermill</span>
-            </div>
-          </div>
-        </div>
-        </div>
-      </div>
-    </div>
+                  <Center>
+                    <Stack spacing="small" align="center">
+                      <div className="w-12 h-12 bg-brand-gold rounded-full flex items-center justify-center text-gray-900 font-bold text-lg">
+                        4
+                      </div>
+                      <Heading as="h3" size="base" color="white">Comprehensive Warranty</Heading>
+                      <Text size="small" color="muted" align="center">Full warranty on all products and installation</Text>
+                    </Stack>
+                  </Center>
+
+                  <Center>
+                    <Stack spacing="small" align="center">
+                      <div className="w-12 h-12 bg-brand-gold rounded-full flex items-center justify-center text-gray-900 font-bold text-lg">
+                        5
+                      </div>
+                      <Heading as="h3" size="base" color="white">Fair Pricing</Heading>
+                      <Text size="small" color="muted" align="center">Competitive prices with no hidden fees</Text>
+                    </Stack>
+                  </Center>
+                </Grid>
+              </Stack>
+            </Card>
+
+            {/* CTA Section */}
+            <Center>
+              <Stack spacing="large" align="center">
+                <Heading as="h2" size="3xl">Ready to Transform Your Uppermill Home?</Heading>
+                <Text size="xlarge" color="light" align="center">
+                  Let's make your windows beautiful together. We'll come to you, measure up, and show you exactly what's possible in your Uppermill home.
+                </Text>
+
+                <Flex direction="column" smDirection="row" gap="medium">
+                  <Button 
+                    as={Link} 
+                    to="/book-appointment" 
+                    variant="primary" 
+                    size="xlarge"
+                  >
+                    Book Your Free Visit
+                  </Button>
+                  <Button 
+                    as="a" 
+                    href="tel:01457597091" 
+                    variant="secondary" 
+                    size="xlarge"
+                  >
+                    Call for a Chat
+                  </Button>
+                </Flex>
+
+                <Flex gap="large" className="mt-8">
+                  <Flex align="center" gap="small">
+                    <Icon name="check" size="small" color="muted" />
+                    <Text size="small" color="muted">Completely Free</Text>
+                  </Flex>
+                  <Flex align="center" gap="small">
+                    <Icon name="lock" size="small" color="muted" />
+                    <Text size="small" color="muted">No Obligation</Text>
+                  </Flex>
+                  <Flex align="center" gap="small">
+                    <Icon name="location" size="small" color="muted" />
+                    <Text size="small" color="muted">Covering Uppermill</Text>
+                  </Flex>
+                </Flex>
+              </Stack>
+            </Center>
+          </Stack>
+        </Container>
+      </Section>
+    </>
   )
 }
 
