@@ -9,10 +9,10 @@ import { AnimatePresence, motion } from 'framer-motion'
 
 // Lazy load pages for better performance
 const Home = lazy(() => import('./pages/HomeLuxury'))
-const Contact = lazy(() => import('./pages/Contact'))
-const Gallery = lazy(() => import('./pages/Gallery'))
-const BookAppointment = lazy(() => import('./pages/BookAppointment'))
-const RollerBlinds = lazy(() => import('./pages/RollerBlinds'))
+const Contact = lazy(() => import('./pages/ContactLuxury'))
+const Gallery = lazy(() => import('./pages/GalleryLuxury'))
+const BookAppointment = lazy(() => import('./pages/BookAppointmentLuxury'))
+const RollerBlinds = lazy(() => import('./pages/RollerBlindsLuxury'))
 const VenetianBlinds = lazy(() => import('./pages/VenetianBlinds'))
 const VisionBlinds = lazy(() => import('./pages/VisionBlinds'))
 const VerticalBlinds = lazy(() => import('./pages/VerticalBlinds'))
