@@ -1,11 +1,14 @@
-import React, { Suspense, lazy, useState, useEffect } from 'react'
+import { Suspense, lazy, useState, useEffect } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import Header from './components/Header'
 import FooterLuxury from './components/FooterLuxury'
 import CookieConsent from './components/CookieConsent'
 import ErrorBoundary from './components/ErrorBoundary'
 import LoadingScreen from './components/LoadingScreen'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence } from 'framer-motion'
+import { PageLoader, AppWrapper, MainContent, ScrollToTopButton } from './components/ui/PageLoader'
+import { SkipLink } from './components/ui/SkipLink'
+import { PageAnimationWrapper } from './components/ui/PageAnimationWrapper'
 
 // Lazy load pages for better performance
 const Home = lazy(() => import('./pages/HomeLuxury'))
@@ -13,7 +16,7 @@ const Contact = lazy(() => import('./pages/ContactLuxury'))
 const Gallery = lazy(() => import('./pages/GalleryLuxury'))
 const BookAppointment = lazy(() => import('./pages/BookAppointmentLuxury'))
 const RollerBlinds = lazy(() => import('./pages/RollerBlindsLuxury'))
-const VenetianBlinds = lazy(() => import('./pages/VenetianBlinds'))
+const VenetianBlinds = lazy(() => import('./pages/VenetianBlindsLuxury'))
 const VisionBlinds = lazy(() => import('./pages/VisionBlinds'))
 const VerticalBlinds = lazy(() => import('./pages/VerticalBlinds'))
 const PerfectFitBlinds = lazy(() => import('./pages/PerfectFitBlinds'))
@@ -35,126 +38,88 @@ const Springhead = lazy(() => import('./pages/Springhead'))
 const Lees = lazy(() => import('./pages/Lees'))
 const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'))
 const TermsConditions = lazy(() => import('./pages/TermsConditions'))
-
-// Loading fallback component
-const PageLoader = () => (
-  <div className="min-h-screen bg-brand-dark flex items-center justify-center">
-    <div className="text-center">
-      <div className="relative">
-        <div className="w-16 h-16 border-4 border-brand-gold/20 rounded-full animate-spin"></div>
-        <div className="absolute inset-0 w-16 h-16 border-4 border-transparent border-t-brand-gold rounded-full animate-spin"></div>
-      </div>
-      <p className="text-gray-400 mt-4 animate-pulse">Loading page...</p>
-    </div>
-  </div>
-)
-
-// Page transition variants
-const pageVariants = {
-  initial: {
-    opacity: 0,
-    y: 20,
-  },
-  in: {
-    opacity: 1,
-    y: 0,
-  },
-  out: {
-    opacity: 0,
-    y: -20,
-  },
-}
-
-const pageTransition = {
-  type: 'tween',
-  ease: 'anticipate',
-  duration: 0.5,
-}
-
-// Page wrapper with animations
-const PageWrapper = ({ children }) => {
-  return (
-    <motion.div
-      initial="initial"
-      animate="in"
-      exit="out"
-      variants={pageVariants}
-      transition={pageTransition}
-    >
-      {children}
-    </motion.div>
-  )
-}
+const TestLuxury = lazy(() => import('./pages/TestLuxury'))
 
 function App() {
   const [isLoading, setIsLoading] = useState(true)
+  const [showScrollTop, setShowScrollTop] = useState(false)
   const location = useLocation()
 
-  // Scroll to top on route change
   useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [location.pathname])
-
-  // Show loading screen on initial load
-  useEffect(() => {
-    // Check if it's the first visit
-    const hasVisited = sessionStorage.getItem('hasVisited')
-    if (!hasVisited) {
-      sessionStorage.setItem('hasVisited', 'true')
-    } else {
+    // Initial loading
+    const timer = setTimeout(() => {
       setIsLoading(false)
+    }, 1000)
+    return () => clearTimeout(timer)
+  }, [])
+
+  useEffect(() => {
+    // Scroll to top on route change
+    window.scrollTo(0, 0)
+  }, [location])
+
+  useEffect(() => {
+    // Show/hide scroll to top button
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 500)
     }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
   if (isLoading) {
-    return <LoadingScreen onLoadComplete={() => setIsLoading(false)} />
+    return <LoadingScreen />
+  }
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   return (
     <ErrorBoundary>
-      <div className="min-h-screen bg-brand-cream text-brand-dark overflow-x-hidden">
-        <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-brand-gold text-gray-900 px-4 py-2 rounded-lg font-semibold shadow-lg z-50">
-          Skip to main content
-        </a>
+      <AppWrapper>
+        <SkipLink />
         <Header />
-        <main id="main-content" className="relative">
+        <MainContent>
           <AnimatePresence mode="wait">
             <Suspense fallback={<PageLoader />}>
               <Routes location={location} key={location.pathname}>
-                <Route path="/" element={<PageWrapper><Home /></PageWrapper>} />
-                <Route path="/contact" element={<PageWrapper><Contact /></PageWrapper>} />
-                <Route path="/gallery" element={<PageWrapper><Gallery /></PageWrapper>} />
-                <Route path="/book-appointment" element={<PageWrapper><BookAppointment /></PageWrapper>} />
-                <Route path="/roller-blinds" element={<PageWrapper><RollerBlinds /></PageWrapper>} />
-                <Route path="/venetian-blinds" element={<PageWrapper><VenetianBlinds /></PageWrapper>} />
-                <Route path="/vision-blinds" element={<PageWrapper><VisionBlinds /></PageWrapper>} />
-                <Route path="/vertical-blinds" element={<PageWrapper><VerticalBlinds /></PageWrapper>} />
-                <Route path="/perfect-fit-blinds" element={<PageWrapper><PerfectFitBlinds /></PageWrapper>} />
-                <Route path="/shutters" element={<PageWrapper><Shutters /></PageWrapper>} />
-                <Route path="/roman-blinds" element={<PageWrapper><RomanBlinds /></PageWrapper>} />
-                <Route path="/curtains" element={<PageWrapper><Curtains /></PageWrapper>} />
-                <Route path="/allusion-blinds" element={<PageWrapper><AllusionBlinds /></PageWrapper>} />
-                <Route path="/areas/uppermill" element={<PageWrapper><Uppermill /></PageWrapper>} />
-                <Route path="/areas/diggle" element={<PageWrapper><Diggle /></PageWrapper>} />
-                <Route path="/areas/delph" element={<PageWrapper><Delph /></PageWrapper>} />
-                <Route path="/areas/greenfield" element={<PageWrapper><Greenfield /></PageWrapper>} />
-                <Route path="/areas/dobcross" element={<PageWrapper><Dobcross /></PageWrapper>} />
-                <Route path="/areas/lydgate" element={<PageWrapper><Lydgate /></PageWrapper>} />
-                <Route path="/areas/denshaw" element={<PageWrapper><Denshaw /></PageWrapper>} />
-                <Route path="/areas/friezland" element={<PageWrapper><Friezland /></PageWrapper>} />
-                <Route path="/areas/grasscroft" element={<PageWrapper><Grasscroft /></PageWrapper>} />
-                <Route path="/areas/grotton" element={<PageWrapper><Grotton /></PageWrapper>} />
-                <Route path="/areas/springhead" element={<PageWrapper><Springhead /></PageWrapper>} />
-                <Route path="/areas/lees" element={<PageWrapper><Lees /></PageWrapper>} />
-                <Route path="/privacy-policy" element={<PageWrapper><PrivacyPolicy /></PageWrapper>} />
-                <Route path="/terms-conditions" element={<PageWrapper><TermsConditions /></PageWrapper>} />
+                <Route path="/" element={<PageAnimationWrapper><Home /></PageAnimationWrapper>} />
+                <Route path="/contact" element={<PageAnimationWrapper><Contact /></PageAnimationWrapper>} />
+                <Route path="/gallery" element={<PageAnimationWrapper><Gallery /></PageAnimationWrapper>} />
+                <Route path="/book-appointment" element={<PageAnimationWrapper><BookAppointment /></PageAnimationWrapper>} />
+                <Route path="/roller-blinds" element={<PageAnimationWrapper><RollerBlinds /></PageAnimationWrapper>} />
+                <Route path="/venetian-blinds" element={<PageAnimationWrapper><VenetianBlinds /></PageAnimationWrapper>} />
+                <Route path="/vision-blinds" element={<PageAnimationWrapper><VisionBlinds /></PageAnimationWrapper>} />
+                <Route path="/vertical-blinds" element={<PageAnimationWrapper><VerticalBlinds /></PageAnimationWrapper>} />
+                <Route path="/perfect-fit-blinds" element={<PageAnimationWrapper><PerfectFitBlinds /></PageAnimationWrapper>} />
+                <Route path="/shutters" element={<PageAnimationWrapper><Shutters /></PageAnimationWrapper>} />
+                <Route path="/roman-blinds" element={<PageAnimationWrapper><RomanBlinds /></PageAnimationWrapper>} />
+                <Route path="/curtains" element={<PageAnimationWrapper><Curtains /></PageAnimationWrapper>} />
+                <Route path="/allusion-blinds" element={<PageAnimationWrapper><AllusionBlinds /></PageAnimationWrapper>} />
+                <Route path="/areas/uppermill" element={<PageAnimationWrapper><Uppermill /></PageAnimationWrapper>} />
+                <Route path="/areas/diggle" element={<PageAnimationWrapper><Diggle /></PageAnimationWrapper>} />
+                <Route path="/areas/delph" element={<PageAnimationWrapper><Delph /></PageAnimationWrapper>} />
+                <Route path="/areas/greenfield" element={<PageAnimationWrapper><Greenfield /></PageAnimationWrapper>} />
+                <Route path="/areas/dobcross" element={<PageAnimationWrapper><Dobcross /></PageAnimationWrapper>} />
+                <Route path="/areas/lydgate" element={<PageAnimationWrapper><Lydgate /></PageAnimationWrapper>} />
+                <Route path="/areas/denshaw" element={<PageAnimationWrapper><Denshaw /></PageAnimationWrapper>} />
+                <Route path="/areas/friezland" element={<PageAnimationWrapper><Friezland /></PageAnimationWrapper>} />
+                <Route path="/areas/grasscroft" element={<PageAnimationWrapper><Grasscroft /></PageAnimationWrapper>} />
+                <Route path="/areas/grotton" element={<PageAnimationWrapper><Grotton /></PageAnimationWrapper>} />
+                <Route path="/areas/springhead" element={<PageAnimationWrapper><Springhead /></PageAnimationWrapper>} />
+                <Route path="/areas/lees" element={<PageAnimationWrapper><Lees /></PageAnimationWrapper>} />
+                <Route path="/privacy-policy" element={<PageAnimationWrapper><PrivacyPolicy /></PageAnimationWrapper>} />
+                <Route path="/terms-conditions" element={<PageAnimationWrapper><TermsConditions /></PageAnimationWrapper>} />
+                <Route path="/test" element={<PageAnimationWrapper><TestLuxury /></PageAnimationWrapper>} />
               </Routes>
             </Suspense>
           </AnimatePresence>
-        </main>
+        </MainContent>
         <FooterLuxury />
         <CookieConsent />
-      </div>
+        <ScrollToTopButton show={showScrollTop} onClick={scrollToTop} />
+      </AppWrapper>
     </ErrorBoundary>
   )
 }

@@ -19,8 +19,8 @@ import {
   GlowBox
 } from '../components/ui'
 import HeroCarouselLuxury from '../components/HeroCarouselLuxury'
-import FAQSection from '../components/FAQSection'
-import ReviewsSection from '../components/ReviewsSection'
+import FAQSectionLuxury from '../components/FAQSectionLuxury'
+import ReviewsSectionLuxury from '../components/ReviewsSectionLuxury'
 
 const HomeLuxury = () => {
   const services = [
@@ -429,7 +429,79 @@ const HomeLuxury = () => {
       </Section>
 
       {/* FAQ Section */}
-      <FAQSection />
+      <FAQSectionLuxury faqs={[
+        {
+          question: 'How long does installation take?',
+          answer: 'Most installations are completed within 2-3 hours, depending on the number of windows. Our expert fitters work efficiently to minimize disruption to your day.'
+        },
+        {
+          question: 'Do you offer a guarantee?',
+          answer: 'Yes! All our products come with a comprehensive 5-year guarantee covering both the product and installation. We stand behind our quality.'
+        },
+        {
+          question: 'Can I see samples before ordering?',
+          answer: 'Absolutely! We bring our entire sample collection to your home during the free consultation, so you can see exactly how they\'ll look in your space.'
+        },
+        {
+          question: 'What areas do you cover?',
+          answer: 'We serve all of Saddleworth and Greater Manchester, including Uppermill, Diggle, Delph, Greenfield, and surrounding areas.'
+        },
+        {
+          question: 'How do I clean and maintain my blinds?',
+          answer: 'We provide full care instructions with every installation. Most blinds just need regular dusting, and we\'ll show you the best techniques for your specific products.'
+        }
+      ]} />
+
+      <ReviewsSectionLuxury reviews={[
+        {
+          name: 'Sarah Thompson',
+          location: 'Uppermill',
+          rating: 5,
+          text: 'Absolutely thrilled with our new shutters! The quality is outstanding and the installation was flawless.',
+          product: 'Plantation Shutters',
+          verified: true
+        },
+        {
+          name: 'James Mitchell',
+          location: 'Diggle',
+          rating: 5,
+          text: 'Professional service from start to finish. The team were knowledgeable, punctual, and left everything spotless.',
+          product: 'Vision Blinds',
+          verified: true
+        },
+        {
+          name: 'Emma Watson',
+          location: 'Delph',
+          rating: 5,
+          text: 'Transformed our entire home! The advice on fabric selection was invaluable. Couldn\'t be happier.',
+          product: 'Roller Blinds',
+          verified: true
+        },
+        {
+          name: 'David Clarke',
+          location: 'Greenfield',
+          rating: 5,
+          text: 'Best prices we found and the quality exceeded our expectations. Highly recommend!',
+          product: 'Venetian Blinds',
+          verified: true
+        },
+        {
+          name: 'Lisa Roberts',
+          location: 'Dobcross',
+          rating: 5,
+          text: 'The motorized blinds are a game-changer! So convenient and they look stunning.',
+          product: 'Motorized Blinds',
+          verified: true
+        },
+        {
+          name: 'Michael Brown',
+          location: 'Lydgate',
+          rating: 5,
+          text: 'Family business that truly cares about their customers. Exceptional service and beautiful products.',
+          product: 'Perfect Fit Blinds',
+          verified: true
+        }
+      ]} />
 
       {/* Final CTA */}
       <Section background="luxury" padding="large">
