@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Icon, Spinner, ProgressBar, Box, CornerDecoration, Center, Stack, Heading, Text } from './ui'
+import SunshineLogo from './SunshineLogo'
 
 const LoadingScreen = ({ onLoadComplete }) => {
   const [progress, setProgress] = useState(0)
@@ -31,7 +32,7 @@ const LoadingScreen = ({ onLoadComplete }) => {
       position="fixed"
       inset="0"
       className={`
-        z-50 bg-brand-dark
+        z-50 bg-white
         transition-all duration-500
         ${isExiting ? 'opacity-0 scale-110' : 'opacity-100 scale-100'}
       `}
@@ -52,19 +53,7 @@ const LoadingScreen = ({ onLoadComplete }) => {
         <Stack spacing="xlarge" align="center">
           {/* Logo animation */}
           <Box position="relative" className="mb-12">
-            <Spinner size="xlarge" variant="gold" multiRing />
-            
-            {/* Center icon */}
-            <Center className="absolute inset-0">
-              <Box 
-                size="16"
-                className="bg-gradient-to-br from-brand-gold to-brand-gold-light rounded-full shadow-lg shadow-brand-gold/50 animate-pulse-glow"
-              >
-                <Center className="w-full h-full">
-                  <Icon name="sun" size="large" className="text-brand-dark" />
-                </Center>
-              </Box>
-            </Center>
+            <SunshineLogo className="h-32 w-auto animate-fade-in" />
           </Box>
 
           {/* Brand name */}
@@ -72,14 +61,16 @@ const LoadingScreen = ({ onLoadComplete }) => {
             <Heading 
               as="h1" 
               size="4xl" 
-              mdSize="5xl"
+              color="charcoal"
               className="font-display animate-fade-in"
             >
               Sunshine Blinds
             </Heading>
             <Text 
               size="large"
-              className="text-brand-gold animate-fade-in animation-delay-200"
+              color="yellow"
+              weight="semibold"
+              className="animate-fade-in animation-delay-200"
             >
               Saddleworth
             </Text>

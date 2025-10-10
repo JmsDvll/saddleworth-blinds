@@ -10,6 +10,7 @@ import {
   Card,
   Badge
 } from './ui'
+import SunshineLogo from './SunshineLogo'
 
 const HeaderStandardized = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -71,39 +72,30 @@ const HeaderStandardized = () => {
   return (
     <header 
       className={`
-        sticky top-0 z-40 transition-all duration-500
+        sticky top-0 z-40 transition-all duration-300 bg-white
         ${isScrolled 
-          ? 'bg-brand-dark/95 backdrop-blur-lg shadow-2xl shadow-black/50 border-b border-brand-gold/10' 
-          : 'bg-brand-dark border-b border-gray-800'
+          ? 'shadow-hard border-b border-gray-200' 
+          : 'shadow-soft border-b border-gray-100'
         }
       `}
       role="navigation"
     >
-      {/* Premium announcement bar */}
-      <div className="bg-gradient-to-r from-brand-gold to-brand-gold-light text-gray-900 py-2 text-center text-sm font-medium animate-shimmer bg-[length:200%_auto]">
+      {/* Announcement bar */}
+      <div className="bg-brand-yellow text-brand-black py-2 text-center text-sm font-semibold">
         <Container>
           <Flex justify="center" align="center" gap="small">
-            <Icon name="sparkle" size="tiny" className="animate-pulse" />
+            <Icon name="sparkle" size="tiny" />
             <span>Special Offer: 20% off all Perfect Fit Blinds this month!</span>
-            <Icon name="sparkle" size="tiny" className="animate-pulse" />
+            <Icon name="sparkle" size="tiny" />
           </Flex>
         </Container>
       </div>
 
       <Container>
         <Flex justify="between" align="center" className="py-4">
-          {/* Logo with premium hover effect */}
-          <Link to="/" className="flex items-center space-x-2 group">
-            <div className="relative">
-              <div className="absolute -inset-2 bg-gradient-to-r from-brand-gold/20 to-brand-gold-light/20 rounded-full blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <svg className="w-10 h-10 text-brand-gold relative transition-transform duration-300 group-hover:scale-110" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 3v1m0 16v1m9-9h-1M4 12H3m3.343-5.657L5.636 5.636m12.728 0l-.707.707m0 11.314l.707.707m-12.728 0l.707-.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" stroke="currentColor" strokeWidth="2" fill="none"/>
-              </svg>
-            </div>
-            <Stack spacing="none">
-              <Text size="large" weight="bold" className="leading-none group-hover:text-brand-gold transition-colors duration-300">Sunshine Blinds</Text>
-              <Text size="small" color="muted">Saddleworth</Text>
-            </Stack>
+          {/* Logo */}
+          <Link to="/" className="flex items-center group">
+            <SunshineLogo className="h-14 w-auto transition-transform duration-300 group-hover:scale-105" />
           </Link>
 
           {/* Desktop Navigation with enhanced styling */}
@@ -120,11 +112,10 @@ const HeaderStandardized = () => {
                 <button
                   onClick={toggleBlindsDropdown}
                   onMouseEnter={() => setIsBlindsDropdownOpen(true)}
-                  className="flex items-center gap-2 text-gray-300 hover:text-white px-3 py-2 rounded-lg hover:bg-white/5 transition-all duration-300 relative overflow-hidden group"
+                  className="flex items-center gap-2 text-brand-charcoal hover:text-brand-yellow px-3 py-2 rounded-lg hover:bg-brand-yellow/10 transition-all duration-300"
                 >
-                  <span className="relative z-10">Products</span>
-                  <Icon name={isBlindsDropdownOpen ? 'chevronUp' : 'chevronDown'} size="small" className="relative z-10 transition-transform duration-300" />
-                  <span className="absolute inset-0 bg-gradient-to-r from-brand-gold/20 to-brand-gold-light/20 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500"></span>
+                  <span>Products</span>
+                  <Icon name={isBlindsDropdownOpen ? 'chevronUp' : 'chevronDown'} size="small" className="transition-transform duration-300" />
                 </button>
                 
                 {/* Premium dropdown menu */}
@@ -139,20 +130,20 @@ const HeaderStandardized = () => {
                   `}
                   onMouseLeave={() => setIsBlindsDropdownOpen(false)}
                 >
-                  <Card variant="elevated" hover="none" padding="small" className="backdrop-blur-xl bg-brand-dark-lighter/95 border-brand-gold/20">
+                  <Card variant="elevated" hover="none" padding="small">
                     <Stack spacing="small">
                       {blindsMenu.map((item) => (
                         <Link 
                           key={item.path}
                           to={item.path}
-                          className="group flex items-center justify-between px-3 py-2 rounded-lg hover:bg-brand-gold/10 transition-all duration-300"
+                          className="group flex items-center justify-between px-3 py-2 rounded-lg hover:bg-gray-50 transition-all duration-300"
                           onClick={() => setIsBlindsDropdownOpen(false)}
                         >
-                          <span className="text-gray-300 group-hover:text-white transition-colors duration-300">
+                          <span className="text-brand-charcoal group-hover:text-brand-yellow transition-colors duration-300">
                             {item.name}
                           </span>
-                          {item.hot && <Badge variant="primary" size="tiny" glow>HOT</Badge>}
-                          {item.new && <Badge variant="secondary" size="tiny" glow>NEW</Badge>}
+                          {item.hot && <Badge variant="primary" size="tiny">HOT</Badge>}
+                          {item.new && <Badge variant="secondary" size="tiny">NEW</Badge>}
                         </Link>
                       ))}
                     </Stack>
@@ -165,11 +156,10 @@ const HeaderStandardized = () => {
                 <button
                   onClick={toggleAreasDropdown}
                   onMouseEnter={() => setIsAreasDropdownOpen(true)}
-                  className="flex items-center gap-2 text-gray-300 hover:text-white px-3 py-2 rounded-lg hover:bg-white/5 transition-all duration-300 relative overflow-hidden group"
+                  className="flex items-center gap-2 text-brand-charcoal hover:text-brand-yellow px-3 py-2 rounded-lg hover:bg-brand-yellow/10 transition-all duration-300"
                 >
-                  <span className="relative z-10">Areas</span>
-                  <Icon name={isAreasDropdownOpen ? 'chevronUp' : 'chevronDown'} size="small" className="relative z-10 transition-transform duration-300" />
-                  <span className="absolute inset-0 bg-gradient-to-r from-brand-gold/20 to-brand-gold-light/20 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500"></span>
+                  <span>Areas</span>
+                  <Icon name={isAreasDropdownOpen ? 'chevronUp' : 'chevronDown'} size="small" className="transition-transform duration-300" />
                 </button>
                 
                 <div 
@@ -183,13 +173,13 @@ const HeaderStandardized = () => {
                   `}
                   onMouseLeave={() => setIsAreasDropdownOpen(false)}
                 >
-                  <Card variant="elevated" hover="none" padding="small" className="backdrop-blur-xl bg-brand-dark-lighter/95 border-brand-gold/20">
+                  <Card variant="elevated" hover="none" padding="small">
                     <div className="grid grid-cols-2 gap-1">
                       {areasMenu.map((item) => (
                         <Link 
                           key={item.path}
                           to={item.path}
-                          className="px-3 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-brand-gold/10 transition-all duration-300 text-sm"
+                          className="px-3 py-2 rounded-lg text-brand-charcoal hover:text-brand-yellow hover:bg-gray-50 transition-all duration-300 text-sm"
                           onClick={() => setIsAreasDropdownOpen(false)}
                         >
                           {item.name}
@@ -213,19 +203,16 @@ const HeaderStandardized = () => {
             </Flex>
           </nav>
 
-          {/* CTA Buttons with premium styling */}
+          {/* CTA Buttons */}
           <Flex gap="medium" className="hidden lg:flex">
             <a 
               href="tel:01457597091" 
-              className="flex items-center gap-2 text-brand-gold hover:text-brand-gold-light transition-all duration-300 group"
+              className="flex items-center gap-2 text-brand-charcoal hover:text-brand-yellow transition-all duration-300 group"
             >
-              <div className="relative">
-                <Icon name="phone" size="medium" className="animate-pulse" />
-                <div className="absolute inset-0 bg-brand-gold/20 rounded-full blur-md"></div>
-              </div>
+              <Icon name="phone" size="medium" className="text-brand-yellow" />
               <Stack spacing="none">
                 <Text size="small" color="muted">Call Now</Text>
-                <Text weight="bold" className="group-hover:text-brand-gold-light transition-colors">01457 597091</Text>
+                <Text weight="bold" color="charcoal">01457 597091</Text>
               </Stack>
             </a>
             
@@ -234,24 +221,22 @@ const HeaderStandardized = () => {
               to="/book-appointment" 
               variant="primary" 
               size="medium"
-              glow
               iconRight={<Icon name="arrowRight" />}
             >
-              Free Quote
+              Book Appointment
             </Button>
           </Flex>
 
-          {/* Enhanced Mobile Menu Button */}
+          {/* Mobile Menu Button */}
           <button
             onClick={toggleMobileMenu}
-            className="lg:hidden relative w-10 h-10 flex items-center justify-center rounded-lg bg-brand-gold/10 hover:bg-brand-gold/20 transition-all duration-300 group"
+            className="lg:hidden relative w-10 h-10 flex items-center justify-center rounded-lg hover:bg-gray-100 transition-all duration-300"
             aria-label="Toggle mobile menu"
           >
-            <div className="absolute inset-0 bg-brand-gold/20 rounded-lg blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             <Icon 
               name={isMobileMenuOpen ? 'close' : 'menu'} 
               size="medium" 
-              className="text-brand-gold relative z-10 transition-transform duration-300 group-hover:scale-110"
+              className="text-brand-charcoal"
             />
           </button>
         </Flex>
@@ -263,13 +248,13 @@ const HeaderStandardized = () => {
             ${isMobileMenuOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'}
           `}
         >
-          <nav className="py-4 border-t border-gray-800">
+          <nav className="py-4 border-t border-gray-200">
             <Stack spacing="small">
               <Link 
                 to="/" 
                 variant="nav" 
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="w-full justify-between"
+                className="w-full"
               >
                 <Flex align="center" gap="small">
                   <Icon name="home" size="small" />
@@ -281,7 +266,7 @@ const HeaderStandardized = () => {
               <div>
                 <button
                   onClick={toggleBlindsDropdown}
-                  className="w-full flex items-center justify-between text-gray-300 hover:text-white px-3 py-2 rounded-lg hover:bg-white/5 transition-all duration-300"
+                  className="w-full flex items-center justify-between text-brand-charcoal hover:text-brand-yellow px-3 py-2 rounded-lg hover:bg-brand-yellow/10 transition-all duration-300"
                 >
                   <span>Products</span>
                   <Icon name={isBlindsDropdownOpen ? 'chevronUp' : 'chevronDown'} size="small" />

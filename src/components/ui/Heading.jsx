@@ -23,22 +23,17 @@ const headingStyles = {
     '6xl': 'text-7xl md:text-8xl',
   },
   
-  // Premium color options
+  // Color options
   colors: {
     inherit: '',
     white: 'text-white',
-    gold: 'text-brand-gold',
+    charcoal: 'text-brand-charcoal',
+    yellow: 'text-brand-yellow',
+    black: 'text-brand-black',
     gradient: `
-      bg-gradient-to-r from-brand-gold via-brand-gold-light to-brand-gold
-      bg-clip-text text-transparent
-      bg-[length:200%_auto]
-      animate-shimmer
-    `,
-    gradientSubtle: `
-      bg-gradient-to-r from-gray-100 to-gray-300
+      bg-gradient-to-r from-brand-yellow to-brand-yellow-light
       bg-clip-text text-transparent
     `,
-    dark: 'text-gray-900',
   },
   
   // Text alignment

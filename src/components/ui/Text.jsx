@@ -22,12 +22,13 @@ const textStyles = {
   colors: {
     inherit: '',
     white: 'text-white',
-    light: 'text-gray-300',
-    muted: 'text-gray-400',
-    dark: 'text-gray-900',
-    gold: 'text-brand-gold',
-    error: 'text-red-400',
-    success: 'text-green-400',
+    charcoal: 'text-brand-charcoal',
+    yellow: 'text-brand-yellow',
+    black: 'text-brand-black',
+    muted: 'text-gray-600',
+    light: 'text-gray-700',
+    error: 'text-red-600',
+    success: 'text-green-600',
   },
   
   // Line height

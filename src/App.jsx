@@ -112,7 +112,7 @@ function App() {
 
   return (
     <ErrorBoundary>
-      <div className="min-h-screen bg-brand-dark text-white overflow-x-hidden">
+      <div className="min-h-screen bg-white text-brand-charcoal overflow-x-hidden">
         <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-brand-gold text-gray-900 px-4 py-2 rounded-lg font-semibold shadow-lg z-50">
           Skip to main content
         </a>

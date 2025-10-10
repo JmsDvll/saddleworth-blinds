@@ -11,56 +11,37 @@ const cardStyles = {
   
   variants: {
     default: `
-      bg-gradient-to-br from-gray-800/80 to-gray-900/80
-      border border-gray-700/50
-      backdrop-blur-sm
+      bg-white
+      border border-gray-200
+      shadow-soft
     `,
     elevated: `
-      bg-gradient-to-br from-brand-dark-lighter to-brand-dark-light
-      border border-brand-gold/10
-      shadow-premium
-      before:absolute before:inset-0 
-      before:bg-gradient-to-br before:from-brand-gold/5 before:to-transparent
-      before:opacity-0 hover:before:opacity-100
-      before:transition-opacity before:duration-500
+      bg-white
+      border border-gray-100
+      shadow-hard
+      hover:shadow-xl
     `,
     ghost: `
       bg-transparent
-      border border-gray-700/30
-      hover:border-gray-600/50
-      backdrop-blur-xs
+      border border-gray-200
+      hover:border-gray-300
     `,
     highlight: `
-      bg-gradient-to-br from-brand-dark-light to-brand-dark
-      border border-brand-gold/30
-      shadow-gold
-      before:absolute before:inset-0 
-      before:bg-gradient-radial before:from-brand-gold/10 before:to-transparent
-      before:opacity-50
-      after:absolute after:inset-0
-      after:bg-shimmer-gradient
-      after:opacity-0 hover:after:opacity-100
-      after:animate-shimmer
-      overflow-hidden
+      bg-white
+      border-2 border-brand-yellow
+      shadow-yellow
     `,
-    link: `
-      bg-brand-dark/90
-      backdrop-blur-sm
-      border border-brand-gold/20
-      hover:bg-brand-dark hover:border-brand-gold/40
-      transition-all duration-300
+    dark: `
+      bg-brand-charcoal
+      text-white
+      border border-brand-charcoal
+      shadow-hard
     `,
-    premium: `
-      bg-gradient-to-br from-brand-dark to-brand-dark-light
-      border border-brand-gold/40
-      shadow-premium shadow-brand-gold/20
-      before:absolute before:inset-[-2px]
-      before:bg-gold-gradient
-      before:rounded-xl
-      before:opacity-20 hover:before:opacity-30
-      before:blur-xl
-      before:transition-opacity before:duration-500
-      before:-z-10
+    gradient: `
+      bg-yellow-to-black
+      text-white
+      border-none
+      shadow-hard
     `
   },
   

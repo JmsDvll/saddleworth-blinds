@@ -13,53 +13,54 @@ const buttonStyles = {
   
   variants: {
     primary: `
-      bg-gradient-to-r from-brand-gold to-brand-gold-light
-      text-gray-900 
-      hover:from-brand-gold-light hover:to-brand-gold
-      focus:ring-brand-gold
-      shadow-gold hover:shadow-lg hover:shadow-brand-gold/30
-      before:absolute before:inset-0 before:bg-shimmer-gradient before:opacity-0
-      hover:before:opacity-100 before:transition-opacity before:duration-300
-      before:animate-shimmer
+      bg-brand-yellow
+      text-brand-black font-semibold
+      hover:bg-brand-yellow-dark
+      focus:ring-brand-yellow
+      shadow-soft hover:shadow-hard
+      hover:transform hover:-translate-y-0.5
     `,
     secondary: `
-      bg-brand-dark-lighter border-2 border-brand-gold/30
-      text-brand-gold
-      hover:bg-brand-dark-light hover:border-brand-gold/60
-      focus:ring-brand-gold
-      shadow-lg hover:shadow-gold
-      backdrop-blur-sm
-      before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-brand-gold/10 before:to-transparent
-      before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-500
+      bg-transparent border-2 border-brand-charcoal
+      text-brand-charcoal
+      hover:bg-brand-charcoal hover:text-white
+      focus:ring-brand-charcoal
+      shadow-none hover:shadow-soft
+    `,
+    outline: `
+      bg-transparent border-2 border-brand-yellow
+      text-brand-yellow
+      hover:bg-brand-yellow hover:text-brand-black
+      focus:ring-brand-yellow
+      shadow-none hover:shadow-soft
     `,
     ghost: `
       bg-transparent
-      text-gray-300 hover:text-brand-gold
-      hover:bg-brand-gold/10
-      focus:ring-gray-600
-      border border-transparent hover:border-brand-gold/30
+      text-brand-charcoal hover:text-brand-yellow
+      hover:bg-brand-yellow/10
+      focus:ring-brand-yellow
     `,
     danger: `
-      bg-gradient-to-r from-red-600 to-red-700
+      bg-red-600
       text-white
-      hover:from-red-700 hover:to-red-800
+      hover:bg-red-700
       focus:ring-red-500
-      shadow-lg hover:shadow-red-500/30
+      shadow-soft hover:shadow-hard
     `,
     success: `
-      bg-gradient-to-r from-emerald-600 to-emerald-700
+      bg-emerald-600
       text-white
-      hover:from-emerald-700 hover:to-emerald-800
+      hover:bg-emerald-700
       focus:ring-emerald-500
-      shadow-lg hover:shadow-emerald-500/30
+      shadow-soft hover:shadow-hard
     `,
   },
   
   sizes: {
-    small: 'px-3 py-1.5 text-sm rounded-md',
-    medium: 'px-4 py-2 text-base rounded-lg',
-    large: 'px-6 py-3 text-lg rounded-lg',
-    xlarge: 'px-8 py-4 text-xl rounded-xl',
+    small: 'px-4 py-1.5 text-sm rounded-full',
+    medium: 'px-6 py-2.5 text-base rounded-full',
+    large: 'px-8 py-3 text-lg rounded-full',
+    xlarge: 'px-10 py-4 text-xl rounded-full',
   },
   
   fullWidth: 'w-full',

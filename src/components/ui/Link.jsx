@@ -11,24 +11,20 @@ const linkStyles = {
   
   variants: {
     default: `
-      text-brand-gold hover:text-brand-gold-light
+      text-brand-yellow hover:text-brand-yellow-dark
       after:absolute after:bottom-0 after:left-0
       after:w-full after:h-px
-      after:bg-gradient-to-r after:from-brand-gold after:to-brand-gold-light
+      after:bg-brand-yellow
       after:scale-x-0 after:origin-left
       after:transition-transform after:duration-300
       hover:after:scale-x-100
     `,
     nav: `
-      text-gray-300 hover:text-white
+      text-brand-charcoal hover:text-brand-yellow
       px-3 py-2 rounded-lg
-      hover:bg-white/5
-      relative overflow-hidden
-      before:absolute before:inset-0
-      before:bg-gradient-to-r before:from-brand-gold/20 before:to-brand-gold-light/20
-      before:translate-x-[-100%]
-      hover:before:translate-x-0
-      before:transition-transform before:duration-500
+      hover:bg-brand-yellow/10
+      font-medium
+      transition-all duration-300
     `,
     subtle: `
       text-gray-400 hover:text-gray-200

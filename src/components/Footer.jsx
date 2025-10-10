@@ -9,6 +9,7 @@ import {
   Link,
   Icon
 } from './ui'
+import SunshineLogo from './SunshineLogo'
 
 const FooterStandardized = () => {
   const services = [
@@ -32,15 +33,16 @@ const FooterStandardized = () => {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="bg-gray-900 border-t border-gray-800 mt-16" role="contentinfo">
+    <footer className="bg-brand-charcoal text-white border-t border-gray-800 mt-16" role="contentinfo">
       <Container padding="large">
         <Stack spacing="xlarge">
           {/* Main Footer Content */}
           <Grid cols={4} gap="large">
             {/* About Section */}
             <Stack spacing="medium">
-              <Heading.H3 size="h5">About Sunshine Blinds Saddleworth</Heading.H3>
-              <Text size="small" color="muted">
+              <SunshineLogo className="h-12 w-auto mb-4" />
+              <Heading.H3 size="h5" color="white">About Sunshine Blinds Saddleworth</Heading.H3>
+              <Text size="small" color="light">
                 Your local window blind specialists, part of the trusted Sunshine Blinds family. 
                 We're dedicated to serving Saddleworth with quality blinds, expert fitting, 
                 and outstanding service.
