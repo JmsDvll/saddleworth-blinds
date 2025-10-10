@@ -14,41 +14,70 @@ const linkStyles = {
       text-brand-gold hover:text-brand-gold-light
       after:absolute after:bottom-0 after:left-0
       after:w-full after:h-px
-      after:bg-gradient-to-r after:from-brand-gold after:to-brand-gold-light
+      after:bg-gold-gradient
       after:scale-x-0 after:origin-left
-      after:transition-transform after:duration-300
+      after:transition-transform after:duration-500
       hover:after:scale-x-100
     `,
     nav: `
       text-brand-dark hover:text-brand-gold
-      px-3 py-2
-      font-medium tracking-wide
+      px-4 py-2
+      font-medium uppercase tracking-wide
       transition-all duration-300
       relative
-      after:absolute after:bottom-0 after:left-3 after:right-3
-      after:h-0.5 after:bg-brand-gold
+      after:absolute after:bottom-0 after:left-4 after:right-4
+      after:h-0.5 after:bg-gold-gradient
       after:transform after:scale-x-0
-      after:transition-transform after:duration-300
+      after:transition-transform after:duration-500
       hover:after:scale-x-100
     `,
+    menu: `
+      block w-full text-left
+      px-4 py-3 rounded-lg
+      text-brand-cream hover:text-brand-gold
+      hover:bg-brand-gold/10
+      transition-all duration-300
+      group
+    `,
+    mobileNav: `
+      block w-full
+      px-4 py-3 rounded-lg
+      text-brand-dark hover:text-brand-gold
+      hover:bg-brand-gold/10
+      transition-all duration-300
+    `,
     subtle: `
-      text-gray-400 hover:text-gray-200
+      text-brand-grey hover:text-brand-grey-light
       underline-offset-4
-      decoration-gray-600 hover:decoration-gray-400
+      decoration-brand-grey/50 hover:decoration-brand-grey
       transition-all duration-300
     `,
     button: `
-      text-white
-      bg-gradient-to-r from-brand-gold to-brand-gold-light
+      inline-flex items-center justify-center
+      text-brand-dark
+      bg-gold-gradient
       px-6 py-3 rounded-lg
-      font-semibold
-      shadow-lg shadow-brand-gold/20
-      hover:shadow-xl hover:shadow-brand-gold/30
-      hover:scale-105
-      active:scale-95
+      font-semibold uppercase tracking-wide
+      shadow-luxury hover:shadow-gold-lg
+      hover:transform hover:-translate-y-0.5
+      transition-all duration-500
+      active:scale-[0.98]
     `,
     plain: `
       hover:opacity-80
+      transition-opacity duration-300
+    `,
+    luxury: `
+      text-brand-gold hover:text-brand-gold-light
+      font-display tracking-luxury
+      relative
+      after:absolute after:bottom-0 after:left-0
+      after:w-full after:h-1
+      after:bg-gold-gradient
+      after:scale-x-0 after:origin-center
+      after:transition-transform after:duration-700
+      hover:after:scale-x-100
+      hover:drop-shadow-gold
     `,
   },
   

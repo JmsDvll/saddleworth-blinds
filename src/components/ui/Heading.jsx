@@ -1,32 +1,43 @@
 import React, { forwardRef } from 'react'
 
 const headingStyles = {
-  base: 'font-display font-bold leading-tight tracking-wide',
+  base: 'font-display font-bold leading-tight tracking-luxury',
   
-  // Luxury size scale
+  // Luxury size scale with better responsive sizing
   sizes: {
-    xs: 'text-lg md:text-xl',
-    sm: 'text-xl md:text-2xl',
-    base: 'text-2xl md:text-3xl',
-    lg: 'text-3xl md:text-4xl',
-    xl: 'text-4xl md:text-5xl',
-    '2xl': 'text-5xl md:text-6xl',
-    '3xl': 'text-6xl md:text-7xl',
-    '4xl': 'text-7xl md:text-8xl',
-    '5xl': 'text-8xl md:text-9xl',
+    xs: 'text-xl md:text-2xl lg:text-3xl',
+    sm: 'text-2xl md:text-3xl lg:text-4xl',
+    base: 'text-3xl md:text-4xl lg:text-5xl',
+    lg: 'text-4xl md:text-5xl lg:text-6xl',
+    xl: 'text-5xl md:text-6xl lg:text-7xl',
+    '2xl': 'text-6xl md:text-7xl lg:text-8xl',
+    '3xl': 'text-7xl md:text-8xl lg:text-9xl',
+    '4xl': 'text-8xl md:text-9xl',
+    'hero': 'text-6xl md:text-8xl lg:text-9xl',
   },
   
-  // Color options
+  // Luxury color options
   colors: {
     inherit: '',
     dark: 'text-brand-dark',
     light: 'text-brand-cream',
     gold: 'text-brand-gold',
+    goldLight: 'text-brand-gold-light',
     gradient: `
-      bg-gradient-to-r from-brand-gold via-brand-gold-light to-brand-gold
+      bg-gold-gradient
       bg-clip-text text-transparent
       bg-[length:200%_auto]
-      animate-shimmer
+      animate-shimmer-slow
+    `,
+    darkGradient: `
+      bg-gradient-to-r from-brand-dark via-brand-dark-light to-brand-dark
+      bg-clip-text text-transparent
+    `,
+    luxuryGradient: `
+      bg-gradient-to-r from-brand-gold via-brand-gold-light to-brand-gold-lighter
+      bg-clip-text text-transparent
+      bg-[length:200%_auto]
+      animate-luxury-shine
     `,
   },
   
@@ -40,17 +51,27 @@ const headingStyles = {
   // Special effects
   effects: {
     none: '',
-    shadow: 'text-shadow-luxury',
-    goldShadow: 'text-shadow-gold',
+    shadow: 'drop-shadow-luxury',
+    goldShadow: 'drop-shadow-gold',
+    glow: 'drop-shadow-[0_0_30px_rgba(202,188,50,0.5)]',
     underline: `
       relative
       after:absolute after:bottom-0 after:left-0
-      after:w-full after:h-0.5
-      after:bg-gradient-to-r after:from-brand-gold after:to-brand-gold-light
+      after:w-full after:h-1
+      after:bg-gold-gradient
       after:transform after:scale-x-0 after:origin-left
-      after:transition-transform after:duration-500
+      after:transition-transform after:duration-700
       hover:after:scale-x-100
     `,
+    luxuryUnderline: `
+      relative pb-2
+      after:absolute after:bottom-0 after:left-0
+      after:w-full after:h-0.5
+      after:bg-gold-gradient
+      after:transform after:origin-center
+      after:transition-all after:duration-700
+    `,
+    reveal: 'animate-reveal-up',
   },
   
   // Margin bottom

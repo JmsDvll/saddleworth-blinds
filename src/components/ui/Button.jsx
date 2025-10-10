@@ -4,60 +4,84 @@ import { Link as RouterLink } from 'react-router-dom'
 const buttonStyles = {
   base: `
     relative inline-flex items-center justify-center
-    font-body font-medium tracking-wide
-    transition-all duration-300 ease-out
+    font-body font-semibold tracking-wide uppercase
+    transition-all duration-500 ease-out
     transform active:scale-[0.98]
     focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-brand-cream focus:ring-brand-gold
     group overflow-hidden
+    whitespace-nowrap
   `,
   
   variants: {
     primary: `
-      bg-gradient-to-r from-brand-gold to-brand-gold-light
+      bg-gold-gradient
       text-brand-dark 
-      hover:from-brand-gold-light hover:to-brand-gold
-      shadow-luxury hover:shadow-gold
+      shadow-luxury hover:shadow-gold-lg
       border border-brand-gold-dark
-      hover:transform hover:-translate-y-0.5
+      hover:transform hover:-translate-y-1
+      relative
+      before:absolute before:inset-0 before:bg-gold-shimmer before:opacity-0 
+      hover:before:opacity-100 before:transition-opacity before:duration-500
     `,
     secondary: `
       bg-brand-cream border-2 border-brand-gold
       text-brand-dark
       hover:bg-brand-gold hover:text-brand-dark
       shadow-soft hover:shadow-luxury
+      hover:border-brand-gold-dark
+      transition-all duration-300
     `,
     outline: `
-      bg-transparent border-2 border-brand-dark
-      text-brand-dark
-      hover:bg-brand-dark hover:text-brand-cream
-      shadow-none hover:shadow-soft
+      bg-transparent border-2 border-brand-gold
+      text-brand-gold
+      hover:bg-brand-gold hover:text-brand-dark
+      shadow-none hover:shadow-gold
+      hover:transform hover:-translate-y-0.5
     `,
     ghost: `
       bg-transparent
-      text-brand-dark hover:text-brand-gold
+      text-brand-gold hover:text-brand-gold-light
       hover:bg-brand-gold/10
+      relative
+      after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0
+      after:bg-brand-gold after:transition-all after:duration-300
+      hover:after:w-full
     `,
     luxury: `
       bg-brand-dark
-      text-brand-gold
+      text-brand-gold font-display tracking-luxury
       border border-brand-gold
-      shadow-luxury
-      hover:bg-brand-gold hover:text-brand-dark
-      hover:shadow-gold
-      hover:transform hover:-translate-y-0.5
-      relative
+      shadow-luxury-lg
+      hover:bg-gold-gradient hover:text-brand-dark
+      hover:shadow-gold-lg
+      hover:transform hover:-translate-y-1 hover:scale-105
+      relative overflow-hidden
       before:absolute before:inset-0
-      before:bg-shimmer-gradient
+      before:bg-gold-shimmer
       before:opacity-0 hover:before:opacity-100
-      before:transition-opacity before:duration-500
+      before:transition-opacity before:duration-700
+      after:absolute after:inset-0 after:bg-gold-pulse
+      after:opacity-0 hover:after:opacity-30
+      after:animate-glow-pulse
+    `,
+    dark: `
+      bg-brand-dark
+      text-brand-cream
+      border border-brand-dark-light
+      shadow-luxury
+      hover:bg-brand-dark-light
+      hover:border-brand-gold
+      hover:text-brand-gold
+      hover:shadow-gold
+      transition-all duration-300
     `,
   },
   
   sizes: {
-    small: 'px-4 py-2 text-sm',
-    medium: 'px-6 py-3 text-base',
-    large: 'px-8 py-4 text-lg',
-    xlarge: 'px-10 py-5 text-xl',
+    small: 'px-6 py-3 text-sm',
+    medium: 'px-8 py-4 text-base',
+    large: 'px-10 py-5 text-lg',
+    xlarge: 'px-12 py-6 text-xl',
   },
   
   fullWidth: 'w-full',

@@ -3,12 +3,25 @@ import React, { forwardRef } from 'react'
 const textStyles = {
   base: 'font-body',
   
+  // Variants (predefined combinations)
+  variants: {
+    default: '',
+    lead: 'text-xl font-light leading-relaxed',
+    small: 'text-sm',
+    caption: 'text-sm text-brand-grey',
+    menu: 'font-medium',
+    heading: 'font-display font-bold tracking-wide',
+    luxury: 'font-display tracking-luxury',
+  },
+  
   // Sizes
   sizes: {
+    xs: 'text-xs',
     small: 'text-sm',
     medium: 'text-base',
     large: 'text-lg',
     xlarge: 'text-xl',
+    '2xl': 'text-2xl',
   },
   
   // Weights
@@ -58,8 +71,9 @@ const textStyles = {
 
 export const Text = forwardRef(({ 
   as: Component = 'p',
-  size = 'medium',
-  weight = 'normal',
+  variant = 'default',
+  size,
+  weight,
   color = 'inherit',
   leading = 'normal',
   align = 'left',
@@ -68,14 +82,18 @@ export const Text = forwardRef(({
   children,
   ...props 
 }, ref) => {
+  // If variant is used, it takes precedence over individual props
+  const useVariant = variant !== 'default'
+  
   const classes = `
     ${textStyles.base}
-    ${textStyles.sizes[size]}
-    ${textStyles.weights[weight]}
+    ${useVariant ? textStyles.variants[variant] : ''}
+    ${!useVariant && size ? textStyles.sizes[size] : ''}
+    ${!useVariant && weight ? textStyles.weights[weight] : ''}
     ${textStyles.colors[color]}
-    ${textStyles.leading[leading]}
+    ${!useVariant ? textStyles.leading[leading] : ''}
     ${textStyles.align[align]}
-    ${textStyles.tracking[tracking]}
+    ${!useVariant ? textStyles.tracking[tracking] : ''}
     ${className}
   `.trim()
 

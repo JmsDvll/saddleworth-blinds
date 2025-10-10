@@ -1,4 +1,6 @@
 // Central export for all UI components
+
+// Core Components
 export { Button } from './Button'
 export { Card } from './Card'
 export { Section } from './Section'
@@ -25,3 +27,20 @@ export { Spinner } from './Spinner'
 export { Box, CornerDecoration } from './Box'
 export { Spacer } from './Spacer'
 export { StyleBox } from './StyleBox'
+
+// Luxury Components
+export { GoldDivider } from './GoldDivider'
+export { LuxuryBadge } from './LuxuryBadge'
+export { GlowBox } from './GlowBox'
+export { ShimmerText } from './ShimmerText'
+export { LuxuryIcon } from './LuxuryIcon'
+
+// Layout Components
+export { 
+  HeaderWrapper, 
+  MobileMenuWrapper, 
+  DropdownWrapper, 
+  NavButton,
+  MobileToggle 
+} from './HeaderWrapper'
+export { AnnouncementBar } from './AnnouncementBar'

@@ -8,17 +8,27 @@ import {
   Text,
   Stack,
   Card,
-  Badge
+  Grid,
+  LuxuryBadge,
+  GoldDivider,
+  ShimmerText,
+  LuxuryIcon,
+  Section,
+  HeaderWrapper,
+  MobileMenuWrapper,
+  DropdownWrapper,
+  NavButton,
+  MobileToggle,
+  AnnouncementBar
 } from './ui'
 import SunshineLogo from './SunshineLogo'
 
-const HeaderStandardized = () => {
+const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isBlindsDropdownOpen, setIsBlindsDropdownOpen] = useState(false)
   const [isAreasDropdownOpen, setIsAreasDropdownOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
 
-  // Add scroll detection for header effects
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20)
@@ -48,7 +58,7 @@ const HeaderStandardized = () => {
     { name: 'Vertical Blinds', path: '/vertical-blinds' },
     { name: 'Vision Blinds', path: '/vision-blinds', hot: true },
     { name: 'Perfect Fit Blinds', path: '/perfect-fit-blinds' },
-    { name: 'Shutters', path: '/shutters' },
+    { name: 'Shutters', path: '/shutters', premium: true },
     { name: 'Roman Blinds', path: '/roman-blinds', new: true },
     { name: 'Curtains', path: '/curtains' },
     { name: 'Allusion Blinds', path: '/allusion-blinds', new: true }
@@ -70,321 +80,283 @@ const HeaderStandardized = () => {
   ]
 
   return (
-    <header 
-      className={`
-        sticky top-0 z-40 transition-all duration-500
-        ${isScrolled 
-          ? 'bg-white/95 backdrop-blur-lg shadow-luxury border-b border-brand-gold/20' 
-          : 'bg-brand-cream shadow-soft border-b border-brand-gold/10'
-        }
-      `}
-      role="navigation"
-    >
-      {/* Luxury announcement bar */}
-      <div className="bg-gradient-to-r from-brand-gold to-brand-gold-light text-brand-dark py-3 text-center text-sm font-medium tracking-wide">
+    <>
+      {/* Announcement Bar */}
+      <AnnouncementBar isVisible={!isScrolled}>
+        <Section padding="none" background="gold">
+          <Container>
+            <Flex justify="center" align="center" className="py-3">
+              <LuxuryIcon variant="simple" size="tiny" animation="pulse">
+                <Icon name="sparkle" />
+              </LuxuryIcon>
+              <Text variant="small" className="mx-3 font-semibold uppercase tracking-luxury">
+                Exclusive Offer: 20% off all Perfect Fit Blinds
+              </Text>
+              <LuxuryIcon variant="simple" size="tiny" animation="pulse">
+                <Icon name="sparkle" />
+              </LuxuryIcon>
+            </Flex>
+          </Container>
+        </Section>
+      </AnnouncementBar>
+
+      {/* Main Header */}
+      <HeaderWrapper isScrolled={isScrolled}>
         <Container>
-          <Flex justify="center" align="center" gap="small">
-            <Icon name="sparkle" size="tiny" className="animate-pulse" />
-            <span className="uppercase">Exclusive Offer: 20% off all Perfect Fit Blinds</span>
-            <Icon name="sparkle" size="tiny" className="animate-pulse" />
+          <Flex justify="between" align="center" className="py-4">
+            {/* Logo */}
+            <Link to="/" variant="plain" className="group">
+              <Flex align="center" gap="medium">
+                <SunshineLogo className="h-14 w-auto transition-all duration-500 group-hover:scale-105 group-hover:drop-shadow-gold" />
+                <Stack spacing="none" className="hidden md:block">
+                  <ShimmerText variant="luxury" as="span" className="text-2xl font-display font-bold">
+                    Sunshine
+                  </ShimmerText>
+                  <Text variant="small" color="muted" className="uppercase tracking-luxury">
+                    Premium Blinds
+                  </Text>
+                </Stack>
+              </Flex>
+            </Link>
+
+            {/* Desktop Navigation */}
+            <nav className="hidden lg:block">
+              <Flex as="ul" gap="small" align="center">
+                <li>
+                  <Link variant="nav" to="/">
+                    <Flex align="center" gap="small">
+                      <Icon name="home" size="small" />
+                      <span>Home</span>
+                    </Flex>
+                  </Link>
+                </li>
+                
+                {/* Products Dropdown */}
+                <li className="relative">
+                  <NavButton
+                    onClick={toggleBlindsDropdown}
+                    onMouseEnter={() => setIsBlindsDropdownOpen(true)}
+                  >
+                    <span>Products</span>
+                    <Icon 
+                      name={isBlindsDropdownOpen ? 'chevronUp' : 'chevronDown'} 
+                      size="small" 
+                      className="transition-transform duration-300"
+                    />
+                  </NavButton>
+                  
+                  {/* Luxury dropdown */}
+                  <DropdownWrapper 
+                    isOpen={isBlindsDropdownOpen}
+                    size="large"
+                    onMouseLeave={() => setIsBlindsDropdownOpen(false)}
+                  >
+                    <Card variant="luxury" hover="none" padding="small" className="shadow-luxury-lg">
+                      <Stack spacing="small">
+                        {blindsMenu.map((item) => (
+                          <Link 
+                            key={item.path}
+                            to={item.path}
+                            variant="menu"
+                            onClick={() => setIsBlindsDropdownOpen(false)}
+                          >
+                            <Flex justify="between" align="center">
+                              <Text variant="menu">{item.name}</Text>
+                              {item.hot && <LuxuryBadge variant="gold" size="tiny" icon="star">HOT</LuxuryBadge>}
+                              {item.new && <LuxuryBadge variant="outline" size="tiny" icon="sparkle">NEW</LuxuryBadge>}
+                              {item.premium && <LuxuryBadge variant="luxury" size="tiny" icon="crown">PREMIUM</LuxuryBadge>}
+                            </Flex>
+                          </Link>
+                        ))}
+                      </Stack>
+                    </Card>
+                  </DropdownWrapper>
+                </li>
+
+                {/* Areas Dropdown */}
+                <li className="relative">
+                  <NavButton
+                    onClick={toggleAreasDropdown}
+                    onMouseEnter={() => setIsAreasDropdownOpen(true)}
+                  >
+                    <span>Areas</span>
+                    <Icon 
+                      name={isAreasDropdownOpen ? 'chevronUp' : 'chevronDown'} 
+                      size="small"
+                      className="transition-transform duration-300" 
+                    />
+                  </NavButton>
+                  
+                  <DropdownWrapper 
+                    isOpen={isAreasDropdownOpen}
+                    size="medium"
+                    onMouseLeave={() => setIsAreasDropdownOpen(false)}
+                  >
+                    <Card variant="luxury" hover="none" padding="small" className="shadow-luxury-lg">
+                      <Text variant="small" color="gold" className="font-semibold uppercase tracking-luxury mb-3">
+                        We Serve
+                      </Text>
+                      <Grid cols={2} gap="small">
+                        {areasMenu.map((item) => (
+                          <Link 
+                            key={item.path}
+                            to={item.path}
+                            variant="menu"
+                            className="text-sm"
+                            onClick={() => setIsAreasDropdownOpen(false)}
+                          >
+                            {item.name}
+                          </Link>
+                        ))}
+                      </Grid>
+                    </Card>
+                  </DropdownWrapper>
+                </li>
+
+                <li>
+                  <Link variant="nav" to="/gallery">Gallery</Link>
+                </li>
+                <li>
+                  <Link variant="nav" to="/contact">Contact</Link>
+                </li>
+              </Flex>
+            </nav>
+
+            {/* CTA Buttons */}
+            <Flex gap="small" align="center">
+              <Button 
+                to="/book-appointment" 
+                variant="luxury" 
+                size="small"
+                className="hidden md:flex"
+                iconLeft={<Icon name="calendar" size="small" />}
+              >
+                Book Consultation
+              </Button>
+              
+              {/* Mobile Menu Toggle */}
+              <MobileToggle
+                onClick={toggleMobileMenu}
+                aria-label="Toggle mobile menu"
+              >
+                <Icon name={isMobileMenuOpen ? 'close' : 'menu'} size="medium" />
+              </MobileToggle>
+            </Flex>
           </Flex>
         </Container>
-      </div>
 
-      <Container>
-        <Flex justify="between" align="center" className="py-4">
-          {/* Logo */}
-          <Link to="/" className="flex items-center group">
-            <SunshineLogo className="h-14 w-auto transition-transform duration-300 group-hover:scale-105" />
-          </Link>
-
-          {/* Desktop Navigation with enhanced styling */}
-          <nav className="hidden lg:block">
-            <Flex as="ul" gap="small">
-              <li>
-                <Link.Nav to="/" iconLeft={<Icon name="home" size="small" />}>
-                  Home
-                </Link.Nav>
-              </li>
-              
-              {/* Enhanced Products Dropdown */}
-              <li className="relative">
-                <button
-                  onClick={toggleBlindsDropdown}
-                  onMouseEnter={() => setIsBlindsDropdownOpen(true)}
-                  className="flex items-center gap-2 text-brand-charcoal hover:text-brand-yellow px-3 py-2 rounded-lg hover:bg-brand-yellow/10 transition-all duration-300"
-                >
-                  <span>Products</span>
-                  <Icon name={isBlindsDropdownOpen ? 'chevronUp' : 'chevronDown'} size="small" className="transition-transform duration-300" />
-                </button>
-                
-                {/* Premium dropdown menu */}
-                <div 
-                  className={`
-                    absolute top-full left-0 w-64 mt-2
-                    transition-all duration-300 origin-top
-                    ${isBlindsDropdownOpen 
-                      ? 'opacity-100 scale-y-100 pointer-events-auto' 
-                      : 'opacity-0 scale-y-95 pointer-events-none'
-                    }
-                  `}
-                  onMouseLeave={() => setIsBlindsDropdownOpen(false)}
-                >
-                  <Card variant="elevated" hover="none" padding="small">
-                    <Stack spacing="small">
-                      {blindsMenu.map((item) => (
-                        <Link 
-                          key={item.path}
-                          to={item.path}
-                          className="group flex items-center justify-between px-3 py-2 rounded-lg hover:bg-gray-50 transition-all duration-300"
-                          onClick={() => setIsBlindsDropdownOpen(false)}
-                        >
-                          <span className="text-brand-charcoal group-hover:text-brand-yellow transition-colors duration-300">
-                            {item.name}
-                          </span>
-                          {item.hot && <Badge variant="primary" size="tiny">HOT</Badge>}
-                          {item.new && <Badge variant="secondary" size="tiny">NEW</Badge>}
-                        </Link>
-                      ))}
-                    </Stack>
-                  </Card>
-                </div>
-              </li>
-
-              {/* Enhanced Areas Dropdown */}
-              <li className="relative">
-                <button
-                  onClick={toggleAreasDropdown}
-                  onMouseEnter={() => setIsAreasDropdownOpen(true)}
-                  className="flex items-center gap-2 text-brand-charcoal hover:text-brand-yellow px-3 py-2 rounded-lg hover:bg-brand-yellow/10 transition-all duration-300"
-                >
-                  <span>Areas</span>
-                  <Icon name={isAreasDropdownOpen ? 'chevronUp' : 'chevronDown'} size="small" className="transition-transform duration-300" />
-                </button>
-                
-                <div 
-                  className={`
-                    absolute top-full left-0 w-56 mt-2
-                    transition-all duration-300 origin-top
-                    ${isAreasDropdownOpen 
-                      ? 'opacity-100 scale-y-100 pointer-events-auto' 
-                      : 'opacity-0 scale-y-95 pointer-events-none'
-                    }
-                  `}
-                  onMouseLeave={() => setIsAreasDropdownOpen(false)}
-                >
-                  <Card variant="elevated" hover="none" padding="small">
-                    <div className="grid grid-cols-2 gap-1">
-                      {areasMenu.map((item) => (
-                        <Link 
-                          key={item.path}
-                          to={item.path}
-                          className="px-3 py-2 rounded-lg text-brand-charcoal hover:text-brand-yellow hover:bg-gray-50 transition-all duration-300 text-sm"
-                          onClick={() => setIsAreasDropdownOpen(false)}
-                        >
-                          {item.name}
-                        </Link>
-                      ))}
-                    </div>
-                  </Card>
-                </div>
-              </li>
-
-              <li>
-                <Link.Nav to="/gallery" iconLeft={<Icon name="grid" size="small" />}>
-                  Gallery
-                </Link.Nav>
-              </li>
-              <li>
-                <Link.Nav to="/contact" iconLeft={<Icon name="mail" size="small" />}>
-                  Contact
-                </Link.Nav>
-              </li>
-            </Flex>
-          </nav>
-
-          {/* CTA Buttons */}
-          <Flex gap="medium" className="hidden lg:flex">
-            <a 
-              href="tel:01457597091" 
-              className="flex items-center gap-3 text-brand-dark hover:text-brand-gold transition-all duration-300 group"
-            >
-              <Icon name="phone" size="medium" className="text-brand-gold" />
-              <Stack spacing="none">
-                <Text size="small" color="muted" tracking="wide">Call Now</Text>
-                <Text weight="semibold" color="dark">01457 597091</Text>
-              </Stack>
-            </a>
-            
-            <Button 
-              as={Link} 
-              to="/book-appointment" 
-              variant="primary" 
-              size="medium"
-              iconRight={<Icon name="arrowRight" />}
-            >
-              Book Appointment
-            </Button>
-          </Flex>
-
-          {/* Mobile Menu Button */}
-          <button
-            onClick={toggleMobileMenu}
-            className="lg:hidden relative w-10 h-10 flex items-center justify-center rounded-lg hover:bg-gray-100 transition-all duration-300"
-            aria-label="Toggle mobile menu"
-          >
-            <Icon 
-              name={isMobileMenuOpen ? 'close' : 'menu'} 
-              size="medium" 
-              className="text-brand-charcoal"
-            />
-          </button>
-        </Flex>
-
-        {/* Premium Mobile Menu */}
-        <div 
-          className={`
-            lg:hidden overflow-hidden transition-all duration-500
-            ${isMobileMenuOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'}
-          `}
-        >
-          <nav className="py-4 border-t border-gray-200">
-            <Stack spacing="small">
-              <Link 
-                to="/" 
-                variant="nav" 
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="w-full"
-              >
-                <Flex align="center" gap="small">
-                  <Icon name="home" size="small" />
-                  Home
+        {/* Mobile Menu */}
+        <MobileMenuWrapper isOpen={isMobileMenuOpen}>
+          <Container className="h-full overflow-y-auto py-8">
+            <Stack spacing="large">
+              {/* Mobile Navigation Links */}
+              <Link variant="mobileNav" to="/" onClick={toggleMobileMenu}>
+                <Flex align="center" gap="medium">
+                  <LuxuryIcon variant="circle" size="small">
+                    <Icon name="home" />
+                  </LuxuryIcon>
+                  <Text variant="large">Home</Text>
                 </Flex>
               </Link>
 
               {/* Mobile Products Section */}
               <div>
-                <button
-                  onClick={toggleBlindsDropdown}
-                  className="w-full flex items-center justify-between text-brand-charcoal hover:text-brand-yellow px-3 py-2 rounded-lg hover:bg-brand-yellow/10 transition-all duration-300"
-                >
-                  <span>Products</span>
-                  <Icon name={isBlindsDropdownOpen ? 'chevronUp' : 'chevronDown'} size="small" />
-                </button>
-                
-                <div className={`
-                  overflow-hidden transition-all duration-300
-                  ${isBlindsDropdownOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}
-                `}>
-                  <Stack spacing="small" className="pl-6 pt-2">
-                    {blindsMenu.map((item) => (
-                      <Link
-                        key={item.path}
-                        to={item.path}
-                        className="flex items-center justify-between text-gray-400 hover:text-white py-2 transition-colors duration-300"
-                        onClick={() => {
-                          setIsMobileMenuOpen(false)
-                          setIsBlindsDropdownOpen(false)
-                        }}
-                      >
-                        {item.name}
-                        {item.hot && <Badge variant="primary" size="tiny">HOT</Badge>}
-                        {item.new && <Badge variant="secondary" size="tiny">NEW</Badge>}
-                      </Link>
-                    ))}
-                  </Stack>
-                </div>
+                <Text variant="large" color="gold" className="font-display mb-4">
+                  Our Products
+                </Text>
+                <Stack spacing="small">
+                  {blindsMenu.map((item) => (
+                    <Link 
+                      key={item.path}
+                      to={item.path}
+                      variant="mobileNav"
+                      onClick={toggleMobileMenu}
+                    >
+                      <Flex justify="between" align="center">
+                        <Text>{item.name}</Text>
+                        {item.hot && <LuxuryBadge variant="gold" size="tiny">HOT</LuxuryBadge>}
+                        {item.new && <LuxuryBadge variant="outline" size="tiny">NEW</LuxuryBadge>}
+                        {item.premium && <LuxuryBadge variant="luxury" size="tiny">PREMIUM</LuxuryBadge>}
+                      </Flex>
+                    </Link>
+                  ))}
+                </Stack>
               </div>
+
+              <GoldDivider variant="luxury" size="full" />
 
               {/* Mobile Areas Section */}
               <div>
-                <button
-                  onClick={toggleAreasDropdown}
-                  className="w-full flex items-center justify-between text-gray-300 hover:text-white px-3 py-2 rounded-lg hover:bg-white/5 transition-all duration-300"
-                >
-                  <span>Areas</span>
-                  <Icon name={isAreasDropdownOpen ? 'chevronUp' : 'chevronDown'} size="small" />
-                </button>
-                
-                <div className={`
-                  overflow-hidden transition-all duration-300
-                  ${isAreasDropdownOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}
-                `}>
-                  <div className="grid grid-cols-2 gap-2 pl-6 pt-2">
-                    {areasMenu.map((item) => (
-                      <Link
-                        key={item.path}
-                        to={item.path}
-                        className="text-gray-400 hover:text-white py-2 text-sm transition-colors duration-300"
-                        onClick={() => {
-                          setIsMobileMenuOpen(false)
-                          setIsAreasDropdownOpen(false)
-                        }}
-                      >
-                        {item.name}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
+                <Text variant="large" color="gold" className="font-display mb-4">
+                  Service Areas
+                </Text>
+                <Grid cols={2} gap="medium">
+                  {areasMenu.map((item) => (
+                    <Link 
+                      key={item.path}
+                      to={item.path}
+                      variant="mobileNav"
+                      onClick={toggleMobileMenu}
+                      className="text-center"
+                    >
+                      <Text variant="small">{item.name}</Text>
+                    </Link>
+                  ))}
+                </Grid>
               </div>
 
-              <Link 
-                to="/gallery" 
-                variant="nav" 
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="w-full justify-between"
-              >
-                <Flex align="center" gap="small">
-                  <Icon name="grid" size="small" />
-                  Gallery
+              <GoldDivider variant="luxury" size="full" />
+
+              {/* Other Links */}
+              <Link variant="mobileNav" to="/gallery" onClick={toggleMobileMenu}>
+                <Flex align="center" gap="medium">
+                  <LuxuryIcon variant="circle" size="small">
+                    <Icon name="image" />
+                  </LuxuryIcon>
+                  <Text variant="large">Gallery</Text>
                 </Flex>
               </Link>
 
-              <Link 
-                to="/contact" 
-                variant="nav" 
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="w-full justify-between"
-              >
-                <Flex align="center" gap="small">
-                  <Icon name="mail" size="small" />
-                  Contact
+              <Link variant="mobileNav" to="/contact" onClick={toggleMobileMenu}>
+                <Flex align="center" gap="medium">
+                  <LuxuryIcon variant="circle" size="small">
+                    <Icon name="mail" />
+                  </LuxuryIcon>
+                  <Text variant="large">Contact</Text>
                 </Flex>
               </Link>
 
-              {/* Mobile CTA Section */}
-              <div className="pt-4 border-t border-gray-800">
-                <Stack spacing="medium">
-                  <a 
-                    href="tel:01457597091" 
-                    className="flex items-center justify-center gap-3 py-3 bg-brand-gold/10 hover:bg-brand-gold/20 rounded-lg transition-all duration-300"
-                  >
-                    <Icon name="phone" size="medium" className="text-brand-gold" />
-                    <div>
-                      <Text size="small" color="muted">Call Now</Text>
-                      <Text weight="bold" className="text-brand-gold">01457 597091</Text>
-                    </div>
-                  </a>
-                  
-                  <Button 
-                    as={Link} 
-                    to="/book-appointment" 
-                    variant="primary" 
-                    size="large"
-                    fullWidth
-                    glow
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    Book Free Consultation
-                  </Button>
+              {/* Mobile CTA */}
+              <Button 
+                to="/book-appointment" 
+                variant="luxury" 
+                size="large"
+                fullWidth
+                onClick={toggleMobileMenu}
+                iconLeft={<Icon name="calendar" />}
+              >
+                Book Free Consultation
+              </Button>
+
+              {/* Contact Info */}
+              <Card variant="gold" padding="medium">
+                <Stack spacing="small" align="center">
+                  <ShimmerText variant="luxury" className="text-2xl font-display">
+                    Call Us Today
+                  </ShimmerText>
+                  <Link to="tel:01614570250" variant="plain">
+                    <Text variant="large" className="font-semibold">
+                      0161 457 0250
+                    </Text>
+                  </Link>
                 </Stack>
-              </div>
+              </Card>
             </Stack>
-          </nav>
-        </div>
-      </Container>
-    </header>
+          </Container>
+        </MobileMenuWrapper>
+      </HeaderWrapper>
+    </>
   )
 }
 
-export default HeaderStandardized
+export default Header

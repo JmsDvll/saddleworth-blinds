@@ -2,9 +2,10 @@ import React, { forwardRef } from 'react'
 
 const cardStyles = {
   base: `
-    rounded-sm
-    transition-all duration-500 ease-out
+    rounded-lg
+    transition-all duration-700 ease-out
     group
+    relative
     overflow-hidden
   `,
   
@@ -18,54 +19,79 @@ const cardStyles = {
       bg-white
       border border-brand-gold/30
       shadow-luxury
-      hover:shadow-gold
+      hover:shadow-gold-lg
+    `,
+    dark: `
+      bg-brand-dark
+      border border-brand-gold/20
+      shadow-luxury
+      text-brand-cream
     `,
     ghost: `
       bg-transparent
       border border-brand-grey-light/30
-      hover:border-brand-gold/30
+      hover:border-brand-gold/50
     `,
     luxury: `
-      bg-gradient-to-br from-brand-dark to-brand-dark-light
+      bg-gradient-to-br from-brand-dark via-brand-dark-light to-brand-dark
       border border-brand-gold
-      shadow-luxury
+      shadow-luxury-lg
       text-brand-cream
       relative
       before:absolute before:inset-0
-      before:bg-gradient-to-br before:from-brand-gold/10 before:to-transparent
+      before:bg-gradient-to-br before:from-brand-gold/20 before:to-transparent
       before:opacity-0 hover:before:opacity-100
-      before:transition-opacity before:duration-500
+      before:transition-all before:duration-700
+      after:absolute after:inset-0
+      after:bg-gold-shimmer after:opacity-0
+      hover:after:opacity-10 after:transition-opacity after:duration-700
     `,
     glass: `
-      bg-white/70
-      backdrop-blur-lg
+      bg-white/10
+      backdrop-blur-xl
       border border-white/20
       shadow-luxury
+      text-brand-cream
+    `,
+    gold: `
+      bg-gold-gradient
+      border border-brand-gold-dark
+      shadow-gold
+      text-brand-dark
+      relative
+      before:absolute before:inset-0
+      before:bg-gold-shimmer before:opacity-0
+      hover:before:opacity-100 before:transition-opacity before:duration-500
     `,
   },
   
   hover: {
     none: '',
     lift: `
-      hover:transform hover:-translate-y-1
-      hover:shadow-gold
+      hover:transform hover:-translate-y-2
+      hover:shadow-gold-lg
     `,
     glow: `
-      hover:shadow-gold
-      hover:border-brand-gold/50
+      hover:shadow-gold-lg
+      hover:border-brand-gold/70
     `,
     scale: `
       hover:scale-[1.02]
-      hover:shadow-luxury
+      hover:shadow-luxury-lg
+    `,
+    luxury: `
+      hover:transform hover:-translate-y-1 hover:scale-[1.01]
+      hover:shadow-gold-lg
+      hover:border-brand-gold-light
     `,
   },
   
   padding: {
     none: '',
-    small: 'p-4',
-    medium: 'p-6',
-    large: 'p-8',
-    xlarge: 'p-10',
+    small: 'p-6',
+    medium: 'p-8',
+    large: 'p-10',
+    xlarge: 'p-12',
   }
 }
 

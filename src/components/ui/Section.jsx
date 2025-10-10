@@ -3,10 +3,11 @@ import React, { forwardRef } from 'react'
 const sectionStyles = {
   padding: {
     none: '',
-    small: 'py-8 md:py-12',
-    medium: 'py-12 md:py-16',
-    large: 'py-16 md:py-24',
-    xlarge: 'py-24 md:py-32',
+    small: 'py-12 md:py-16 lg:py-20',
+    medium: 'py-16 md:py-24 lg:py-32',
+    large: 'py-24 md:py-32 lg:py-40',
+    xlarge: 'py-32 md:py-40 lg:py-48',
+    hero: 'py-32 md:py-48 lg:py-64',
   },
   
   background: {
@@ -14,13 +15,22 @@ const sectionStyles = {
     cream: 'bg-brand-cream',
     white: 'bg-white',
     dark: 'bg-brand-dark text-brand-cream',
-    luxury: 'bg-gradient-to-br from-brand-dark via-brand-dark-light to-brand-dark text-brand-cream',
-    gold: 'bg-gradient-to-r from-brand-gold to-brand-gold-light text-brand-dark',
+    darker: 'bg-brand-dark-soft text-brand-cream',
+    luxury: 'bg-hero-gradient text-brand-cream relative overflow-hidden',
+    gold: 'bg-gold-gradient text-brand-dark',
+    goldRadial: 'bg-gold-radial text-brand-dark',
+    darkRadial: 'bg-dark-radial text-brand-cream',
     pattern: `
       bg-brand-cream
       relative
       before:absolute before:inset-0
-      before:bg-[url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23D4AF37' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")]
+      before:bg-[url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23CABC32' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")]
+    `,
+    hero: `
+      bg-brand-dark text-brand-cream
+      relative overflow-hidden
+      before:absolute before:inset-0 before:bg-hero-gradient
+      after:absolute after:inset-0 after:bg-gold-pulse after:opacity-30 after:animate-glow-pulse
     `,
   },
   
@@ -29,6 +39,14 @@ const sectionStyles = {
     dark: 'text-brand-dark',
     light: 'text-brand-cream',
     gold: 'text-brand-gold',
+    muted: 'text-brand-grey-light',
+  },
+  
+  effects: {
+    none: '',
+    shimmer: 'relative before:absolute before:inset-0 before:bg-gold-shimmer before:animate-shimmer before:opacity-10',
+    glow: 'relative after:absolute after:inset-0 after:bg-gold-pulse after:animate-glow-pulse after:opacity-20',
+    overlay: 'relative before:absolute before:inset-0 before:bg-overlay-gradient before:pointer-events-none',
   },
 }
 
@@ -37,6 +55,7 @@ export const Section = forwardRef(({
   padding = 'medium',
   background = 'transparent',
   textColor = 'inherit',
+  effect = 'none',
   className = '',
   ...props 
 }, ref) => {
@@ -44,6 +63,7 @@ export const Section = forwardRef(({
     ${sectionStyles.padding[padding]}
     ${sectionStyles.background[background]}
     ${sectionStyles.textColor[textColor]}
+    ${sectionStyles.effects[effect]}
     ${className}
   `.trim()
 
