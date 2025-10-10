@@ -34,24 +34,32 @@ const CookieConsent = () => {
   if (!isVisible) return null
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 bg-gray-900 border-t border-brand-gold p-4 shadow-lg">
+    <Card
+      variant="elevated"
+      className="fixed bottom-0 left-0 right-0 z-50 border-t border-brand-gold"
+      padding="medium"
+    >
       <Container>
         <Flex direction="column" lgDirection="row" align="start" lgAlign="center" gap="medium">
           <Stack spacing="small" className="flex-1">
             <Heading as="h3" size="lg">
               🍪 Cookie Consent
             </Heading>
-            <Text color="light" size="small">
-              We use cookies to enhance your browsing experience and analyze our website traffic.
+            <Flex align="center" gap="small">
+              <Text color="light" size="small">
+                We use cookies to enhance your browsing experience and analyze our website traffic.
+              </Text>
               {!showDetails && (
-                <button
+                <Button
                   onClick={() => setShowDetails(true)}
-                  className="text-brand-gold hover:text-brand-green transition-colors ml-2"
+                  variant="ghost"
+                  size="small"
+                  className="ml-2 p-0 h-auto"
                 >
                   View Details
-                </button>
+                </Button>
               )}
-            </Text>
+            </Flex>
 
             {showDetails && (
               <Card variant="elevated" padding="medium" className="mt-2">
@@ -91,16 +99,17 @@ const CookieConsent = () => {
             >
               Necessary Only
             </Button>
-            <button
+            <Button
               onClick={() => setShowDetails(!showDetails)}
-              className="text-gray-400 hover:text-white transition-colors text-sm underline"
+              variant="ghost"
+              size="small"
             >
               {showDetails ? 'Hide Details' : 'Cookie Settings'}
-            </button>
+            </Button>
           </Flex>
         </Flex>
       </Container>
-    </div>
+    </Card>
   )
 }
 
