@@ -1,98 +1,167 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 
-// Centralized badge styles
 const badgeStyles = {
-  // Base styles
-  base: 'inline-flex items-center font-medium rounded-full',
+  base: `
+    inline-flex items-center
+    font-medium
+    rounded-full
+    transition-all duration-300
+    group
+  `,
   
-  // Variants
   variants: {
-    default: 'bg-gray-800 text-gray-300',
-    primary: 'bg-brand-gold text-gray-900',
-    secondary: 'bg-gray-700 text-white',
-    success: 'bg-green-900 text-green-300',
-    warning: 'bg-yellow-900 text-yellow-300',
-    error: 'bg-red-900 text-red-300',
-    info: 'bg-blue-900 text-blue-300',
-    ghost: 'bg-transparent border border-gray-600 text-gray-300',
+    default: `
+      bg-gray-800/80 text-gray-300
+      border border-gray-700/50
+      hover:bg-gray-700/80 hover:border-gray-600/50
+    `,
+    primary: `
+      bg-gradient-to-r from-brand-gold to-brand-gold-light
+      text-gray-900
+      shadow-sm shadow-brand-gold/20
+      hover:shadow-md hover:shadow-brand-gold/30
+      hover:scale-105
+    `,
+    secondary: `
+      bg-brand-dark-lighter text-brand-gold
+      border border-brand-gold/30
+      hover:border-brand-gold/50
+      hover:bg-brand-dark-light
+    `,
+    success: `
+      bg-gradient-to-r from-emerald-900/80 to-emerald-800/80
+      text-emerald-300
+      border border-emerald-500/30
+      hover:border-emerald-400/40
+    `,
+    warning: `
+      bg-gradient-to-r from-amber-900/80 to-amber-800/80
+      text-amber-300
+      border border-amber-500/30
+      hover:border-amber-400/40
+    `,
+    error: `
+      bg-gradient-to-r from-red-900/80 to-red-800/80
+      text-red-300
+      border border-red-500/30
+      hover:border-red-400/40
+    `,
+    info: `
+      bg-gradient-to-r from-blue-900/80 to-blue-800/80
+      text-blue-300
+      border border-blue-500/30
+      hover:border-blue-400/40
+    `,
+    ghost: `
+      bg-transparent
+      text-gray-400
+      border border-gray-700/30
+      hover:bg-gray-800/50 hover:border-gray-600/50
+    `,
   },
   
-  // Sizes
   sizes: {
-    tiny: 'text-xs px-2 py-0.5',
-    small: 'text-sm px-2.5 py-0.5',
-    medium: 'text-sm px-3 py-1',
-    large: 'text-base px-4 py-1.5',
+    tiny: 'px-2 py-0.5 text-xs',
+    small: 'px-2.5 py-1 text-xs',
+    medium: 'px-3 py-1.5 text-sm',
+    large: 'px-4 py-2 text-base',
   },
   
-  // Dot indicator
-  dot: {
-    base: 'rounded-full',
-    sizes: {
-      tiny: 'w-1.5 h-1.5',
-      small: 'w-2 h-2',
-      medium: 'w-2.5 h-2.5',
-      large: 'w-3 h-3',
-    },
-  },
+  // Animated dot indicator
+  dot: `
+    before:content-['']
+    before:inline-block
+    before:w-2 before:h-2
+    before:rounded-full
+    before:mr-2
+    before:bg-current
+    before:animate-pulse
+  `,
+  
+  // Premium glow effect
+  glow: `
+    after:absolute after:inset-0
+    after:rounded-full
+    after:bg-current
+    after:blur-md
+    after:opacity-30
+    after:-z-10
+    after:transition-opacity
+    hover:after:opacity-50
+  `
 }
 
-const Badge = ({
+export const Badge = forwardRef(({
   children,
   variant = 'default',
   size = 'medium',
   dot = false,
-  dotColor,
+  glow = false,
   className = '',
+  icon,
   ...props
-}) => {
-  const classes = [
-    badgeStyles.base,
-    badgeStyles.variants[variant],
-    badgeStyles.sizes[size],
-    className,
-  ].filter(Boolean).join(' ')
-  
+}, ref) => {
+  const classes = `
+    ${badgeStyles.base}
+    ${badgeStyles.variants[variant]}
+    ${badgeStyles.sizes[size]}
+    ${dot ? badgeStyles.dot : ''}
+    ${glow && (variant === 'primary' || variant === 'secondary') ? badgeStyles.glow + ' relative' : ''}
+    ${className}
+  `.trim()
+
   return (
-    <span className={classes} {...props}>
-      {dot && (
-        <span
-          className={[
-            badgeStyles.dot.base,
-            badgeStyles.dot.sizes[size],
-            dotColor || 'bg-current',
-            'mr-1.5',
-          ].join(' ')}
-        />
-      )}
+    <span
+      ref={ref}
+      className={classes}
+      {...props}
+    >
+      {icon && <span className="mr-1.5">{icon}</span>}
       {children}
     </span>
   )
-}
+})
 
-// Status Badge variants
-Badge.Success = (props) => <Badge variant="success" {...props} />
-Badge.Warning = (props) => <Badge variant="warning" {...props} />
-Badge.Error = (props) => <Badge variant="error" {...props} />
-Badge.Info = (props) => <Badge variant="info" {...props} />
+Badge.displayName = 'Badge'
 
-// Special badges
-Badge.New = (props) => (
-  <Badge variant="primary" size="tiny" {...props}>
+// Convenience components for common badge types
+Badge.Success = forwardRef((props, ref) => (
+  <Badge ref={ref} variant="success" {...props} />
+))
+Badge.Success.displayName = 'Badge.Success'
+
+Badge.Warning = forwardRef((props, ref) => (
+  <Badge ref={ref} variant="warning" {...props} />
+))
+Badge.Warning.displayName = 'Badge.Warning'
+
+Badge.Error = forwardRef((props, ref) => (
+  <Badge ref={ref} variant="error" {...props} />
+))
+Badge.Error.displayName = 'Badge.Error'
+
+Badge.Info = forwardRef((props, ref) => (
+  <Badge ref={ref} variant="info" {...props} />
+))
+Badge.Info.displayName = 'Badge.Info'
+
+Badge.New = forwardRef((props, ref) => (
+  <Badge ref={ref} variant="primary" dot glow {...props}>
     NEW
   </Badge>
-)
+))
+Badge.New.displayName = 'Badge.New'
 
-Badge.ComingSoon = (props) => (
-  <Badge variant="warning" size="small" {...props}>
+Badge.ComingSoon = forwardRef((props, ref) => (
+  <Badge ref={ref} variant="secondary" glow {...props}>
     Coming Soon
   </Badge>
-)
+))
+Badge.ComingSoon.displayName = 'Badge.ComingSoon'
 
-Badge.Beta = (props) => (
-  <Badge variant="info" size="tiny" {...props}>
+Badge.Beta = forwardRef((props, ref) => (
+  <Badge ref={ref} variant="info" {...props}>
     BETA
   </Badge>
-)
-
-export default Badge
+))
+Badge.Beta.displayName = 'Badge.Beta'

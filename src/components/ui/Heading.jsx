@@ -1,15 +1,44 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 
-// Centralized heading styles
 const headingStyles = {
-  // Sizes based on heading level
+  // Base styles with premium typography
+  base: `
+    font-display font-bold
+    tracking-tight
+    leading-tight
+    transition-all duration-300
+  `,
+  
+  // Enhanced sizes with better scaling
   sizes: {
-    h1: 'text-4xl lg:text-6xl font-bold leading-tight',
-    h2: 'text-3xl lg:text-4xl font-bold',
-    h3: 'text-2xl lg:text-3xl font-semibold',
-    h4: 'text-xl lg:text-2xl font-semibold',
-    h5: 'text-lg lg:text-xl font-semibold',
-    h6: 'text-base lg:text-lg font-semibold',
+    xs: 'text-sm md:text-base',
+    sm: 'text-base md:text-lg',
+    base: 'text-lg md:text-xl',
+    lg: 'text-xl md:text-2xl',
+    xl: 'text-2xl md:text-3xl',
+    '2xl': 'text-3xl md:text-4xl',
+    '3xl': 'text-4xl md:text-5xl',
+    '4xl': 'text-5xl md:text-6xl',
+    '5xl': 'text-6xl md:text-7xl',
+    '6xl': 'text-7xl md:text-8xl',
+  },
+  
+  // Premium color options
+  colors: {
+    inherit: '',
+    white: 'text-white',
+    gold: 'text-brand-gold',
+    gradient: `
+      bg-gradient-to-r from-brand-gold via-brand-gold-light to-brand-gold
+      bg-clip-text text-transparent
+      bg-[length:200%_auto]
+      animate-shimmer
+    `,
+    gradientSubtle: `
+      bg-gradient-to-r from-gray-100 to-gray-300
+      bg-clip-text text-transparent
+    `,
+    dark: 'text-gray-900',
   },
   
   // Text alignment
@@ -19,58 +48,107 @@ const headingStyles = {
     right: 'text-right',
   },
   
-  // Color variations
-  color: {
-    inherit: '',
-    white: 'text-white',
-    gold: 'text-brand-gold',
-    gradient: 'bg-gradient-to-r from-brand-gold to-yellow-400 bg-clip-text text-transparent',
-  },
-  
-  // Margin bottom
+  // Margin bottom options
   marginBottom: {
     none: '',
     small: 'mb-2',
     medium: 'mb-4',
     large: 'mb-6',
-    xlarge: 'mb-8',
   },
+  
+  // Special effects
+  effects: {
+    none: '',
+    glow: `
+      drop-shadow-[0_0_20px_rgba(212,175,55,0.5)]
+      hover:drop-shadow-[0_0_30px_rgba(212,175,55,0.7)]
+    `,
+    shadow: 'drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]',
+    underline: `
+      relative
+      after:absolute after:bottom-0 after:left-0
+      after:w-full after:h-0.5
+      after:bg-gold-gradient
+      after:transform after:scale-x-0
+      after:origin-left
+      after:transition-transform after:duration-500
+      hover:after:scale-x-100
+    `,
+  }
 }
 
-const Heading = ({
-  as: Component = 'h2',
-  size,
-  align = 'left',
-  color = 'inherit',
-  marginBottom = 'medium',
-  children,
-  className = '',
-  ...props
-}) => {
-  // Use the component level as default size if not specified
-  const headingSize = size || Component
-  
-  const classes = [
-    headingStyles.sizes[headingSize],
-    headingStyles.align[align],
-    headingStyles.color[color],
-    headingStyles.marginBottom[marginBottom],
-    className,
-  ].filter(Boolean).join(' ')
-  
-  return (
-    <Component className={classes} {...props}>
-      {children}
-    </Component>
-  )
+const createHeading = (as) => {
+  return forwardRef(({
+    children,
+    size,
+    color = 'inherit',
+    align = 'left',
+    marginBottom = 'medium',
+    effect = 'none',
+    className = '',
+    animate = false,
+    mdSize,
+    lgSize,
+    ...props
+  }, ref) => {
+    // Default sizes based on heading level
+    const defaultSizes = {
+      h1: '4xl',
+      h2: '3xl',
+      h3: '2xl',
+      h4: 'xl',
+      h5: 'lg',
+      h6: 'base',
+    }
+    
+    const finalSize = size || defaultSizes[as] || 'base'
+    
+    const classes = `
+      ${headingStyles.base}
+      ${headingStyles.sizes[finalSize]}
+      ${mdSize ? `md:${headingStyles.sizes[mdSize].split(' ')[1]}` : ''}
+      ${lgSize ? `lg:${headingStyles.sizes[lgSize].split(' ')[1]}` : ''}
+      ${headingStyles.colors[color]}
+      ${headingStyles.align[align]}
+      ${headingStyles.marginBottom[marginBottom]}
+      ${headingStyles.effects[effect]}
+      ${animate ? 'animate-slide-down' : ''}
+      ${className}
+    `.trim()
+
+    const Component = as
+
+    return (
+      <Component
+        ref={ref}
+        className={classes}
+        {...props}
+      >
+        {children}
+      </Component>
+    )
+  })
 }
+
+// Main Heading component
+export const Heading = createHeading('h2')
+Heading.displayName = 'Heading'
 
 // Convenience components for each heading level
-Heading.H1 = (props) => <Heading as="h1" {...props} />
-Heading.H2 = (props) => <Heading as="h2" {...props} />
-Heading.H3 = (props) => <Heading as="h3" {...props} />
-Heading.H4 = (props) => <Heading as="h4" {...props} />
-Heading.H5 = (props) => <Heading as="h5" {...props} />
-Heading.H6 = (props) => <Heading as="h6" {...props} />
+Heading.H1 = createHeading('h1')
+Heading.H1.displayName = 'Heading.H1'
 
-export default Heading
+Heading.H2 = createHeading('h2')
+Heading.H2.displayName = 'Heading.H2'
+
+Heading.H3 = createHeading('h3')
+Heading.H3.displayName = 'Heading.H3'
+
+Heading.H4 = createHeading('h4')
+Heading.H4.displayName = 'Heading.H4'
+
+Heading.H5 = createHeading('h5')
+Heading.H5.displayName = 'Heading.H5'
+
+Heading.H6 = createHeading('h6')
+Heading.H6.displayName = 'Heading.H6'

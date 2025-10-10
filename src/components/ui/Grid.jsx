@@ -43,7 +43,7 @@ const gridStyles = {
   },
 }
 
-const Grid = ({
+export const Grid = ({
   cols = 1,
   gap = 'medium',
   align = 'stretch',
@@ -92,5 +92,3 @@ Grid.Item = ({ span = 1, className = '', children, ...props }) => {
     </div>
   )
 }
-
-export default Grid

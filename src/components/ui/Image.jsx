@@ -1,25 +1,28 @@
-import React, { useState } from 'react'
+import React, { useState, forwardRef } from 'react'
 import { useInView } from 'react-intersection-observer'
 
-// Centralized image styles
 const imageStyles = {
-  // Container styles
   container: {
-    base: 'relative overflow-hidden',
+    base: `
+      relative overflow-hidden
+      bg-gradient-to-br from-gray-800 to-gray-900
+      group
+    `,
     aspectRatio: {
       none: '',
-      video: 'aspect-video',
+      '16/9': 'aspect-[16/9]',
+      '4/3': 'aspect-[4/3]',
       square: 'aspect-square',
-      portrait: 'aspect-[3/4]',
-      landscape: 'aspect-[4/3]',
-      wide: 'aspect-[16/9]',
-      ultrawide: 'aspect-[21/9]',
-    },
+      '3/2': 'aspect-[3/2]',
+      '2/3': 'aspect-[2/3]',
+    }
   },
   
-  // Image styles
   image: {
-    base: 'w-full h-full transition-opacity duration-300',
+    base: `
+      w-full h-full
+      transition-all duration-700 ease-out
+    `,
     objectFit: {
       cover: 'object-cover',
       contain: 'object-contain',
@@ -27,24 +30,47 @@ const imageStyles = {
       none: 'object-none',
       scaleDown: 'object-scale-down',
     },
-    loading: 'opacity-0',
-    loaded: 'opacity-100',
-    error: 'opacity-0',
+    loading: 'opacity-0 scale-105',
+    loaded: 'opacity-100 scale-100',
+    error: 'opacity-50',
   },
   
-  // Loading skeleton
-  skeleton: {
-    base: 'absolute inset-0 bg-gray-800 animate-pulse',
-  },
+  // Premium loading skeleton
+  skeleton: `
+    absolute inset-0
+    bg-gradient-to-r from-gray-800 via-gray-700 to-gray-800
+    bg-[length:200%_100%]
+    animate-shimmer
+  `,
+  
+  // Loading spinner overlay
+  loadingOverlay: `
+    absolute inset-0
+    flex items-center justify-center
+    bg-gray-900/50
+    backdrop-blur-sm
+  `,
   
   // Error state
-  error: {
-    base: 'absolute inset-0 flex items-center justify-center bg-gray-800',
-    text: 'text-gray-500 text-sm',
-  },
+  errorOverlay: `
+    absolute inset-0
+    flex flex-col items-center justify-center
+    bg-gray-900/80
+    text-gray-400
+    p-4 text-center
+  `,
+  
+  // Hover effects
+  hoverEffects: {
+    none: '',
+    zoom: 'group-hover:scale-110',
+    brightness: 'group-hover:brightness-110',
+    grayscale: 'grayscale group-hover:grayscale-0',
+    blur: 'group-hover:blur-sm',
+  }
 }
 
-const Image = ({
+export const Image = forwardRef(({
   src,
   alt,
   aspectRatio = 'none',
@@ -54,111 +80,140 @@ const Image = ({
   containerClassName = '',
   onLoad,
   onError,
-  fallback = '/images/placeholder.jpg',
   showSkeleton = true,
+  hoverEffect = 'none',
+  fallbackSrc = '/images/placeholder.jpg',
   ...props
-}) => {
-  const [imageStatus, setImageStatus] = useState('loading')
-  const { ref, inView } = useInView({
-    threshold: 0.1,
+}, ref) => {
+  const [imageState, setImageState] = useState('loading')
+  const [currentSrc, setCurrentSrc] = useState(src)
+  
+  // Use intersection observer for lazy loading
+  const { ref: inViewRef, inView } = useInView({
     triggerOnce: true,
+    threshold: 0.1,
+    rootMargin: '100px',
   })
   
-  const handleLoad = (e) => {
-    setImageStatus('loaded')
-    onLoad?.(e)
-  }
-  
-  const handleError = (e) => {
-    setImageStatus('error')
-    onError?.(e)
-    
-    // Try fallback image
-    if (e.target.src !== fallback && fallback) {
-      e.target.src = fallback
-      setImageStatus('loading')
+  // Combine refs
+  const setRefs = (el) => {
+    inViewRef(el)
+    if (ref) {
+      if (typeof ref === 'function') ref(el)
+      else ref.current = el
     }
   }
   
-  const containerClasses = [
-    imageStyles.container.base,
-    imageStyles.container.aspectRatio[aspectRatio],
-    containerClassName,
-  ].filter(Boolean).join(' ')
+  const handleLoad = (e) => {
+    setImageState('loaded')
+    if (onLoad) onLoad(e)
+  }
   
-  const imageClasses = [
-    imageStyles.image.base,
-    imageStyles.image.objectFit[objectFit],
-    imageStyles.image[imageStatus],
-    className,
-  ].filter(Boolean).join(' ')
+  const handleError = (e) => {
+    setImageState('error')
+    if (currentSrc !== fallbackSrc) {
+      setCurrentSrc(fallbackSrc)
+      setImageState('loading')
+    }
+    if (onError) onError(e)
+  }
   
+  const containerClasses = `
+    ${imageStyles.container.base}
+    ${imageStyles.container.aspectRatio[aspectRatio]}
+    ${containerClassName}
+  `.trim()
+  
+  const imageClasses = `
+    ${imageStyles.image.base}
+    ${imageStyles.image.objectFit[objectFit]}
+    ${imageState === 'loading' ? imageStyles.image.loading : ''}
+    ${imageState === 'loaded' ? imageStyles.image.loaded : ''}
+    ${imageState === 'error' ? imageStyles.image.error : ''}
+    ${imageStyles.hoverEffects[hoverEffect]}
+    ${className}
+  `.trim()
+  
+  // Only load image if in view or eager loading
+  const shouldLoad = loading === 'eager' || inView
+
   return (
-    <div ref={ref} className={containerClasses}>
+    <div className={containerClasses}>
       {/* Loading skeleton */}
-      {showSkeleton && imageStatus === 'loading' && (
-        <div className={imageStyles.skeleton.base} />
-      )}
-      
-      {/* Error state */}
-      {imageStatus === 'error' && !fallback && (
-        <div className={imageStyles.error.base}>
-          <span className={imageStyles.error.text}>Failed to load image</span>
+      {showSkeleton && imageState === 'loading' && (
+        <div className={imageStyles.skeleton}>
+          <div className={imageStyles.loadingOverlay}>
+            <div className="relative">
+              <div className="w-12 h-12 border-3 border-gray-600 border-t-brand-gold rounded-full animate-spin"></div>
+              <div className="absolute inset-0 w-12 h-12 border-3 border-transparent border-t-brand-gold/30 rounded-full animate-spin animate-reverse"></div>
+            </div>
+          </div>
         </div>
       )}
       
-      {/* Image */}
-      {(loading !== 'lazy' || inView) && (
+      {/* Main image */}
+      {shouldLoad && (
         <img
-          src={src}
+          ref={setRefs}
+          src={currentSrc}
           alt={alt}
           className={imageClasses}
-          loading={loading === 'lazy' ? 'lazy' : 'eager'}
           onLoad={handleLoad}
           onError={handleError}
+          loading={loading}
           {...props}
         />
       )}
+      
+      {/* Error state */}
+      {imageState === 'error' && currentSrc === fallbackSrc && (
+        <div className={imageStyles.errorOverlay}>
+          <svg className="w-12 h-12 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+          <p className="text-sm">Failed to load image</p>
+        </div>
+      )}
+      
+      {/* Premium overlay gradient */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
     </div>
   )
-}
+})
 
-// Hero Image variant
-Image.Hero = ({ gradient = true, ...props }) => (
-  <div className="relative">
-    <Image aspectRatio="wide" loading="eager" {...props} />
-    {gradient && (
-      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
-    )}
-  </div>
-)
+Image.displayName = 'Image'
 
-// Thumbnail variant
-Image.Thumbnail = ({ size = 'medium', ...props }) => {
-  const sizes = {
-    small: 'w-16 h-16',
-    medium: 'w-24 h-24',
-    large: 'w-32 h-32',
-  }
-  
-  return (
-    <Image
-      aspectRatio="square"
-      containerClassName={sizes[size]}
-      {...props}
-    />
-  )
-}
+// Specialized image components
+Image.Hero = forwardRef((props, ref) => (
+  <Image
+    ref={ref}
+    aspectRatio="16/9"
+    loading="eager"
+    hoverEffect="zoom"
+    className="rounded-xl shadow-2xl"
+    {...props}
+  />
+))
+Image.Hero.displayName = 'Image.Hero'
 
-// Gallery Image variant
-Image.Gallery = ({ onClick, ...props }) => (
-  <div 
-    className="cursor-pointer group"
-    onClick={onClick}
-  >
-    <Image {...props} />
-    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
-  </div>
-)
+Image.Thumbnail = forwardRef((props, ref) => (
+  <Image
+    ref={ref}
+    aspectRatio="square"
+    className="rounded-lg"
+    hoverEffect="brightness"
+    {...props}
+  />
+))
+Image.Thumbnail.displayName = 'Image.Thumbnail'
 
-export default Image
+Image.Gallery = forwardRef((props, ref) => (
+  <Image
+    ref={ref}
+    aspectRatio="4/3"
+    className="rounded-lg"
+    hoverEffect="zoom"
+    {...props}
+  />
+))
+Image.Gallery.displayName = 'Image.Gallery'

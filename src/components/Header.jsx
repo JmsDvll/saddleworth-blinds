@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   Container,
   Flex,
@@ -7,13 +7,25 @@ import {
   Button,
   Text,
   Stack,
-  Card
+  Card,
+  Badge
 } from './ui'
 
 const HeaderStandardized = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isBlindsDropdownOpen, setIsBlindsDropdownOpen] = useState(false)
   const [isAreasDropdownOpen, setIsAreasDropdownOpen] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false)
+
+  // Add scroll detection for header effects
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20)
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen)
@@ -30,15 +42,15 @@ const HeaderStandardized = () => {
   }
 
   const blindsMenu = [
-    { name: 'Roller Blinds', path: '/roller-blinds' },
+    { name: 'Roller Blinds', path: '/roller-blinds', hot: true },
     { name: 'Venetian Blinds', path: '/venetian-blinds' },
     { name: 'Vertical Blinds', path: '/vertical-blinds' },
-    { name: 'Vision Blinds', path: '/vision-blinds' },
+    { name: 'Vision Blinds', path: '/vision-blinds', hot: true },
     { name: 'Perfect Fit Blinds', path: '/perfect-fit-blinds' },
     { name: 'Shutters', path: '/shutters' },
-    { name: 'Roman Blinds', path: '/roman-blinds' },
+    { name: 'Roman Blinds', path: '/roman-blinds', new: true },
     { name: 'Curtains', path: '/curtains' },
-    { name: 'Allusion Blinds', path: '/allusion-blinds' }
+    { name: 'Allusion Blinds', path: '/allusion-blinds', new: true }
   ]
 
   const areasMenu = [
@@ -56,307 +68,335 @@ const HeaderStandardized = () => {
     { name: 'Lees', path: '/areas/lees' }
   ]
 
-  const mainNav = [
-    { name: 'Home', path: '/' },
-    { name: 'Gallery', path: '/gallery' },
-    { name: 'Contact', path: '/contact' }
-  ]
-
   return (
-    <header className="bg-gray-900 border-b border-gray-800 sticky top-0 z-50">
-      <Container padding="none">
-        <Flex justify="between" align="center" className="min-h-[80px] px-4 md:px-6 lg:px-8">
-          {/* Logo */}
-          <Link to="/" variant="plain">
-            <Flex gap="medium" align="center">
-              <img 
-                src="/images/sunshine-logo.svg" 
-                alt="Sunshine Blinds Logo" 
-                className="w-16 h-12 object-contain" 
-              />
-              <Stack spacing="none">
-                <Text 
-                  size="xlarge" 
-                  weight="bold" 
-                  color="gold" 
-                  className="leading-tight"
-                >
-                  Sunshine<br />Blinds
-                </Text>
-                <Text size="small" weight="medium" color="muted">
-                  Saddleworth
-                </Text>
-              </Stack>
-            </Flex>
+    <header 
+      className={`
+        sticky top-0 z-40 transition-all duration-500
+        ${isScrolled 
+          ? 'bg-brand-dark/95 backdrop-blur-lg shadow-2xl shadow-black/50 border-b border-brand-gold/10' 
+          : 'bg-brand-dark border-b border-gray-800'
+        }
+      `}
+      role="navigation"
+    >
+      {/* Premium announcement bar */}
+      <div className="bg-gradient-to-r from-brand-gold to-brand-gold-light text-gray-900 py-2 text-center text-sm font-medium animate-shimmer bg-[length:200%_auto]">
+        <Container>
+          <Flex justify="center" align="center" gap="small">
+            <Icon name="sparkle" size="tiny" className="animate-pulse" />
+            <span>Special Offer: 20% off all Perfect Fit Blinds this month!</span>
+            <Icon name="sparkle" size="tiny" className="animate-pulse" />
+          </Flex>
+        </Container>
+      </div>
+
+      <Container>
+        <Flex justify="between" align="center" className="py-4">
+          {/* Logo with premium hover effect */}
+          <Link to="/" className="flex items-center space-x-2 group">
+            <div className="relative">
+              <div className="absolute -inset-2 bg-gradient-to-r from-brand-gold/20 to-brand-gold-light/20 rounded-full blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <svg className="w-10 h-10 text-brand-gold relative transition-transform duration-300 group-hover:scale-110" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 3v1m0 16v1m9-9h-1M4 12H3m3.343-5.657L5.636 5.636m12.728 0l-.707.707m0 11.314l.707.707m-12.728 0l.707-.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" stroke="currentColor" strokeWidth="2" fill="none"/>
+              </svg>
+            </div>
+            <Stack spacing="none">
+              <Text size="large" weight="bold" className="leading-none group-hover:text-brand-gold transition-colors duration-300">Sunshine Blinds</Text>
+              <Text size="small" color="muted">Saddleworth</Text>
+            </Stack>
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav 
-            className="hidden lg:flex items-center gap-8" 
-            role="navigation" 
-            aria-label="Main navigation"
-          >
-            {/* Home Link */}
-            <Link.Nav to="/" className="font-medium">
-              Home
-            </Link.Nav>
-
-            {/* Blinds Dropdown */}
-            <div className="relative">
-              <button
-                onClick={toggleBlindsDropdown}
-                className="group relative flex items-center gap-2 px-4 py-2 text-white hover:text-brand-gold transition-colors font-medium rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-gold focus:ring-offset-2 focus:ring-offset-gray-900"
-                aria-expanded={isBlindsDropdownOpen}
-                aria-haspopup="true"
-              >
-                <span className="relative z-10">Our Blinds</span>
-                <Icon 
-                  name="chevronDown" 
-                  size="small"
-                  className={`transition-transform duration-200 ${isBlindsDropdownOpen ? 'rotate-180' : ''} relative z-10`}
-                />
-                <div className="absolute inset-0 bg-gray-800 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg -z-0" />
-              </button>
-
-              {/* Blinds Dropdown Menu */}
-              {isBlindsDropdownOpen && (
-                <Card 
-                  variant="elevated" 
-                  className="absolute top-full left-1/2 transform -translate-x-1/2 mt-3 w-80 backdrop-blur-sm"
+          {/* Desktop Navigation with enhanced styling */}
+          <nav className="hidden lg:block">
+            <Flex as="ul" gap="small">
+              <li>
+                <Link.Nav to="/" iconLeft={<Icon name="home" size="small" />}>
+                  Home
+                </Link.Nav>
+              </li>
+              
+              {/* Enhanced Products Dropdown */}
+              <li className="relative">
+                <button
+                  onClick={toggleBlindsDropdown}
+                  onMouseEnter={() => setIsBlindsDropdownOpen(true)}
+                  className="flex items-center gap-2 text-gray-300 hover:text-white px-3 py-2 rounded-lg hover:bg-white/5 transition-all duration-300 relative overflow-hidden group"
                 >
-                  <Stack spacing="small">
-                    <Text size="small" weight="semibold" color="gold" className="uppercase tracking-wider px-4">
-                      Our Products
-                    </Text>
-                    <Stack spacing="tiny" className="pb-2">
+                  <span className="relative z-10">Products</span>
+                  <Icon name={isBlindsDropdownOpen ? 'chevronUp' : 'chevronDown'} size="small" className="relative z-10 transition-transform duration-300" />
+                  <span className="absolute inset-0 bg-gradient-to-r from-brand-gold/20 to-brand-gold-light/20 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500"></span>
+                </button>
+                
+                {/* Premium dropdown menu */}
+                <div 
+                  className={`
+                    absolute top-full left-0 w-64 mt-2
+                    transition-all duration-300 origin-top
+                    ${isBlindsDropdownOpen 
+                      ? 'opacity-100 scale-y-100 pointer-events-auto' 
+                      : 'opacity-0 scale-y-95 pointer-events-none'
+                    }
+                  `}
+                  onMouseLeave={() => setIsBlindsDropdownOpen(false)}
+                >
+                  <Card variant="elevated" hover="none" padding="small" className="backdrop-blur-xl bg-brand-dark-lighter/95 border-brand-gold/20">
+                    <Stack spacing="small">
                       {blindsMenu.map((item) => (
-                        <Link
-                          key={item.name}
+                        <Link 
+                          key={item.path}
                           to={item.path}
-                          variant="nav"
-                          className="group flex items-center gap-3 px-4 py-3 mx-2 hover:bg-gray-800 rounded-xl transition-colors"
+                          className="group flex items-center justify-between px-3 py-2 rounded-lg hover:bg-brand-gold/10 transition-all duration-300"
                           onClick={() => setIsBlindsDropdownOpen(false)}
                         >
-                          <div className="w-2 h-2 bg-brand-gold rounded-full group-hover:scale-125 transition-transform" />
-                          <Text>{item.name}</Text>
+                          <span className="text-gray-300 group-hover:text-white transition-colors duration-300">
+                            {item.name}
+                          </span>
+                          {item.hot && <Badge variant="primary" size="tiny" glow>HOT</Badge>}
+                          {item.new && <Badge variant="secondary" size="tiny" glow>NEW</Badge>}
                         </Link>
                       ))}
                     </Stack>
-                  </Stack>
-                </Card>
-              )}
-            </div>
+                  </Card>
+                </div>
+              </li>
 
-            {/* Areas Dropdown */}
-            <div className="relative">
-              <button
-                onClick={toggleAreasDropdown}
-                className="group relative flex items-center gap-2 px-4 py-2 text-white hover:text-brand-gold transition-colors font-medium rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-gold focus:ring-offset-2 focus:ring-offset-gray-900"
-                aria-expanded={isAreasDropdownOpen}
-                aria-haspopup="true"
-              >
-                <span className="relative z-10">Areas</span>
-                <Icon 
-                  name="chevronDown" 
-                  size="small"
-                  className={`transition-transform duration-200 ${isAreasDropdownOpen ? 'rotate-180' : ''} relative z-10`}
-                />
-                <div className="absolute inset-0 bg-gray-800 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg -z-0" />
-              </button>
-
-              {/* Areas Dropdown Menu */}
-              {isAreasDropdownOpen && (
-                <Card 
-                  variant="elevated" 
-                  className="absolute top-full left-1/2 transform -translate-x-1/2 mt-3 w-72 backdrop-blur-sm"
+              {/* Enhanced Areas Dropdown */}
+              <li className="relative">
+                <button
+                  onClick={toggleAreasDropdown}
+                  onMouseEnter={() => setIsAreasDropdownOpen(true)}
+                  className="flex items-center gap-2 text-gray-300 hover:text-white px-3 py-2 rounded-lg hover:bg-white/5 transition-all duration-300 relative overflow-hidden group"
                 >
-                  <Stack spacing="small">
-                    <Text size="small" weight="semibold" color="gold" className="uppercase tracking-wider px-4">
-                      Areas We Cover
-                    </Text>
-                    <div className="grid grid-cols-2 gap-1 pb-2 px-2">
-                      {areasMenu.map((area) => (
-                        <Link
-                          key={area.name}
-                          to={area.path}
-                          variant="nav"
-                          className="flex items-center gap-2 px-3 py-2 hover:bg-gray-800 rounded-lg transition-colors text-sm"
+                  <span className="relative z-10">Areas</span>
+                  <Icon name={isAreasDropdownOpen ? 'chevronUp' : 'chevronDown'} size="small" className="relative z-10 transition-transform duration-300" />
+                  <span className="absolute inset-0 bg-gradient-to-r from-brand-gold/20 to-brand-gold-light/20 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500"></span>
+                </button>
+                
+                <div 
+                  className={`
+                    absolute top-full left-0 w-56 mt-2
+                    transition-all duration-300 origin-top
+                    ${isAreasDropdownOpen 
+                      ? 'opacity-100 scale-y-100 pointer-events-auto' 
+                      : 'opacity-0 scale-y-95 pointer-events-none'
+                    }
+                  `}
+                  onMouseLeave={() => setIsAreasDropdownOpen(false)}
+                >
+                  <Card variant="elevated" hover="none" padding="small" className="backdrop-blur-xl bg-brand-dark-lighter/95 border-brand-gold/20">
+                    <div className="grid grid-cols-2 gap-1">
+                      {areasMenu.map((item) => (
+                        <Link 
+                          key={item.path}
+                          to={item.path}
+                          className="px-3 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-brand-gold/10 transition-all duration-300 text-sm"
                           onClick={() => setIsAreasDropdownOpen(false)}
                         >
-                          <Icon name="mapPin" size="tiny" color="gold" />
-                          <Text size="small">{area.name}</Text>
+                          {item.name}
                         </Link>
                       ))}
                     </div>
-                  </Stack>
-                </Card>
-              )}
-            </div>
+                  </Card>
+                </div>
+              </li>
 
-            {/* Other Nav Items */}
-            <Link.Nav to="/gallery" className="font-medium">
-              Gallery
-            </Link.Nav>
-            <Link.Nav to="/contact" className="font-medium">
-              Contact
-            </Link.Nav>
-
-            {/* CTA Buttons */}
-            <Flex gap="small" align="center">
-              <Button 
-                to="/book-appointment" 
-                variant="primary" 
-                size="small"
-                className="shadow-lg shadow-brand-gold/20"
-              >
-                Free Quote
-              </Button>
-              <Button 
-                href="tel:01457597091" 
-                variant="ghost" 
-                size="small"
-                iconLeft={<Icon name="phone" size="small" />}
-              >
-                <span className="hidden xl:inline">01457 597091</span>
-                <span className="xl:hidden">Call</span>
-              </Button>
+              <li>
+                <Link.Nav to="/gallery" iconLeft={<Icon name="grid" size="small" />}>
+                  Gallery
+                </Link.Nav>
+              </li>
+              <li>
+                <Link.Nav to="/contact" iconLeft={<Icon name="mail" size="small" />}>
+                  Contact
+                </Link.Nav>
+              </li>
             </Flex>
           </nav>
 
-          {/* Mobile Menu Button */}
+          {/* CTA Buttons with premium styling */}
+          <Flex gap="medium" className="hidden lg:flex">
+            <a 
+              href="tel:01457597091" 
+              className="flex items-center gap-2 text-brand-gold hover:text-brand-gold-light transition-all duration-300 group"
+            >
+              <div className="relative">
+                <Icon name="phone" size="medium" className="animate-pulse" />
+                <div className="absolute inset-0 bg-brand-gold/20 rounded-full blur-md"></div>
+              </div>
+              <Stack spacing="none">
+                <Text size="small" color="muted">Call Now</Text>
+                <Text weight="bold" className="group-hover:text-brand-gold-light transition-colors">01457 597091</Text>
+              </Stack>
+            </a>
+            
+            <Button 
+              as={Link} 
+              to="/book-appointment" 
+              variant="primary" 
+              size="medium"
+              glow
+              iconRight={<Icon name="arrowRight" />}
+            >
+              Free Quote
+            </Button>
+          </Flex>
+
+          {/* Enhanced Mobile Menu Button */}
           <button
             onClick={toggleMobileMenu}
-            className="lg:hidden p-2 text-white hover:text-brand-gold transition-colors focus:outline-none focus:ring-2 focus:ring-brand-gold focus:ring-offset-2 focus:ring-offset-gray-900 rounded-lg"
-            aria-label="Toggle menu"
-            aria-expanded={isMobileMenuOpen}
+            className="lg:hidden relative w-10 h-10 flex items-center justify-center rounded-lg bg-brand-gold/10 hover:bg-brand-gold/20 transition-all duration-300 group"
+            aria-label="Toggle mobile menu"
           >
-            <Icon name={isMobileMenuOpen ? 'close' : 'menu'} size="large" />
+            <div className="absolute inset-0 bg-brand-gold/20 rounded-lg blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <Icon 
+              name={isMobileMenuOpen ? 'close' : 'menu'} 
+              size="medium" 
+              className="text-brand-gold relative z-10 transition-transform duration-300 group-hover:scale-110"
+            />
           </button>
         </Flex>
 
-        {/* Mobile Menu */}
-        {isMobileMenuOpen && (
-          <nav className="lg:hidden border-t border-gray-800">
-            <Stack spacing="none" className="py-4">
-              {/* Mobile Home Link */}
-              <Link
-                to="/"
-                variant="nav"
-                className="block px-6 py-3 hover:bg-gray-800 transition-colors font-medium"
+        {/* Premium Mobile Menu */}
+        <div 
+          className={`
+            lg:hidden overflow-hidden transition-all duration-500
+            ${isMobileMenuOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'}
+          `}
+        >
+          <nav className="py-4 border-t border-gray-800">
+            <Stack spacing="small">
+              <Link 
+                to="/" 
+                variant="nav" 
                 onClick={() => setIsMobileMenuOpen(false)}
+                className="w-full justify-between"
               >
-                Home
+                <Flex align="center" gap="small">
+                  <Icon name="home" size="small" />
+                  Home
+                </Flex>
               </Link>
 
-              {/* Mobile Blinds Section */}
+              {/* Mobile Products Section */}
               <div>
                 <button
                   onClick={toggleBlindsDropdown}
-                  className="w-full flex items-center justify-between px-6 py-3 hover:bg-gray-800 transition-colors font-medium"
+                  className="w-full flex items-center justify-between text-gray-300 hover:text-white px-3 py-2 rounded-lg hover:bg-white/5 transition-all duration-300"
                 >
-                  <span>Our Blinds</span>
-                  <Icon 
-                    name="chevronDown" 
-                    size="small"
-                    className={`transition-transform ${isBlindsDropdownOpen ? 'rotate-180' : ''}`}
-                  />
+                  <span>Products</span>
+                  <Icon name={isBlindsDropdownOpen ? 'chevronUp' : 'chevronDown'} size="small" />
                 </button>
-                {isBlindsDropdownOpen && (
-                  <Stack spacing="none" className="bg-gray-800/50">
+                
+                <div className={`
+                  overflow-hidden transition-all duration-300
+                  ${isBlindsDropdownOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}
+                `}>
+                  <Stack spacing="small" className="pl-6 pt-2">
                     {blindsMenu.map((item) => (
                       <Link
-                        key={item.name}
+                        key={item.path}
                         to={item.path}
-                        variant="nav"
-                        className="block pl-12 pr-6 py-2 hover:bg-gray-700 transition-colors text-sm"
+                        className="flex items-center justify-between text-gray-400 hover:text-white py-2 transition-colors duration-300"
                         onClick={() => {
                           setIsMobileMenuOpen(false)
                           setIsBlindsDropdownOpen(false)
                         }}
                       >
                         {item.name}
+                        {item.hot && <Badge variant="primary" size="tiny">HOT</Badge>}
+                        {item.new && <Badge variant="secondary" size="tiny">NEW</Badge>}
                       </Link>
                     ))}
                   </Stack>
-                )}
+                </div>
               </div>
 
               {/* Mobile Areas Section */}
               <div>
                 <button
                   onClick={toggleAreasDropdown}
-                  className="w-full flex items-center justify-between px-6 py-3 hover:bg-gray-800 transition-colors font-medium"
+                  className="w-full flex items-center justify-between text-gray-300 hover:text-white px-3 py-2 rounded-lg hover:bg-white/5 transition-all duration-300"
                 >
                   <span>Areas</span>
-                  <Icon 
-                    name="chevronDown" 
-                    size="small"
-                    className={`transition-transform ${isAreasDropdownOpen ? 'rotate-180' : ''}`}
-                  />
+                  <Icon name={isAreasDropdownOpen ? 'chevronUp' : 'chevronDown'} size="small" />
                 </button>
-                {isAreasDropdownOpen && (
-                  <div className="bg-gray-800/50 px-6 py-2">
-                    <div className="grid grid-cols-2 gap-1">
-                      {areasMenu.map((area) => (
-                        <Link
-                          key={area.name}
-                          to={area.path}
-                          variant="nav"
-                          className="block px-3 py-2 hover:bg-gray-700 rounded transition-colors text-sm"
-                          onClick={() => {
-                            setIsMobileMenuOpen(false)
-                            setIsAreasDropdownOpen(false)
-                          }}
-                        >
-                          {area.name}
-                        </Link>
-                      ))}
-                    </div>
+                
+                <div className={`
+                  overflow-hidden transition-all duration-300
+                  ${isAreasDropdownOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}
+                `}>
+                  <div className="grid grid-cols-2 gap-2 pl-6 pt-2">
+                    {areasMenu.map((item) => (
+                      <Link
+                        key={item.path}
+                        to={item.path}
+                        className="text-gray-400 hover:text-white py-2 text-sm transition-colors duration-300"
+                        onClick={() => {
+                          setIsMobileMenuOpen(false)
+                          setIsAreasDropdownOpen(false)
+                        }}
+                      >
+                        {item.name}
+                      </Link>
+                    ))}
                   </div>
-                )}
+                </div>
               </div>
 
-              {/* Other Mobile Links */}
-              <Link
-                to="/gallery"
-                variant="nav"
-                className="block px-6 py-3 hover:bg-gray-800 transition-colors font-medium"
+              <Link 
+                to="/gallery" 
+                variant="nav" 
                 onClick={() => setIsMobileMenuOpen(false)}
+                className="w-full justify-between"
               >
-                Gallery
-              </Link>
-              <Link
-                to="/contact"
-                variant="nav"
-                className="block px-6 py-3 hover:bg-gray-800 transition-colors font-medium"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Contact
+                <Flex align="center" gap="small">
+                  <Icon name="grid" size="small" />
+                  Gallery
+                </Flex>
               </Link>
 
-              {/* Mobile CTA Buttons */}
-              <Stack spacing="small" className="px-6 pt-4 mt-4 border-t border-gray-800">
-                <Button 
-                  to="/book-appointment" 
-                  variant="primary" 
-                  size="medium"
-                  fullWidth
-                >
-                  Get Free Quote
-                </Button>
-                <Button 
-                  href="tel:01457597091" 
-                  variant="secondary" 
-                  size="medium"
-                  fullWidth
-                  iconLeft={<Icon name="phone" />}
-                >
-                  Call 01457 597091
-                </Button>
-              </Stack>
+              <Link 
+                to="/contact" 
+                variant="nav" 
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="w-full justify-between"
+              >
+                <Flex align="center" gap="small">
+                  <Icon name="mail" size="small" />
+                  Contact
+                </Flex>
+              </Link>
+
+              {/* Mobile CTA Section */}
+              <div className="pt-4 border-t border-gray-800">
+                <Stack spacing="medium">
+                  <a 
+                    href="tel:01457597091" 
+                    className="flex items-center justify-center gap-3 py-3 bg-brand-gold/10 hover:bg-brand-gold/20 rounded-lg transition-all duration-300"
+                  >
+                    <Icon name="phone" size="medium" className="text-brand-gold" />
+                    <div>
+                      <Text size="small" color="muted">Call Now</Text>
+                      <Text weight="bold" className="text-brand-gold">01457 597091</Text>
+                    </div>
+                  </a>
+                  
+                  <Button 
+                    as={Link} 
+                    to="/book-appointment" 
+                    variant="primary" 
+                    size="large"
+                    fullWidth
+                    glow
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Book Free Consultation
+                  </Button>
+                </Stack>
+              </div>
             </Stack>
           </nav>
-        )}
+        </div>
       </Container>
     </header>
   )

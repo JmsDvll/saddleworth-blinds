@@ -24,7 +24,7 @@ const containerStyles = {
   },
 }
 
-const Container = ({
+export const Container = ({
   children,
   maxWidth = 'large',
   padding = 'medium',
@@ -152,5 +152,3 @@ export const Center = ({
     </div>
   )
 }
-
-export default Container

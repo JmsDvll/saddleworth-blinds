@@ -46,7 +46,7 @@ const textStyles = {
   },
 }
 
-const Text = ({
+export const Text = ({
   as: Component = 'p',
   size = 'medium',
   weight = 'normal',
@@ -89,5 +89,3 @@ Text.Error = (props) => (
 Text.Success = (props) => (
   <Text color="success" weight="medium" {...props} />
 )
-
-export default Text

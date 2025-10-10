@@ -1,9 +1,11 @@
-import React, { Suspense, lazy } from 'react'
-import { Routes, Route } from 'react-router-dom'
+import React, { Suspense, lazy, useState, useEffect } from 'react'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import CookieConsent from './components/CookieConsent'
 import ErrorBoundary from './components/ErrorBoundary'
+import LoadingScreen from './components/LoadingScreen'
+import { AnimatePresence, motion } from 'framer-motion'
 
 // Lazy load pages for better performance
 const Home = lazy(() => import('./pages/Home'))
@@ -36,54 +38,119 @@ const TermsConditions = lazy(() => import('./pages/TermsConditions'))
 
 // Loading fallback component
 const PageLoader = () => (
-  <div className="min-h-screen bg-gray-900 flex items-center justify-center">
+  <div className="min-h-screen bg-brand-dark flex items-center justify-center">
     <div className="text-center">
-      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-brand-gold mx-auto mb-4"></div>
-      <p className="text-white">Loading...</p>
+      <div className="relative">
+        <div className="w-16 h-16 border-4 border-brand-gold/20 rounded-full animate-spin"></div>
+        <div className="absolute inset-0 w-16 h-16 border-4 border-transparent border-t-brand-gold rounded-full animate-spin"></div>
+      </div>
+      <p className="text-gray-400 mt-4 animate-pulse">Loading page...</p>
     </div>
   </div>
 )
 
+// Page transition variants
+const pageVariants = {
+  initial: {
+    opacity: 0,
+    y: 20,
+  },
+  in: {
+    opacity: 1,
+    y: 0,
+  },
+  out: {
+    opacity: 0,
+    y: -20,
+  },
+}
+
+const pageTransition = {
+  type: 'tween',
+  ease: 'anticipate',
+  duration: 0.5,
+}
+
+// Page wrapper with animations
+const PageWrapper = ({ children }) => {
+  return (
+    <motion.div
+      initial="initial"
+      animate="in"
+      exit="out"
+      variants={pageVariants}
+      transition={pageTransition}
+    >
+      {children}
+    </motion.div>
+  )
+}
+
 function App() {
+  const [isLoading, setIsLoading] = useState(true)
+  const location = useLocation()
+
+  // Scroll to top on route change
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [location.pathname])
+
+  // Show loading screen on initial load
+  useEffect(() => {
+    // Check if it's the first visit
+    const hasVisited = sessionStorage.getItem('hasVisited')
+    if (!hasVisited) {
+      sessionStorage.setItem('hasVisited', 'true')
+    } else {
+      setIsLoading(false)
+    }
+  }, [])
+
+  if (isLoading) {
+    return <LoadingScreen onLoadComplete={() => setIsLoading(false)} />
+  }
+
   return (
     <ErrorBoundary>
-      <div className="min-h-screen bg-gray-900 text-white">
-        <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-brand-gold text-gray-900 px-4 py-2 rounded">
+      <div className="min-h-screen bg-brand-dark text-white overflow-x-hidden">
+        <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-brand-gold text-gray-900 px-4 py-2 rounded-lg font-semibold shadow-lg z-50">
           Skip to main content
         </a>
         <Header />
-        <main id="main-content">
-          <Suspense fallback={<PageLoader />}>
-            <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/gallery" element={<Gallery />} />
-            <Route path="/book-appointment" element={<BookAppointment />} />
-            <Route path="/roller-blinds" element={<RollerBlinds />} />
-            <Route path="/venetian-blinds" element={<VenetianBlinds />} />
-            <Route path="/vision-blinds" element={<VisionBlinds />} />
-            <Route path="/vertical-blinds" element={<VerticalBlinds />} />
-            <Route path="/perfect-fit-blinds" element={<PerfectFitBlinds />} />
-            <Route path="/shutters" element={<Shutters />} />
-            <Route path="/roman-blinds" element={<RomanBlinds />} />
-            <Route path="/curtains" element={<Curtains />} />
-            <Route path="/allusion-blinds" element={<AllusionBlinds />} />
-            <Route path="/areas/uppermill" element={<Uppermill />} />
-            <Route path="/areas/diggle" element={<Diggle />} />
-            <Route path="/areas/delph" element={<Delph />} />
-            <Route path="/areas/greenfield" element={<Greenfield />} />
-            <Route path="/areas/dobcross" element={<Dobcross />} />
-            <Route path="/areas/lydgate" element={<Lydgate />} />
-            <Route path="/areas/denshaw" element={<Denshaw />} />
-            <Route path="/areas/friezland" element={<Friezland />} />
-            <Route path="/areas/grasscroft" element={<Grasscroft />} />
-            <Route path="/areas/grotton" element={<Grotton />} />
-            <Route path="/areas/springhead" element={<Springhead />} />
-            <Route path="/areas/lees" element={<Lees />} />
-            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-            <Route path="/terms-conditions" element={<TermsConditions />} />
-            </Routes>
-          </Suspense>
+        <main id="main-content" className="relative">
+          <AnimatePresence mode="wait">
+            <Suspense fallback={<PageLoader />}>
+              <Routes location={location} key={location.pathname}>
+                <Route path="/" element={<PageWrapper><Home /></PageWrapper>} />
+                <Route path="/contact" element={<PageWrapper><Contact /></PageWrapper>} />
+                <Route path="/gallery" element={<PageWrapper><Gallery /></PageWrapper>} />
+                <Route path="/book-appointment" element={<PageWrapper><BookAppointment /></PageWrapper>} />
+                <Route path="/roller-blinds" element={<PageWrapper><RollerBlinds /></PageWrapper>} />
+                <Route path="/venetian-blinds" element={<PageWrapper><VenetianBlinds /></PageWrapper>} />
+                <Route path="/vision-blinds" element={<PageWrapper><VisionBlinds /></PageWrapper>} />
+                <Route path="/vertical-blinds" element={<PageWrapper><VerticalBlinds /></PageWrapper>} />
+                <Route path="/perfect-fit-blinds" element={<PageWrapper><PerfectFitBlinds /></PageWrapper>} />
+                <Route path="/shutters" element={<PageWrapper><Shutters /></PageWrapper>} />
+                <Route path="/roman-blinds" element={<PageWrapper><RomanBlinds /></PageWrapper>} />
+                <Route path="/curtains" element={<PageWrapper><Curtains /></PageWrapper>} />
+                <Route path="/allusion-blinds" element={<PageWrapper><AllusionBlinds /></PageWrapper>} />
+                <Route path="/areas/uppermill" element={<PageWrapper><Uppermill /></PageWrapper>} />
+                <Route path="/areas/diggle" element={<PageWrapper><Diggle /></PageWrapper>} />
+                <Route path="/areas/delph" element={<PageWrapper><Delph /></PageWrapper>} />
+                <Route path="/areas/greenfield" element={<PageWrapper><Greenfield /></PageWrapper>} />
+                <Route path="/areas/dobcross" element={<PageWrapper><Dobcross /></PageWrapper>} />
+                <Route path="/areas/lydgate" element={<PageWrapper><Lydgate /></PageWrapper>} />
+                <Route path="/areas/denshaw" element={<PageWrapper><Denshaw /></PageWrapper>} />
+                <Route path="/areas/friezland" element={<PageWrapper><Friezland /></PageWrapper>} />
+                <Route path="/areas/grasscroft" element={<PageWrapper><Grasscroft /></PageWrapper>} />
+                <Route path="/areas/grotton" element={<PageWrapper><Grotton /></PageWrapper>} />
+                <Route path="/areas/springhead" element={<PageWrapper><Springhead /></PageWrapper>} />
+                <Route path="/areas/lees" element={<PageWrapper><Lees /></PageWrapper>} />
+                <Route path="/privacy-policy" element={<PageWrapper><PrivacyPolicy /></PageWrapper>} />
+                <Route path="/terms-conditions" element={<PageWrapper><TermsConditions /></PageWrapper>} />
+              </Routes>
+            </Suspense>
+          </AnimatePresence>
         </main>
         <Footer />
         <CookieConsent />

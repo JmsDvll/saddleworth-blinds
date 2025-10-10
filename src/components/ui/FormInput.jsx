@@ -1,335 +1,356 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 
-// Centralized form input styles
+// Enhanced form input styles with premium effects
 const inputStyles = {
-  base: 'w-full rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2',
+  base: `
+    w-full
+    bg-brand-dark-lighter
+    border-2 border-gray-700/50
+    rounded-lg
+    text-white placeholder-gray-500
+    transition-all duration-300
+    focus:outline-none focus:ring-2 focus:ring-brand-gold/50 focus:border-brand-gold/50
+    hover:border-gray-600/50
+    backdrop-blur-sm
+    relative
+  `,
   
-  // Variants
   variants: {
-    default: 'bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:border-transparent focus:ring-brand-gold focus:ring-offset-gray-900',
-    error: 'bg-gray-800 border border-red-600 text-white placeholder-gray-500 focus:border-transparent focus:ring-red-600 focus:ring-offset-gray-900',
-    success: 'bg-gray-800 border border-green-600 text-white placeholder-gray-500 focus:border-transparent focus:ring-green-600 focus:ring-offset-gray-900',
+    default: `
+      focus:bg-brand-dark-light
+      focus:shadow-[0_0_20px_rgba(212,175,55,0.1)]
+    `,
+    error: `
+      border-red-500/50 
+      focus:ring-red-500/50 focus:border-red-500/50
+      bg-red-900/10
+    `,
+    success: `
+      border-emerald-500/50 
+      focus:ring-emerald-500/50 focus:border-emerald-500/50
+      bg-emerald-900/10
+    `,
   },
   
-  // Sizes
   sizes: {
-    small: 'px-3 py-1.5 text-sm',
+    small: 'px-3 py-2 text-sm',
     medium: 'px-4 py-3 text-base',
     large: 'px-5 py-4 text-lg',
   },
   
-  // Label styles
-  label: {
-    base: 'block font-medium mb-2',
-    sizes: {
-      small: 'text-sm',
-      medium: 'text-base',
-      large: 'text-lg',
-    },
-    required: 'after:content-["*"] after:ml-0.5 after:text-red-500',
-  },
+  // Premium label styles
+  label: `
+    block text-sm font-medium text-gray-300 mb-2
+    transition-colors duration-300
+  `,
+  
+  labelRequired: `
+    after:content-['*'] after:ml-1 after:text-brand-gold
+  `,
   
   // Helper text styles
   helperText: {
-    base: 'mt-1 text-sm',
-    variants: {
-      default: 'text-gray-400',
-      error: 'text-red-400',
-      success: 'text-green-400',
-    },
-  },
+    default: 'mt-2 text-sm text-gray-500',
+    error: 'mt-2 text-sm text-red-400',
+    success: 'mt-2 text-sm text-emerald-400',
+  }
 }
 
-// Base Input Component
-export const FormInput = ({
+// Enhanced Form Input Component
+export const FormInput = forwardRef(({
   label,
-  id,
-  type = 'text',
-  size = 'medium',
-  variant = 'default',
-  required = false,
   error,
   success,
   helperText,
+  required,
   className = '',
+  size = 'medium',
   ...props
-}) => {
-  const inputId = id || label?.toLowerCase().replace(/\s+/g, '-')
-  const currentVariant = error ? 'error' : success ? 'success' : variant
-  
-  const inputClasses = [
-    inputStyles.base,
-    inputStyles.variants[currentVariant],
-    inputStyles.sizes[size],
-    className,
-  ].filter(Boolean).join(' ')
+}, ref) => {
+  const variant = error ? 'error' : success ? 'success' : 'default'
   
   return (
-    <div>
+    <div className="relative group">
       {label && (
-        <label
-          htmlFor={inputId}
-          className={[
-            inputStyles.label.base,
-            inputStyles.label.sizes[size],
-            required && inputStyles.label.required,
-          ].filter(Boolean).join(' ')}
+        <label 
+          htmlFor={props.id || props.name}
+          className={`
+            ${inputStyles.label}
+            ${required ? inputStyles.labelRequired : ''}
+            group-focus-within:text-brand-gold
+          `}
         >
           {label}
         </label>
       )}
-      <input
-        id={inputId}
-        type={type}
-        required={required}
-        className={inputClasses}
-        {...props}
-      />
-      {(helperText || error || success) && (
-        <p className={[
-          inputStyles.helperText.base,
-          inputStyles.helperText.variants[currentVariant],
-        ].join(' ')}>
-          {error || success || helperText}
+      
+      <div className="relative">
+        <input
+          ref={ref}
+          className={`
+            ${inputStyles.base}
+            ${inputStyles.variants[variant]}
+            ${inputStyles.sizes[size]}
+            ${className}
+          `}
+          required={required}
+          {...props}
+        />
+        
+        {/* Premium focus glow effect */}
+        <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-brand-gold/20 to-brand-gold-light/20 opacity-0 group-focus-within:opacity-100 blur-xl transition-opacity duration-500 pointer-events-none -z-10"></div>
+      </div>
+      
+      {helperText && (
+        <p className={inputStyles.helperText[variant]}>
+          {helperText}
         </p>
       )}
     </div>
   )
-}
+})
 
-// Select Component
-export const FormSelect = ({
+FormInput.displayName = 'FormInput'
+
+// Enhanced Form Select Component
+export const FormSelect = forwardRef(({
   label,
-  id,
-  size = 'medium',
-  variant = 'default',
-  required = false,
   error,
   success,
   helperText,
+  required,
   children,
   className = '',
+  size = 'medium',
   ...props
-}) => {
-  const selectId = id || label?.toLowerCase().replace(/\s+/g, '-')
-  const currentVariant = error ? 'error' : success ? 'success' : variant
-  
-  const selectClasses = [
-    inputStyles.base,
-    inputStyles.variants[currentVariant],
-    inputStyles.sizes[size],
-    'cursor-pointer',
-    className,
-  ].filter(Boolean).join(' ')
+}, ref) => {
+  const variant = error ? 'error' : success ? 'success' : 'default'
   
   return (
-    <div>
+    <div className="relative group">
       {label && (
-        <label
-          htmlFor={selectId}
-          className={[
-            inputStyles.label.base,
-            inputStyles.label.sizes[size],
-            required && inputStyles.label.required,
-          ].filter(Boolean).join(' ')}
+        <label 
+          htmlFor={props.id || props.name}
+          className={`
+            ${inputStyles.label}
+            ${required ? inputStyles.labelRequired : ''}
+            group-focus-within:text-brand-gold
+          `}
         >
           {label}
         </label>
       )}
-      <select
-        id={selectId}
-        required={required}
-        className={selectClasses}
-        {...props}
-      >
-        {children}
-      </select>
-      {(helperText || error || success) && (
-        <p className={[
-          inputStyles.helperText.base,
-          inputStyles.helperText.variants[currentVariant],
-        ].join(' ')}>
-          {error || success || helperText}
+      
+      <div className="relative">
+        <select
+          ref={ref}
+          className={`
+            ${inputStyles.base}
+            ${inputStyles.variants[variant]}
+            ${inputStyles.sizes[size]}
+            appearance-none
+            cursor-pointer
+            ${className}
+          `}
+          required={required}
+          {...props}
+        >
+          {children}
+        </select>
+        
+        {/* Custom dropdown arrow */}
+        <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
+          <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          </svg>
+        </div>
+        
+        {/* Premium focus glow effect */}
+        <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-brand-gold/20 to-brand-gold-light/20 opacity-0 group-focus-within:opacity-100 blur-xl transition-opacity duration-500 pointer-events-none -z-10"></div>
+      </div>
+      
+      {helperText && (
+        <p className={inputStyles.helperText[variant]}>
+          {helperText}
         </p>
       )}
     </div>
   )
-}
+})
 
-// Textarea Component
-export const FormTextarea = ({
+FormSelect.displayName = 'FormSelect'
+
+// Enhanced Form Textarea Component
+export const FormTextarea = forwardRef(({
   label,
-  id,
-  size = 'medium',
-  variant = 'default',
-  required = false,
   error,
   success,
   helperText,
-  rows = 4,
+  required,
   className = '',
+  size = 'medium',
   ...props
-}) => {
-  const textareaId = id || label?.toLowerCase().replace(/\s+/g, '-')
-  const currentVariant = error ? 'error' : success ? 'success' : variant
-  
-  const textareaClasses = [
-    inputStyles.base,
-    inputStyles.variants[currentVariant],
-    inputStyles.sizes[size],
-    'resize-y',
-    className,
-  ].filter(Boolean).join(' ')
+}, ref) => {
+  const variant = error ? 'error' : success ? 'success' : 'default'
   
   return (
-    <div>
+    <div className="relative group">
       {label && (
-        <label
-          htmlFor={textareaId}
-          className={[
-            inputStyles.label.base,
-            inputStyles.label.sizes[size],
-            required && inputStyles.label.required,
-          ].filter(Boolean).join(' ')}
+        <label 
+          htmlFor={props.id || props.name}
+          className={`
+            ${inputStyles.label}
+            ${required ? inputStyles.labelRequired : ''}
+            group-focus-within:text-brand-gold
+          `}
         >
           {label}
         </label>
       )}
-      <textarea
-        id={textareaId}
-        required={required}
-        rows={rows}
-        className={textareaClasses}
-        {...props}
-      />
-      {(helperText || error || success) && (
-        <p className={[
-          inputStyles.helperText.base,
-          inputStyles.helperText.variants[currentVariant],
-        ].join(' ')}>
-          {error || success || helperText}
+      
+      <div className="relative">
+        <textarea
+          ref={ref}
+          className={`
+            ${inputStyles.base}
+            ${inputStyles.variants[variant]}
+            ${inputStyles.sizes[size]}
+            resize-y min-h-[100px]
+            ${className}
+          `}
+          required={required}
+          {...props}
+        />
+        
+        {/* Premium focus glow effect */}
+        <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-brand-gold/20 to-brand-gold-light/20 opacity-0 group-focus-within:opacity-100 blur-xl transition-opacity duration-500 pointer-events-none -z-10"></div>
+      </div>
+      
+      {helperText && (
+        <p className={inputStyles.helperText[variant]}>
+          {helperText}
         </p>
       )}
     </div>
   )
-}
+})
 
-// Checkbox Component
-export const FormCheckbox = ({
+FormTextarea.displayName = 'FormTextarea'
+
+// Enhanced Form Checkbox Component
+export const FormCheckbox = forwardRef(({
   label,
-  id,
-  size = 'medium',
   error,
   className = '',
   ...props
-}) => {
-  const checkboxId = id || label?.toLowerCase().replace(/\s+/g, '-')
-  
-  const sizeClasses = {
-    small: 'w-4 h-4',
-    medium: 'w-5 h-5',
-    large: 'w-6 h-6',
-  }
-  
-  const labelSizes = {
-    small: 'text-sm',
-    medium: 'text-base',
-    large: 'text-lg',
-  }
-  
+}, ref) => {
   return (
-    <div className="flex items-start gap-3">
-      <input
-        type="checkbox"
-        id={checkboxId}
-        className={[
-          sizeClasses[size],
-          'rounded border-gray-700 bg-gray-800 text-brand-gold focus:ring-2 focus:ring-brand-gold focus:ring-offset-2 focus:ring-offset-gray-900',
-          error && 'border-red-600',
-          className,
-        ].filter(Boolean).join(' ')}
-        {...props}
-      />
-      {label && (
-        <label
-          htmlFor={checkboxId}
-          className={[
-            'cursor-pointer',
-            labelSizes[size],
-            error ? 'text-red-400' : 'text-gray-300',
-          ].join(' ')}
+    <label className="relative flex items-start gap-3 cursor-pointer group">
+      <div className="relative mt-0.5">
+        <input
+          ref={ref}
+          type="checkbox"
+          className={`
+            w-5 h-5
+            bg-brand-dark-lighter
+            border-2 border-gray-600
+            rounded
+            text-brand-gold
+            focus:ring-2 focus:ring-brand-gold/50 focus:ring-offset-2 focus:ring-offset-brand-dark
+            transition-all duration-300
+            cursor-pointer
+            checked:bg-gradient-to-br checked:from-brand-gold checked:to-brand-gold-light
+            checked:border-brand-gold
+            ${className}
+          `}
+          {...props}
+        />
+        
+        {/* Custom checkmark */}
+        <svg 
+          className="absolute left-0.5 top-0.5 w-4 h-4 text-gray-900 pointer-events-none opacity-0 peer-checked:opacity-100 transition-opacity duration-200" 
+          fill="none" 
+          stroke="currentColor" 
+          viewBox="0 0 24 24"
         >
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+        </svg>
+      </div>
+      
+      {label && (
+        <span className={`
+          text-gray-300 select-none
+          group-hover:text-white
+          transition-colors duration-300
+          ${error ? 'text-red-400' : ''}
+        `}>
           {label}
-        </label>
+        </span>
       )}
-    </div>
+    </label>
   )
-}
+})
 
-// Radio Component
-export const FormRadio = ({
+FormCheckbox.displayName = 'FormCheckbox'
+
+// Enhanced Form Radio Component
+export const FormRadio = forwardRef(({
   label,
-  id,
-  name,
-  size = 'medium',
   error,
   className = '',
   ...props
-}) => {
-  const radioId = id || `${name}-${label?.toLowerCase().replace(/\s+/g, '-')}`
-  
-  const sizeClasses = {
-    small: 'w-4 h-4',
-    medium: 'w-5 h-5',
-    large: 'w-6 h-6',
-  }
-  
-  const labelSizes = {
-    small: 'text-sm',
-    medium: 'text-base',
-    large: 'text-lg',
-  }
-  
+}, ref) => {
   return (
-    <div className="flex items-center gap-3">
-      <input
-        type="radio"
-        id={radioId}
-        name={name}
-        className={[
-          sizeClasses[size],
-          'border-gray-700 bg-gray-800 text-brand-gold focus:ring-2 focus:ring-brand-gold focus:ring-offset-2 focus:ring-offset-gray-900',
-          error && 'border-red-600',
-          className,
-        ].filter(Boolean).join(' ')}
-        {...props}
-      />
+    <label className="relative flex items-center gap-3 cursor-pointer group">
+      <div className="relative">
+        <input
+          ref={ref}
+          type="radio"
+          className={`
+            w-5 h-5
+            bg-brand-dark-lighter
+            border-2 border-gray-600
+            text-brand-gold
+            focus:ring-2 focus:ring-brand-gold/50 focus:ring-offset-2 focus:ring-offset-brand-dark
+            transition-all duration-300
+            cursor-pointer
+            checked:bg-gradient-to-br checked:from-brand-gold checked:to-brand-gold-light
+            checked:border-brand-gold
+            ${className}
+          `}
+          {...props}
+        />
+        
+        {/* Inner dot */}
+        <div className="absolute inset-0 m-auto w-2 h-2 bg-gray-900 rounded-full opacity-0 peer-checked:opacity-100 transition-opacity duration-200 pointer-events-none"></div>
+      </div>
+      
       {label && (
-        <label
-          htmlFor={radioId}
-          className={[
-            'cursor-pointer',
-            labelSizes[size],
-            error ? 'text-red-400' : 'text-gray-300',
-          ].join(' ')}
-        >
+        <span className={`
+          text-gray-300 select-none
+          group-hover:text-white
+          transition-colors duration-300
+          ${error ? 'text-red-400' : ''}
+        `}>
           {label}
-        </label>
+        </span>
       )}
-    </div>
+    </label>
   )
-}
+})
 
-// Form Group Component for consistent spacing
+FormRadio.displayName = 'FormRadio'
+
+// Form Group for consistent spacing
 export const FormGroup = ({ children, className = '' }) => (
   <div className={`space-y-6 ${className}`}>
     {children}
   </div>
 )
 
-// Form Row Component for side-by-side inputs
+// Form Row for side-by-side inputs
 export const FormRow = ({ children, className = '' }) => (
-  <div className={`grid md:grid-cols-2 gap-6 ${className}`}>
+  <div className={`grid grid-cols-1 md:grid-cols-2 gap-4 ${className}`}>
     {children}
   </div>
 )

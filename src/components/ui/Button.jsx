@@ -1,82 +1,142 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import { Link } from 'react-router-dom'
 
-// Centralized button styles - NO inline styles allowed!
 const buttonStyles = {
-  base: 'inline-flex items-center justify-center font-semibold rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed',
+  base: `
+    relative inline-flex items-center justify-center
+    font-semibold tracking-wide
+    transition-all duration-300 ease-premium
+    transform active:scale-[0.98]
+    focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900
+    group overflow-hidden
+  `,
   
-  // Variants
   variants: {
-    primary: 'bg-brand-gold hover:bg-yellow-500 text-gray-900 focus:ring-brand-gold focus:ring-offset-gray-900',
-    secondary: 'bg-gray-800 hover:bg-gray-700 text-white border border-gray-700 hover:border-gray-600 focus:ring-gray-600 focus:ring-offset-gray-900',
-    ghost: 'bg-transparent hover:bg-gray-800 text-gray-300 hover:text-white focus:ring-gray-600 focus:ring-offset-gray-900',
-    danger: 'bg-red-600 hover:bg-red-700 text-white focus:ring-red-600 focus:ring-offset-gray-900',
-    success: 'bg-green-600 hover:bg-green-700 text-white focus:ring-green-600 focus:ring-offset-gray-900',
+    primary: `
+      bg-gradient-to-r from-brand-gold to-brand-gold-light
+      text-gray-900 
+      hover:from-brand-gold-light hover:to-brand-gold
+      focus:ring-brand-gold
+      shadow-gold hover:shadow-lg hover:shadow-brand-gold/30
+      before:absolute before:inset-0 before:bg-shimmer-gradient before:opacity-0
+      hover:before:opacity-100 before:transition-opacity before:duration-300
+      before:animate-shimmer
+    `,
+    secondary: `
+      bg-brand-dark-lighter border-2 border-brand-gold/30
+      text-brand-gold
+      hover:bg-brand-dark-light hover:border-brand-gold/60
+      focus:ring-brand-gold
+      shadow-lg hover:shadow-gold
+      backdrop-blur-sm
+      before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-brand-gold/10 before:to-transparent
+      before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-500
+    `,
+    ghost: `
+      bg-transparent
+      text-gray-300 hover:text-brand-gold
+      hover:bg-brand-gold/10
+      focus:ring-gray-600
+      border border-transparent hover:border-brand-gold/30
+    `,
+    danger: `
+      bg-gradient-to-r from-red-600 to-red-700
+      text-white
+      hover:from-red-700 hover:to-red-800
+      focus:ring-red-500
+      shadow-lg hover:shadow-red-500/30
+    `,
+    success: `
+      bg-gradient-to-r from-emerald-600 to-emerald-700
+      text-white
+      hover:from-emerald-700 hover:to-emerald-800
+      focus:ring-emerald-500
+      shadow-lg hover:shadow-emerald-500/30
+    `,
   },
   
-  // Sizes
   sizes: {
-    small: 'text-sm px-3 py-1.5',
-    medium: 'text-base px-4 py-2',
-    large: 'text-lg px-6 py-3',
-    xlarge: 'text-lg px-8 py-4',
+    small: 'px-3 py-1.5 text-sm rounded-md',
+    medium: 'px-4 py-2 text-base rounded-lg',
+    large: 'px-6 py-3 text-lg rounded-lg',
+    xlarge: 'px-8 py-4 text-xl rounded-xl',
   },
   
-  // Full width option
   fullWidth: 'w-full',
   
-  // Icon styles
-  iconLeft: 'mr-2',
-  iconRight: 'ml-2',
+  // Enhanced loading animation
+  loading: `
+    after:absolute after:inset-0 after:flex after:items-center after:justify-center
+    after:bg-inherit after:rounded-inherit
+    text-transparent
+  `,
+  
+  // Glow effect for primary buttons
+  glow: `
+    after:absolute after:-inset-1 after:bg-gradient-to-r after:from-brand-gold/50 after:to-brand-gold-light/50
+    after:blur-xl after:opacity-0 hover:after:opacity-100 after:transition-opacity after:duration-500
+    after:-z-10
+  `
 }
 
-const Button = ({
+export const Button = forwardRef(({
   children,
   variant = 'primary',
   size = 'medium',
   fullWidth = false,
-  disabled = false,
   loading = false,
+  disabled = false,
+  className = '',
+  as = 'button',
+  to,
+  href,
   iconLeft,
   iconRight,
-  onClick,
-  type = 'button',
-  href,
-  to,
-  className = '',
+  glow = false,
   ...props
-}) => {
-  // Build className from our centralized styles
-  const classes = [
-    buttonStyles.base,
-    buttonStyles.variants[variant],
-    buttonStyles.sizes[size],
-    fullWidth && buttonStyles.fullWidth,
-    className, // Allow extending but discourage it
-  ].filter(Boolean).join(' ')
-  
-  // Loading spinner component
-  const LoadingSpinner = () => (
-    <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-    </svg>
+}, ref) => {
+  const classes = `
+    ${buttonStyles.base}
+    ${buttonStyles.variants[variant]}
+    ${buttonStyles.sizes[size]}
+    ${fullWidth ? buttonStyles.fullWidth : ''}
+    ${loading ? buttonStyles.loading : ''}
+    ${glow && variant === 'primary' ? buttonStyles.glow : ''}
+    ${disabled ? 'opacity-50 cursor-not-allowed transform-none' : ''}
+    ${className}
+  `.trim()
+
+  // Enhanced loading spinner with smooth animation
+  const loadingSpinner = loading && (
+    <div className="absolute inset-0 flex items-center justify-center">
+      <div className="relative w-5 h-5">
+        <div className="absolute inset-0 border-2 border-current opacity-25 rounded-full"></div>
+        <div className="absolute inset-0 border-2 border-current border-t-transparent rounded-full animate-spin"></div>
+      </div>
+    </div>
   )
-  
-  // Button content with icons
+
   const content = (
     <>
-      {loading && <LoadingSpinner />}
-      {!loading && iconLeft && <span className={buttonStyles.iconLeft}>{iconLeft}</span>}
-      {children}
-      {!loading && iconRight && <span className={buttonStyles.iconRight}>{iconRight}</span>}
+      {/* Hover effect overlay */}
+      <span className="absolute inset-0 bg-gradient-to-t from-white/0 to-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+      
+      {/* Content wrapper for z-index */}
+      <span className="relative flex items-center gap-2">
+        {iconLeft && <span className="transition-transform duration-300 group-hover:scale-110">{iconLeft}</span>}
+        <span className={loading ? 'invisible' : ''}>{children}</span>
+        {iconRight && <span className="transition-transform duration-300 group-hover:scale-110">{iconRight}</span>}
+      </span>
+      
+      {loadingSpinner}
     </>
   )
-  
-  // If it's a link
-  if (to) {
+
+  // Handle different element types
+  if (as === Link && to) {
     return (
       <Link
+        ref={ref}
         to={to}
         className={classes}
         {...props}
@@ -85,12 +145,12 @@ const Button = ({
       </Link>
     )
   }
-  
-  // If it's an external link
-  if (href) {
+
+  if ((as === 'a' || href) && (href || props.href)) {
     return (
       <a
-        href={href}
+        ref={ref}
+        href={href || props.href}
         className={classes}
         {...props}
       >
@@ -98,19 +158,17 @@ const Button = ({
       </a>
     )
   }
-  
-  // Regular button
+
   return (
     <button
-      type={type}
+      ref={ref}
       className={classes}
       disabled={disabled || loading}
-      onClick={onClick}
       {...props}
     >
       {content}
     </button>
   )
-}
+})
 
-export default Button
+Button.displayName = 'Button'
