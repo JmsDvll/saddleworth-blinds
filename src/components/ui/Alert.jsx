@@ -122,9 +122,9 @@ export const Alert = forwardRef(({
       role="alert"
       {...props}
     >
-      <div className="flex items-start">
+      <div className={`flex items-start`}>
         {showIcon && iconName && (
-          <div className="flex-shrink-0 mr-3">
+          <div className={`flex-shrink-0 mr-3`}>
             <Icon 
               name={iconName} 
               size={size === 'small' ? 'small' : 'medium'}
@@ -133,13 +133,13 @@ export const Alert = forwardRef(({
           </div>
         )}
         
-        <div className="flex-1">
+        <div className={`flex-1`}>
           {title && (
-            <h3 className="font-semibold mb-1 text-current">
+            <h3 className={`font-semibold mb-1 text-current`}>
               {title}
             </h3>
           )}
-          <div className="text-current opacity-90">
+          <div className={`text-current opacity-90`}>
             {children}
           </div>
         </div>
@@ -160,14 +160,14 @@ export const Alert = forwardRef(({
             <Icon 
               name="x" 
               size="small"
-              className="transition-transform duration-300 group-hover/close:scale-110"
+              className={`transition-transform duration-300 group-hover/close:scale-110`}
             />
           </button>
         )}
       </div>
       
       {/* Animated border gradient */}
-      <div className="absolute inset-0 rounded-lg overflow-hidden pointer-events-none">
+      <div className={`absolute inset-0 rounded-lg overflow-hidden pointer-events-none`}>
         <div className={`
           absolute inset-0 opacity-0 group-hover:opacity-100
           transition-opacity duration-500
