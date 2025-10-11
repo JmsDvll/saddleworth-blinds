@@ -11,294 +11,215 @@ import {
   Icon,
   Button,
   GoldDivider,
-  ShimmerText,
   LuxuryIcon,
-  GlowBox,
+  Card,
   LuxuryBadge
 } from './ui'
 import SunshineLogo from './SunshineLogo'
 
 const FooterLuxury = () => {
   const services = [
-    { name: 'Roller Blinds', path: '/roller-blinds', hot: true },
+    { name: 'Roller Blinds', path: '/roller-blinds' },
     { name: 'Venetian Blinds', path: '/venetian-blinds' },
     { name: 'Vertical Blinds', path: '/vertical-blinds' },
-    { name: 'Vision Blinds', path: '/vision-blinds', hot: true },
+    { name: 'Vision Blinds', path: '/vision-blinds' },
     { name: 'Perfect Fit Blinds', path: '/perfect-fit-blinds' },
-    { name: 'Shutters', path: '/shutters', premium: true },
-    { name: 'Roman Blinds', path: '/roman-blinds', new: true },
-    { name: 'Curtains', path: '/curtains' },
-    { name: 'Allusion Blinds', path: '/allusion-blinds', new: true }
+    { name: 'Shutters', path: '/shutters' }
   ]
 
   const areas = [
     'Uppermill', 'Diggle', 'Delph', 'Greenfield',
-    'Dobcross', 'Lydgate', 'Denshaw', 'Friezland',
-    'Grasscroft', 'Grotton', 'Springhead', 'Lees'
+    'Dobcross', 'Lydgate', 'Denshaw', 'Friezland'
   ]
 
   const currentYear = new Date().getFullYear()
 
   return (
     <>
-      {/* Call to Action Section */}
-      <Section background="gold" padding="large">
+      {/* CTA Section */}
+      <Section background="luxury" padding="large">
         <Container>
-          <Stack spacing="large" align="center">
-            <ShimmerText variant="luxury" as="h2" className="text-4xl md:text-5xl font-display font-bold text-center">
-              Ready to Transform Your Home?
-            </ShimmerText>
-            <Text variant="large" align="center" className="max-w-2xl">
-              Book your free consultation today and discover the perfect window solutions for your space
-            </Text>
-            <Flex gap="medium" wrap="wrap" justify="center">
-              <Button 
-                to="/book-appointment" 
-                variant="dark"
-                size="large"
-                iconLeft={<Icon name="calendar" />}
-              >
-                Schedule Consultation
-              </Button>
-              <Button 
-                href="tel:01457597091"
-                variant="outline"
-                size="large"
-                iconLeft={<Icon name="phone" />}
-              >
-                Call 01457 597091
-              </Button>
-            </Flex>
-          </Stack>
+          <Card variant="dark" padding="large">
+            <Grid cols={2} gap="xlarge" align="center">
+              <Stack spacing="medium">
+                <Heading size="2xl" color="gold">
+                  Ready to Transform Your Windows?
+                </Heading>
+                <Text size="large" color="light">
+                  Get your free quote today and join thousands of satisfied customers across Saddleworth
+                </Text>
+              </Stack>
+              <Flex gap="medium" justify="end">
+                <Button 
+                  to="/book-appointment"
+                  variant="luxury"
+                  size="large"
+                  iconLeft={<Icon name="calendar" />}
+                >
+                  Book Consultation
+                </Button>
+                <Button 
+                  href="tel:01457597091"
+                  variant="outline"
+                  size="large"
+                  iconLeft={<Icon name="phone" />}
+                >
+                  Call Now
+                </Button>
+              </Flex>
+            </Grid>
+          </Card>
         </Container>
       </Section>
 
       {/* Main Footer */}
-      <Section background="dark" padding="xlarge">
-        <Container>
-          <Stack spacing="xlarge">
-            {/* Top Section */}
-            <Grid cols={4} gap="large">
-              {/* Brand Section */}
-              <Stack spacing="medium">
-                <GlowBox variant="subtle">
-                  <SunshineLogo className="h-16 w-auto mb-4" />
-                </GlowBox>
-                <Heading size="lg" color="gold">
-                  Sunshine Blinds
-                </Heading>
-                <Text size="small" color="light" leading="relaxed">
-                  Your trusted partner for premium window solutions in Saddleworth. 
-                  Part of the renowned Sunshine Blinds family, we bring decades of expertise 
-                  and uncompromising quality to every home.
-                </Text>
-                <Stack spacing="small">
-                  <LuxuryBadge variant="outline" size="small" icon="star">
-                    Est. 1979
-                  </LuxuryBadge>
-                  <LuxuryBadge variant="outline" size="small" icon="check">
-                    5 Star Rated
-                  </LuxuryBadge>
+      <footer role="contentinfo">
+        <Section background="dark" padding="xlarge" className="border-t border-brand-gold/20">
+          <Container>
+            <Stack spacing="xlarge">
+              {/* Main Footer Content */}
+              <Grid cols={4} gap="xlarge">
+                {/* About Section */}
+                <Stack spacing="medium">
+                  <SunshineLogo className="h-12 w-auto" />
+                  <Text size="small" color="light">
+                    Your trusted local window blind specialists since 1979. 
+                    We're dedicated to serving Saddleworth with quality blinds, 
+                    expert fitting, and outstanding service.
+                  </Text>
+                  <Flex gap="small">
+                    <LuxuryIcon variant="circle" size="small">
+                      <Icon name="facebook" />
+                    </LuxuryIcon>
+                    <LuxuryIcon variant="circle" size="small">
+                      <Icon name="instagram" />
+                    </LuxuryIcon>
+                    <LuxuryIcon variant="circle" size="small">
+                      <Icon name="twitter" />
+                    </LuxuryIcon>
+                  </Flex>
                 </Stack>
-              </Stack>
 
-              {/* Products Section */}
-              <Stack spacing="medium">
-                <Heading size="base" color="gold">
-                  Our Products
-                </Heading>
-                <GoldDivider variant="simple" size="small" align="left" />
-                <Stack spacing="small">
-                  {services.map((service) => (
-                    <Flex key={service.name} justify="between" align="center">
+                {/* Products */}
+                <Stack spacing="medium">
+                  <Heading size="base" color="gold">
+                    Our Products
+                  </Heading>
+                  <Stack spacing="small">
+                    {services.map((service) => (
                       <Link
+                        key={service.path}
                         to={service.path}
-                        variant="subtle"
+                        variant="footer"
                         size="small"
                       >
                         {service.name}
                       </Link>
-                      {service.hot && <LuxuryBadge variant="gold" size="tiny" pulse>HOT</LuxuryBadge>}
-                      {service.new && <LuxuryBadge variant="outline" size="tiny">NEW</LuxuryBadge>}
-                      {service.premium && <LuxuryBadge variant="luxury" size="tiny">PREMIUM</LuxuryBadge>}
-                    </Flex>
-                  ))}
+                    ))}
+                  </Stack>
                 </Stack>
-              </Stack>
 
-              {/* Service Areas */}
-              <Stack spacing="medium">
-                <Heading size="base" color="gold">
-                  Service Areas
-                </Heading>
-                <GoldDivider variant="simple" size="small" align="left" />
-                <Grid cols={2} gap="small">
-                  {areas.map((area) => (
-                    <Link
-                      key={area}
-                      to={`/areas/${area.toLowerCase()}`}
-                      variant="subtle"
-                      size="small"
-                    >
-                      {area}
-                    </Link>
-                  ))}
-                </Grid>
-              </Stack>
-
-              {/* Contact Section */}
-              <Stack spacing="medium">
-                <Heading size="base" color="gold">
-                  Get In Touch
-                </Heading>
-                <GoldDivider variant="simple" size="small" align="left" />
+                {/* Service Areas */}
                 <Stack spacing="medium">
-                  <Link
-                    href="tel:01457597091"
-                    variant="luxury"
-                    className="group"
-                  >
-                    <Flex gap="small" align="center">
-                      <LuxuryIcon variant="glow" size="small">
-                        <Icon name="phone" />
-                      </LuxuryIcon>
-                      <Stack spacing="none">
-                        <Text size="small" color="muted">Call us today</Text>
-                        <Text weight="semibold">01457 597091</Text>
-                      </Stack>
-                    </Flex>
-                  </Link>
-                  
-                  <Link
-                    href="mailto:info@saddleworthblinds.co.uk"
-                    variant="subtle"
-                    className="group"
-                  >
-                    <Flex gap="small" align="center">
-                      <LuxuryIcon variant="simple" size="small">
-                        <Icon name="mail" />
-                      </LuxuryIcon>
-                      <Text size="small">info@saddleworthblinds.co.uk</Text>
-                    </Flex>
-                  </Link>
-
+                  <Heading size="base" color="gold">
+                    Areas We Cover
+                  </Heading>
                   <Stack spacing="small">
-                    <Text size="small" color="gold" weight="semibold">
-                      Showroom Hours
-                    </Text>
-                    <Text size="small" color="muted">
-                      Mon-Fri: 9:00 AM - 5:30 PM<br />
-                      Sat: 10:00 AM - 4:00 PM<br />
-                      Sun: By Appointment
-                    </Text>
+                    {areas.map((area) => (
+                      <Link
+                        key={area}
+                        to={`/areas/${area.toLowerCase()}`}
+                        variant="footer"
+                        size="small"
+                      >
+                        {area}
+                      </Link>
+                    ))}
+                    <Link to="/areas" variant="footer" size="small" className="font-semibold">
+                      View All Areas →
+                    </Link>
                   </Stack>
+                </Stack>
 
-                  {/* Social Links */}
+                {/* Contact */}
+                <Stack spacing="medium">
+                  <Heading size="base" color="gold">
+                    Get In Touch
+                  </Heading>
                   <Stack spacing="small">
-                    <Text size="small" color="gold" weight="semibold">
-                      Follow Us
-                    </Text>
-                    <Flex gap="small">
-                      <Link
-                        href="https://facebook.com/sunshineblinds"
-                        external
-                        aria-label="Facebook"
-                      >
-                        <LuxuryIcon variant="circle" size="small">
-                          <Icon name="facebook" />
-                        </LuxuryIcon>
+                    <Flex gap="small" align="center">
+                      <Icon name="phone" size="small" className="text-brand-gold" />
+                      <Link href="tel:01457597091" variant="footer">
+                        01457 597091
                       </Link>
-                      <Link
-                        href="https://instagram.com/sunshineblinds"
-                        external
-                        aria-label="Instagram"
-                      >
-                        <LuxuryIcon variant="circle" size="small">
-                          <Icon name="instagram" />
-                        </LuxuryIcon>
+                    </Flex>
+                    <Flex gap="small" align="center">
+                      <Icon name="mail" size="small" className="text-brand-gold" />
+                      <Link href="mailto:info@saddleworthblinds.co.uk" variant="footer" size="small">
+                        info@saddleworthblinds.co.uk
                       </Link>
-                      <Link
-                        href="https://twitter.com/sunshineblinds"
-                        external
-                        aria-label="Twitter"
-                      >
-                        <LuxuryIcon variant="circle" size="small">
-                          <Icon name="twitter" />
-                        </LuxuryIcon>
-                      </Link>
+                    </Flex>
+                    <Flex gap="small" align="start">
+                      <Icon name="location" size="small" className="text-brand-gold mt-1" />
+                      <Text size="small" color="light">
+                        Serving all of Saddleworth<br />
+                        and Greater Manchester
+                      </Text>
                     </Flex>
                   </Stack>
                 </Stack>
-              </Stack>
-            </Grid>
+              </Grid>
 
-            <GoldDivider variant="luxury" size="full" />
+              <GoldDivider variant="simple" />
 
-            {/* Bottom Section */}
-            <Stack spacing="medium">
               {/* Trust Badges */}
-              <Flex justify="center" wrap="wrap" gap="large" className="mb-8">
-                <GlowBox variant="subtle" intensity="low">
-                  <Flex align="center" gap="small">
-                    <Icon name="shield" size="medium" className="text-brand-gold" />
-                    <Text size="small" weight="medium">5 Year Guarantee</Text>
-                  </Flex>
-                </GlowBox>
-                <GlowBox variant="subtle" intensity="low">
-                  <Flex align="center" gap="small">
-                    <Icon name="currency" size="medium" className="text-brand-gold" />
-                    <Text size="small" weight="medium">Best Price Promise</Text>
-                  </Flex>
-                </GlowBox>
-                <GlowBox variant="subtle" intensity="low">
-                  <Flex align="center" gap="small">
-                    <Icon name="truck" size="medium" className="text-brand-gold" />
-                    <Text size="small" weight="medium">Free Installation</Text>
-                  </Flex>
-                </GlowBox>
-                <GlowBox variant="subtle" intensity="low">
-                  <Flex align="center" gap="small">
-                    <Icon name="home" size="medium" className="text-brand-gold" />
-                    <Text size="small" weight="medium">Free Home Visit</Text>
-                  </Flex>
-                </GlowBox>
-              </Flex>
+              <Grid cols={4} gap="medium">
+                <Flex align="center" gap="small">
+                  <LuxuryIcon variant="simple" size="small">
+                    <Icon name="shield" />
+                  </LuxuryIcon>
+                  <Text size="small" color="light">5 Year Guarantee</Text>
+                </Flex>
+                <Flex align="center" gap="small">
+                  <LuxuryIcon variant="simple" size="small">
+                    <Icon name="star" />
+                  </LuxuryIcon>
+                  <Text size="small" color="light">5★ Rated Service</Text>
+                </Flex>
+                <Flex align="center" gap="small">
+                  <LuxuryIcon variant="simple" size="small">
+                    <Icon name="truck" />
+                  </LuxuryIcon>
+                  <Text size="small" color="light">Free Installation</Text>
+                </Flex>
+                <Flex align="center" gap="small">
+                  <LuxuryIcon variant="simple" size="small">
+                    <Icon name="home" />
+                  </LuxuryIcon>
+                  <Text size="small" color="light">Family Business</Text>
+                </Flex>
+              </Grid>
 
-              {/* Legal Links */}
-              <Flex justify="center" wrap="wrap" gap="medium">
-                <Link to="/privacy-policy" variant="subtle" size="small">
-                  Privacy Policy
-                </Link>
-                <Text size="small" color="muted">•</Text>
-                <Link to="/terms-conditions" variant="subtle" size="small">
-                  Terms & Conditions
-                </Link>
-                <Text size="small" color="muted">•</Text>
-                <Link to="/sitemap" variant="subtle" size="small">
-                  Sitemap
-                </Link>
-              </Flex>
+              <GoldDivider variant="simple" />
 
-              {/* Copyright */}
-              <Text size="small" color="muted" align="center">
-                © {currentYear} Sunshine Blinds Saddleworth. All rights reserved. 
-                Part of the Sunshine Blinds Group.
-              </Text>
+              {/* Bottom Bar */}
+              <Flex justify="between" align="center" wrap="wrap" gap="medium">
+                <Text size="small" color="muted">
+                  © {currentYear} Sunshine Blinds Saddleworth. All rights reserved.
+                </Text>
+                <Flex gap="medium">
+                  <Link to="/privacy-policy" variant="subtle" size="small">
+                    Privacy Policy
+                  </Link>
+                  <Link to="/terms-conditions" variant="subtle" size="small">
+                    Terms & Conditions
+                  </Link>
+                </Flex>
+              </Flex>
             </Stack>
-          </Stack>
-        </Container>
-      </Section>
-
-      {/* Luxury Bottom Bar */}
-      <Section background="luxury" padding="none">
-        <Container>
-          <Flex justify="center" align="center" className="py-2">
-            <ShimmerText variant="subtle" speed="slow" className="text-sm">
-              Premium Window Solutions Since 1979
-            </ShimmerText>
-          </Flex>
-        </Container>
-      </Section>
+          </Container>
+        </Section>
+      </footer>
     </>
   )
 }

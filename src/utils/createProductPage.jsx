@@ -15,7 +15,8 @@ import {
   Center,
   PageTitle,
   SectionTitle,
-  LuxuryIcon
+  LuxuryIcon,
+  LuxuryBadge
 } from '../components/ui'
 
 // Standard product page configuration
@@ -669,7 +670,7 @@ export const createProductPage = (productSlug, CarouselComponent) => {
                   </Button>
                 </Flex>
 
-                <Grid cols={3} gap="medium" className="pt-4">
+                <Grid cols={3} gap="medium">
                   {config.features.map((feature, index) => (
                     <Center key={index}>
                       <Stack spacing="small" align="center">
@@ -712,9 +713,9 @@ export const createProductPage = (productSlug, CarouselComponent) => {
                 {config.keyBenefits.map((benefit, index) => (
                   <Card key={index} variant="elevated" hover="lift" padding="large">
                     <Stack spacing="medium" align="center">
-                      <div className="w-16 h-16 bg-brand-gold/10 rounded-full flex items-center justify-center">
-                        <Icon name={benefit.icon} size="large" className="text-brand-gold" />
-                      </div>
+                      <LuxuryIcon variant="circle" size="large">
+                        <Icon name={benefit.icon} />
+                      </LuxuryIcon>
                       <Heading as="h3" size="xl" align="center">{benefit.title}</Heading>
                       <Text color="light" align="center">{benefit.description}</Text>
                     </Stack>
@@ -795,9 +796,9 @@ export const createProductPage = (productSlug, CarouselComponent) => {
                   { number: '4', title: 'Professional Fitting', description: 'Expert installation included' }
                 ].map((step, index) => (
                   <Stack key={index} spacing="medium" align="center">
-                    <div className="w-16 h-16 bg-brand-gold rounded-full flex items-center justify-center text-gray-900 font-bold text-2xl">
+                    <LuxuryBadge variant="gold" size="large" shape="circle">
                       {step.number}
-                    </div>
+                    </LuxuryBadge>
                     <Heading as="h3" size="lg" align="center">{step.title}</Heading>
                     <Text color="light" align="center">{step.description}</Text>
                   </Stack>

@@ -1,7 +1,7 @@
 import { Suspense, lazy, useState, useEffect } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import Header from './components/Header'
-import Footer from './components/Footer'
+import FooterLuxury from './components/FooterLuxury'
 import CookieConsent from './components/CookieConsent'
 import ErrorBoundary from './components/ErrorBoundary'
 import LoadingScreen from './components/LoadingScreen'
@@ -11,8 +11,8 @@ import { SkipLink } from './components/ui/SkipLink'
 import { PageAnimationWrapper } from './components/ui/PageAnimationWrapper'
 
 // Lazy load pages for better performance
-const Home = lazy(() => import('./pages/Home'))
-const Contact = lazy(() => import('./pages/Contact'))
+const Home = lazy(() => import('./pages/HomeLuxury'))
+const Contact = lazy(() => import('./pages/ContactLuxury'))
 const Gallery = lazy(() => import('./pages/Gallery'))
 const BookAppointment = lazy(() => import('./pages/BookAppointment'))
 const RollerBlinds = lazy(() => import('./pages/RollerBlinds'))
@@ -114,7 +114,7 @@ function App() {
             </Suspense>
           </AnimatePresence>
         </MainContent>
-        <Footer />
+        <FooterLuxury />
         <CookieConsent />
         <ScrollToTopButton show={showScrollTop} onClick={scrollToTop} />
       </AppWrapper>
