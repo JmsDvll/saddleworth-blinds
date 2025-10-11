@@ -13,6 +13,7 @@ import {
   Image,
   Flex,
   Badge,
+  Box,
   HeroSection,
   HeroContent,
   HeroOverlay,
@@ -191,7 +192,7 @@ const HomeLuxury = () => {
                   <Text weight="bold" size="small" color="dark">
                     {feature.title}
                   </Text>
-                  <Text size="xs" color="dark" className="opacity-75">
+                  <Text size="xs" color="dark">
                     {feature.description}
                   </Text>
                 </Stack>
@@ -214,7 +215,7 @@ const HomeLuxury = () => {
                   Welcome to Sunshine Blinds Saddleworth
                 </ShimmerText>
               </Heading>
-              <Text size="xlarge" align="center" color="muted" className="max-w-3xl">
+              <Text size="xlarge" align="center" color="muted">
                 Transform your windows with our stunning collection of made-to-measure blinds, 
                 shutters, and curtains. Serving Saddleworth with pride for over 40 years.
               </Text>
@@ -227,21 +228,21 @@ const HomeLuxury = () => {
               {services.map((service, index) => (
                 <GlowBox key={index} variant="subtle" intensity="low">
                   <Card variant="elevated" hover="lift" padding="none">
-                    <div className="aspect-[4/3] overflow-hidden relative">
+                    <Box position="relative" overflow="hidden">
                       <Image
                         src={`/images/optimized/${service.image}`}
                         alt={service.name}
-                        className="w-full h-full object-cover"
+                        fill
                       />
                       {service.badge && (
-                        <div className="absolute top-4 right-4">
+                        <Box position="absolute" top="4" right="4">
                           <LuxuryBadge variant="gold" size="small">
                             {service.badge}
                           </LuxuryBadge>
-                        </div>
+                        </Box>
                       )}
-                    </div>
-                    <Stack spacing="medium" className="p-6">
+                    </Box>
+                    <Stack spacing="medium" padding="medium">
                       <Heading size="lg">
                         {service.name}
                       </Heading>
@@ -284,7 +285,7 @@ const HomeLuxury = () => {
               {processSteps.map((step, index) => (
                 <Stack key={index} spacing="medium" align="center">
                   <GlowBox variant="gold" intensity="medium" padding="small">
-                    <div className="relative">
+                    <Box position="relative">
                       <LuxuryIcon variant="luxury" size="large">
                         <Icon name={step.icon} />
                       </LuxuryIcon>
@@ -292,11 +293,11 @@ const HomeLuxury = () => {
                         variant="dark" 
                         size="small" 
                         shape="circle"
-                        className="absolute -top-2 -right-2"
+                        position="absolute"
                       >
                         {step.number}
                       </LuxuryBadge>
-                    </div>
+                    </Box>
                   </GlowBox>
                   <Heading size="base" color="gold" align="center">
                     {step.title}

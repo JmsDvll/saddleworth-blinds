@@ -2,11 +2,11 @@ import React, { forwardRef } from 'react'
 import { Stack, Text, Icon, Flex } from './index'
 
 // Form Group wrapper for consistent spacing and layout
-export const FormGroup = ({ children, className = '' }) => {
+export const FormGroup = ({ children }) => {
   return (
-    <div className={`w-full ${className}`}>
+    <Stack spacing="none" width="full">
       {children}
-    </div>
+    </Stack>
   )
 }
 

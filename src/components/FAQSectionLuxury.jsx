@@ -33,7 +33,7 @@ const FAQSectionLuxury = ({ faqs = [], title = 'Frequently Asked Questions', sub
               </ShimmerText>
             </Heading>
             {subtitle && (
-              <Text size="large" color="light" align="center" className="max-w-2xl">
+              <Text size="large" color="light" align="center">
                 {subtitle}
               </Text>
             )}
@@ -41,14 +41,13 @@ const FAQSectionLuxury = ({ faqs = [], title = 'Frequently Asked Questions', sub
           </Stack>
 
           {/* FAQ Items */}
-          <Stack spacing="medium" className="max-w-4xl mx-auto">
+          <Stack spacing="medium">
             {faqs.map((faq, index) => (
               <GlowBox key={index} variant="subtle" intensity="low">
                 <Card
                   variant="luxury"
                   hover="glow"
                   padding="none"
-                  className="overflow-hidden"
                 >
                   <button
                     onClick={() => toggleQuestion(index)}

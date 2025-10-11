@@ -198,7 +198,7 @@ const BookAppointmentLuxury = () => {
                         label="Your Name"
                         {...register('name')}
                         error={errors.name?.message}
-                        icon={<Icon name="user" />}
+                        icon="user"
                       />
                     </FormGroup>
 
@@ -208,7 +208,7 @@ const BookAppointmentLuxury = () => {
                         type="email"
                         {...register('email')}
                         error={errors.email?.message}
-                        icon={<Icon name="email" />}
+                        icon="email"
                       />
                     </FormGroup>
 
@@ -218,7 +218,7 @@ const BookAppointmentLuxury = () => {
                         type="tel"
                         {...register('phone')}
                         error={errors.phone?.message}
-                        icon={<Icon name="phone" />}
+                        icon="phone"
                       />
                     </FormGroup>
 
@@ -227,7 +227,7 @@ const BookAppointmentLuxury = () => {
                         label="Postcode"
                         {...register('postcode')}
                         error={errors.postcode?.message}
-                        icon={<Icon name="location" />}
+                        icon="location"
                       />
                     </FormGroup>
 
@@ -236,7 +236,7 @@ const BookAppointmentLuxury = () => {
                         label="Product Interest"
                         {...register('product')}
                         error={errors.product?.message}
-                        icon={<Icon name="blinds" />}
+                        icon="blinds"
                       >
                         <option value="">Select a product...</option>
                         {products.map(product => (
@@ -252,7 +252,7 @@ const BookAppointmentLuxury = () => {
                         label="Preferred Time Slot"
                         {...register('timeSlot')}
                         error={errors.timeSlot?.message}
-                        icon={<Icon name="time" />}
+                        icon="time"
                       >
                         <option value="">Select a time...</option>
                         {timeSlots.map(slot => (
@@ -291,7 +291,7 @@ const BookAppointmentLuxury = () => {
                     size="large"
                     fullWidth
                     loading={isSubmitting}
-                    icon={<Icon name="calendar" />}
+                    icon="calendar"
                   >
                     Book Free Consultation
                   </Button>
