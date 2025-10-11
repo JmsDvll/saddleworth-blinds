@@ -31,7 +31,7 @@ import FAQSectionLuxury from '../components/FAQSectionLuxury'
 import ReviewsSectionLuxury from '../components/ReviewsSectionLuxury'
 
 // Import all product configurations
-import { productConfigs } from './createProductPage'
+import { productConfigs } from './productConfigs'
 import { carouselData } from './carouselData'
 import ProductCarouselStandardized from '../components/ProductCarouselStandardized'
 

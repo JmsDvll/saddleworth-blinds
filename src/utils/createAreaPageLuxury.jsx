@@ -29,7 +29,7 @@ import ContactFormLuxury from '../components/ContactFormLuxury'
 import ReviewsSectionLuxury from '../components/ReviewsSectionLuxury'
 
 // Import area configurations
-import { areaConfigs } from './createAreaPage'
+import { areaConfigs } from './areaConfigs'
 
 export const createAreaPageLuxury = (areaName) => {
   const AreaPage = () => {
