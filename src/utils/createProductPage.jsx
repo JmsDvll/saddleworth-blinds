@@ -12,7 +12,10 @@ import {
   Image,
   Stack,
   Flex,
-  Center
+  Center,
+  PageTitle,
+  SectionTitle,
+  LuxuryIcon
 } from '../components/ui'
 
 // Standard product page configuration
@@ -639,12 +642,7 @@ export const createProductPage = (productSlug, CarouselComponent) => {
             <Grid cols={1} mdCols={2} gap="xlarge" align="center">
               <Stack spacing="large">
                 <Stack spacing="medium">
-                  <Heading as="h1" size="4xl" mdSize="5xl">
-                    {config.title}
-                    <Text as="span" color="gold" className="block text-2xl md:text-3xl mt-2">
-                      {config.tagline}
-                    </Text>
-                  </Heading>
+                  <PageTitle title={config.title} subtitle={config.tagline} />
                   
                   <Text size="xlarge" color="light" leading="relaxed">
                     {config.description}
@@ -675,9 +673,9 @@ export const createProductPage = (productSlug, CarouselComponent) => {
                   {config.features.map((feature, index) => (
                     <Center key={index}>
                       <Stack spacing="small" align="center">
-                        <div className="w-12 h-12 bg-brand-gold rounded-full flex items-center justify-center">
-                          <Icon name={feature.icon} size="medium" className="text-gray-900" />
-                        </div>
+                        <LuxuryIcon variant="circle" size="medium">
+                          <Icon name={feature.icon} />
+                        </LuxuryIcon>
                         <Text size="small" weight="medium" align="center">{feature.title}</Text>
                       </Stack>
                     </Center>

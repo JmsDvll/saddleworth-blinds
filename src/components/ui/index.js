@@ -66,3 +66,6 @@ export {
   HeroCTA,
   HeroBadge
 } from './HeroSection'
+
+// Page Components
+export { PageTitle, SectionTitle } from './PageTitle'

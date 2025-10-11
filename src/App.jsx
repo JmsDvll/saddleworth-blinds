@@ -1,20 +1,20 @@
 import { Suspense, lazy, useState, useEffect } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import Header from './components/Header'
-import FooterLuxury from './components/FooterLuxury'
-import CookieConsentLuxury from './components/CookieConsentLuxury'
-import ErrorBoundaryLuxury from './components/ErrorBoundaryLuxury'
-import LoadingScreenLuxury from './components/LoadingScreenLuxury'
+import Footer from './components/Footer'
+import CookieConsent from './components/CookieConsent'
+import ErrorBoundary from './components/ErrorBoundary'
+import LoadingScreen from './components/LoadingScreen'
 import { AnimatePresence } from 'framer-motion'
 import { PageLoader, AppWrapper, MainContent, ScrollToTopButton } from './components/ui/PageLoader'
 import { SkipLink } from './components/ui/SkipLink'
 import { PageAnimationWrapper } from './components/ui/PageAnimationWrapper'
 
 // Lazy load pages for better performance
-const Home = lazy(() => import('./pages/HomeLuxury'))
-const Contact = lazy(() => import('./pages/ContactLuxury'))
-const Gallery = lazy(() => import('./pages/GalleryLuxury'))
-const BookAppointment = lazy(() => import('./pages/BookAppointmentLuxury'))
+const Home = lazy(() => import('./pages/Home'))
+const Contact = lazy(() => import('./pages/Contact'))
+const Gallery = lazy(() => import('./pages/Gallery'))
+const BookAppointment = lazy(() => import('./pages/BookAppointment'))
 const RollerBlinds = lazy(() => import('./pages/RollerBlinds'))
 const VenetianBlinds = lazy(() => import('./pages/VenetianBlinds'))
 const VisionBlinds = lazy(() => import('./pages/VisionBlinds'))
@@ -22,9 +22,9 @@ const VerticalBlinds = lazy(() => import('./pages/VerticalBlinds'))
 const PerfectFitBlinds = lazy(() => import('./pages/PerfectFitBlinds'))
 const Shutters = lazy(() => import('./pages/Shutters'))
 const RomanBlinds = lazy(() => import('./pages/RomanBlinds'))
-const Curtains = lazy(() => import('./pages/CurtainsLuxury'))
-const AllusionBlinds = lazy(() => import('./pages/AllusionBlindsLuxury'))
-const Uppermill = lazy(() => import('./pages/UppermillLuxury'))
+const Curtains = lazy(() => import('./pages/Curtains'))
+const AllusionBlinds = lazy(() => import('./pages/AllusionBlinds'))
+const Uppermill = lazy(() => import('./pages/Uppermill'))
 const Diggle = lazy(() => import('./pages/Diggle'))
 const Delph = lazy(() => import('./pages/Delph'))
 const Greenfield = lazy(() => import('./pages/Greenfield'))
@@ -38,7 +38,6 @@ const Springhead = lazy(() => import('./pages/Springhead'))
 const Lees = lazy(() => import('./pages/Lees'))
 const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'))
 const TermsConditions = lazy(() => import('./pages/TermsConditions'))
-const TestLuxury = lazy(() => import('./pages/TestLuxury'))
 
 function App() {
   const [isLoading, setIsLoading] = useState(true)
@@ -68,7 +67,7 @@ function App() {
   }, [])
 
   if (isLoading) {
-    return <LoadingScreenLuxury />
+    return <LoadingScreen />
   }
 
   const scrollToTop = () => {
@@ -76,7 +75,7 @@ function App() {
   }
 
   return (
-    <ErrorBoundaryLuxury>
+    <ErrorBoundary>
       <AppWrapper>
         <SkipLink />
         <Header />
@@ -111,16 +110,15 @@ function App() {
                 <Route path="/areas/lees" element={<PageAnimationWrapper><Lees /></PageAnimationWrapper>} />
                 <Route path="/privacy-policy" element={<PageAnimationWrapper><PrivacyPolicy /></PageAnimationWrapper>} />
                 <Route path="/terms-conditions" element={<PageAnimationWrapper><TermsConditions /></PageAnimationWrapper>} />
-                <Route path="/test" element={<PageAnimationWrapper><TestLuxury /></PageAnimationWrapper>} />
               </Routes>
             </Suspense>
           </AnimatePresence>
         </MainContent>
-        <FooterLuxury />
-        <CookieConsentLuxury />
+        <Footer />
+        <CookieConsent />
         <ScrollToTopButton show={showScrollTop} onClick={scrollToTop} />
       </AppWrapper>
-    </ErrorBoundaryLuxury>
+    </ErrorBoundary>
   )
 }
 
