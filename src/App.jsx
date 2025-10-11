@@ -1,10 +1,10 @@
 import { Suspense, lazy, useState, useEffect } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
-import Header from './components/Header'
+import HeaderStandardized from './components/HeaderStandardized'
 import FooterLuxury from './components/FooterLuxury'
-import CookieConsent from './components/CookieConsent'
-import ErrorBoundary from './components/ErrorBoundary'
-import LoadingScreen from './components/LoadingScreen'
+import CookieConsentLuxury from './components/CookieConsentLuxury'
+import ErrorBoundaryLuxury from './components/ErrorBoundaryLuxury'
+import LoadingScreenLuxury from './components/LoadingScreenLuxury'
 import { AnimatePresence } from 'framer-motion'
 import { PageLoader, AppWrapper, MainContent, ScrollToTopButton } from './components/ui/PageLoader'
 import { SkipLink } from './components/ui/SkipLink'
@@ -14,7 +14,7 @@ import { PageAnimationWrapper } from './components/ui/PageAnimationWrapper'
 const Home = lazy(() => import('./pages/HomeLuxury'))
 const Contact = lazy(() => import('./pages/ContactLuxury'))
 const Gallery = lazy(() => import('./pages/Gallery'))
-const BookAppointment = lazy(() => import('./pages/BookAppointment'))
+const BookAppointment = lazy(() => import('./pages/BookAppointmentLuxury'))
 const RollerBlinds = lazy(() => import('./pages/RollerBlinds'))
 const VenetianBlinds = lazy(() => import('./pages/VenetianBlinds'))
 const VisionBlinds = lazy(() => import('./pages/VisionBlinds'))
@@ -67,7 +67,7 @@ function App() {
   }, [])
 
   if (isLoading) {
-    return <LoadingScreen />
+    return <LoadingScreenLuxury />
   }
 
   const scrollToTop = () => {
@@ -75,10 +75,10 @@ function App() {
   }
 
   return (
-    <ErrorBoundary>
+    <ErrorBoundaryLuxury>
       <AppWrapper>
         <SkipLink />
-        <Header />
+        <HeaderStandardized />
         <MainContent>
           <AnimatePresence mode="wait">
             <Suspense fallback={<PageLoader />}>
@@ -115,10 +115,10 @@ function App() {
           </AnimatePresence>
         </MainContent>
         <FooterLuxury />
-        <CookieConsent />
+        <CookieConsentLuxury />
         <ScrollToTopButton show={showScrollTop} onClick={scrollToTop} />
       </AppWrapper>
-    </ErrorBoundary>
+    </ErrorBoundaryLuxury>
   )
 }
 

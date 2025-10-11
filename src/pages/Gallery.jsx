@@ -48,7 +48,7 @@ const Gallery = () => {
         <Stack spacing="xlarge">
           {/* Hero Section */}
           <Center>
-            <Stack spacing="medium" align="center" className="max-w-3xl">
+            <Stack spacing="medium" align="center">
               <Heading as="h1" size="4xl" mdSize="5xl">Our Gallery</Heading>
               <Text size="xlarge" color="light" leading="relaxed" align="center">
                 See our beautiful blinds installed in real Saddleworth homes. From cosy cottages in Uppermill to modern conversions in Diggle, discover how the right blinds can transform any space.

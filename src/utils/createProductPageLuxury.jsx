@@ -32,6 +32,8 @@ import ReviewsSectionLuxury from '../components/ReviewsSectionLuxury'
 
 // Import all product configurations
 import { productConfigs } from './createProductPage'
+import { carouselData } from './carouselData'
+import ProductCarouselStandardized from '../components/ProductCarouselStandardized'
 
 // Create a luxury product page using the existing configs
 export const createProductPageLuxury = (productSlug, CarouselComponent) => {
@@ -118,7 +120,7 @@ export const createProductPageLuxury = (productSlug, CarouselComponent) => {
         </HeroSection>
 
         {/* Product Carousel */}
-        {CarouselComponent && (
+        {(CarouselComponent || carouselData[productSlug]) && (
           <Section background="dark" padding="large">
             <Container>
               <Stack spacing="large">
@@ -127,7 +129,11 @@ export const createProductPageLuxury = (productSlug, CarouselComponent) => {
                     Explore Our Collection
                   </ShimmerText>
                 </Heading>
-                <CarouselComponent />
+                {CarouselComponent ? (
+                  <CarouselComponent />
+                ) : (
+                  <ProductCarouselStandardized slides={carouselData[productSlug]} />
+                )}
               </Stack>
             </Container>
           </Section>
