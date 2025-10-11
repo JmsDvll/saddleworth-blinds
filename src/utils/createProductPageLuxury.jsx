@@ -23,7 +23,9 @@ import {
   LuxuryBadge,
   LuxuryIcon,
   GlowBox,
-  ShimmerText
+  ShimmerText,
+  HeroImage,
+  ImageContainer
 } from '../components/ui'
 import FAQSectionLuxury from '../components/FAQSectionLuxury'
 import ReviewsSectionLuxury from '../components/ReviewsSectionLuxury'
@@ -55,10 +57,9 @@ export const createProductPageLuxury = (productSlug, CarouselComponent) => {
         <HeroSection variant="luxury" height="large">
           <HeroOverlay variant="gradient" />
           {config.heroImage && (
-            <Image
+            <HeroImage
               src={config.heroImage}
               alt={config.heroAlt || config.title}
-              className="absolute inset-0 w-full h-full object-cover"
             />
           )}
           <HeroContent align="left" padding="large">
@@ -197,7 +198,7 @@ export const createProductPageLuxury = (productSlug, CarouselComponent) => {
                             <GoldDivider variant="simple" size="small" align="left" />
                             {option.features.map((feature, idx) => (
                               <Flex key={idx} gap="small" align="center">
-                                <Icon name="check" size="small" className="text-brand-gold" />
+                                <Icon name="check" size="small" />
                                 <Text size="small" color="light">{feature}</Text>
                               </Flex>
                             ))}
@@ -257,19 +258,18 @@ export const createProductPageLuxury = (productSlug, CarouselComponent) => {
                 <Grid cols={3} gap="large">
                   {config.gallery.map((item, index) => (
                     <Card key={index} variant="elevated" hover="lift" padding="none">
-                      <div className="aspect-[4/3] overflow-hidden">
+                      <ImageContainer aspectRatio="4:3">
                         <Image
                           src={item.src}
                           alt={item.alt}
-                          className="w-full h-full object-cover"
                         />
-                      </div>
+                      </ImageContainer>
                       {item.caption && (
-                        <div className="p-4">
+                        <Container padding="small">
                           <Text size="small" color="muted" align="center">
                             {item.caption}
                           </Text>
-                        </div>
+                        </Container>
                       )}
                     </Card>
                   ))}

@@ -703,7 +703,7 @@ export const createProductPage = (productSlug, CarouselComponent) => {
                   <Heading as="h2" size="3xl" mdSize="4xl" color="gradient">
                     Why Choose {config.title}?
                   </Heading>
-                  <Text size="xlarge" color="light" align="center" className="max-w-3xl">
+                  <Text size="xlarge" color="light" align="center">
                     Discover why thousands of Saddleworth homeowners trust us for their {config.title.toLowerCase()}
                   </Text>
                 </Stack>
@@ -750,7 +750,7 @@ export const createProductPage = (productSlug, CarouselComponent) => {
                   <Heading as="h2" size="3xl" mdSize="4xl" color="gradient">
                     Types of {config.title}
                   </Heading>
-                  <Text size="xlarge" color="light" align="center" className="max-w-3xl">
+                  <Text size="xlarge" color="light" align="center">
                     Choose the perfect style for your home
                   </Text>
                 </Stack>
@@ -762,10 +762,10 @@ export const createProductPage = (productSlug, CarouselComponent) => {
                     <Stack spacing="medium">
                       <Heading as="h3" size="2xl" color="gold">{type.name}</Heading>
                       <Text size="large" color="light">{type.description}</Text>
-                      <Stack spacing="small" className="mt-4">
+                      <Stack spacing="small">
                         {type.features.map((feature, fIndex) => (
                           <Flex key={fIndex} align="start" gap="small">
-                            <Icon name="check" size="small" className="text-brand-gold mt-1 flex-shrink-0" />
+                            <Icon name="check" size="small" />
                             <Text color="light">{feature}</Text>
                           </Flex>
                         ))}
@@ -816,7 +816,7 @@ export const createProductPage = (productSlug, CarouselComponent) => {
                 <Heading as="h2" size="3xl" mdSize="4xl">
                   Ready to Transform Your Windows?
                 </Heading>
-                <Text size="xlarge" color="light" align="center" className="max-w-2xl">
+                <Text size="xlarge" color="light" align="center">
                   Join thousands of happy Saddleworth homeowners who've chosen us for their {config.title.toLowerCase()}.
                 </Text>
                 
@@ -842,15 +842,15 @@ export const createProductPage = (productSlug, CarouselComponent) => {
 
                 <Grid cols={3} gap="large" className="mt-8">
                   <Stack spacing="small" align="center">
-                    <Icon name="check" size="medium" className="text-brand-gold" />
+                    <Icon name="check" size="medium" />
                     <Text weight="medium">Free Measuring</Text>
                   </Stack>
                   <Stack spacing="small" align="center">
-                    <Icon name="check" size="medium" className="text-brand-gold" />
+                    <Icon name="check" size="medium" />
                     <Text weight="medium">5 Year Guarantee</Text>
                   </Stack>
                   <Stack spacing="small" align="center">
-                    <Icon name="check" size="medium" className="text-brand-gold" />
+                    <Icon name="check" size="medium" />
                     <Text weight="medium">Expert Fitting</Text>
                   </Stack>
                 </Grid>

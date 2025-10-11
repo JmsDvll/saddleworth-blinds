@@ -66,6 +66,14 @@ export {
   HeroCTA,
   HeroBadge
 } from './HeroSection'
+export {
+  ImageContainer,
+  ImageElement,
+  ImageSkeleton,
+  ImageSpinner,
+  ImageError,
+  ImageOverlay
+} from './ImageWrapper'
 
 // Page Components
 export { PageTitle, SectionTitle } from './PageTitle'

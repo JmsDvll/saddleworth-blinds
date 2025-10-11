@@ -1,18 +1,21 @@
 import React from 'react'
 import { 
   Section, 
-  Container, 
-  Grid, 
-  Heading, 
-  Text, 
-  Button, 
-  Card, 
-  Icon, 
-  Link, 
+  Container,
+  Grid,
+  Heading,
+  Text,
+  Button,
+  Card,
+  Icon,
+  Link,
   Image,
   Stack,
   Flex,
-  Center
+  Center,
+  LuxuryIcon,
+  LuxuryBadge,
+  PageTitle
 } from '../components/ui'
 
 // Area page configuration
@@ -388,7 +391,7 @@ export const createAreaPage = (areaName) => {
               <Stack spacing="large">
                 <Heading as="h1" size="4xl" mdSize="6xl">
                   Window Blinds in
-                  <Text as="span" color="gold" className="block">{areaName}</Text>
+                  <Text as="span" color="gold">{areaName}</Text>
                 </Heading>
                 
                 <Text size="xlarge" color="light" leading="relaxed">
@@ -415,13 +418,13 @@ export const createAreaPage = (areaName) => {
                   </Button>
                 </Flex>
 
-                <Grid cols={3} gap="medium" className="pt-8">
+                <Grid cols={3} gap="medium">
                   {config.features.map((feature, index) => (
                     <Center key={index}>
                       <Stack spacing="small" align="center">
-                        <div className="w-12 h-12 bg-brand-gold rounded-full flex items-center justify-center">
-                          <Icon name={feature.icon} size="medium" className="text-gray-900" />
-                        </div>
+                        <LuxuryIcon variant="circle" size="medium">
+                          <Icon name={feature.icon} />
+                        </LuxuryIcon>
                         <Text size="small" weight="medium">{feature.text}</Text>
                       </Stack>
                     </Center>
@@ -444,7 +447,7 @@ export const createAreaPage = (areaName) => {
             <Stack spacing="xlarge">
               {/* Intro Section */}
               <Center>
-                <Stack spacing="medium" align="center" className="max-w-3xl">
+                <Stack spacing="medium" align="center">
                   <Heading as="h2" size="3xl" mdSize="4xl">
                     Window Blinds for {areaName} Homes
                   </Heading>
@@ -464,14 +467,14 @@ export const createAreaPage = (areaName) => {
                   {config.propertyTypes.map((type, index) => (
                     <Card key={index} variant="elevated" padding="large">
                       <Stack spacing="medium" align="center">
-                        <div className="w-16 h-16 bg-brand-gold rounded-full flex items-center justify-center">
-                          <Icon name={type.icon} size="large" className="text-gray-900" />
-                        </div>
+                        <LuxuryIcon variant="circle" size="large">
+                          <Icon name={type.icon} />
+                        </LuxuryIcon>
                         <Heading as="h3" size="xl">{type.title}</Heading>
                         <Text color="light" align="center">
                           {type.description}
                         </Text>
-                        <Stack spacing="small" className="w-full">
+                        <Stack spacing="small">
                           {type.features.map((feature, fIndex) => (
                             <Text key={fIndex} size="small" color="muted">• {feature}</Text>
                           ))}
@@ -516,9 +519,9 @@ export const createAreaPage = (areaName) => {
                   <Grid cols={1} mdCols={3} lgCols={5} gap="medium">
                     <Center>
                       <Stack spacing="small" align="center">
-                        <div className="w-12 h-12 bg-brand-gold rounded-full flex items-center justify-center text-gray-900 font-bold text-lg">
+                        <LuxuryBadge variant="gold" size="medium" shape="circle">
                           1
-                        </div>
+                        </LuxuryBadge>
                         <Heading as="h3" size="base" color="white">Local Knowledge</Heading>
                         <Text size="small" color="muted" align="center">We understand {areaName}'s unique architectural styles</Text>
                       </Stack>
@@ -526,9 +529,9 @@ export const createAreaPage = (areaName) => {
 
                     <Center>
                       <Stack spacing="small" align="center">
-                        <div className="w-12 h-12 bg-brand-gold rounded-full flex items-center justify-center text-gray-900 font-bold text-lg">
+                        <LuxuryBadge variant="gold" size="medium" shape="circle">
                           2
-                        </div>
+                        </LuxuryBadge>
                         <Heading as="h3" size="base" color="white">20+ Years Experience</Heading>
                         <Text size="small" color="muted" align="center">Fitting blinds in hundreds of local homes</Text>
                       </Stack>
@@ -536,9 +539,9 @@ export const createAreaPage = (areaName) => {
 
                     <Center>
                       <Stack spacing="small" align="center">
-                        <div className="w-12 h-12 bg-brand-gold rounded-full flex items-center justify-center text-gray-900 font-bold text-lg">
+                        <LuxuryBadge variant="gold" size="medium" shape="circle">
                           3
-                        </div>
+                        </LuxuryBadge>
                         <Heading as="h3" size="base" color="white">Professional Installation</Heading>
                         <Text size="small" color="muted" align="center">Expert fitting included in every quote</Text>
                       </Stack>
@@ -546,9 +549,9 @@ export const createAreaPage = (areaName) => {
 
                     <Center>
                       <Stack spacing="small" align="center">
-                        <div className="w-12 h-12 bg-brand-gold rounded-full flex items-center justify-center text-gray-900 font-bold text-lg">
+                        <LuxuryBadge variant="gold" size="medium" shape="circle">
                           4
-                        </div>
+                        </LuxuryBadge>
                         <Heading as="h3" size="base" color="white">Comprehensive Warranty</Heading>
                         <Text size="small" color="muted" align="center">Full warranty on all products and installation</Text>
                       </Stack>
@@ -556,9 +559,9 @@ export const createAreaPage = (areaName) => {
 
                     <Center>
                       <Stack spacing="small" align="center">
-                        <div className="w-12 h-12 bg-brand-gold rounded-full flex items-center justify-center text-gray-900 font-bold text-lg">
+                        <LuxuryBadge variant="gold" size="medium" shape="circle">
                           5
-                        </div>
+                        </LuxuryBadge>
                         <Heading as="h3" size="base" color="white">Fair Pricing</Heading>
                         <Text size="small" color="muted" align="center">Competitive prices with no hidden fees</Text>
                       </Stack>
@@ -594,7 +597,7 @@ export const createAreaPage = (areaName) => {
                     </Button>
                   </Flex>
 
-                  <Flex gap="large" className="mt-8">
+                  <Flex gap="large">
                     <Flex align="center" gap="small">
                       <Icon name="check" size="small" color="muted" />
                       <Text size="small" color="muted">Completely Free</Text>
