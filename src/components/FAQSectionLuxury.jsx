@@ -9,6 +9,8 @@ import {
   Card,
   Icon,
   Button,
+  Box,
+  Flex,
   GoldDivider,
   ShimmerText,
   GlowBox
@@ -49,17 +51,19 @@ const FAQSectionLuxury = ({ faqs = [], title = 'Frequently Asked Questions', sub
                   hover="glow"
                   padding="none"
                 >
-                  <button
+                  <Button
                     onClick={() => toggleQuestion(index)}
-                    className="w-full text-left p-6 focus:outline-none focus:ring-2 focus:ring-brand-gold/50"
+                    variant="ghost"
+                    fullWidth
+                    align="left"
                     aria-expanded={openIndex === index}
                     aria-controls={`faq-answer-${index}`}
                   >
-                    <div className="flex items-start justify-between gap-4">
-                      <Heading size="base" color="gold" className="flex-1">
+                    <Flex align="start" justify="between" gap="medium">
+                      <Heading size="base" color="gold" flex="1">
                         {faq.question}
                       </Heading>
-                      <div className="flex-shrink-0 mt-1">
+                      <Box flexShrink="0" marginTop="1">
                         <motion.div
                           animate={{ rotate: openIndex === index ? 45 : 0 }}
                           transition={{ duration: 0.3, ease: 'easeInOut' }}
@@ -67,12 +71,12 @@ const FAQSectionLuxury = ({ faqs = [], title = 'Frequently Asked Questions', sub
                           <Icon 
                             name="plus" 
                             size="medium" 
-                            className="text-brand-gold"
+                            color="gold"
                           />
                         </motion.div>
-                      </div>
-                    </div>
-                  </button>
+                      </Box>
+                    </Flex>
+                  </Button>
 
                   <AnimatePresence>
                     {openIndex === index && (
@@ -82,15 +86,15 @@ const FAQSectionLuxury = ({ faqs = [], title = 'Frequently Asked Questions', sub
                         animate={{ height: 'auto', opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
                         transition={{ duration: 0.3, ease: 'easeInOut' }}
-                        className="overflow-hidden"
+                        style={{ overflow: 'hidden' }}
                       >
-                        <div className="px-6 pb-6">
-                          <div className="border-t border-brand-gold/20 pt-4">
+                        <Box padding="large" paddingTop="none">
+                          <Box borderTop="gold" paddingTop="medium">
                             <Text color="light" leading="relaxed">
                               {faq.answer}
                             </Text>
-                          </div>
-                        </div>
+                          </Box>
+                        </Box>
                       </motion.div>
                     )}
                   </AnimatePresence>
@@ -105,7 +109,7 @@ const FAQSectionLuxury = ({ faqs = [], title = 'Frequently Asked Questions', sub
             <Text size="large" color="light" align="center">
               Still have questions?
             </Text>
-            <div className="flex flex-wrap gap-4 justify-center">
+            <Flex wrap gap="medium" justify="center">
               <Button 
                 to="/contact"
                 variant="luxury"
@@ -120,7 +124,7 @@ const FAQSectionLuxury = ({ faqs = [], title = 'Frequently Asked Questions', sub
               >
                 Call 01457 597091
               </Button>
-            </div>
+            </Flex>
           </Stack>
         </Stack>
       </Container>
