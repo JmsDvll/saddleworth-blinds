@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Card, Stack, Text, Button, Icon, Flex, Link, GlowBox } from './ui'
+import { useEffect, useState } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
+import { Button, Card, Flex, GlowBox, Icon, Link, Stack, Text } from './ui'
 
 const CookieConsentLuxury = () => {
   const [showBanner, setShowBanner] = useState(false)
@@ -24,7 +24,7 @@ const CookieConsentLuxury = () => {
     // Enable analytics
     if (window.gtag) {
       window.gtag('consent', 'update', {
-        'analytics_storage': 'granted'
+        'analytics_storage': 'granted',
       })
     }
   }
@@ -37,7 +37,7 @@ const CookieConsentLuxury = () => {
     // Disable analytics
     if (window.gtag) {
       window.gtag('consent', 'update', {
-        'analytics_storage': 'denied'
+        'analytics_storage': 'denied',
       })
     }
   }
@@ -50,32 +50,35 @@ const CookieConsentLuxury = () => {
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 100, opacity: 0 }}
           transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-          className="fixed bottom-0 left-0 right-0 z-50 p-4 md:p-6"
+          style={{ position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 9999, pointerEvents: 'auto' }}
+          role="dialog"
+          aria-label="Cookie preferences"
         >
-          <GlowBox variant="subtle" intensity="medium">
-            <Card variant="luxury" padding="large">
+          <GlowBox variant="subtle" intensity="medium" style={{ pointerEvents: 'auto' }}>
+            <Card variant="luxury" padding="large" style={{ pointerEvents: 'auto' }}>
               <Stack spacing="medium">
                 {/* Header */}
                 <Flex justify="between" align="start">
                   <Flex gap="small" align="center">
-                    <Icon name="cookie" size="medium" className="text-brand-gold" />
+                    <Icon name="cookie" size="medium" color="#CABC32" />
                     <Text size="large" weight="semibold" color="gold">
                       Cookie Preferences
                     </Text>
                   </Flex>
-                  <button
+                  <Button
+                    variant="ghost"
+                    size="small"
                     onClick={() => setShowBanner(false)}
-                    className="p-1 hover:bg-white/10 rounded-lg transition-colors"
                     aria-label="Close cookie banner"
                   >
                     <Icon name="x" size="small" />
-                  </button>
+                  </Button>
                 </Flex>
 
                 {/* Main content */}
                 <Text color="light">
                   We use cookies to enhance your browsing experience and analyze our traffic. 
-                  By clicking "Accept All", you consent to our use of cookies.
+                  By clicking &quot;Accept All&quot;, you consent to our use of cookies.
                 </Text>
 
                 {/* Details section */}
@@ -87,7 +90,7 @@ const CookieConsentLuxury = () => {
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.3 }}
                     >
-                      <Stack spacing="small" className="pt-4 border-t border-brand-gold/20">
+                      <Stack spacing="small">
                         <Text size="small" weight="semibold" color="gold">
                           Essential Cookies
                         </Text>
@@ -95,7 +98,7 @@ const CookieConsentLuxury = () => {
                           Required for the website to function properly. Cannot be disabled.
                         </Text>
                         
-                        <Text size="small" weight="semibold" color="gold" className="mt-2">
+                        <Text size="small" weight="semibold" color="gold">
                           Analytics Cookies
                         </Text>
                         <Text size="small" color="light">

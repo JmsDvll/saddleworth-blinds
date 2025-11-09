@@ -1,4 +1,24 @@
 import React, { forwardRef } from 'react'
+/**
+ * Text – Standardized typography wrapper.
+ *
+ * Props
+ * - as: string – HTML tag to render (default 'p')
+ * - variant: 'default' | 'lead' | 'small' | 'caption' | 'menu' | 'heading' | 'luxury'
+ * - size: 'xs' | 'small' | 'medium' | 'large' | 'xlarge' | '2xl'
+ * - weight: 'light' | 'normal' | 'medium' | 'semibold' | 'bold'
+ * - color: 'inherit' | 'dark' | 'light' | 'gold' | 'muted' | 'error' | 'success'
+ * - leading: 'tight' | 'normal' | 'relaxed' | 'loose'
+ * - align: 'left' | 'center' | 'right' | 'justify'
+ * - tracking: 'normal' | 'wide' | 'wider' | 'luxury'
+ *
+ * Usage
+ *  <Text size="large" color="muted">Body copy</Text>
+ *
+ * Anti‑patterns
+ * - Do not use raw <p>/<span> outside UI layer for standard text
+ * - Avoid Tailwind className; choose semantic props here
+ */
 
 const textStyles = {
   base: 'font-body',
@@ -39,7 +59,7 @@ const textStyles = {
     dark: 'text-brand-dark',
     light: 'text-brand-cream',
     gold: 'text-brand-gold',
-    muted: 'text-brand-grey',
+    muted: 'text-brand-grey-darker',
     error: 'text-red-600',
     success: 'text-emerald-600',
   },
@@ -66,7 +86,7 @@ const textStyles = {
     wide: 'tracking-wide',
     wider: 'tracking-wider',
     luxury: 'tracking-luxury',
-  }
+  },
 }
 
 export const Text = forwardRef(({ 

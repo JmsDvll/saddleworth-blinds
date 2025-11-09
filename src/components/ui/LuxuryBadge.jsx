@@ -1,4 +1,15 @@
 import React from 'react'
+/**
+ * LuxuryBadge – decorative badge with variants and optional icon.
+ *
+ * Props
+ * - variant: 'gold' | 'dark' | 'outline' | 'luxury' | 'premium'
+ * - size: 'tiny' | 'small' | 'medium' | 'large'
+ * - shape: 'rounded' | 'square' | 'sharp'
+ * - icon: 'star' | 'diamond' | 'crown' | 'check' | 'arrow' | 'sparkle'
+ * - iconPosition: 'left' | 'right'
+ * - pulse: boolean
+ */
 
 const badgeStyles = {
   base: `
@@ -27,9 +38,10 @@ const badgeStyles = {
     `,
     outline: `
       bg-transparent
-      text-brand-gold
+      text-brand-dark
       border-2 border-brand-gold
       hover:bg-brand-gold hover:text-brand-dark
+      focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2
     `,
     luxury: `
       bg-gradient-to-r from-brand-dark via-brand-dark-light to-brand-dark
@@ -52,9 +64,9 @@ const badgeStyles = {
   
   sizes: {
     tiny: 'px-2 py-0.5 text-xs',
-    small: 'px-3 py-1 text-sm',
+    small: 'px-3 py-1.5 text-sm',
     medium: 'px-4 py-1.5 text-base',
-    large: 'px-6 py-2 text-lg',
+    large: 'px-6 py-2.5 text-lg',
   },
   
   shapes: {

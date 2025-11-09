@@ -1,4 +1,15 @@
 import React, { forwardRef } from 'react'
+/**
+ * ProgressBar – Determinate progress indicator.
+ *
+ * Props
+ * - value, max: numbers (0..max)
+ * - size: 'small' | 'medium' | 'large'
+ * - variant: 'primary' | 'secondary' | 'success' | 'error'
+ * - containerVariant: 'default' | 'dark' | 'light'
+ * - rounded: 'none' | 'small' | 'medium' | 'large' | 'full'
+ * - animated: 'none' | 'pulse' | 'shimmer'
+ */
 
 const progressBarStyles = {
   container: {
@@ -19,7 +30,7 @@ const progressBarStyles = {
       medium: 'rounded',
       large: 'rounded-lg',
       full: 'rounded-full',
-    }
+    },
   },
   bar: {
     base: 'h-full transition-all',
@@ -33,8 +44,8 @@ const progressBarStyles = {
       none: '',
       pulse: 'animate-pulse',
       shimmer: 'animate-shimmer bg-[length:200%_100%]',
-    }
-  }
+    },
+  },
 }
 
 export const ProgressBar = forwardRef(({
@@ -83,7 +94,7 @@ export const ProgressBar = forwardRef(({
         className={barClasses}
         style={{
           width: `${percentage}%`,
-          ...barStyle
+          ...barStyle,
         }}
       />
     </div>

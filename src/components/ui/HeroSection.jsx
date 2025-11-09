@@ -1,4 +1,17 @@
 import React, { forwardRef } from 'react'
+/**
+ * HeroSection Suite – Composable hero building blocks.
+ *
+ * HeroSection props
+ * - variant: 'default' | 'image' | 'luxury' | 'pattern'
+ * - height: 'full' | 'large' | 'medium' | 'auto'
+ *
+ * HeroContent props: align ('left' | 'center' | 'right'), padding
+ * HeroImage: src, alt (required)
+ * HeroOverlay: variant ('dark' | 'gradient' | 'radial' | 'luxury')
+ * HeroTitle: effect ('none' | 'glow' | 'gradient')
+ * HeroSubtitle / HeroDescription / HeroCTA / HeroBadge: display helpers
+ */
 
 // Hero section wrapper
 const heroStyles = {
@@ -111,7 +124,7 @@ HeroImage.displayName = 'HeroImage'
 
 // Hero overlay
 const heroOverlayStyles = {
-  base: 'absolute inset-0',
+  base: 'absolute inset-0 pointer-events-none',
   
   variants: {
     dark: 'bg-brand-dark/70',
@@ -149,7 +162,7 @@ const heroTitleStyles = {
   
   effects: {
     none: '',
-    glow: 'drop-shadow-luxury',
+    glow: 'drop-shadow-[0_0_24px_rgba(202,188,50,0.35)]',
     gradient: 'bg-gold-gradient bg-clip-text text-transparent',
   },
 }

@@ -1,4 +1,22 @@
 import React, { forwardRef } from 'react'
+/**
+ * Form Inputs – Standardized input/select/textarea/checkbox/radio controls.
+ *
+ * Common Props
+ * - label: string (renders accessible label)
+ * - error / success: string|boolean (styling + helper text tone)
+ * - helperText: string
+ * - required: boolean
+ * - size: 'small' | 'medium' | 'large'
+ *
+ * Usage
+ *  <FormInput label="Email" type="email" required />
+ *  <FormSelect label="Service" required><option>...</option></FormSelect>
+ *  <FormTextarea label="Message" rows={4} />
+ *
+ * Anti‑patterns
+ * - Do not use raw <input>/<select>/<textarea> outside UI.
+ */
 
 // Enhanced form input styles with premium effects
 const inputStyles = {
@@ -53,7 +71,7 @@ const inputStyles = {
     default: 'mt-2 text-sm text-gray-500',
     error: 'mt-2 text-sm text-red-400',
     success: 'mt-2 text-sm text-emerald-400',
-  }
+  },
 }
 
 // Enhanced Form Input Component
@@ -67,10 +85,15 @@ export const FormInput = forwardRef(({
   size = 'medium',
   ...props
 }, ref) => {
-  const variant = error ? 'error' : success ? 'success' : 'default'
+  let variant = 'default'
+  if (error) {
+    variant = 'error'
+  } else if (success) {
+    variant = 'success'
+  }
   
   return (
-    <div className={`relative group`}>
+    <div className={'relative group'}>
       {label && (
         <label 
           htmlFor={props.id || props.name}
@@ -84,7 +107,7 @@ export const FormInput = forwardRef(({
         </label>
       )}
       
-      <div className={`relative`}>
+      <div className={'relative'}>
         <input
           ref={ref}
           className={`
@@ -98,7 +121,7 @@ export const FormInput = forwardRef(({
         />
         
         {/* Premium focus glow effect */}
-        <div className={`absolute inset-0 rounded-lg bg-gradient-to-r from-brand-gold/20 to-brand-gold-light/20 opacity-0 group-focus-within:opacity-100 blur-xl transition-opacity duration-500 pointer-events-none -z-10`}></div>
+        <div className={'absolute inset-0 rounded-lg bg-gradient-to-r from-brand-gold/20 to-brand-gold-light/20 opacity-0 group-focus-within:opacity-100 blur-xl transition-opacity duration-500 pointer-events-none -z-10'}></div>
       </div>
       
       {helperText && (
@@ -124,10 +147,15 @@ export const FormSelect = forwardRef(({
   size = 'medium',
   ...props
 }, ref) => {
-  const variant = error ? 'error' : success ? 'success' : 'default'
+  let variant = 'default'
+  if (error) {
+    variant = 'error'
+  } else if (success) {
+    variant = 'success'
+  }
   
   return (
-    <div className={`relative group`}>
+    <div className={'relative group'}>
       {label && (
         <label 
           htmlFor={props.id || props.name}
@@ -141,7 +169,7 @@ export const FormSelect = forwardRef(({
         </label>
       )}
       
-      <div className={`relative`}>
+      <div className={'relative'}>
         <select
           ref={ref}
           className={`
@@ -159,14 +187,14 @@ export const FormSelect = forwardRef(({
         </select>
         
         {/* Custom dropdown arrow */}
-        <div className={`absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none`}>
-          <svg className={`w-5 h-5 text-gray-400`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div className={'absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none'}>
+          <svg className={'w-5 h-5 text-gray-400'} fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
           </svg>
         </div>
         
         {/* Premium focus glow effect */}
-        <div className={`absolute inset-0 rounded-lg bg-gradient-to-r from-brand-gold/20 to-brand-gold-light/20 opacity-0 group-focus-within:opacity-100 blur-xl transition-opacity duration-500 pointer-events-none -z-10`}></div>
+        <div className={'absolute inset-0 rounded-lg bg-gradient-to-r from-brand-gold/20 to-brand-gold-light/20 opacity-0 group-focus-within:opacity-100 blur-xl transition-opacity duration-500 pointer-events-none -z-10'}></div>
       </div>
       
       {helperText && (
@@ -191,10 +219,15 @@ export const FormTextarea = forwardRef(({
   size = 'medium',
   ...props
 }, ref) => {
-  const variant = error ? 'error' : success ? 'success' : 'default'
+  let variant = 'default'
+  if (error) {
+    variant = 'error'
+  } else if (success) {
+    variant = 'success'
+  }
   
   return (
-    <div className={`relative group`}>
+    <div className={'relative group'}>
       {label && (
         <label 
           htmlFor={props.id || props.name}
@@ -208,7 +241,7 @@ export const FormTextarea = forwardRef(({
         </label>
       )}
       
-      <div className={`relative`}>
+      <div className={'relative'}>
         <textarea
           ref={ref}
           className={`
@@ -223,7 +256,7 @@ export const FormTextarea = forwardRef(({
         />
         
         {/* Premium focus glow effect */}
-        <div className={`absolute inset-0 rounded-lg bg-gradient-to-r from-brand-gold/20 to-brand-gold-light/20 opacity-0 group-focus-within:opacity-100 blur-xl transition-opacity duration-500 pointer-events-none -z-10`}></div>
+        <div className={'absolute inset-0 rounded-lg bg-gradient-to-r from-brand-gold/20 to-brand-gold-light/20 opacity-0 group-focus-within:opacity-100 blur-xl transition-opacity duration-500 pointer-events-none -z-10'}></div>
       </div>
       
       {helperText && (
@@ -245,8 +278,8 @@ export const FormCheckbox = forwardRef(({
   ...props
 }, ref) => {
   return (
-    <label className={`relative flex items-start gap-3 cursor-pointer group`}>
-      <div className={`relative mt-0.5`}>
+    <label className={'relative flex items-start gap-3 cursor-pointer group'}>
+      <div className={'relative mt-0.5'}>
         <input
           ref={ref}
           type="checkbox"
@@ -268,7 +301,7 @@ export const FormCheckbox = forwardRef(({
         
         {/* Custom checkmark */}
         <svg 
-          className={`absolute left-0.5 top-0.5 w-4 h-4 text-gray-900 pointer-events-none opacity-0 peer-checked:opacity-100 transition-opacity duration-200`} 
+          className={'absolute left-0.5 top-0.5 w-4 h-4 text-gray-900 pointer-events-none opacity-0 peer-checked:opacity-100 transition-opacity duration-200'} 
           fill="none" 
           stroke="currentColor" 
           viewBox="0 0 24 24"
@@ -301,8 +334,8 @@ export const FormRadio = forwardRef(({
   ...props
 }, ref) => {
   return (
-    <label className={`relative flex items-center gap-3 cursor-pointer group`}>
-      <div className={`relative`}>
+    <label className={'relative flex items-center gap-3 cursor-pointer group'}>
+      <div className={'relative'}>
         <input
           ref={ref}
           type="radio"
@@ -322,7 +355,7 @@ export const FormRadio = forwardRef(({
         />
         
         {/* Inner dot */}
-        <div className={`absolute inset-0 m-auto w-2 h-2 bg-gray-900 rounded-full opacity-0 peer-checked:opacity-100 transition-opacity duration-200 pointer-events-none`}></div>
+        <div className={'absolute inset-0 m-auto w-2 h-2 bg-gray-900 rounded-full opacity-0 peer-checked:opacity-100 transition-opacity duration-200 pointer-events-none'}></div>
       </div>
       
       {label && (

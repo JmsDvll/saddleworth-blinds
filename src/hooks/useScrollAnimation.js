@@ -99,7 +99,6 @@ export const useStaggerAnimation = (options = {}) => {
   } = options
 
   const refs = useRef([])
-  const animations = useRef([])
 
   const addToRefs = (el) => {
     if (el && !refs.current.includes(el)) {
@@ -122,16 +121,17 @@ export const useStaggerAnimation = (options = {}) => {
       {
         threshold: animationOptions.threshold || 0.1,
         rootMargin: animationOptions.rootMargin || '50px',
-      }
+      },
     )
 
-    refs.current.forEach((ref) => {
-      if (ref) observer.observe(ref)
+    const currentRefs = [...refs.current]
+    currentRefs.forEach((el) => {
+      if (el) observer.observe(el)
     })
 
     return () => {
-      refs.current.forEach((ref) => {
-        if (ref) observer.unobserve(ref)
+      currentRefs.forEach((el) => {
+        if (el) observer.unobserve(el)
       })
     }
   }, [staggerDelay, animationOptions.threshold, animationOptions.rootMargin])

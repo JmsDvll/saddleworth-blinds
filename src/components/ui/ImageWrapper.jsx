@@ -1,4 +1,13 @@
 import React, { forwardRef } from 'react'
+/**
+ * ImageWrapper Suite – composables for image layout and states.
+ *
+ * ImageContainer: aspectRatio, rounded
+ * ImageElement: objectFit, state ('loading'|'loaded'|'error'), hoverEffect
+ * ImageSkeleton / ImageSpinner / ImageError / ImageOverlay: state overlays
+ */
+import { Icon } from './Icon'
+import { Text } from './Text'
 
 // Image container styles
 const containerStyles = {

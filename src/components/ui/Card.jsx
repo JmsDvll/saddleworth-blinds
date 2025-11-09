@@ -1,9 +1,23 @@
 import React, { forwardRef } from 'react'
+/**
+ * Card – Surface container for grouping content.
+ *
+ * Props
+ * - variant: 'default' | 'elevated' | 'dark' | 'ghost' | 'luxury' | 'glass' | 'gold'
+ * - hover: 'none' | 'lift' | 'glow' | 'scale' | 'luxury'
+ * - padding: 'none' | 'small' | 'medium' | 'large' | 'xlarge'
+ *
+ * Subcomponents
+ * - Card.Header, Card.Body, Card.Footer, Card.Image
+ *
+ * Usage
+ *  <Card variant="elevated" padding="large"><Card.Body>...</Card.Body></Card>
+ */
 
 const cardStyles = {
   base: `
     rounded-lg
-    transition-all duration-700 ease-out
+    transition-all duration-500 ease-out
     group
     relative
     overflow-hidden
@@ -38,11 +52,11 @@ const cardStyles = {
       shadow-luxury-lg
       text-brand-cream
       relative
-      before:absolute before:inset-0
+      before:absolute before:inset-0 before:pointer-events-none
       before:bg-gradient-to-br before:from-brand-gold/20 before:to-transparent
       before:opacity-0 hover:before:opacity-100
       before:transition-all before:duration-700
-      after:absolute after:inset-0
+      after:absolute after:inset-0 after:pointer-events-none
       after:bg-gold-shimmer after:opacity-0
       hover:after:opacity-10 after:transition-opacity after:duration-700
     `,
@@ -59,7 +73,7 @@ const cardStyles = {
       shadow-gold
       text-brand-dark
       relative
-      before:absolute before:inset-0
+      before:absolute before:inset-0 before:pointer-events-none
       before:bg-gold-shimmer before:opacity-0
       hover:before:opacity-100 before:transition-opacity before:duration-500
     `,
@@ -68,7 +82,8 @@ const cardStyles = {
   hover: {
     none: '',
     lift: `
-      hover:transform hover:-translate-y-2
+      will-change-transform
+      hover:transform hover:-translate-y-1.5
       hover:shadow-gold-lg
     `,
     glow: `
@@ -92,7 +107,7 @@ const cardStyles = {
     medium: 'p-8',
     large: 'p-10',
     xlarge: 'p-12',
-  }
+  },
 }
 
 export const Card = forwardRef(({ 

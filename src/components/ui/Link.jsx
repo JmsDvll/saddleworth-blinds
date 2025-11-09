@@ -1,11 +1,27 @@
 import React, { forwardRef } from 'react'
+/**
+ * Link – Unified internal/external link with variants.
+ *
+ * Props
+ * - to: string – internal route (uses RouterLink)
+ * - href: string – external URL
+ * - external: boolean – force new tab and rel attrs
+ * - variant: 'default' | 'nav' | 'menu' | 'mobileNav' | 'subtle' | 'button' | 'plain' | 'luxury'
+ * - underline: 'none' | 'hover' | 'always' | 'gradient'
+ * - size: 'small' | 'medium' | 'large'
+ * - iconLeft / iconRight: ReactNode
+ *
+ * Usage
+ *  <Link to="/contact" iconRight={<Icon name="arrowRight" />}>Contact</Link>
+ */
 import { Link as RouterLink } from 'react-router-dom'
 
 const linkStyles = {
   base: `
     relative
     inline-flex items-center
-    transition-all duration-300
+    transition-all duration-300 ease-out
+    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-brand-gold
     group
   `,
   
@@ -16,17 +32,17 @@ const linkStyles = {
       after:w-full after:h-px
       after:bg-gold-gradient
       after:scale-x-0 after:origin-left
-      after:transition-transform after:duration-500
+      after:transition-transform after:duration-500 after:pointer-events-none
       hover:after:scale-x-100
     `,
     nav: `
-      text-brand-dark hover:text-brand-gold
+      text-brand-dark hover:text-brand-gold-dark
       px-4 py-2
       font-medium uppercase tracking-wide
       transition-all duration-300
       relative
       after:absolute after:bottom-0 after:left-4 after:right-4
-      after:h-0.5 after:bg-gold-gradient
+      after:h-0.5 after:bg-gold-gradient after:pointer-events-none
       after:transform after:scale-x-0
       after:transition-transform after:duration-500
       hover:after:scale-x-100
@@ -39,6 +55,13 @@ const linkStyles = {
       transition-all duration-300
       group
     `,
+    dropdown: `
+      block w-full text-left
+      px-4 py-2 rounded-md
+      text-brand-dark hover:text-brand-gold
+      hover:bg-brand-gold/10
+      transition-all duration-200 ease-out
+    `,
     mobileNav: `
       block w-full
       px-4 py-3 rounded-lg
@@ -47,9 +70,9 @@ const linkStyles = {
       transition-all duration-300
     `,
     subtle: `
-      text-brand-grey hover:text-brand-grey-light
+      text-brand-grey-darker hover:text-brand-dark
       underline-offset-4
-      decoration-brand-grey/50 hover:decoration-brand-grey
+      decoration-brand-grey/50 hover:decoration-brand-grey-dark
       transition-all duration-300
     `,
     button: `
@@ -73,11 +96,16 @@ const linkStyles = {
       relative
       after:absolute after:bottom-0 after:left-0
       after:w-full after:h-1
-      after:bg-gold-gradient
+      after:bg-gold-gradient after:pointer-events-none
       after:scale-x-0 after:origin-center
       after:transition-transform after:duration-700
       hover:after:scale-x-100
       hover:drop-shadow-gold
+    `,
+    footer: `
+      text-brand-cream hover:text-brand-gold-light
+      underline-offset-4
+      transition-colors duration-300
     `,
   },
   
@@ -106,7 +134,7 @@ const linkStyles = {
   iconAnimation: `
     [&>svg]:transition-transform [&>svg]:duration-300
     hover:[&>svg]:translate-x-1
-  `
+  `,
 }
 
 export const Link = forwardRef(({

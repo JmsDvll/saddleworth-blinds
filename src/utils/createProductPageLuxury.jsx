@@ -1,31 +1,31 @@
 import React from 'react'
 import {
-  Section,
-  Container,
-  Grid,
-  Stack,
-  Heading,
-  Text,
   Button,
   Card,
-  Icon,
-  Link,
-  Image,
+  Container,
   Flex,
-  HeroSection,
-  HeroContent,
-  HeroOverlay,
-  HeroTitle,
-  HeroSubtitle,
-  HeroDescription,
-  HeroCTA,
+  GlowBox,
   GoldDivider,
+  Grid,
+  Heading,
+  HeroContent,
+  HeroCTA,
+  HeroDescription,
+  HeroImage,
+  HeroOverlay,
+  HeroSection,
+  HeroSubtitle,
+  HeroTitle,
+  Icon,
+  Image,
+  ImageContainer,
+  Link,
   LuxuryBadge,
   LuxuryIcon,
-  GlowBox,
+  Section,
   ShimmerText,
-  HeroImage,
-  ImageContainer
+  Stack,
+  Text,
 } from '../components/ui'
 import FAQSectionLuxury from '../components/FAQSectionLuxury'
 import ReviewsSectionLuxury from '../components/ReviewsSectionLuxury'
@@ -34,6 +34,7 @@ import ReviewsSectionLuxury from '../components/ReviewsSectionLuxury'
 import { productConfigs } from './productConfigs'
 import { carouselData } from './carouselData'
 import ProductCarouselStandardized from '../components/ProductCarouselStandardized'
+import { Seo } from '../components/Seo'
 
 // Create a luxury product page using the existing configs
 export const createProductPageLuxury = (productSlug, CarouselComponent) => {
@@ -53,8 +54,27 @@ export const createProductPageLuxury = (productSlug, CarouselComponent) => {
       )
     }
 
+    // Build JSON-LD Product schema
+    const averageRating = Array.isArray(config.reviews) && config.reviews.length > 0
+      ? (config.reviews.reduce((sum, r) => sum + (r.rating || 0), 0) / config.reviews.length)
+      : undefined
+
+    const productJsonLd = {
+      '@context': 'https://schema.org',
+      '@type': 'Product',
+      name: config.title,
+      description: config.description,
+      image: config.heroImage || undefined,
+      brand: { '@type': 'Brand', name: 'Sunshine Blinds Saddleworth' },
+      aggregateRating: averageRating ? {
+        '@type': 'AggregateRating',
+        ratingValue: Number(averageRating.toFixed(1)),
+        reviewCount: config.reviews.length,
+      } : undefined,
+    }
+
     return (
-      <>
+      <Seo jsonLd={productJsonLd}>
         {/* Hero Section */}
         <HeroSection variant="luxury" height="large">
           <HeroOverlay variant="gradient" />
@@ -68,11 +88,11 @@ export const createProductPageLuxury = (productSlug, CarouselComponent) => {
             <Container>
               <Grid cols={2} gap="xlarge" align="center">
                 <Stack spacing="large">
-                  <HeroTitle>
+                  <Heading as="h1" size="3xl">
                     <ShimmerText variant="luxury">
                       {config.title}
                     </ShimmerText>
-                  </HeroTitle>
+                  </Heading>
                   <HeroSubtitle>
                     {config.tagline}
                   </HeroSubtitle>
@@ -267,7 +287,7 @@ export const createProductPageLuxury = (productSlug, CarouselComponent) => {
                       <ImageContainer aspectRatio="4:3">
                         <Image
                           src={item.src}
-                          alt={item.alt}
+                          alt={item.alt || `${config.title} example`}
                         />
                       </ImageContainer>
                       {item.caption && (
@@ -324,7 +344,23 @@ export const createProductPageLuxury = (productSlug, CarouselComponent) => {
             </Card>
           </Container>
         </Section>
-      </>
+
+        {/* Service Areas Internal Links */}
+        <Section background="cream" padding="large">
+          <Container>
+            <Stack spacing="large" align="center">
+              <Heading size="xl" color="dark" align="center">We Serve Your Area</Heading>
+              <Flex gap="small" wrap="wrap" justify="center">
+                {['Uppermill','Diggle','Delph','Greenfield','Dobcross','Lydgate','Denshaw','Friezland','Grasscroft','Grotton','Springhead','Lees'].map((area) => (
+                  <Link key={area} to={`/areas/${area.toLowerCase()}`} variant="subtle" size="small">
+                    <Text color="dark">{area}</Text>
+                  </Link>
+                ))}
+              </Flex>
+            </Stack>
+          </Container>
+        </Section>
+      </Seo>
     )
   }
 

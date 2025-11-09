@@ -1,4 +1,12 @@
 import React from 'react'
+/**
+ * GoldDivider – ornamental divider lines.
+ *
+ * Props
+ * - variant: 'simple' | 'luxury' | 'dots' | 'line' | 'wave' | 'ornament'
+ * - size: 'small' | 'medium' | 'large' | 'full'
+ * - align: 'left' | 'center' | 'right'
+ */
 
 const dividerStyles = {
   base: 'relative',

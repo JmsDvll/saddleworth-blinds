@@ -12,8 +12,8 @@ const RollerBlindsCarouselStandardized = () => {
       badge: 'Popular Choice',
       cta: {
         text: 'View Zen Collection',
-        link: '/roller-blinds#zen'
-      }
+        link: '/roller-blinds#zen',
+      },
     },
     {
       image: 'roller-petal-white-1600.jpg',
@@ -24,8 +24,8 @@ const RollerBlindsCarouselStandardized = () => {
       badge: 'Best Seller',
       cta: {
         text: 'Explore White Options',
-        link: '/roller-blinds#white'
-      }
+        link: '/roller-blinds#white',
+      },
     },
     {
       image: 'roller-birdsong-colour-1600.jpg',
@@ -35,8 +35,8 @@ const RollerBlindsCarouselStandardized = () => {
       description: 'Beautiful patterns that bring the outdoors in',
       cta: {
         text: 'Discover Patterns',
-        link: '/roller-blinds#patterns'
-      }
+        link: '/roller-blinds#patterns',
+      },
     },
     {
       image: 'roller-dove-1600.jpg',
@@ -46,9 +46,9 @@ const RollerBlindsCarouselStandardized = () => {
       description: 'Versatile grey that complements any decor',
       cta: {
         text: 'See Neutral Options',
-        link: '/roller-blinds#neutrals'
-      }
-    }
+        link: '/roller-blinds#neutrals',
+      },
+    },
   ]
 
   return <ProductCarouselStandardized slides={slides} height="hero" />

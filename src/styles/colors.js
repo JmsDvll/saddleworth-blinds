@@ -6,7 +6,7 @@ export const colors = {
     gold: 'brand-gold', // #CABC32
     goldHover: 'yellow-500',
     green: 'brand-green', // #059669
-    greenHover: 'green-600'
+    greenHover: 'green-600',
   },
 
   // Background colors
@@ -23,7 +23,7 @@ export const colors = {
     gradientSubtle: 'bg-gradient-to-br from-gray-900/50 via-gray-800/50 to-gray-900/50',
     gold: 'bg-brand-gold',
     goldGradient: 'bg-gradient-to-r from-brand-gold to-yellow-400',
-    dark: 'bg-gray-900'
+    dark: 'bg-gray-900',
   },
 
   // Text colors
@@ -37,7 +37,7 @@ export const colors = {
     gold: 'text-brand-gold',
     lightGray: 'text-gray-300',
     dark: 'text-gray-900',
-    darkGray: 'text-gray-800'
+    darkGray: 'text-gray-800',
   },
 
   // Border colors
@@ -46,7 +46,7 @@ export const colors = {
     light: 'border-gray-600',
     dark: 'border-gray-800',
     accent: 'border-brand-gold',
-    subtle: 'border-brand-gold/20'
+    subtle: 'border-brand-gold/20',
   },
 
   // Gradient usage (use sparingly!)
@@ -57,7 +57,7 @@ export const colors = {
     
     // Subtle background gradients
     subtleBg: 'bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900',
-    overlayGradient: 'bg-gradient-to-t from-black/60 via-black/20 to-transparent'
+    overlayGradient: 'bg-gradient-to-t from-black/60 via-black/20 to-transparent',
   },
 
   // State colors
@@ -70,8 +70,8 @@ export const colors = {
     info: 'text-blue-600',
     warning: 'bg-yellow-100',
     warningBorder: 'border-yellow-300',
-    warningText: 'text-yellow-800'
-  }
+    warningText: 'text-yellow-800',
+  },
 }
 
 // Color patterns to avoid
@@ -81,22 +81,22 @@ export const colorGuidelines = {
       'Gradient text on every heading',
       'Multiple gradients in one section',
       'Gradient backgrounds with gradient text',
-      'Decorative gradient lines everywhere'
+      'Decorative gradient lines everywhere',
     ],
     use: [
       'Primary CTA buttons',
       'Hero section accents',
       'Special promotional elements',
-      'One key element per section'
-    ]
+      'One key element per section',
+    ],
   },
 
   consistency: {
     primary: 'Use brand-gold for primary actions',
     secondary: 'Use gray tones for secondary elements',
     hover: 'Consistent hover states across similar elements',
-    contrast: 'Ensure WCAG AA contrast ratios'
-  }
+    contrast: 'Ensure WCAG AA contrast ratios',
+  },
 }
 
 // Visual hierarchy guidelines
@@ -104,20 +104,20 @@ export const visualHierarchy = {
   sectionBreaks: {
     use: 'Use section breaks to create visual rhythm',
     spacing: '16px minimum between sections',
-    backgrounds: 'Alternate background colors for visual separation'
+    backgrounds: 'Alternate background colors for visual separation',
   },
 
   inspirationCards: {
     purpose: 'Break up text-heavy content with visual elements',
     placement: 'Place after 200-300 words of content',
     styling: 'Use consistent card styling with hover effects',
-    content: 'Mix practical and aspirational content'
+    content: 'Mix practical and aspirational content',
   },
 
   ctaStrategy: {
     primary: 'One main CTA per section',
     secondary: 'Micro-CTAs for engagement',
     placement: 'Place CTAs at natural reading breaks',
-    visual: 'Make CTAs visually distinct with color and spacing'
-  }
+    visual: 'Make CTAs visually distinct with color and spacing',
+  },
 }

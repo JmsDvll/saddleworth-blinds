@@ -1,22 +1,24 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link as RouterLink } from 'react-router-dom'
 import {
-  Container,
-  Flex,
-  Stack,
-  Icon,
-  Text,
-  Link,
+  AnnouncementBar,
   Button,
-  Section,
-  LuxuryIcon,
-  ShimmerText,
-  HeaderWrapper,
-  MobileMenuWrapper,
+  Container,
   DropdownWrapper,
-  NavButton,
+  Flex,
+  HeaderWrapper,
+  Icon,
+  Link,
+  List,
+  LuxuryIcon,
+  MobileMenuWrapper,
   MobileToggle,
-  AnnouncementBar
+  NavButton,
+  Navigation,
+  Section,
+  ShimmerText,
+  Stack,
+  Text,
 } from './ui'
 import SunshineLogo from './SunshineLogo'
 
@@ -34,13 +36,15 @@ const HeaderStandardized = () => {
   }, [])
 
   const productLinks = [
+    { name: 'Allusion Blinds', href: '/allusion-blinds' },
+    { name: 'Curtains', href: '/curtains' },
+    { name: 'Perfect Fit Blinds', href: '/perfect-fit-blinds' },
     { name: 'Roller Blinds', href: '/roller-blinds' },
+    { name: 'Roman Blinds', href: '/roman-blinds' },
+    { name: 'Shutters', href: '/shutters' },
     { name: 'Venetian Blinds', href: '/venetian-blinds' },
     { name: 'Vertical Blinds', href: '/vertical-blinds' },
     { name: 'Vision Blinds', href: '/vision-blinds' },
-    { name: 'Perfect Fit Blinds', href: '/perfect-fit-blinds' },
-    { name: 'Shutters', href: '/shutters' },
-    { name: 'View All Products →', href: '/products' }
   ]
 
   const areaLinks = [
@@ -48,7 +52,14 @@ const HeaderStandardized = () => {
     { name: 'Diggle', href: '/areas/diggle' },
     { name: 'Delph', href: '/areas/delph' },
     { name: 'Greenfield', href: '/areas/greenfield' },
-    { name: 'View All Areas →', href: '/areas' }
+    { name: 'Dobcross', href: '/areas/dobcross' },
+    { name: 'Lydgate', href: '/areas/lydgate' },
+    { name: 'Denshaw', href: '/areas/denshaw' },
+    { name: 'Friezland', href: '/areas/friezland' },
+    { name: 'Grasscroft', href: '/areas/grasscroft' },
+    { name: 'Grotton', href: '/areas/grotton' },
+    { name: 'Lees', href: '/areas/lees' },
+    { name: 'Springhead', href: '/areas/springhead' },
   ]
 
   return (
@@ -79,7 +90,7 @@ const HeaderStandardized = () => {
             {/* Logo */}
             <RouterLink to="/">
               <Flex align="center" gap="medium">
-                <SunshineLogo className="h-14 w-auto" />
+                <SunshineLogo height={56} width={72} />
                 <Stack spacing="none">
                   <ShimmerText variant="luxury" as="span">
                     Sunshine
@@ -92,14 +103,14 @@ const HeaderStandardized = () => {
             </RouterLink>
 
             {/* Desktop Navigation */}
-            <nav>
-              <Flex as="ul" gap="small" align="center">
-                <li>
-                  <Link to="/" variant="menu">Home</Link>
-                </li>
+            <Navigation aria-label="Primary">
+              <List as="ul" direction="row" gap="small" className="items-center">
+                <List.Item>
+                  <Link to="/" variant="nav">Home</Link>
+                </List.Item>
                 
                 {/* Products Dropdown */}
-                <li>
+                <List.Item>
                   <DropdownWrapper 
                     isOpen={openDropdown === 'products'}
                     onMouseEnter={() => setOpenDropdown('products')}
@@ -121,10 +132,10 @@ const HeaderStandardized = () => {
                       ))}
                     </Stack>
                   </DropdownWrapper>
-                </li>
+                </List.Item>
 
                 {/* Areas Dropdown */}
-                <li>
+                <List.Item>
                   <DropdownWrapper 
                     isOpen={openDropdown === 'areas'}
                     onMouseEnter={() => setOpenDropdown('areas')}
@@ -146,16 +157,16 @@ const HeaderStandardized = () => {
                       ))}
                     </Stack>
                   </DropdownWrapper>
-                </li>
+                </List.Item>
 
-                <li>
-                  <Link to="/gallery" variant="menu">Gallery</Link>
-                </li>
-                <li>
-                  <Link to="/contact" variant="menu">Contact</Link>
-                </li>
-              </Flex>
-            </nav>
+                <List.Item>
+                  <Link to="/gallery" variant="nav">Gallery</Link>
+                </List.Item>
+                <List.Item>
+                  <Link to="/contact" variant="nav">Contact</Link>
+                </List.Item>
+              </List>
+            </Navigation>
 
             {/* CTA Buttons */}
             <Flex gap="small" align="center">

@@ -1,10 +1,18 @@
 import React from 'react'
+/**
+ * [STANDARDIZATION CHECKLIST]
+ * ✅ Uses UI components only (no raw HTML for layout/content)
+ * ✅ Zero inline Tailwind classes
+ * ✅ SEO handled via route meta/Seo component
+ * ✅ ESLint clean
+ */
 import { 
-  Section, 
   Container, 
   Heading, 
-  Text, 
-  Stack
+  List, 
+  Section, 
+  Stack,
+  Text,
 } from '../components/ui'
 
 const PrivacyPolicy = () => {
@@ -23,7 +31,7 @@ const PrivacyPolicy = () => {
             <Stack spacing="medium">
               <Heading as="h2" size="2xl">Introduction</Heading>
               <Text color="light">
-                Sunshine Blinds Saddleworth ("we", "us", or "our") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website saddleworthblinds.co.uk or use our services.
+                Sunshine Blinds Saddleworth (&quot;we&quot;, &quot;us&quot;, or &quot;our&quot;) is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website saddleworthblinds.co.uk or use our services.
               </Text>
             </Stack>
 
@@ -33,55 +41,55 @@ const PrivacyPolicy = () => {
               <Stack spacing="small">
                 <Heading as="h3" size="xl">Personal Information</Heading>
                 <Text color="light">We may collect personal information that you voluntarily provide to us when you:</Text>
-                <Stack spacing="small" className="list-disc list-inside">
-                  <Text color="light" as="li">Contact us through our website or by phone</Text>
-                  <Text color="light" as="li">Request a quote or book an appointment</Text>
-                  <Text color="light" as="li">Subscribe to our newsletter</Text>
-                  <Text color="light" as="li">Participate in surveys or promotions</Text>
-                </Stack>
+              <List as="ul" spacing="small">
+                <List.Item><Text color="light">Contact us through our website or by phone</Text></List.Item>
+                <List.Item><Text color="light">Request a quote or book an appointment</Text></List.Item>
+                <List.Item><Text color="light">Subscribe to our newsletter</Text></List.Item>
+                <List.Item><Text color="light">Participate in surveys or promotions</Text></List.Item>
+              </List>
                 
-                <Text color="light" className="mt-4">This information may include:</Text>
-                <Stack spacing="small" className="list-disc list-inside">
-                  <Text color="light" as="li">Name and contact details (email, phone number, address)</Text>
-                  <Text color="light" as="li">Property details and window measurements</Text>
-                  <Text color="light" as="li">Preferences and requirements for window treatments</Text>
-                  <Text color="light" as="li">Communication history</Text>
-                </Stack>
+              <Text color="light">This information may include:</Text>
+              <List as="ul" spacing="small">
+                <List.Item><Text color="light">Name and contact details (email, phone number, address)</Text></List.Item>
+                <List.Item><Text color="light">Property details and window measurements</Text></List.Item>
+                <List.Item><Text color="light">Preferences and requirements for window treatments</Text></List.Item>
+                <List.Item><Text color="light">Communication history</Text></List.Item>
+              </List>
               </Stack>
 
-              <Stack spacing="small" className="mt-6">
+              <Stack spacing="small">
                 <Heading as="h3" size="xl">Automatically Collected Information</Heading>
                 <Text color="light">When you visit our website, we may automatically collect:</Text>
-                <Stack spacing="small" className="list-disc list-inside">
-                  <Text color="light" as="li">IP address and device information</Text>
-                  <Text color="light" as="li">Browser type and version</Text>
-                  <Text color="light" as="li">Pages visited and time spent on site</Text>
-                  <Text color="light" as="li">Referring website information</Text>
-                </Stack>
+                <List as="ul" spacing="small">
+                  <List.Item><Text color="light">IP address and device information</Text></List.Item>
+                  <List.Item><Text color="light">Browser type and version</Text></List.Item>
+                  <List.Item><Text color="light">Pages visited and time spent on site</Text></List.Item>
+                  <List.Item><Text color="light">Referring website information</Text></List.Item>
+                </List>
               </Stack>
             </Stack>
 
             <Stack spacing="medium">
               <Heading as="h2" size="2xl">How We Use Your Information</Heading>
               <Text color="light">We use the collected information to:</Text>
-              <Stack spacing="small" className="list-disc list-inside">
-                <Text color="light" as="li">Provide and manage our services</Text>
-                <Text color="light" as="li">Process appointments and quotations</Text>
-                <Text color="light" as="li">Communicate with you about our services</Text>
-                <Text color="light" as="li">Send marketing communications (with your consent)</Text>
-                <Text color="light" as="li">Improve our website and services</Text>
-                <Text color="light" as="li">Comply with legal obligations</Text>
-              </Stack>
+              <List as="ul" spacing="small">
+                <List.Item><Text color="light">Provide and manage our services</Text></List.Item>
+                <List.Item><Text color="light">Process appointments and quotations</Text></List.Item>
+                <List.Item><Text color="light">Communicate with you about our services</Text></List.Item>
+                <List.Item><Text color="light">Send marketing communications (with your consent)</Text></List.Item>
+                <List.Item><Text color="light">Improve our website and services</Text></List.Item>
+                <List.Item><Text color="light">Comply with legal obligations</Text></List.Item>
+              </List>
             </Stack>
 
             <Stack spacing="medium">
               <Heading as="h2" size="2xl">Information Sharing</Heading>
               <Text color="light">We do not sell, trade, or rent your personal information to third parties. We may share your information with:</Text>
-              <Stack spacing="small" className="list-disc list-inside">
-                <Text color="light" as="li">Service providers who assist in our operations</Text>
-                <Text color="light" as="li">Professional advisors (accountants, lawyers)</Text>
-                <Text color="light" as="li">Law enforcement when required by law</Text>
-              </Stack>
+              <List as="ul" spacing="small">
+                <List.Item><Text color="light">Service providers who assist in our operations</Text></List.Item>
+                <List.Item><Text color="light">Professional advisors (accountants, lawyers)</Text></List.Item>
+                <List.Item><Text color="light">Law enforcement when required by law</Text></List.Item>
+              </List>
             </Stack>
 
             <Stack spacing="medium">
@@ -94,14 +102,14 @@ const PrivacyPolicy = () => {
             <Stack spacing="medium">
               <Heading as="h2" size="2xl">Your Rights</Heading>
               <Text color="light">Under UK data protection laws, you have the right to:</Text>
-              <Stack spacing="small" className="list-disc list-inside">
-                <Text color="light" as="li">Access your personal information</Text>
-                <Text color="light" as="li">Correct inaccurate information</Text>
-                <Text color="light" as="li">Request deletion of your information</Text>
-                <Text color="light" as="li">Object to processing of your information</Text>
-                <Text color="light" as="li">Request data portability</Text>
-                <Text color="light" as="li">Withdraw consent for marketing communications</Text>
-              </Stack>
+              <List as="ul" spacing="small">
+                <List.Item><Text color="light">Access your personal information</Text></List.Item>
+                <List.Item><Text color="light">Correct inaccurate information</Text></List.Item>
+                <List.Item><Text color="light">Request deletion of your information</Text></List.Item>
+                <List.Item><Text color="light">Object to processing of your information</Text></List.Item>
+                <List.Item><Text color="light">Request data portability</Text></List.Item>
+                <List.Item><Text color="light">Withdraw consent for marketing communications</Text></List.Item>
+              </List>
             </Stack>
 
             <Stack spacing="medium">
@@ -126,7 +134,7 @@ const PrivacyPolicy = () => {
             </Stack>
 
             <Stack spacing="medium">
-              <Heading as="h2" size="2xl">Children's Privacy</Heading>
+              <Heading as="h2" size="2xl">Children&apos;s Privacy</Heading>
               <Text color="light">
                 Our services are not directed to individuals under 18 years of age. We do not knowingly collect personal information from children.
               </Text>
@@ -135,7 +143,7 @@ const PrivacyPolicy = () => {
             <Stack spacing="medium">
               <Heading as="h2" size="2xl">Changes to This Policy</Heading>
               <Text color="light">
-                We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last updated" date.
+                We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the &quot;Last updated&quot; date.
               </Text>
             </Stack>
 
@@ -155,8 +163,8 @@ const PrivacyPolicy = () => {
                   <Text as="span" weight="medium">Address:</Text> Sunshine Blinds, Saddleworth, Oldham
                 </Text>
               </Stack>
-              <Text color="light" className="mt-4">
-                You also have the right to lodge a complaint with the Information Commissioner's Office (ICO) if you believe we have not handled your personal information appropriately.
+              <Text color="light">
+                You also have the right to lodge a complaint with the Information Commissioner&apos;s Office (ICO) if you believe we have not handled your personal information appropriately.
               </Text>
             </Stack>
           </Stack>

@@ -7,7 +7,7 @@ export const carouselData = {
       title: 'Zen Kiwi',
       subtitle: 'Fresh & Contemporary',
       description: 'A vibrant green that brings life to any room',
-      badge: 'Popular Choice'
+      badge: 'Popular Choice',
     },
     {
       image: 'roller-petal-white-1600.jpg',
@@ -15,15 +15,15 @@ export const carouselData = {
       title: 'Petal White',
       subtitle: 'Pure Elegance',
       description: 'Classic white for a clean, minimalist look',
-      badge: 'Best Seller'
+      badge: 'Best Seller',
     },
     {
       image: 'roller-birdsong-colour-1600.jpg',
       alt: 'Birdsong Colour roller blind with nature pattern',
       title: 'Birdsong Colour',
       subtitle: 'Nature Inspired',
-      description: 'Beautiful patterns that bring the outdoors in'
-    }
+      description: 'Beautiful patterns that bring the outdoors in',
+    },
   ],
   'venetian-blinds': [
     {
@@ -32,22 +32,22 @@ export const carouselData = {
       title: 'Starwood Collection',
       subtitle: 'Natural Wood Effect',
       description: 'The warmth of wood with the practicality of faux wood',
-      badge: 'Premium'
+      badge: 'Premium',
     },
     {
       image: 'venetian-white-1600.jpg',
       alt: 'White venetian blind in modern bathroom',
       title: 'Pure White',
       subtitle: 'Classic & Clean',
-      description: 'Timeless white venetians for any room'
+      description: 'Timeless white venetians for any room',
     },
     {
       image: 'venetian-aluminium-1600.jpg',
       alt: 'Silver aluminium venetian blind',
       title: 'Aluminium Range',
       subtitle: 'Modern & Durable',
-      description: 'Sleek metallic finishes for contemporary spaces'
-    }
+      description: 'Sleek metallic finishes for contemporary spaces',
+    },
   ],
   'vision-blinds': [
     {
@@ -56,22 +56,22 @@ export const carouselData = {
       title: 'Capri Concrete',
       subtitle: 'Urban Sophistication',
       description: 'Contemporary grey tones for modern living',
-      badge: 'Trending'
+      badge: 'Trending',
     },
     {
       image: 'vision-firenze-walnut-1600.jpg',
       alt: 'Firenze Walnut vision blind',
       title: 'Firenze Walnut',
       subtitle: 'Natural Elegance',
-      description: 'Rich wood tones with innovative light control'
+      description: 'Rich wood tones with innovative light control',
     },
     {
       image: 'vision-lusso-pebble-1600.jpg',
       alt: 'Lusso Pebble vision blind',
       title: 'Lusso Pebble',
       subtitle: 'Soft & Serene',
-      description: 'Gentle neutrals for a calming atmosphere'
-    }
+      description: 'Gentle neutrals for a calming atmosphere',
+    },
   ],
   'vertical-blinds': [
     {
@@ -79,15 +79,15 @@ export const carouselData = {
       alt: 'Savanna Zebra vertical blind on patio doors',
       title: 'Savanna Zebra',
       subtitle: 'Bold Statement',
-      description: 'Eye-catching patterns for large windows'
+      description: 'Eye-catching patterns for large windows',
     },
     {
       image: 'vertical-atlantex-white-1600.jpg',
       alt: 'White vertical blinds in office',
       title: 'Atlantex White',
       subtitle: 'Professional Choice',
-      description: 'Clean and practical for commercial spaces'
-    }
+      description: 'Clean and practical for commercial spaces',
+    },
   ],
   'perfect-fit-blinds': [
     {
@@ -96,15 +96,15 @@ export const carouselData = {
       title: 'Monet Flower',
       subtitle: 'Artistic Beauty',
       description: 'Floral designs that clip perfectly into UPVC frames',
-      badge: 'No Drilling'
+      badge: 'No Drilling',
     },
     {
       image: 'perfectfit-white-1600.jpg',
       alt: 'White perfect fit blinds',
       title: 'Classic White',
       subtitle: 'Simple Perfection',
-      description: 'Clean lines for modern UPVC windows'
-    }
+      description: 'Clean lines for modern UPVC windows',
+    },
   ],
   'shutters': [
     {
@@ -113,14 +113,14 @@ export const carouselData = {
       title: 'Cotton White Shutters',
       subtitle: 'Timeless Elegance',
       description: 'Premium plantation shutters in classic white',
-      badge: 'Luxury'
+      badge: 'Luxury',
     },
     {
       image: 'shutters-cafe-1600.jpg',
       alt: 'Café style shutters',
       title: 'Café Style',
       subtitle: 'Street Level Privacy',
-      description: 'Half-height shutters for the perfect balance'
-    }
-  ]
+      description: 'Half-height shutters for the perfect balance',
+    },
+  ],
 }

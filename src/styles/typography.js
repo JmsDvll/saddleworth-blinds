@@ -19,7 +19,7 @@ export const typography = {
     large: 'text-lg lg:text-xl leading-relaxed',
     base: 'text-base lg:text-lg leading-relaxed',
     small: 'text-sm lg:text-base leading-relaxed',
-    xs: 'text-xs lg:text-sm'
+    xs: 'text-xs lg:text-sm',
   },
 
   // Special styles
@@ -34,7 +34,7 @@ export const typography = {
     secondary: 'text-gray-300',
     muted: 'text-gray-400',
     accent: 'text-brand-gold',
-    gradient: 'bg-gradient-to-r from-brand-gold to-yellow-400 bg-clip-text text-transparent'
+    gradient: 'bg-gradient-to-r from-brand-gold to-yellow-400 bg-clip-text text-transparent',
   },
 
   // Utility classes
@@ -43,8 +43,8 @@ export const typography = {
     truncate: 'truncate',
     center: 'text-center',
     uppercase: 'uppercase',
-    capitalize: 'capitalize'
-  }
+    capitalize: 'capitalize',
+  },
 }
 
 // Common text component styles
@@ -56,5 +56,5 @@ export const textStyles = {
   
   // Specific patterns to avoid
   gradientOveruse: 'Use sparingly - only for key CTAs or special emphasis',
-  decorativeLines: 'Limit to one per section maximum'
+  decorativeLines: 'Limit to one per section maximum',
 }

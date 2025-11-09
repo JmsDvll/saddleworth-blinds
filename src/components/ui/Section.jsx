@@ -1,12 +1,24 @@
 import React, { forwardRef } from 'react'
+/**
+ * Section – Page section wrapper with background, padding, and effects.
+ *
+ * Props
+ * - padding: 'none' | 'small' | 'medium' | 'large' | 'xlarge' | 'hero'
+ * - background: 'transparent' | 'cream' | 'white' | 'dark' | 'darker' | 'luxury' | 'gold' | 'goldRadial' | 'darkRadial' | 'pattern' | 'hero'
+ * - textColor: 'inherit' | 'dark' | 'light' | 'gold' | 'muted'
+ * - effect: 'none' | 'shimmer' | 'glow' | 'overlay'
+ *
+ * Usage
+ *  <Section background="dark" padding="large"><Container>...</Container></Section>
+ */
 
 const sectionStyles = {
   padding: {
     none: '',
-    small: 'py-12 md:py-16 lg:py-20',
-    medium: 'py-16 md:py-24 lg:py-32',
-    large: 'py-24 md:py-32 lg:py-40',
-    xlarge: 'py-32 md:py-40 lg:py-48',
+    small: 'section-spacing-small',
+    medium: 'section-spacing-medium',
+    large: 'section-spacing-large',
+    xlarge: 'section-spacing-xlarge',
     hero: 'py-32 md:py-48 lg:py-64',
   },
   

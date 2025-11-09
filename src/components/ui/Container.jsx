@@ -1,4 +1,28 @@
 import React from 'react'
+/**
+ * Container / Stack / Flex / Center – Layout primitives.
+ *
+ * Container props
+ * - maxWidth: 'none' | 'small' | 'medium' | 'large' | 'full' | 'screen'
+ * - padding: 'none' | 'small' | 'medium' | 'large'
+ *
+ * Stack props
+ * - spacing: 'none' | 'tiny' | 'small' | 'medium' | 'large' | 'xlarge' | 'xxlarge'
+ *
+ * Flex props
+ * - direction: 'row' | 'rowReverse' | 'col' | 'colReverse'
+ * - align: 'start' | 'center' | 'end' | 'baseline' | 'stretch'
+ * - justify: 'start' | 'center' | 'end' | 'between' | 'around' | 'evenly'
+ * - wrap: boolean
+ * - gap: 'none' | 'tiny' | 'small' | 'medium' | 'large' | 'xlarge'
+ *
+ * Center props
+ * - minHeight: 'none' | 'screen' | 'full'
+ *
+ * Anti‑patterns
+ * - Avoid raw <div> for layout outside UI.
+ * - Prefer these primitives with semantic props over ad‑hoc className strings.
+ */
 
 // Centralized container styles
 const containerStyles = {
@@ -143,11 +167,22 @@ export const Flex = ({
 // Center component for centering content
 export const Center = ({
   children,
+  minHeight,
   className = '',
   ...props
 }) => {
+  const minHeights = {
+    none: '',
+    screen: 'min-h-screen',
+    full: 'min-h-full',
+  }
+  const classes = [
+    'flex items-center justify-center',
+    minHeights[minHeight || 'none'],
+    className,
+  ].filter(Boolean).join(' ')
   return (
-    <div className={`flex items-center justify-center ${className}`} {...props}>
+    <div className={classes} {...props}>
       {children}
     </div>
   )

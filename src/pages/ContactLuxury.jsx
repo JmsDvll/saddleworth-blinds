@@ -1,24 +1,32 @@
 import React from 'react'
+/**
+ * [STANDARDIZATION CHECKLIST]
+ * ✅ Uses UI components only (no raw HTML for layout/content)
+ * ✅ Zero inline Tailwind classes
+ * ✅ SEO handled globally via route meta/Seo component
+ * ✅ ESLint clean
+ */
 import {
-  Section,
-  Container,
-  Grid,
-  Stack,
-  Heading,
-  Text,
+  Box,
+  Button,
   Card,
+  Container,
+  Flex,
+  GlowBox,
+  GoldDivider,
+  Grid,
+  Heading,
+  HeroContent,
+  HeroOverlay,
+  HeroSection,
+  HeroTitle,
   Icon,
   Link,
-  Flex,
   LuxuryIcon,
-  GoldDivider,
+  Section,
   ShimmerText,
-  GlowBox,
-  HeroSection,
-  HeroContent,
-  HeroTitle,
-  HeroOverlay,
-  Button
+  Stack,
+  Text,
 } from '../components/ui'
 import ContactFormLuxury from '../components/ContactFormLuxury'
 
@@ -30,7 +38,7 @@ const ContactLuxury = () => {
       primary: '01457 597091',
       secondary: 'Mon-Fri 9am-5:30pm, Sat 10am-4pm',
       action: 'tel:01457597091',
-      actionText: 'Call Now'
+      actionText: 'Call Now',
     },
     {
       icon: 'mail',
@@ -38,7 +46,7 @@ const ContactLuxury = () => {
       primary: 'info@saddleworthblinds.co.uk',
       secondary: 'We\'ll respond within 24 hours',
       action: 'mailto:info@saddleworthblinds.co.uk',
-      actionText: 'Send Email'
+      actionText: 'Send Email',
     },
     {
       icon: 'location',
@@ -46,31 +54,31 @@ const ContactLuxury = () => {
       primary: 'Saddleworth Blinds',
       secondary: 'Serving all of Greater Manchester',
       action: '/areas/uppermill',
-      actionText: 'View Service Areas'
-    }
+      actionText: 'View Service Areas',
+    },
   ]
 
   const reasons = [
     {
       icon: 'star',
       title: 'Family Business',
-      description: 'Trusted local service since 1979 with thousands of happy customers'
+      description: 'Trusted local service since 1979 with thousands of happy customers',
     },
     {
       icon: 'shield',
       title: '5 Year Guarantee',
-      description: 'Complete peace of mind with our comprehensive warranty'
+      description: 'Complete peace of mind with our comprehensive warranty',
     },
     {
       icon: 'currency',
       title: 'Best Price Promise',
-      description: 'Competitive pricing without compromising on quality'
+      description: 'Competitive pricing without compromising on quality',
     },
     {
       icon: 'truck',
       title: 'Free Services',
-      description: 'Free measuring, quote, and professional installation'
-    }
+      description: 'Free measuring, quote, and professional installation',
+    },
   ]
 
   return (
@@ -79,11 +87,11 @@ const ContactLuxury = () => {
       <HeroSection variant="luxury" height="medium">
         <HeroOverlay variant="gradient" />
         <HeroContent align="center" padding="large">
-          <Container>
-            <Stack spacing="large" align="center" className="max-w-3xl mx-auto">
+          <Container maxWidth="medium">
+            <Stack spacing="large" align="center">
               <HeroTitle effect="glow">
                 <ShimmerText variant="luxury">
-                  Let's Transform Your Windows
+                  Let&apos;s Transform Your Windows
                 </ShimmerText>
               </HeroTitle>
               <Text size="xlarge" color="light" align="center">
@@ -104,7 +112,7 @@ const ContactLuxury = () => {
                 Choose How to Reach Us
               </Heading>
               <Text size="large" color="muted" align="center">
-                We're here to help, whatever way suits you best
+                We&apos;re here to help, whatever way suits you best
               </Text>
             </Stack>
 
@@ -127,31 +135,27 @@ const ContactLuxury = () => {
                           {method.secondary}
                         </Text>
                       </Stack>
-                      {method.action.includes('tel:') ? (
-                        <Button
-                          href={method.action}
-                          variant="primary"
-                          size="small"
-                        >
-                          {method.actionText}
-                        </Button>
-                      ) : method.action.includes('mailto:') ? (
-                        <Button
-                          href={method.action}
-                          variant="primary"
-                          size="small"
-                        >
-                          {method.actionText}
-                        </Button>
-                      ) : (
-                        <Button
-                          to={method.action}
-                          variant="primary"
-                          size="small"
-                        >
-                          {method.actionText}
-                        </Button>
-                      )}
+                      {(() => {
+                        if (method.action.includes('tel:')) {
+                          return (
+                            <Button href={method.action} variant="primary" size="small">
+                              {method.actionText}
+                            </Button>
+                          )
+                        }
+                        if (method.action.includes('mailto:')) {
+                          return (
+                            <Button href={method.action} variant="primary" size="small">
+                              {method.actionText}
+                            </Button>
+                          )
+                        }
+                        return (
+                          <Button to={method.action} variant="primary" size="small">
+                            {method.actionText}
+                          </Button>
+                        )
+                      })()}
                     </Stack>
                   </Card>
                 </GlowBox>
@@ -166,9 +170,9 @@ const ContactLuxury = () => {
         <Container>
           <Grid cols={2} gap="xlarge" align="center">
             {/* Form */}
-            <div>
+            <Box>
               <ContactFormLuxury variant="luxury" />
-            </div>
+            </Box>
 
             {/* Why Choose Us */}
             <Stack spacing="large">
@@ -177,7 +181,7 @@ const ContactLuxury = () => {
                   Why Choose Sunshine Blinds?
                 </Heading>
                 <Text size="large" color="light">
-                  Join thousands of satisfied customers who've discovered 
+                  Join thousands of satisfied customers who&apos;ve discovered 
                   the perfect window solutions with us
                 </Text>
               </Stack>
@@ -185,7 +189,7 @@ const ContactLuxury = () => {
               <Stack spacing="medium">
                 {reasons.map((reason, index) => (
                   <Flex key={index} gap="medium" align="start">
-                    <LuxuryIcon variant="glow" size="small" className="flex-shrink-0 mt-1">
+                    <LuxuryIcon variant="glow" size="small">
                       <Icon name={reason.icon} />
                     </LuxuryIcon>
                     <Stack spacing="small">
@@ -207,13 +211,13 @@ const ContactLuxury = () => {
                 <Stack spacing="medium">
                   <Flex gap="small">
                     {[...Array(5)].map((_, i) => (
-                      <Icon key={i} name="star" size="small" className="text-brand-gold" />
+                      <Icon key={i} name="star" size="small" color="#CABC32" />
                     ))}
                   </Flex>
                   <Text color="light" leading="relaxed">
-                    "From the initial consultation to the final installation, 
+                    &ldquo;From the initial consultation to the final installation, 
                     the service was impeccable. Our new shutters have completely 
-                    transformed our home!"
+                    transformed our home!&rdquo;
                   </Text>
                   <Stack spacing="small">
                     <Text weight="semibold" color="gold">
@@ -251,7 +255,6 @@ const ContactLuxury = () => {
                     key={area}
                     to={`/areas/${area.toLowerCase()}`}
                     variant="subtle"
-                    className="text-center p-2 rounded hover:bg-brand-gold/10 transition-all"
                   >
                     <Text color="light">{area}</Text>
                   </Link>

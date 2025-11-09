@@ -17,7 +17,7 @@ export {
   typography,
   spacing,
   interactive,
-  carouselStyles
+  carouselStyles,
 }
 
 // Named exports for convenience

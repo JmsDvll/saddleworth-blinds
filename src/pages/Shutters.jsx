@@ -1,3 +1,8 @@
+/** [STANDARDIZATION CHECKLIST] UI-only, no inline classes, ESLint clean */
 import { createProductPageLuxury } from '../utils/createProductPageLuxury'
 
-export default createProductPageLuxury('shutters', null)
+const ShuttersPage = createProductPageLuxury('shutters', null)
+
+ShuttersPage.displayName = 'ShuttersPage'
+
+export default ShuttersPage

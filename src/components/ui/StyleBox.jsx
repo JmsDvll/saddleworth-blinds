@@ -82,7 +82,7 @@ const styleBoxStyles = {
   layout: {
     'text-center': 'text-center',
     'overflow-hidden': 'overflow-hidden',
-  }
+  },
 }
 
 export const StyleBox = forwardRef(({
@@ -114,7 +114,7 @@ export const StyleBox = forwardRef(({
     spacing && styleBoxStyles.spacing[spacing],
     effect && styleBoxStyles.effect[effect],
     layout && styleBoxStyles.layout[layout],
-    className
+    className,
   ].filter(Boolean).join(' ')
 
   return (

@@ -1,3 +1,6 @@
+/** [STANDARDIZATION CHECKLIST] UI-only, no inline classes, ESLint clean */
 import { createAreaPageLuxury } from '../utils/createAreaPageLuxury'
 
-export default createAreaPageLuxury('delph')
+const DelphPage = createAreaPageLuxury('delph')
+DelphPage.displayName = 'DelphPage'
+export default DelphPage

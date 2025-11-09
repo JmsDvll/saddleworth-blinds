@@ -1,21 +1,22 @@
-import React, { useState, useEffect } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import {
   Button,
   Card,
+  CarouselContainer,
+  CarouselContent,
+  CarouselDots,
+  CarouselImageWrapper,
+  CarouselNavButton,
+  CarouselOverlay,
+  CarouselProgress,
+  CarouselSlide,
+  Flex,
   Heading,
-  Text,
   Icon,
   Image,
-  Flex,
-  Stack,
   LuxuryBadge,
-  CarouselContainer,
-  CarouselSlide,
-  CarouselNavButton,
-  CarouselDots,
-  CarouselOverlay,
-  CarouselImageWrapper,
-  CarouselProgress
+  Stack,
+  Text,
 } from './ui'
 
 // Base carousel component with luxury styling
@@ -28,13 +29,13 @@ export const BaseCarouselLuxury = ({
   showProgress = false,
   height = 'product',
   onSlideChange,
-  className = ''
+  className = '',
 }) => {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
   const [isTransitioning, setIsTransitioning] = useState(false)
 
-  const nextSlide = () => {
+  const nextSlide = useCallback(() => {
     if (!isTransitioning) {
       setIsTransitioning(true)
       const next = (currentSlide + 1) % slides.length
@@ -42,9 +43,9 @@ export const BaseCarouselLuxury = ({
       if (onSlideChange) onSlideChange(next)
       setTimeout(() => setIsTransitioning(false), 700)
     }
-  }
+  }, [currentSlide, isTransitioning, onSlideChange, slides.length])
 
-  const prevSlide = () => {
+  const prevSlide = useCallback(() => {
     if (!isTransitioning) {
       setIsTransitioning(true)
       const prev = (currentSlide - 1 + slides.length) % slides.length
@@ -52,7 +53,7 @@ export const BaseCarouselLuxury = ({
       if (onSlideChange) onSlideChange(prev)
       setTimeout(() => setIsTransitioning(false), 700)
     }
-  }
+  }, [currentSlide, isTransitioning, onSlideChange, slides.length])
 
   const goToSlide = (index) => {
     if (!isTransitioning && index !== currentSlide) {
@@ -69,7 +70,7 @@ export const BaseCarouselLuxury = ({
       const interval = setInterval(nextSlide, autoPlayInterval)
       return () => clearInterval(interval)
     }
-  }, [currentSlide, isPaused, autoPlay, autoPlayInterval, slides.length])
+  }, [isPaused, autoPlay, autoPlayInterval, slides.length, nextSlide])
 
   if (!slides || slides.length === 0) return null
 
@@ -88,15 +89,15 @@ export const BaseCarouselLuxury = ({
           <Image
             src={`/images/optimized/${currentSlideData.image}`}
             alt={currentSlideData.alt || currentSlideData.title}
-            className="w-full h-full object-cover"
             loading="eager"
+            objectFit="cover"
           />
           <CarouselOverlay variant="product" />
         </CarouselImageWrapper>
 
         {/* Content Overlay (if provided) */}
-        {currentSlideData.title && (
-          <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
+          {currentSlideData.title && (
+          <CarouselContent position="bottom">
             <Stack spacing="small">
               {currentSlideData.badge && (
                 <LuxuryBadge variant="gold" size="small">
@@ -107,12 +108,12 @@ export const BaseCarouselLuxury = ({
                 {currentSlideData.title}
               </Heading>
               {currentSlideData.description && (
-                <Text color="light" className="max-w-xl">
+                <Text color="light">
                   {currentSlideData.description}
                 </Text>
               )}
             </Stack>
-          </div>
+          </CarouselContent>
         )}
 
         {/* Navigation */}
@@ -129,13 +130,11 @@ export const BaseCarouselLuxury = ({
 
         {/* Dots */}
         {showDots && slides.length > 1 && (
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2">
-            <CarouselDots
-              total={slides.length}
-              current={currentSlide}
-              onSelect={goToSlide}
-            />
-          </div>
+          <CarouselDots
+            total={slides.length}
+            current={currentSlide}
+            onSelect={goToSlide}
+          />
         )}
 
         {/* Progress Bar */}
@@ -157,7 +156,7 @@ export const ProductCarouselLuxury = ({
   title,
   subtitle,
   showThumbnails = true,
-  className = ''
+  className = '',
 }) => {
   const [currentProduct, setCurrentProduct] = useState(0)
 
@@ -166,7 +165,7 @@ export const ProductCarouselLuxury = ({
   const current = products[currentProduct]
 
   return (
-    <Stack spacing="large" className={className}>
+      <Stack spacing="large" className={className}>
       {/* Header */}
       {(title || subtitle) && (
         <Stack spacing="small" align="center">
@@ -190,7 +189,7 @@ export const ProductCarouselLuxury = ({
           alt: p.name,
           title: p.name,
           description: p.description,
-          badge: p.badge
+          badge: p.badge,
         }))}
         onSlideChange={setCurrentProduct}
         height="product"
@@ -199,30 +198,24 @@ export const ProductCarouselLuxury = ({
 
       {/* Thumbnails */}
       {showThumbnails && products.length > 1 && (
-        <div className="mt-4">
-          <Flex gap="small" justify="center" className="overflow-x-auto pb-2">
+        <Stack spacing="small">
+          <Flex gap="small" justify="center">
             {products.map((product, index) => (
-              <button
+              <Button
                 key={index}
+                variant="ghost"
+                size="small"
                 onClick={() => setCurrentProduct(index)}
-                className={`
-                  relative w-20 h-20 rounded-lg overflow-hidden
-                  transition-all duration-300
-                  ${index === currentProduct 
-                    ? 'ring-2 ring-brand-gold scale-110' 
-                    : 'opacity-70 hover:opacity-100'
-                  }
-                `}
               >
                 <Image
                   src={`/images/optimized/${product.thumbnail || product.image}`}
                   alt={product.name}
-                  className="w-full h-full object-cover"
+                  objectFit="cover"
                 />
-              </button>
+              </Button>
             ))}
           </Flex>
-        </div>
+        </Stack>
       )}
 
       {/* Product Info */}
@@ -235,7 +228,7 @@ export const ProductCarouselLuxury = ({
             <Flex gap="large" wrap="wrap">
               {current.features.map((feature, index) => (
                 <Flex key={index} gap="small" align="center">
-                  <Icon name="check" size="small" className="text-brand-gold" />
+                  <Icon name="check" size="small" color="#CABC32" />
                   <Text color="light">{feature}</Text>
                 </Flex>
               ))}
@@ -250,10 +243,8 @@ export const ProductCarouselLuxury = ({
 // Testimonial carousel
 export const TestimonialCarouselLuxury = ({
   testimonials,
-  className = ''
+  className = '',
 }) => {
-  const [current, setCurrent] = useState(0)
-
   if (!testimonials || testimonials.length === 0) return null
 
   return (
@@ -263,23 +254,18 @@ export const TestimonialCarouselLuxury = ({
           <Card variant="luxury" padding="xlarge">
             <Stack spacing="large" align="center">
               {/* Quote Icon */}
-              <Icon name="quote" size="large" className="text-brand-gold opacity-50" />
+              <Icon name="quote" size="large" color="#CABC32" opacity="50" />
               
               {/* Testimonial Text */}
               <Text size="xlarge" color="light" align="center" leading="relaxed">
-                "{t.text}"
+                &ldquo;{t.text}&rdquo;
               </Text>
               
               {/* Customer Info */}
               <Stack spacing="small" align="center">
                 <Flex gap="small">
                   {[...Array(5)].map((_, i) => (
-                    <Icon 
-                      key={i} 
-                      name="star" 
-                      size="small" 
-                      className={i < t.rating ? 'text-brand-gold' : 'text-brand-grey-dark'}
-                    />
+                    <Icon key={i} name="star" size="small" color={i < t.rating ? '#CABC32' : '#4B5563'} />
                   ))}
                 </Flex>
                 <Text weight="semibold" color="gold">
@@ -291,7 +277,7 @@ export const TestimonialCarouselLuxury = ({
               </Stack>
             </Stack>
           </Card>
-        )
+        ),
       }))}
       height="feature"
       showArrows={false}

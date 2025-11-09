@@ -1,3 +1,6 @@
+/** [STANDARDIZATION CHECKLIST] UI-only, no inline classes, ESLint clean */
 import { createAreaPageLuxury } from '../utils/createAreaPageLuxury'
 
-export default createAreaPageLuxury('Lees')
+const LeesPage = createAreaPageLuxury('Lees')
+LeesPage.displayName = 'LeesPage'
+export default LeesPage

@@ -1,19 +1,19 @@
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import {
-  Section,
-  Container,
-  Stack,
-  Heading,
-  Text,
-  Card,
-  Icon,
-  Button,
   Box,
+  Button,
+  Card,
+  Container,
   Flex,
+  GlowBox,
   GoldDivider,
+  Heading,
+  Icon,
+  Section,
   ShimmerText,
-  GlowBox
+  Stack,
+  Text,
 } from './ui'
 
 const FAQSectionLuxury = ({ faqs = [], title = 'Frequently Asked Questions', subtitle }) => {

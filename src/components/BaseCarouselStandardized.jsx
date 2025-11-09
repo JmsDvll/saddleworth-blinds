@@ -1,16 +1,16 @@
-import { useState, useEffect, useRef } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { useCallback, useEffect, useRef, useState } from 'react'
+import { AnimatePresence } from 'framer-motion'
 import { 
-  Button, 
-  Icon, 
-  Image, 
-  CarouselContainer,
-  CarouselSlide,
-  CarouselNavButton,
+  CarouselContainer, 
+  CarouselContent, 
   CarouselDots,
-  CarouselOverlay,
   CarouselImageWrapper,
-  CarouselProgress 
+  CarouselNavButton,
+  CarouselOverlay,
+  CarouselProgress,
+  CarouselSlide,
+  Icon,
+  Image, 
 } from './ui'
 
 const BaseCarouselStandardized = ({
@@ -29,13 +29,13 @@ const BaseCarouselStandardized = ({
   const [isPaused, setIsPaused] = useState(false)
   const intervalRef = useRef(null)
 
-  const nextSlide = () => {
+  const nextSlide = useCallback(() => {
     setCurrentSlide((prev) => (prev + 1) % slides.length)
-  }
+  }, [slides.length])
 
-  const prevSlide = () => {
+  const prevSlide = useCallback(() => {
     setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)
-  }
+  }, [slides.length])
 
   const goToSlide = (index) => {
     setCurrentSlide(index)
@@ -56,7 +56,7 @@ const BaseCarouselStandardized = ({
         }
       }
     }
-  }, [autoPlay, isPaused, autoPlayInterval, slides.length, currentSlide])
+  }, [autoPlay, isPaused, autoPlayInterval, slides.length, nextSlide])
 
   if (!slides || slides.length === 0) {
     return null
@@ -79,8 +79,8 @@ const BaseCarouselStandardized = ({
               <Image
                 src={currentSlideData.image}
                 alt={currentSlideData.alt || currentSlideData.title || ''}
-                className="w-full h-full object-cover"
                 loading="eager"
+                objectFit="cover"
               />
             </CarouselImageWrapper>
           )}
@@ -92,9 +92,9 @@ const BaseCarouselStandardized = ({
 
           {/* Content */}
           {currentSlideData.content && (
-            <div className="absolute inset-0 flex items-center justify-center">
+            <CarouselContent position="center">
               {currentSlideData.content}
-            </div>
+            </CarouselContent>
           )}
 
           {/* Navigation Arrows */}

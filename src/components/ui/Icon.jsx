@@ -1,4 +1,17 @@
 import React, { forwardRef } from 'react'
+/**
+ * Icon – SVG icon renderer with named paths and effects.
+ *
+ * Props
+ * - name: keyof iconPaths – required
+ * - size: 'tiny' | 'small' | 'medium' | 'large' | 'xlarge'
+ * - color: CSS color string
+ * - effect: 'none' | 'spin' | 'pulse' | 'bounce' | 'glow' | 'float'
+ * - strokeWidth: number (applies to stroked icons)
+ *
+ * Usage
+ *  <Icon name="phone" size="small" color="#CABC32" />
+ */
 
 // Enhanced icon definitions with better paths
 const iconPaths = {
@@ -102,7 +115,7 @@ const iconPaths = {
   // Social media
   facebook: 'M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z',
   instagram: 'M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zM17.5 6.5h.01',
-  twitter: 'M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z'
+  twitter: 'M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z',
 }
 
 const iconStyles = {
@@ -127,7 +140,7 @@ const iconStyles = {
     bounce: 'animate-bounce',
     glow: 'filter drop-shadow-[0_0_8px_currentColor]',
     float: 'animate-float',
-  }
+  },
 }
 
 export const Icon = forwardRef(({
@@ -217,3 +230,4 @@ Icon.Spinner = ({ size = 'medium', className = '' }) => {
     </div>
   )
 }
+Icon.Spinner.displayName = 'Icon.Spinner'

@@ -1,4 +1,18 @@
 import React, { forwardRef } from 'react'
+/**
+ * Heading – Display typography for titles.
+ *
+ * Props
+ * - as: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' (default h2)
+ * - size: xs | sm | base | lg | xl | 2xl | 3xl | 4xl | hero (auto by 'as' if omitted)
+ * - color: 'inherit' | 'dark' | 'light' | 'gold' | gradients ('gradient' | 'darkGradient' | 'luxuryGradient')
+ * - align: 'left' | 'center' | 'right'
+ * - effect: 'none' | 'shadow' | 'goldShadow' | 'glow' | 'underline' | 'luxuryUnderline' | 'reveal'
+ * - marginBottom: 'none' | 'small' | 'medium' | 'large' | 'xlarge'
+ *
+ * Usage
+ *  <Heading as="h1" color="gold" effect="glow">Title</Heading>
+ */
 
 const headingStyles = {
   base: 'font-display font-bold leading-tight tracking-luxury',
@@ -81,7 +95,7 @@ const headingStyles = {
     medium: 'mb-4',
     large: 'mb-6',
     xlarge: 'mb-8',
-  }
+  },
 }
 
 export const Heading = forwardRef(({ 

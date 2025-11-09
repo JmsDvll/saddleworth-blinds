@@ -1,3 +1,42 @@
+# 20i / Apache SPA routing with PHP endpoint pass-through
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Pass through existing files and directories
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # Allow PHP endpoints (forms, webhooks) to run directly
+  RewriteRule ^process-(booking|contact)\.php$ - [L]
+
+  # Allow sitemap and robots
+  RewriteRule ^(sitemap\.xml|robots\.txt)$ - [L]
+
+  # Fallback all other routes to the SPA entry
+  RewriteRule ^ index.html [L]
+</IfModule>
+
+# Caching: long cache for build assets, short for HTML
+<IfModule mod_expires.c>
+  ExpiresActive On
+  # HTML
+  ExpiresByType text/html "access plus 1h"
+  # JS/CSS
+  ExpiresByType text/javascript "access plus 1y"
+  ExpiresByType application/javascript "access plus 1y"
+  ExpiresByType text/css "access plus 1y"
+  # Images
+  ExpiresByType image/webp "access plus 1y"
+  ExpiresByType image/png "access plus 1y"
+  ExpiresByType image/jpeg "access plus 1y"
+  ExpiresByType image/svg+xml "access plus 1y"
+</IfModule>
+
+# Compression (safe defaults)
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/javascript application/json image/svg+xml
+</IfModule>
 # Saddleworth Blinds .htaccess Configuration - MODERNIZED
 # Handles React Router, security, and performance optimizations
 

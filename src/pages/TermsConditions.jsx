@@ -1,10 +1,18 @@
 import React from 'react'
+/**
+ * [STANDARDIZATION CHECKLIST]
+ * ✅ Uses UI components only (no raw HTML for layout/content)
+ * ✅ Zero inline Tailwind classes
+ * ✅ SEO handled via route meta/Seo component
+ * ✅ ESLint clean
+ */
 import { 
-  Section, 
   Container, 
   Heading, 
-  Text, 
-  Stack
+  List, 
+  Section, 
+  Stack,
+  Text,
 } from '../components/ui'
 
 const TermsConditions = () => {
@@ -23,7 +31,7 @@ const TermsConditions = () => {
             <Stack spacing="medium">
               <Heading as="h2" size="2xl">Acceptance of Terms</Heading>
               <Text color="light">
-                By accessing and using Sunshine Blinds Saddleworth's website and services, you accept and agree to be bound by the terms and provision of this agreement. These terms apply to all visitors, users, and others who access or use our services.
+                By accessing and using Sunshine Blinds Saddleworth&apos;s website and services, you accept and agree to be bound by the terms and provision of this agreement. These terms apply to all visitors, users, and others who access or use our services.
               </Text>
             </Stack>
 
@@ -36,42 +44,42 @@ const TermsConditions = () => {
 
             <Stack spacing="medium">
               <Heading as="h2" size="2xl">Quotations and Pricing</Heading>
-              <Stack spacing="small" className="list-disc list-inside">
-                <Text color="light" as="li">All quotations are valid for 30 days from the date of issue</Text>
-                <Text color="light" as="li">Prices include professional measurement and installation</Text>
-                <Text color="light" as="li">Additional charges may apply for complex installations or difficult access</Text>
-                <Text color="light" as="li">We reserve the right to amend quotations if specifications change</Text>
-              </Stack>
+              <List as="ul" spacing="small">
+                <List.Item><Text color="light">All quotations are valid for 30 days from the date of issue</Text></List.Item>
+                <List.Item><Text color="light">Prices include professional measurement and installation</Text></List.Item>
+                <List.Item><Text color="light">Additional charges may apply for complex installations or difficult access</Text></List.Item>
+                <List.Item><Text color="light">We reserve the right to amend quotations if specifications change</Text></List.Item>
+              </List>
             </Stack>
 
             <Stack spacing="medium">
               <Heading as="h2" size="2xl">Appointments and Consultations</Heading>
-              <Stack spacing="small" className="list-disc list-inside">
-                <Text color="light" as="li">Free home consultations are available throughout Saddleworth</Text>
-                <Text color="light" as="li">Appointments are subject to availability</Text>
-                <Text color="light" as="li">We require 24 hours notice for cancellations</Text>
-                <Text color="light" as="li">Late cancellations may incur charges</Text>
-              </Stack>
+              <List as="ul" spacing="small">
+                <List.Item><Text color="light">Free home consultations are available throughout Saddleworth</Text></List.Item>
+                <List.Item><Text color="light">Appointments are subject to availability</Text></List.Item>
+                <List.Item><Text color="light">We require 24 hours notice for cancellations</Text></List.Item>
+                <List.Item><Text color="light">Late cancellations may incur charges</Text></List.Item>
+              </List>
             </Stack>
 
             <Stack spacing="medium">
               <Heading as="h2" size="2xl">Installation</Heading>
-              <Stack spacing="small" className="list-disc list-inside">
-                <Text color="light" as="li">Installation is carried out by our trained professionals</Text>
-                <Text color="light" as="li">We take responsibility for accurate measuring</Text>
-                <Text color="light" as="li">Any measuring errors will be corrected at no additional cost</Text>
-                <Text color="light" as="li">Normal installation does not include electrical work or building modifications</Text>
-              </Stack>
+              <List as="ul" spacing="small">
+                <List.Item><Text color="light">Installation is carried out by our trained professionals</Text></List.Item>
+                <List.Item><Text color="light">We take responsibility for accurate measuring</Text></List.Item>
+                <List.Item><Text color="light">Any measuring errors will be corrected at no additional cost</Text></List.Item>
+                <List.Item><Text color="light">Normal installation does not include electrical work or building modifications</Text></List.Item>
+              </List>
             </Stack>
 
             <Stack spacing="medium">
               <Heading as="h2" size="2xl">Warranties</Heading>
-              <Stack spacing="small" className="list-disc list-inside">
-                <Text color="light" as="li">All products come with comprehensive warranties</Text>
-                <Text color="light" as="li">Installation is warranted for 12 months</Text>
-                <Text color="light" as="li">Product warranties vary by manufacturer (typically 1-5 years)</Text>
-                <Text color="light" as="li">Warranties do not cover misuse or accidental damage</Text>
-              </Stack>
+              <List as="ul" spacing="small">
+                <List.Item><Text color="light">All products come with comprehensive warranties</Text></List.Item>
+                <List.Item><Text color="light">Installation is warranted for 12 months</Text></List.Item>
+                <List.Item><Text color="light">Product warranties vary by manufacturer (typically 1-5 years)</Text></List.Item>
+                <List.Item><Text color="light">Warranties do not cover misuse or accidental damage</Text></List.Item>
+              </List>
             </Stack>
 
             <Stack spacing="medium">
@@ -83,12 +91,12 @@ const TermsConditions = () => {
 
             <Stack spacing="medium">
               <Heading as="h2" size="2xl">Cancellation Policy</Heading>
-              <Stack spacing="small" className="list-disc list-inside">
-                <Text color="light" as="li">Orders can be cancelled within 48 hours without charge</Text>
-                <Text color="light" as="li">Cancellations after 48 hours may incur charges for work completed</Text>
-                <Text color="light" as="li">Made-to-measure products cannot be cancelled once manufacturing begins</Text>
-                <Text color="light" as="li">Deposits are non-refundable after manufacturing commences</Text>
-              </Stack>
+              <List as="ul" spacing="small">
+                <List.Item><Text color="light">Orders can be cancelled within 48 hours without charge</Text></List.Item>
+                <List.Item><Text color="light">Cancellations after 48 hours may incur charges for work completed</Text></List.Item>
+                <List.Item><Text color="light">Made-to-measure products cannot be cancelled once manufacturing begins</Text></List.Item>
+                <List.Item><Text color="light">Deposits are non-refundable after manufacturing commences</Text></List.Item>
+              </List>
             </Stack>
 
             <Stack spacing="medium">

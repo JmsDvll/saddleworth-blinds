@@ -1,5 +1,5 @@
 import React from 'react'
-import { Section, Container, Stack, Heading, Text, Button, Icon, Card, GlowBox, Center } from './ui'
+import { Button, Card, Center, Container, GlowBox, Heading, Icon, Section, Stack, Text } from './ui'
 
 class ErrorBoundaryLuxury extends React.Component {
   constructor(props) {
@@ -7,20 +7,20 @@ class ErrorBoundaryLuxury extends React.Component {
     this.state = { hasError: false, error: null, errorInfo: null }
   }
 
-  static getDerivedStateFromError(error) {
+  static getDerivedStateFromError(_error) {
     return { hasError: true }
   }
 
   componentDidCatch(error, errorInfo) {
     // Log error to console in development
-    if (process.env.NODE_ENV === 'development') {
+    if (import.meta && import.meta.env && import.meta.env.DEV) {
       console.error('Error caught by boundary:', error, errorInfo)
     }
     
     // You can also log to an error reporting service here
     this.setState({
       error: error,
-      errorInfo: errorInfo
+      errorInfo: errorInfo,
     })
   }
 
@@ -32,19 +32,14 @@ class ErrorBoundaryLuxury extends React.Component {
   render() {
     if (this.state.hasError) {
       return (
-        <Section background="dark" className="min-h-screen">
+        <Section background="dark">
           <Container>
-            <Center className="min-h-screen">
+            <Center minHeight="screen">
               <GlowBox variant="subtle" padding="large">
                 <Card variant="luxury" padding="xlarge">
-                  <Stack spacing="large" align="center" className="max-w-2xl">
+                  <Stack spacing="large" align="center">
                     {/* Error Icon */}
-                    <div className="relative">
-                      <Icon name="exclamation" size="xlarge" className="text-brand-gold" />
-                      <div className="absolute inset-0 animate-ping">
-                        <Icon name="exclamation" size="xlarge" className="text-brand-gold opacity-30" />
-                      </div>
-                    </div>
+                    <Icon name="exclamation" size="xlarge" />
 
                     {/* Error Message */}
                     <Stack spacing="medium" align="center">
@@ -57,17 +52,17 @@ class ErrorBoundaryLuxury extends React.Component {
                     </Stack>
 
                     {/* Error Details (Development only) */}
-                    {process.env.NODE_ENV === 'development' && this.state.error && (
-                      <Card variant="dark" padding="medium" className="w-full">
+                    {import.meta && import.meta.env && import.meta.env.DEV && this.state.error && (
+                      <Card variant="dark" padding="medium">
                         <Stack spacing="small">
                           <Text size="small" weight="semibold" color="gold">
                             Error Details:
                           </Text>
-                          <Text size="small" color="muted" className="font-mono">
+                          <Text size="small" color="muted">
                             {this.state.error.toString()}
                           </Text>
                           {this.state.errorInfo && (
-                            <Text size="small" color="muted" className="font-mono whitespace-pre-wrap">
+                            <Text size="small" color="muted">
                               {this.state.errorInfo.componentStack}
                             </Text>
                           )}

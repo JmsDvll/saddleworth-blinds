@@ -1,3 +1,8 @@
+/** [STANDARDIZATION CHECKLIST] UI-only, no inline classes, ESLint clean */
 import { createProductPageLuxury } from '../utils/createProductPageLuxury'
 
-export default createProductPageLuxury('allusion-blinds', null)
+const AllusionBlindsPage = createProductPageLuxury('allusion-blinds', null)
+
+AllusionBlindsPage.displayName = 'AllusionBlindsPage'
+
+export default AllusionBlindsPage

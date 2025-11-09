@@ -10,26 +10,26 @@ const glowBoxStyles = {
   variants: {
     gold: `
       before:absolute before:inset-0
-      before:bg-gold-gradient before:opacity-20
+      before:bg-gold-gradient before:opacity-20 before:pointer-events-none
       before:blur-xl before:transition-all before:duration-700
       hover:before:opacity-40 hover:before:blur-2xl
-      after:absolute after:inset-0
-      after:bg-gold-pulse after:animate-glow-pulse
+      after:absolute after:inset-0 after:pointer-events-none
+      after:bg-gold-pulse after:animate-glow-pulse 
       after:opacity-0 hover:after:opacity-30
     `,
     subtle: `
       before:absolute before:inset-0
-      before:bg-brand-gold/10 before:blur-md
+      before:bg-brand-gold/10 before:blur-md before:pointer-events-none
       before:transition-all before:duration-500
       hover:before:bg-brand-gold/20 hover:before:blur-lg
     `,
     luxury: `
-      before:absolute before:inset-[-20px]
+      before:absolute before:inset-[-20px] before:pointer-events-none
       before:bg-gradient-to-r before:from-brand-gold/0 before:via-brand-gold/30 before:to-brand-gold/0
       before:blur-2xl before:opacity-0
       hover:before:opacity-100 before:transition-all before:duration-700
-      after:absolute after:inset-0
-      after:bg-gold-shimmer after:opacity-0
+      after:absolute after:inset-0 after:pointer-events-none
+      after:bg-gold-shimmer after:opacity-0 
       hover:after:opacity-10 after:transition-opacity after:duration-700
     `,
     border: `
@@ -38,10 +38,10 @@ const glowBoxStyles = {
       before:p-[2px]
       before:bg-gold-gradient
       before:content-['']
-      before:-z-10
+      before:-z-10 before:pointer-events-none
       before:opacity-50 hover:before:opacity-100
       before:transition-opacity before:duration-500
-      after:absolute after:inset-0
+      after:absolute after:inset-0 after:pointer-events-none
       after:rounded-inherit
       after:bg-brand-dark
       after:-z-10

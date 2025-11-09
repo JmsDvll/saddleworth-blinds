@@ -1,5 +1,13 @@
 import React from 'react'
-import { Center, Stack, Text, Spinner } from './index'
+/**
+ * PageLoader / AppWrapper / MainContent / ScrollToTopButton – app shell helpers.
+ *
+ * PageLoader: full-screen loading indicator
+ * AppWrapper: sets base app background/typography
+ * MainContent: wraps routed content
+ * ScrollToTopButton: floating action to return to top
+ */
+import { Center, Spinner, Stack, Text } from './index'
 
 export const PageLoader = () => {
   return (
@@ -24,7 +32,7 @@ export const AppWrapper = ({ children }) => {
 // Main content wrapper
 export const MainContent = ({ children }) => {
   return (
-    <main className="flex-grow relative">
+    <main id="main-content" role="main" className="flex-grow relative">
       {children}
     </main>
   )

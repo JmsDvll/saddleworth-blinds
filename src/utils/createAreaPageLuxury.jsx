@@ -1,35 +1,36 @@
 import React from 'react'
 import {
-  Section,
-  Container,
-  Grid,
-  Stack,
-  Heading,
-  Text,
   Button,
   Card,
-  Icon,
-  Link,
-  Image,
+  Container,
   Flex,
-  HeroSection,
-  HeroContent,
-  HeroOverlay,
-  HeroTitle,
-  HeroSubtitle,
-  HeroDescription,
-  HeroCTA,
-  GoldDivider,
-  LuxuryBadge,
-  LuxuryIcon,
   GlowBox,
-  ShimmerText
+  Grid,
+  Heading,
+  HeroContent,
+  HeroCTA,
+  HeroDescription,
+  HeroImage,
+  HeroOverlay,
+  HeroSection,
+  HeroSubtitle,
+  HeroTitle,
+  Icon,
+  Image,
+  ImageContainer,
+  Link,
+  LuxuryIcon,
+  Section,
+  ShimmerText,
+  Stack,
+  Text,
 } from '../components/ui'
 import ContactFormLuxury from '../components/ContactFormLuxury'
-import ReviewsSectionLuxury from '../components/ReviewsSectionLuxury'
+// ReviewsSectionLuxury is imported on-demand where used
 
 // Import area configurations
 import { areaConfigs } from './areaConfigs'
+import { Seo } from '../components/Seo'
 
 export const createAreaPageLuxury = (areaName) => {
   const AreaPage = () => {
@@ -48,38 +49,44 @@ export const createAreaPageLuxury = (areaName) => {
       )
     }
 
-    // Area-specific reviews
-    const areaReviews = [
-      {
-        name: config.testimonial?.name || 'Local Customer',
-        location: areaName,
-        rating: 5,
-        text: config.testimonial?.quote || 'Excellent service and beautiful blinds!',
-        product: config.testimonial?.product || 'Roller Blinds',
-        verified: true
-      }
-    ]
+    // Reviews handled by ReviewsSectionLuxury where used
+
+    const serviceJsonLd = {
+      '@context': 'https://schema.org',
+      '@type': 'Service',
+      name: `Window Blinds in ${areaName}`,
+      provider: {
+        '@type': 'LocalBusiness',
+        name: 'Sunshine Blinds Saddleworth',
+      },
+      areaServed: areaName,
+      offers: {
+        '@type': 'Offer',
+        priceCurrency: 'GBP',
+        price: '0',
+        description: 'Free home visit, measuring, and quotation',
+      },
+    }
 
     return (
-      <>
+      <Seo jsonLd={serviceJsonLd}>
         {/* Hero Section */}
         <HeroSection variant="luxury" height="large">
           <HeroOverlay variant="gradient" />
           {config.heroImage && (
-            <Image
+            <HeroImage
               src={config.heroImage}
               alt={`${areaName} window blinds and shutters`}
-              className="absolute inset-0 w-full h-full object-cover"
             />
           )}
           <HeroContent align="center" padding="large">
-            <Container>
-              <Stack spacing="large" align="center" className="max-w-4xl mx-auto">
-                <HeroTitle>
+            <Container maxWidth="medium">
+              <Stack spacing="large" align="center">
+                <Heading as="h1" size="3xl" align="center">
                   <ShimmerText variant="luxury">
                     Window Blinds {areaName}
                   </ShimmerText>
-                </HeroTitle>
+                </Heading>
                 <HeroSubtitle>
                   Your Local Window Treatment Specialists
                 </HeroSubtitle>
@@ -127,23 +134,23 @@ export const createAreaPageLuxury = (areaName) => {
                   {
                     icon: 'truck',
                     title: 'Free Home Visit',
-                    description: `We come to you in ${areaName}`
+                    description: `We come to you in ${areaName}`,
                   },
                   {
                     icon: 'ruler',
                     title: 'Free Measuring',
-                    description: 'Professional measuring service'
+                    description: 'Professional measuring service',
                   },
                   {
                     icon: 'currency',
                     title: 'Free Quote',
-                    description: 'No obligation pricing'
+                    description: 'No obligation pricing',
                   },
                   {
                     icon: 'tools',
                     title: 'Expert Fitting',
-                    description: 'Professional installation'
-                  }
+                    description: 'Professional installation',
+                  },
                 ].map((benefit, index) => (
                   <Card key={index} variant="elevated" hover="lift" padding="medium">
                     <Stack spacing="small" align="center">
@@ -182,15 +189,14 @@ export const createAreaPageLuxury = (areaName) => {
               <Grid cols={3} gap="large">
                 {config.popularProducts.map((product, index) => (
                   <GlowBox key={index} variant="subtle" intensity="low">
-                    <Card variant="luxury" hover="glow" padding="none">
-                      <div className="aspect-[4/3] overflow-hidden">
+                    <Card variant="luxury" hover="glow" padding="large">
+                      <ImageContainer aspectRatio="4:3">
                         <Image
                           src={product.image}
                           alt={product.title}
-                          className="w-full h-full object-cover"
                         />
-                      </div>
-                      <Stack spacing="medium" className="p-6">
+                      </ImageContainer>
+                      <Stack spacing="medium">
                         <Heading size="lg" color="gold">
                           {product.title}
                         </Heading>
@@ -221,14 +227,14 @@ export const createAreaPageLuxury = (areaName) => {
               <GlowBox variant="luxury" padding="large">
                 <Card variant="dark" padding="xlarge">
                   <Stack spacing="large" align="center">
-                    <Icon name="quote" size="large" className="text-brand-gold opacity-50" />
+                    <Icon name="quote" size="large" color="#CABC32" />
                     <Text size="xlarge" color="light" align="center" leading="relaxed">
-                      "{config.testimonial.quote}"
+                      &ldquo;{config.testimonial.quote}&rdquo;
                     </Text>
                     <Stack spacing="small" align="center">
                       <Flex gap="small">
                         {[...Array(5)].map((_, i) => (
-                          <Icon key={i} name="star" size="small" className="text-brand-gold" />
+                          <Icon key={i} name="star" size="small" color="#CABC32" />
                         ))}
                       </Flex>
                       <Text weight="semibold" color="gold">
@@ -277,13 +283,13 @@ export const createAreaPageLuxury = (areaName) => {
                   Get Your Free {areaName} Quote
                 </Heading>
                 <Text size="large" color="light" align="center">
-                  Tell us about your windows and we'll provide a no-obligation quote
+                  Tell us about your windows and we&apos;ll provide a no-obligation quote
                 </Text>
               </Stack>
               
-              <div className="max-w-4xl mx-auto">
+              <Container maxWidth="large">
                 <ContactFormLuxury variant="luxury" showHeader={false} />
-              </div>
+              </Container>
             </Stack>
           </Container>
         </Section>
@@ -299,19 +305,19 @@ export const createAreaPageLuxury = (areaName) => {
                   </Heading>
                   <Stack spacing="small">
                     <Flex gap="small" align="center">
-                      <Icon name="check" className="text-brand-gold" />
+                    <Icon name="check" color="#CABC32" />
                       <Text color="light">Family business serving {areaName} since 1979</Text>
                     </Flex>
                     <Flex gap="small" align="center">
-                      <Icon name="check" className="text-brand-gold" />
+                    <Icon name="check" color="#CABC32" />
                       <Text color="light">Expert knowledge of {areaName} homes</Text>
                     </Flex>
                     <Flex gap="small" align="center">
-                      <Icon name="check" className="text-brand-gold" />
+                    <Icon name="check" color="#CABC32" />
                       <Text color="light">5 year guarantee on all products</Text>
                     </Flex>
                     <Flex gap="small" align="center">
-                      <Icon name="check" className="text-brand-gold" />
+                    <Icon name="check" color="#CABC32" />
                       <Text color="light">Competitive local pricing</Text>
                     </Flex>
                   </Stack>
@@ -332,7 +338,7 @@ export const createAreaPageLuxury = (areaName) => {
             </Card>
           </Container>
         </Section>
-      </>
+      </Seo>
     )
   }
 

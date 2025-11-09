@@ -1,4 +1,24 @@
 import React, { forwardRef } from 'react'
+/**
+ * Button – Standardized action control.
+ *
+ * Props
+ * - variant: 'primary' | 'secondary' | 'outline' | 'ghost' | 'luxury' | 'dark'
+ * - size: 'small' | 'medium' | 'large' | 'xlarge'
+ * - fullWidth: boolean – stretches to container width
+ * - loading: boolean – shows loading spinner and disables interactions
+ * - iconLeft / iconRight: ReactNode – icon elements rendered beside the label
+ * - to: string – client-side navigation (uses RouterLink)
+ * - href: string – external link
+ * - as: override element (rarely needed; prefer to / href)
+ *
+ * Usage
+ *  <Button variant="luxury" size="large" iconLeft={<Icon name="calendar" />}>Book</Button>
+ *
+ * Anti‑patterns
+ * - Do not use raw <button> outside UI layer; use this component instead
+ * - Avoid passing Tailwind classes via className; prefer semantic props above
+ */
 import { Link as RouterLink } from 'react-router-dom'
 
 const buttonStyles = {
@@ -7,7 +27,7 @@ const buttonStyles = {
     font-body font-semibold tracking-wide uppercase
     transition-all duration-500 ease-out
     transform active:scale-[0.98]
-    focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-brand-cream focus:ring-brand-gold
+    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-cream focus-visible:ring-brand-gold
     group overflow-hidden
     whitespace-nowrap
   `,
@@ -33,7 +53,7 @@ const buttonStyles = {
     `,
     outline: `
       bg-transparent border-2 border-brand-gold
-      text-brand-gold
+      text-brand-dark
       hover:bg-brand-gold hover:text-brand-dark
       shadow-none hover:shadow-gold
       hover:transform hover:-translate-y-0.5
@@ -78,8 +98,8 @@ const buttonStyles = {
   },
   
   sizes: {
-    small: 'px-6 py-3 text-sm',
-    medium: 'px-8 py-4 text-base',
+    small: 'px-7 py-3.5 text-sm',
+    medium: 'px-9 py-4 text-base',
     large: 'px-10 py-5 text-lg',
     xlarge: 'px-12 py-6 text-xl',
   },
@@ -108,7 +128,7 @@ export const Button = forwardRef((
     className = '',
     ...props
   },
-  ref
+  ref,
 ) => {
   const classes = `
     ${buttonStyles.base}
@@ -122,21 +142,21 @@ export const Button = forwardRef((
   const content = (
     <>
       {loading && (
-        <svg className={`animate-spin -ml-1 mr-3 h-5 w-5`} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-          <circle className={`opacity-25`} cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-          <path className={`opacity-75`} fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        <svg className={'animate-spin -ml-1 mr-3 h-5 w-5'} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <circle className={'opacity-25'} cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+          <path className={'opacity-75'} fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
         </svg>
       )}
-      {!loading && iconLeft && <span className={`mr-2 -ml-1`}>{iconLeft}</span>}
-      <span className={`relative z-10`}>{children}</span>
-      {!loading && iconRight && <span className={`ml-2 -mr-1`}>{iconRight}</span>}
+      {!loading && iconLeft && <span className={'mr-2 -ml-1'}>{iconLeft}</span>}
+      <span className={'relative z-10'}>{children}</span>
+      {!loading && iconRight && <span className={'ml-2 -mr-1'}>{iconRight}</span>}
     </>
   )
 
   // Shimmer effect for luxury variant
   const shimmerEffect = variant === 'luxury' || variant === 'primary' ? (
-    <span className={`absolute inset-0 overflow-hidden rounded-inherit`}>
-      <span className={`absolute inset-0 bg-shimmer-gradient opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-shimmer`} />
+    <span className={'absolute inset-0 overflow-hidden rounded-inherit'}>
+      <span className={'absolute inset-0 bg-shimmer-gradient opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-shimmer'} />
     </span>
   ) : null
 
@@ -172,6 +192,7 @@ export const Button = forwardRef((
     <button
       ref={ref}
       className={classes}
+      type={props.type || 'button'}
       disabled={loading}
       {...props}
     >

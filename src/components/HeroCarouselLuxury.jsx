@@ -1,34 +1,33 @@
-import React, { useState, useEffect } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import {
-  Container,
-  Stack,
-  Flex,
   Button,
-  Icon,
-  Text,
   Card,
-  Grid,
-  Image,
-  LuxuryBadge,
-  ShimmerText,
-  LuxuryIcon,
-  GlowBox,
   CarouselContainer,
-  CarouselSlide,
-  CarouselNavButton,
-  CarouselDots,
-  CarouselOverlay,
   CarouselContent,
-  CarouselImageWrapper,
-  CarouselProgress,
   CarouselCounter,
-  HeroSection,
+  CarouselDots,
+  CarouselImageWrapper,
+  CarouselNavButton,
+  CarouselOverlay,
+  CarouselProgress,
+  CarouselSlide,
+  Container,
+  Flex,
+  GlowBox,
+  Grid,
+  HeroBadge,
   HeroContent,
-  HeroTitle,
-  HeroSubtitle,
-  HeroDescription,
   HeroCTA,
-  HeroBadge
+  HeroDescription,
+  HeroSection,
+  HeroSubtitle,
+  HeroTitle,
+  Icon,
+  Image,
+  LuxuryIcon,
+  ShimmerText,
+  Stack,
+  Text,
 } from './ui'
 
 const HeroCarouselLuxury = () => {
@@ -49,14 +48,14 @@ const HeroCarouselLuxury = () => {
         primary: {
           text: 'Book Free Design Consultation',
           link: '/book-appointment',
-          icon: 'calendar'
+          icon: 'calendar',
         },
         secondary: {
           text: 'View Collection',
           link: '/gallery',
-          icon: 'image'
-        }
-      }
+          icon: 'image',
+        },
+      },
     },
     {
       id: 2,
@@ -70,14 +69,14 @@ const HeroCarouselLuxury = () => {
         primary: {
           text: 'Explore Perfect Fit',
           link: '/perfect-fit-blinds',
-          icon: 'sparkle'
+          icon: 'sparkle',
         },
         secondary: {
           text: 'Get Quote',
           link: '/contact',
-          icon: 'currency'
-        }
-      }
+          icon: 'currency',
+        },
+      },
     },
     {
       id: 3,
@@ -91,32 +90,32 @@ const HeroCarouselLuxury = () => {
         primary: {
           text: 'Discover Blackout Range',
           link: '/roller-blinds',
-          icon: 'moon'
+          icon: 'moon',
         },
         secondary: {
           text: 'Call Us',
           link: 'tel:01457597091',
-          icon: 'phone'
-        }
-      }
-    }
+          icon: 'phone',
+        },
+      },
+    },
   ]
 
-  const nextSlide = () => {
+  const nextSlide = useCallback(() => {
     if (!isTransitioning) {
       setIsTransitioning(true)
       setCurrentSlide((prev) => (prev + 1) % slides.length)
       setTimeout(() => setIsTransitioning(false), 700)
     }
-  }
+  }, [isTransitioning, slides.length])
 
-  const prevSlide = () => {
+  const prevSlide = useCallback(() => {
     if (!isTransitioning) {
       setIsTransitioning(true)
       setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)
       setTimeout(() => setIsTransitioning(false), 700)
     }
-  }
+  }, [isTransitioning, slides.length])
 
   const goToSlide = (index) => {
     if (!isTransitioning && index !== currentSlide) {
@@ -132,7 +131,7 @@ const HeroCarouselLuxury = () => {
       const interval = setInterval(nextSlide, 6000)
       return () => clearInterval(interval)
     }
-  }, [currentSlide, isPaused])
+  }, [isPaused, nextSlide])
 
   const currentSlideData = slides[currentSlide]
 
@@ -149,8 +148,8 @@ const HeroCarouselLuxury = () => {
             <Image
               src={`/images/optimized/${currentSlideData.image}`}
               alt={currentSlideData.alt}
-              className="w-full h-full object-cover"
               loading="eager"
+              objectFit="cover"
             />
             <CarouselOverlay variant="hero" />
             <CarouselOverlay variant="heroBottom" />
@@ -160,7 +159,7 @@ const HeroCarouselLuxury = () => {
           <CarouselContent align="left">
             <Container>
               <HeroContent align="left" padding="large">
-                <Stack spacing="large" className="max-w-3xl">
+                <Stack spacing="large">
                   {/* Badge */}
                   <HeroBadge>
                     <LuxuryIcon variant="simple" size="tiny">
@@ -222,7 +221,7 @@ const HeroCarouselLuxury = () => {
 
           {/* Slide Counter */}
           <Container>
-            <Flex justify="between" align="end" className="absolute bottom-8 left-0 right-0">
+            <Flex justify="between" align="end">
               {/* Dots */}
               <CarouselDots
                 total={slides.length}
@@ -234,7 +233,6 @@ const HeroCarouselLuxury = () => {
               <CarouselCounter
                 current={currentSlide + 1}
                 total={slides.length}
-                className="hidden md:block"
               />
             </Flex>
           </Container>
@@ -249,7 +247,7 @@ const HeroCarouselLuxury = () => {
       </CarouselContainer>
 
       {/* Quick Features Below Hero */}
-      <Container className="relative -mt-20 z-20">
+      <Container>
         <Grid cols={3} gap="medium">
           <GlowBox variant="luxury" padding="medium">
             <Card variant="glass" hover="glow" padding="medium">

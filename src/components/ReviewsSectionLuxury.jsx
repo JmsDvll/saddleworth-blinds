@@ -1,26 +1,26 @@
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import {
-  Section,
+  Button,
+  Card,
   Container,
-  Stack,
+  Flex,
+  GlowBox,
+  GoldDivider,
   Grid,
   Heading,
-  Text,
-  Card,
   Icon,
-  Button,
-  Flex,
   LuxuryBadge,
-  GoldDivider,
+  Section,
   ShimmerText,
-  GlowBox
+  Stack,
+  Text,
 } from './ui'
 
 const ReviewsSectionLuxury = ({ 
   reviews = [], 
   title = 'What Our Customers Say',
-  subtitle = 'Real reviews from real customers across Saddleworth'
+  subtitle = 'Real reviews from real customers across Saddleworth',
 }) => {
   const [showAll, setShowAll] = useState(false)
   const displayedReviews = showAll ? reviews : reviews.slice(0, 6)
@@ -59,7 +59,7 @@ const ReviewsSectionLuxury = ({
                           key={i} 
                           name="star" 
                           size="small" 
-                          className={i < Math.floor(averageRating) ? 'text-brand-gold' : 'text-brand-grey-light'}
+                          color={i < Math.floor(averageRating) ? '#CABC32' : '#C5C5C5'}
                         />
                       ))}
                     </Flex>
@@ -84,8 +84,8 @@ const ReviewsSectionLuxury = ({
                   exit={{ opacity: 0, y: -20 }}
                   transition={{ delay: index * 0.1 }}
                 >
-                  <Card variant="elevated" hover="lift" padding="large" className="h-full">
-                    <Stack spacing="medium" className="h-full">
+                  <Card variant="elevated" hover="lift" padding="large">
+                    <Stack spacing="medium">
                       {/* Stars */}
                       <Flex gap="small">
                         {[...Array(5)].map((_, i) => (
@@ -93,14 +93,14 @@ const ReviewsSectionLuxury = ({
                             key={i} 
                             name="star" 
                             size="small" 
-                            className={i < review.rating ? 'text-brand-gold' : 'text-brand-grey-light'}
+                            color={i < review.rating ? '#CABC32' : '#C5C5C5'}
                           />
                         ))}
                       </Flex>
 
                       {/* Review Text */}
-                      <Text color="dark" leading="relaxed" className="flex-1">
-                        "{review.text}"
+                      <Text color="dark" leading="relaxed">
+                        &ldquo;{review.text}&rdquo;
                       </Text>
 
                       {/* Customer Info */}
@@ -110,7 +110,7 @@ const ReviewsSectionLuxury = ({
                           {review.name}
                         </Text>
                         <Flex gap="small" align="center">
-                          <Icon name="location" size="tiny" className="text-brand-grey" />
+                          <Icon name="location" size="tiny" color="#8A8A8A" />
                           <Text size="small" color="muted">
                             {review.location}
                           </Text>
@@ -125,7 +125,7 @@ const ReviewsSectionLuxury = ({
                       {/* Verified Badge */}
                       {review.verified && (
                         <Flex gap="small" align="center">
-                          <Icon name="checkCircle" size="tiny" className="text-green-600" />
+                          <Icon name="checkCircle" size="tiny" color="#16A34A" />
                           <Text size="small" color="muted">
                             Verified Purchase
                           </Text>
@@ -155,7 +155,7 @@ const ReviewsSectionLuxury = ({
           {/* CTA */}
           <Stack spacing="medium" align="center">
             <GoldDivider variant="luxury" size="medium" />
-            <Heading size="xl" color="gold" align="center">
+            <Heading size="xl" color="dark" align="center">
               Ready to Join Our Happy Customers?
             </Heading>
             <Flex gap="medium" wrap="wrap" justify="center">

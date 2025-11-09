@@ -1,4 +1,17 @@
 import React, { forwardRef } from 'react'
+/**
+ * Carousel Suite – Container, Slide, NavButton, Dots, Overlay, Content,
+ * ImageWrapper, Progress, Counter. Compose for hero and product carousels.
+ *
+ * Common props
+ * - CarouselContainer: effect ('none' | 'glow')
+ * - CarouselSlide: height ('hero' | 'product' | 'thumbnail' | 'feature'), transition
+ * - CarouselNavButton: direction ('left' | 'right')
+ * - CarouselDots: total, current, onSelect
+ * - CarouselOverlay: variant ('hero' | 'heroBottom' | 'product' | 'dark' | 'light')
+ * - CarouselContent: align ('left' | 'center' | 'right')
+ * - CarouselImageWrapper: scale ('none' | 'zoom' | 'cover')
+ */
 
 // Carousel container styles
 const carouselContainerStyles = {

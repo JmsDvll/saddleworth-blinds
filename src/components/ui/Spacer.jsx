@@ -68,7 +68,7 @@ const spacerStyles = {
     'l-1': 'pl-1',
     'l-2': 'pl-2',
     'l-4': 'pl-4',
-  }
+  },
 }
 
 export const Spacer = forwardRef(({
@@ -82,7 +82,7 @@ export const Spacer = forwardRef(({
   const classes = [
     margin && spacerStyles.margin[margin],
     padding && spacerStyles.padding[padding],
-    className
+    className,
   ].filter(Boolean).join(' ')
 
   return (

@@ -1,4 +1,11 @@
 import React from 'react'
+/**
+ * SkipLink – accessibility skip navigation link.
+ *
+ * Props
+ * - href: string – anchor to main content (default '#main-content')
+ * - children: link text
+ */
 
 export const SkipLink = ({ href = '#main-content', children = 'Skip to main content' }) => {
   return (

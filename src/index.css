@@ -22,6 +22,16 @@
     overflow-x: hidden;
   }
 
+  /* Respect reduced motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
   /* Selection styles */
   ::selection {
     background: rgba(212, 175, 55, 0.2);
@@ -129,6 +139,12 @@
   .animation-delay-1000 {
     animation-delay: 1000ms;
   }
+
+  /* Section spacing rhythm */
+  .section-spacing-small { padding-top: 3rem; padding-bottom: 4rem; }
+  .section-spacing-medium { padding-top: 4rem; padding-bottom: 6rem; }
+  .section-spacing-large { padding-top: 6rem; padding-bottom: 8rem; }
+  .section-spacing-xlarge { padding-top: 8rem; padding-bottom: 10rem; }
 
   /* Focus styles */
   *:focus {

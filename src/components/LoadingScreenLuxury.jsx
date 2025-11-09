@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-import { Center, Stack, Icon, Text, ShimmerText, GlowBox } from './ui'
+import { Box, Center, GlowBox, Icon, ShimmerText, Stack, Text } from './ui'
 
 const LoadingScreenLuxury = () => {
   const [progress, setProgress] = useState(0)
@@ -20,7 +20,7 @@ const LoadingScreenLuxury = () => {
   }, [])
 
   return (
-    <Center className="fixed inset-0 z-50 bg-brand-dark">
+    <Center background="dark">
       <Stack spacing="large" align="center">
         {/* Logo with glow effect */}
         <GlowBox variant="luxury" intensity="high" padding="none">
@@ -29,29 +29,28 @@ const LoadingScreenLuxury = () => {
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.5 }}
           >
-            <Icon name="sun" size="xlarge" className="text-brand-gold animate-pulse" />
+            <Icon name="sun" size="xlarge" effect="pulse" color="#CABC32" />
           </motion.div>
         </GlowBox>
 
         {/* Brand name */}
         <ShimmerText variant="luxury" speed="slow">
-          <Text size="2xl" weight="bold" className="font-display">
+          <Text size="2xl" weight="bold" color="light">
             Sunshine Blinds
           </Text>
         </ShimmerText>
 
         {/* Loading bar */}
-        <div className="w-64 h-1 bg-brand-dark-lighter rounded-full overflow-hidden">
+        <Box>
           <motion.div
-            className="h-full bg-gradient-to-r from-brand-gold to-brand-gold-light"
             initial={{ x: '-100%' }}
             animate={{ x: `${progress - 100}%` }}
             transition={{ duration: 0.3 }}
           />
-        </div>
+        </Box>
 
         {/* Loading text */}
-        <Text size="small" color="muted" className="animate-pulse">
+        <Text size="small" color="light">
           Preparing luxury experience...
         </Text>
       </Stack>

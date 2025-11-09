@@ -3,7 +3,7 @@
 export const interactive = {
   // Button styles
   button: {
-    base: 'inline-flex items-center justify-center font-semibold rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed',
+    base: 'inline-flex items-center justify-center font-semibold rounded-lg transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed',
     
     // Direct button class combinations
     primary: 'btn btn-primary',
@@ -21,24 +21,24 @@ export const interactive = {
       sm: 'px-4 py-2 text-sm',
       base: 'px-6 py-3 text-base',
       lg: 'px-8 py-4 text-lg',
-      xl: 'px-10 py-5 text-xl'
+      xl: 'px-10 py-5 text-xl',
     },
     
     variants: {
       primary: 'bg-gradient-to-r from-brand-gold to-yellow-400 text-gray-900 hover:shadow-lg hover:scale-105 focus:ring-brand-gold',
       secondary: 'bg-gray-800 text-white border-2 border-gray-700 hover:bg-gray-700 hover:border-brand-gold focus:ring-gray-600',
       ghost: 'text-gray-300 hover:text-white hover:bg-gray-800 focus:ring-gray-600',
-      danger: 'bg-red-600 text-white hover:bg-red-700 focus:ring-red-500'
-    }
+      danger: 'bg-red-600 text-white hover:bg-red-700 focus:ring-red-500',
+    },
   },
 
   // Link styles
   link: {
-    base: 'transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-gold rounded',
+    base: 'transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-brand-gold rounded',
     default: 'text-brand-gold hover:text-yellow-500 underline-offset-2 hover:underline',
     nav: 'text-white hover:text-brand-gold',
     subtle: 'text-gray-400 hover:text-white',
-    accent: 'text-brand-gold hover:text-brand-green transition-colors'
+    accent: 'text-brand-gold hover:text-brand-green transition-colors',
   },
 
   // Form elements
@@ -49,7 +49,7 @@ export const interactive = {
     label: 'block text-sm font-medium text-white mb-2',
     error: 'text-red-500 text-sm mt-1',
     checkbox: 'w-4 h-4 text-brand-gold bg-gray-800 border-gray-600 rounded focus:ring-brand-gold focus:ring-2',
-    radio: 'w-4 h-4 text-brand-gold bg-gray-800 border-gray-600 focus:ring-brand-gold focus:ring-2'
+    radio: 'w-4 h-4 text-brand-gold bg-gray-800 border-gray-600 focus:ring-brand-gold focus:ring-2',
   },
 
   // Card interactions
@@ -57,7 +57,7 @@ export const interactive = {
     base: 'group bg-gray-900 rounded-2xl overflow-hidden hover:shadow-2xl hover:shadow-brand-gold/20 transition-all duration-300 hover:-translate-y-2 border border-gray-800 hover:border-brand-gold/30',
     hover: 'hover:shadow-xl hover:-translate-y-1 hover:bg-gray-700',
     clickable: 'cursor-pointer',
-    focus: 'focus:outline-none focus:ring-2 focus:ring-brand-gold focus:ring-offset-2 focus:ring-offset-gray-900'
+    focus: 'focus:outline-none focus:ring-2 focus:ring-brand-gold focus:ring-offset-2 focus:ring-offset-gray-900',
   },
 
   // Image interactions
@@ -66,7 +66,7 @@ export const interactive = {
     responsive: 'w-full h-full object-cover group-hover:scale-105 transition-transform duration-300',
     hover: 'transition-transform duration-300 hover:scale-105',
     thumbnail: 'cursor-pointer opacity-70 hover:opacity-100 transition-opacity duration-300',
-    active: 'ring-2 ring-brand-gold opacity-100'
+    active: 'ring-2 ring-brand-gold opacity-100',
   },
 
   // Transitions
@@ -77,19 +77,19 @@ export const interactive = {
     slow: 'transition-all duration-500',
     transform: 'transition-transform duration-300',
     colors: 'transition-colors duration-200',
-    opacity: 'transition-opacity duration-300'
+    opacity: 'transition-opacity duration-300',
   },
 
   // Focus states (accessibility)
   focus: {
     ring: 'focus:ring-2 focus:ring-brand-gold focus:ring-offset-2 focus:ring-offset-gray-900',
     outline: 'focus:outline-none focus:ring-2 focus:ring-brand-gold',
-    visible: 'focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2'
+    visible: 'focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2',
   },
 
   // Touch targets (minimum 44px)
   touch: {
     min: 'min-h-[44px] min-w-[44px]',
-    padding: 'p-3'
-  }
+    padding: 'p-3',
+  },
 }

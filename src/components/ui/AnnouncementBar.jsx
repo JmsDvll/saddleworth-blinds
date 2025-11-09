@@ -1,4 +1,10 @@
 import React, { forwardRef } from 'react'
+/**
+ * AnnouncementBar – collapsible top bar for announcements.
+ *
+ * Props
+ * - isVisible: boolean – toggles visibility with animation
+ */
 
 const announcementStyles = {
   base: `
@@ -25,7 +31,7 @@ export const AnnouncementBar = forwardRef(({
   `.trim()
 
   return (
-    <div ref={ref} className={classes} {...props}>
+    <div ref={ref} className={classes} role="region" aria-label="Announcement" {...props}>
       {children}
     </div>
   )

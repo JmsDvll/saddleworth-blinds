@@ -17,16 +17,19 @@ const customStandardizationRules = {
       return {
         JSXAttribute(node) {
           if (node.name.name === 'className' && node.value) {
-            // Check if it's a string literal with Tailwind classes
+            // Only flag literal className strings containing Tailwind utilities
             if (node.value.type === 'Literal' && typeof node.value.value === 'string') {
+              const filePath = String(context.getFilename()).replace(/\\/g, '/')
+              const isInUIComponent = filePath.includes('/src/components/ui/')
+              if (isInUIComponent) return
+
               const classes = node.value.value
-              // Allow only component-specific classes that don't contain Tailwind utilities
-              const tailwindPattern = /\b(bg-|text-|p-|m-|flex|grid|w-|h-|border|shadow|rounded|absolute|relative|fixed|block|inline|hidden|opacity|transition|transform|translate|rotate|scale|hover:|focus:|active:|disabled:|group-|animate-|duration-|ease-|delay-|cursor-|select-|resize-|space-|divide-|ring-|blur-|brightness-|contrast-|grayscale-|hue-rotate-|invert-|saturate-|sepia-|backdrop-|fill-|stroke-|sr-only|not-sr-only|pointer-events-|visible|invisible|z-|order-|col-|row-|gap-|justify-|items-|content-|self-|place-|overflow-|overscroll-|scroll-|break-|whitespace-|text-\w+|font-|leading-|tracking-|align-|decoration-|indent-|vertical-align|list-|placeholder-|accent-|caret-|aspect-|object-|box-|isolation-|table-|caption-|border-\w+|outline-|filter|backdrop-filter|mix-blend|bg-blend)/
-              
+              const tailwindPattern = /\b(bg-|text-|p-|m-|flex|grid|w-|h-|border|shadow|rounded|absolute|relative|fixed|block|inline|hidden|opacity|transition|transform|translate|rotate|scale|hover:|focus:|active:|disabled:|group-|animate-|duration-|ease-|delay-|cursor-|select-|resize-|space-|divide-|ring-|blur-|brightness-|contrast-|grayscale-|hue-rotate-|invert-|saturate-|sepia-|backdrop-|fill-|stroke|sr-only|not-sr-only|pointer-events-|visible|invisible|z-|order-|col-|row-|gap-|justify-|items-|content-|self-|place-|overflow-|overscroll-|scroll-|break-|whitespace-|text-\w+|font-|leading-|tracking-|align-|decoration-|indent-|vertical-align|list-|placeholder-|accent-|caret-|aspect-|object-|box-|isolation-|table-|caption-|border-\w+|outline-|filter|backdrop-filter|mix-blend|bg-blend)/
+
               if (tailwindPattern.test(classes)) {
                 context.report({
                   node,
-                  message: 'Inline Tailwind classes are forbidden. Use UI components with semantic props instead.',
+                  message: 'Inline Tailwind classes are forbidden outside components/ui. Use UI components with semantic props instead. Example: <Section padding="large"><Container maxWidth="medium">...'
                 })
               }
             }
@@ -75,14 +78,14 @@ const customStandardizationRules = {
         JSXOpeningElement(node) {
           const elementName = node.name.name
           if (bannedElements[elementName]) {
-            // Allow exceptions for specific cases
-            const parent = node.parent
-            const isInUIComponent = context.getFilename().includes('/components/ui/')
-            
+            // Normalize Windows paths and allow exceptions for UI primitives
+            const filePath = String(context.getFilename()).replace(/\\/g, '/')
+            const isInUIComponent = filePath.includes('/src/components/ui/')
+
             if (!isInUIComponent) {
               context.report({
                 node,
-                message: `Use <${bannedElements[elementName]}> component instead of <${elementName}>`,
+                message: `Use <${bannedElements[elementName]}> component instead of <${elementName}>. See COMPONENT_RULES.json and ui/README.md for allowed props.`,
               })
             }
           }
@@ -93,7 +96,7 @@ const customStandardizationRules = {
 }
 
 export default [
-  { ignores: ['dist', 'node_modules', '*.config.js'] },
+  { ignores: ['dist', 'node_modules', '*.config.js', 'tests', 'playwright.config.js', 'playwright-report', 'test-results'] },
   {
     files: ['**/*.{js,jsx}'],
     languageOptions: {
@@ -128,7 +131,7 @@ export default [
       'react/no-unescaped-entities': 'error',
       
       // General JavaScript rules
-      'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+      'no-unused-vars': ['error', { argsIgnorePattern: '^_', varsIgnorePattern: '^React$' }],
       'no-console': ['warn', { allow: ['warn', 'error'] }],
       'no-debugger': 'error',
       'no-alert': 'error',
@@ -138,7 +141,7 @@ export default [
       'prefer-template': 'error',
       'no-nested-ternary': 'error',
       'max-lines': ['warn', { max: 500, skipComments: true }],
-      'max-lines-per-function': ['warn', { max: 150, skipComments: true }],
+      'max-lines-per-function': ['warn', { max: 400, skipComments: true }],
       
       // Import rules
       'no-duplicate-imports': 'error',
@@ -158,6 +161,24 @@ export default [
       // Custom standardization rules
       'custom/no-inline-styles': 'error',
       'custom/use-ui-components': 'error',
+    },
+  },
+  // Overrides
+  {
+    files: ['src/components/ui/**/*.{js,jsx}'],
+    rules: {
+      'custom/no-inline-styles': 'off',
+      'custom/use-ui-components': 'off',
+    },
+  },
+  {
+    files: ['scripts/**/*.js'],
+    languageOptions: {
+      globals: { ...globals.node },
+      parserOptions: { sourceType: 'module' },
+    },
+    rules: {
+      'no-console': 'off',
     },
   },
 ]

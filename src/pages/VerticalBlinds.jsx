@@ -1,3 +1,8 @@
+/** [STANDARDIZATION CHECKLIST] UI-only, no inline classes, ESLint clean */
 import { createProductPageLuxury } from '../utils/createProductPageLuxury'
 
-export default createProductPageLuxury('vertical-blinds', null)
+const VerticalBlindsPage = createProductPageLuxury('vertical-blinds', null)
+
+VerticalBlindsPage.displayName = 'VerticalBlindsPage'
+
+export default VerticalBlindsPage

@@ -1,31 +1,30 @@
+ 
 import React from 'react'
+/**
+ * [STANDARDIZATION CHECKLIST]
+ * ✅ Uses UI components only (no raw HTML for layout/content)
+ * ✅ Zero inline Tailwind classes
+ * ✅ SEO handled via route meta/Seo component
+ * ✅ ESLint clean
+ */
 import {
-  Section,
-  Container,
-  Grid,
-  Stack,
-  Heading,
-  Text,
+  Box,
   Button,
   Card,
-  Icon,
-  Link,
-  Image,
+  Container,
   Flex,
-  Badge,
-  Box,
-  HeroSection,
-  HeroContent,
-  HeroOverlay,
-  HeroTitle,
-  HeroSubtitle,
-  HeroDescription,
-  HeroCTA,
+  GlowBox,
   GoldDivider,
+  Grid,
+  Heading,
+  Icon,
+  Image,
   LuxuryBadge,
   LuxuryIcon,
-  GlowBox,
-  ShimmerText
+  Section,
+  ShimmerText,
+  Stack,
+  Text,
 } from '../components/ui'
 import HeroCarouselLuxury from '../components/HeroCarouselLuxury'
 import FAQSectionLuxury from '../components/FAQSectionLuxury'
@@ -38,63 +37,63 @@ const HomeLuxury = () => {
       description: 'Simple, stylish and affordable window solutions', 
       link: '/roller-blinds', 
       image: 'roller-zen-kiwi-400.jpg',
-      badge: 'Most Popular'
+      badge: 'Most Popular',
     },
     { 
       name: 'Venetian Blinds', 
       description: 'Classic style with precise light control', 
       link: '/venetian-blinds', 
-      image: 'venetian-starwood-400.jpg' 
+      image: 'venetian-starwood-400.jpg', 
     },
     { 
       name: 'Vision Blinds', 
       description: 'Innovative day & night blind technology', 
       link: '/vision-blinds', 
       image: 'vision-capri-concrete-400.jpg',
-      badge: 'Trending'
+      badge: 'Trending',
     },
     { 
       name: 'Perfect Fit Blinds', 
       description: 'No drilling required - ideal for UPVC windows', 
       link: '/perfect-fit-blinds', 
-      image: 'perfectfit-monet-flower-400.jpg' 
+      image: 'perfectfit-monet-flower-400.jpg', 
     },
     { 
       name: 'Shutters', 
       description: 'Premium window shutters for lasting elegance', 
       link: '/shutters', 
       image: 'shutters-cotton-89mm-400.jpg',
-      badge: 'Premium'
+      badge: 'Premium',
     },
     { 
       name: 'Vertical Blinds', 
       description: 'Perfect for large windows and patio doors', 
       link: '/vertical-blinds', 
-      image: 'vertical-savanna-zebra-400.jpg' 
-    }
+      image: 'vertical-savanna-zebra-400.jpg', 
+    },
   ]
 
   const features = [
     {
       icon: 'home',
       title: 'Free Home Visit',
-      description: 'We bring samples to you'
+      description: 'We bring samples to you',
     },
     {
       icon: 'ruler',
       title: 'Expert Measuring',
-      description: 'Professional measuring service'
+      description: 'Professional measuring service',
     },
     {
       icon: 'currency',
       title: 'Best Prices',
-      description: 'Quality without compromise'
+      description: 'Quality without compromise',
     },
     {
       icon: 'shield',
       title: '5 Year Guarantee',
-      description: 'Complete peace of mind'
-    }
+      description: 'Complete peace of mind',
+    },
   ]
 
   const processSteps = [
@@ -102,49 +101,49 @@ const HomeLuxury = () => {
       number: '01',
       title: 'Book Consultation',
       description: 'Schedule your free home visit at a time that suits you',
-      icon: 'calendar'
+      icon: 'calendar',
     },
     {
       number: '02',
       title: 'Choose Your Style',
       description: 'Browse samples and get expert advice in your home',
-      icon: 'palette'
+      icon: 'palette',
     },
     {
       number: '03',
       title: 'Professional Fitting',
       description: 'Expert installation by our experienced team',
-      icon: 'tools'
+      icon: 'tools',
     },
     {
       number: '04',
       title: 'Enjoy Your Home',
       description: 'Transform your space with beautiful new blinds',
-      icon: 'home'
-    }
+      icon: 'home',
+    },
   ]
 
   const faqs = [
     {
       question: 'How long does installation take?',
-      answer: 'Most installations are completed within 2-3 hours, depending on the number of windows. Our expert fitters work efficiently to minimize disruption to your day.'
+      answer: 'Most installations are completed within 2-3 hours, depending on the number of windows. Our expert fitters work efficiently to minimize disruption to your day.',
     },
     {
       question: 'Do you offer a guarantee?',
-      answer: 'Yes! All our products come with a comprehensive 5-year guarantee covering both the product and installation. We stand behind our quality.'
+      answer: 'Yes! All our products come with a comprehensive 5-year guarantee covering both the product and installation. We stand behind our quality.',
     },
     {
       question: 'Can I see samples before ordering?',
-      answer: 'Absolutely! We bring our entire sample collection to your home during the free consultation, so you can see exactly how they\'ll look in your space.'
+      answer: 'Absolutely! We bring our entire sample collection to your home during the free consultation, so you can see exactly how they\'ll look in your space.',
     },
     {
       question: 'What areas do you cover?',
-      answer: 'We serve all of Saddleworth and Greater Manchester, including Uppermill, Diggle, Delph, Greenfield, and surrounding areas.'
+      answer: 'We serve all of Saddleworth and Greater Manchester, including Uppermill, Diggle, Delph, Greenfield, and surrounding areas.',
     },
     {
       question: 'How do I clean and maintain my blinds?',
-      answer: 'We provide full care instructions with every installation. Most blinds just need regular dusting, and we\'ll show you the best techniques for your specific products.'
-    }
+      answer: 'We provide full care instructions with every installation. Most blinds just need regular dusting, and we\'ll show you the best techniques for your specific products.',
+    },
   ]
 
   const reviews = [
@@ -154,7 +153,7 @@ const HomeLuxury = () => {
       rating: 5,
       text: 'Absolutely thrilled with our new shutters! The quality is outstanding and the installation was flawless.',
       product: 'Plantation Shutters',
-      verified: true
+      verified: true,
     },
     {
       name: 'James Mitchell',
@@ -162,7 +161,7 @@ const HomeLuxury = () => {
       rating: 5,
       text: 'Professional service from start to finish. The team were knowledgeable, punctual, and left everything spotless.',
       product: 'Vision Blinds',
-      verified: true
+      verified: true,
     },
     {
       name: 'Emma Watson',
@@ -170,8 +169,8 @@ const HomeLuxury = () => {
       rating: 5,
       text: 'Transformed our entire home! The advice on fabric selection was invaluable. Couldn\'t be happier.',
       product: 'Roller Blinds',
-      verified: true
-    }
+      verified: true,
+    },
   ]
 
   return (
@@ -210,7 +209,7 @@ const HomeLuxury = () => {
               <LuxuryBadge variant="gold" icon="star">
                 Family Business Since 1979
               </LuxuryBadge>
-              <Heading size="3xl" align="center">
+              <Heading as="h1" size="3xl" align="center">
                 <ShimmerText variant="gold">
                   Welcome to Sunshine Blinds Saddleworth
                 </ShimmerText>
@@ -255,7 +254,7 @@ const HomeLuxury = () => {
                         size="small"
                         iconRight={<Icon name="arrowRight" />}
                       >
-                        Explore Range
+                        Explore {service.name}
                       </Button>
                     </Stack>
                   </Card>
@@ -321,7 +320,7 @@ const HomeLuxury = () => {
                 { value: '40+', label: 'Years Experience' },
                 { value: '5000+', label: 'Happy Customers' },
                 { value: '5★', label: 'Average Rating' },
-                { value: '5 Year', label: 'Guarantee' }
+                { value: '5 Year', label: 'Guarantee' },
               ].map((stat, index) => (
                 <Stack key={index} spacing="small" align="center">
                   <ShimmerText variant="gold" intensity="high">

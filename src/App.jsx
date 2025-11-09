@@ -1,12 +1,15 @@
-import { Suspense, lazy, useState, useEffect } from 'react'
-import { Routes, Route, useLocation } from 'react-router-dom'
+import { lazy, Suspense, useEffect, useState } from 'react'
+import { Route, Routes, useLocation } from 'react-router-dom'
 import HeaderStandardized from './components/HeaderStandardized'
 import FooterLuxury from './components/FooterLuxury'
 import CookieConsentLuxury from './components/CookieConsentLuxury'
 import ErrorBoundaryLuxury from './components/ErrorBoundaryLuxury'
 import LoadingScreenLuxury from './components/LoadingScreenLuxury'
 import { AnimatePresence } from 'framer-motion'
-import { PageLoader, AppWrapper, MainContent, ScrollToTopButton } from './components/ui/PageLoader'
+import { HelmetProvider } from 'react-helmet-async'
+import { Seo } from './components/Seo'
+import { defaultMeta, routeMeta } from './utils/seo'
+import { AppWrapper, MainContent, PageLoader, ScrollToTopButton } from './components/ui/PageLoader'
 import { SkipLink } from './components/ui/SkipLink'
 import { PageAnimationWrapper } from './components/ui/PageAnimationWrapper'
 
@@ -40,17 +43,12 @@ const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'))
 const TermsConditions = lazy(() => import('./pages/TermsConditions'))
 
 function App() {
-  const [isLoading, setIsLoading] = useState(true)
+  // Remove artificial initial loading for a11y and faster paint
+  const [isLoading] = useState(false)
   const [showScrollTop, setShowScrollTop] = useState(false)
   const location = useLocation()
 
-  useEffect(() => {
-    // Initial loading
-    const timer = setTimeout(() => {
-      setIsLoading(false)
-    }, 1000)
-    return () => clearTimeout(timer)
-  }, [])
+  // no artificial loading delay
 
   useEffect(() => {
     // Scroll to top on route change
@@ -66,23 +64,26 @@ function App() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  if (isLoading) {
-    return <LoadingScreenLuxury />
-  }
+  // Always render the main app shell to preserve landmarks for a11y
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   return (
-    <ErrorBoundaryLuxury>
-      <AppWrapper>
-        <SkipLink />
-        <HeaderStandardized />
-        <MainContent>
-          <AnimatePresence mode="wait">
-            <Suspense fallback={<PageLoader />}>
-              <Routes location={location} key={location.pathname}>
+    <HelmetProvider>
+      <ErrorBoundaryLuxury>
+        <AppWrapper>
+          <Seo {...(routeMeta[location.pathname] || defaultMeta)} />
+          <SkipLink />
+          <HeaderStandardized />
+          <MainContent>
+            <AnimatePresence mode="wait">
+              {isLoading ? (
+                <LoadingScreenLuxury />
+              ) : (
+                <Suspense fallback={<PageLoader />}>
+                  <Routes location={location} key={location.pathname}>
                 <Route path="/" element={<PageAnimationWrapper><Home /></PageAnimationWrapper>} />
                 <Route path="/contact" element={<PageAnimationWrapper><Contact /></PageAnimationWrapper>} />
                 <Route path="/gallery" element={<PageAnimationWrapper><Gallery /></PageAnimationWrapper>} />
@@ -110,15 +111,17 @@ function App() {
                 <Route path="/areas/lees" element={<PageAnimationWrapper><Lees /></PageAnimationWrapper>} />
                 <Route path="/privacy-policy" element={<PageAnimationWrapper><PrivacyPolicy /></PageAnimationWrapper>} />
                 <Route path="/terms-conditions" element={<PageAnimationWrapper><TermsConditions /></PageAnimationWrapper>} />
-              </Routes>
-            </Suspense>
-          </AnimatePresence>
-        </MainContent>
-        <FooterLuxury />
-        <CookieConsentLuxury />
-        <ScrollToTopButton show={showScrollTop} onClick={scrollToTop} />
-      </AppWrapper>
-    </ErrorBoundaryLuxury>
+                  </Routes>
+                </Suspense>
+              )}
+            </AnimatePresence>
+          </MainContent>
+          <FooterLuxury />
+          <CookieConsentLuxury />
+          <ScrollToTopButton show={showScrollTop} onClick={scrollToTop} />
+        </AppWrapper>
+      </ErrorBoundaryLuxury>
+    </HelmetProvider>
   )
 }
 

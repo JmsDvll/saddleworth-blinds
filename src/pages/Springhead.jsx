@@ -1,3 +1,6 @@
+/** [STANDARDIZATION CHECKLIST] UI-only, no inline classes, ESLint clean */
 import { createAreaPageLuxury } from '../utils/createAreaPageLuxury'
 
-export default createAreaPageLuxury('Springhead')
+const SpringheadPage = createAreaPageLuxury('Springhead')
+SpringheadPage.displayName = 'SpringheadPage'
+export default SpringheadPage

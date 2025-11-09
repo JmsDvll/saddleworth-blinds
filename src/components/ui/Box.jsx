@@ -1,4 +1,29 @@
 import React, { forwardRef } from 'react'
+/**
+ * Box – Low-level layout utility for one-off structural needs.
+ *
+ * Props (selected)
+ * - as: element tag to render (default 'div')
+ * - position: 'static' | 'relative' | 'absolute' | 'fixed' | 'sticky'
+ * - display: 'block' | 'inline' | 'inlineBlock' | 'flex' | 'inlineFlex' | 'grid' | 'hidden'
+ * - size: preset square width/height: '8' | '10' | ... | 'full'
+ * - inset: '0' | '1' | '2' | '3' | '4' | 'x-0' | 'y-0'
+ * - border: 'none' | '1' | '2' | '4' | 't-1' | 'r-1' | 'b-1' | 'l-1' (and -2)
+ * - borderColor: 'transparent' | 'current' | 'gold' | 'goldLight' | ...
+ * - rounded: 'none' | 'sm' | 'base' | 'md' | 'lg' | 'xl' | '2xl' | 'full'
+ * - overflow: 'visible' | 'hidden' | 'auto' | 'scroll'
+ * - opacity: '0'...'100'
+ * - scale: '90' | '95' | '100' | '105' | '110' | '125' | '150'
+ * - maxWidth: 'xs'...'7xl' | 'full'
+ * - translate: 'x-*' | 'y-*' | '-x-*' | '-y-*'
+ * - positioning: common utility shortcuts (e.g., 'bottom-0', 'left-1/2', 'z-50')
+ *
+ * Usage
+ *  <Box position="absolute" inset="0" />
+ *
+ * Anti‑patterns
+ * - Don’t use Box to duplicate higher-level components (Section, Container, etc.)
+ */
 
 // Generic box component for layout and styling
 const boxStyles = {
@@ -167,7 +192,7 @@ const boxStyles = {
     'z-30': 'z-30',
     'z-40': 'z-40',
     'z-50': 'z-50',
-  }
+  },
 }
 
 export const Box = forwardRef(({
@@ -204,7 +229,7 @@ export const Box = forwardRef(({
     maxWidth && boxStyles.maxWidth[maxWidth],
     translate && boxStyles.translate[translate],
     positioning && boxStyles.positioning[positioning],
-    className
+    className,
   ].filter(Boolean).join(' ')
 
   return (

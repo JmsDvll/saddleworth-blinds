@@ -1,5 +1,13 @@
 import React from 'react'
-import { Heading, Text, Stack } from './index'
+/**
+ * PageTitle / SectionTitle – standardized heading blocks with optional subtitles.
+ *
+ * Props
+ * - title: string (required)
+ * - subtitle: string (optional)
+ * - align: 'left' | 'center' | 'right'
+ */
+import { Heading, Stack, Text } from './index'
 
 // Page title component for hero sections
 export const PageTitle = ({ title, subtitle, align = 'left' }) => {

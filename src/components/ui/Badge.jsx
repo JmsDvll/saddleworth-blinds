@@ -85,7 +85,7 @@ const badgeStyles = {
     after:-z-10
     after:transition-opacity
     hover:after:opacity-50
-  `
+  `,
 }
 
 export const Badge = forwardRef(({
@@ -103,7 +103,7 @@ export const Badge = forwardRef(({
     ${badgeStyles.variants[variant]}
     ${badgeStyles.sizes[size]}
     ${dot ? badgeStyles.dot : ''}
-    ${glow && (variant === 'primary' || variant === 'secondary') ? badgeStyles.glow + ' relative' : ''}
+    ${glow && (variant === 'primary' || variant === 'secondary') ? `${badgeStyles.glow  } relative` : ''}
     ${className}
   `.trim()
 

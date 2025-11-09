@@ -1,4 +1,18 @@
 import React, { forwardRef } from 'react'
+/**
+ * Alert – Status messaging with variants and optional close control.
+ *
+ * Props
+ * - variant: 'default' | 'info' | 'success' | 'warning' | 'error' | 'ghost'
+ * - size: 'small' | 'medium' | 'large'
+ * - title: string (optional)
+ * - icon: string | false (false hides icon; string overrides default)
+ * - onClose: () => void (renders close button when provided)
+ * - glow: boolean – enable decorative glow
+ *
+ * Usage
+ *  <Alert variant="success" title="Saved">Profile updated.</Alert>
+ */
 import { Icon } from './Icon'
 
 const alertStyles = {
@@ -73,7 +87,7 @@ const alertStyles = {
     success: 'before:from-emerald-500 before:to-emerald-600',
     warning: 'before:from-amber-500 before:to-amber-600',
     error: 'before:from-red-500 before:to-red-600',
-  }
+  },
 }
 
 // Icon mapping for alert types
@@ -122,9 +136,9 @@ export const Alert = forwardRef(({
       role="alert"
       {...props}
     >
-      <div className={`flex items-start`}>
+      <div className={'flex items-start'}>
         {showIcon && iconName && (
-          <div className={`flex-shrink-0 mr-3`}>
+          <div className={'flex-shrink-0 mr-3'}>
             <Icon 
               name={iconName} 
               size={size === 'small' ? 'small' : 'medium'}
@@ -133,13 +147,13 @@ export const Alert = forwardRef(({
           </div>
         )}
         
-        <div className={`flex-1`}>
+        <div className={'flex-1'}>
           {title && (
-            <h3 className={`font-semibold mb-1 text-current`}>
+            <h3 className={'font-semibold mb-1 text-current'}>
               {title}
             </h3>
           )}
-          <div className={`text-current opacity-90`}>
+          <div className={'text-current opacity-90'}>
             {children}
           </div>
         </div>
@@ -160,14 +174,14 @@ export const Alert = forwardRef(({
             <Icon 
               name="x" 
               size="small"
-              className={`transition-transform duration-300 group-hover/close:scale-110`}
+              className={'transition-transform duration-300 group-hover/close:scale-110'}
             />
           </button>
         )}
       </div>
       
       {/* Animated border gradient */}
-      <div className={`absolute inset-0 rounded-lg overflow-hidden pointer-events-none`}>
+      <div className={'absolute inset-0 rounded-lg overflow-hidden pointer-events-none'}>
         <div className={`
           absolute inset-0 opacity-0 group-hover:opacity-100
           transition-opacity duration-500

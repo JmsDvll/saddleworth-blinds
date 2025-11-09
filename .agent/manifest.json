@@ -1,0 +1,64 @@
+{
+  "projectName": "Saddleworth Blinds",
+  "rules": {
+    "styling": {
+      "noInlineTailwindOutsideUI": true,
+      "uiComponentsPath": "src/components/ui",
+      "htmlElementsBanned": ["section","h1","h2","h3","h4","h5","h6","p","a","img","button","input","textarea","select","label","form","ul","ol","li","nav","header","footer","main","article","aside"]
+    },
+    "qualityGates": {
+      "preCommitLint": true,
+      "huskyHook": ".husky/pre-commit",
+      "lintScript": "npm run lint"
+    },
+    "hosting": {
+      "server": "Apache on 20i",
+      "spaRouting": true,
+      "phpEndpoints": ["/process-booking.php","/process-contact.php"]
+    }
+  },
+  "status": {
+    "migration": "in_progress",
+    "seo": "completed_base",
+    "forms": "wired_php",
+    "todos": [
+      "Finish removing inline classes in remaining components",
+      "Run lint and build; fix any issues",
+      "Add JSDoc docs for UI components",
+      "Generate UI templates and page checklists"
+    ]
+  },
+  "sourcesOfTruth": {
+    "uiComponents": "src/components/ui",
+    "styles": "src/styles",
+    "routing": "src/App.jsx",
+    "seo": ["src/components/Seo.jsx","src/utils/seo.js"],
+    "forms": ["process-booking.php","process-contact.php"]
+  },
+  "qaBacklog": [
+    {
+      "name": "visual-regression",
+      "tools": ["playwright", "percy"],
+      "description": "Capture key pages and components; block layout regressions",
+      "status": "deferred"
+    },
+    {
+      "name": "accessibility-audit",
+      "tools": ["axe", "pa11y"],
+      "description": "Automated a11y checks on critical flows",
+      "status": "deferred"
+    },
+    {
+      "name": "performance-budgets",
+      "tools": ["lighthouse"],
+      "description": "Set budgets for LCP, CLS, TBT; fail on regressions",
+      "status": "deferred"
+    },
+    {
+      "name": "broken-link-checks",
+      "tools": ["linkinator"],
+      "description": "Crawl site for 4xx/5xx; exclude mailto/tel/anchors",
+      "status": "deferred"
+    }
+  ]
+}

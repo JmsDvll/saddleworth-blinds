@@ -1,4 +1,18 @@
 import React, { forwardRef } from 'react'
+/**
+ * Header Suite – wrappers for header, mobile menu, dropdowns and toggles.
+ *
+ * HeaderWrapper props
+ * - isScrolled: boolean – toggles scrolled styles
+ *
+ * MobileMenuWrapper props
+ * - isOpen: boolean – show/hide mobile menu
+ *
+ * DropdownWrapper props
+ * - isOpen: boolean, size: 'medium' | 'large'
+ *
+ * NavButton/MobileToggle: semantic buttons for nav interactions
+ */
 
 const headerStyles = {
   base: `
@@ -34,7 +48,7 @@ export const HeaderWrapper = forwardRef(({
   `.trim()
 
   return (
-    <header ref={ref} className={classes} role="navigation" {...props}>
+    <header ref={ref} className={classes} {...props}>
       {children}
     </header>
   )
@@ -120,7 +134,7 @@ DropdownWrapper.displayName = 'DropdownWrapper'
 
 // Nav button for dropdowns
 const navButtonStyles = `
-  flex items-center gap-2 px-4 py-2 
+  flex items-center gap-2 px-4 py-3 min-h-[44px] 
   text-brand-dark hover:text-brand-gold 
   transition-all duration-300 
   font-medium uppercase tracking-wide
@@ -144,7 +158,7 @@ NavButton.displayName = 'NavButton'
 
 // Mobile menu toggle
 const mobileToggleStyles = `
-  lg:hidden p-2 
+  lg:hidden p-3 min-h-[44px] min-w-[44px]
   text-brand-dark hover:text-brand-gold 
   transition-colors duration-300
 `
@@ -155,9 +169,10 @@ export const MobileToggle = forwardRef(({
   ...props 
 }, ref) => {
   const classes = `${mobileToggleStyles} ${className}`.trim()
+  const ariaLabel = props['aria-label'] || 'Toggle menu'
 
   return (
-    <button ref={ref} className={classes} {...props}>
+    <button ref={ref} className={classes} aria-label={ariaLabel} {...props}>
       {children}
     </button>
   )

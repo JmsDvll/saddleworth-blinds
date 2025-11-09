@@ -1,3 +1,6 @@
+/** [STANDARDIZATION CHECKLIST] UI-only, no inline classes, ESLint clean */
 import { createAreaPageLuxury } from '../utils/createAreaPageLuxury'
 
-export default createAreaPageLuxury('Grotton')
+const GrottonPage = createAreaPageLuxury('Grotton')
+GrottonPage.displayName = 'GrottonPage'
+export default GrottonPage

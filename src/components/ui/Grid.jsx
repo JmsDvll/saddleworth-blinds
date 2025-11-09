@@ -1,4 +1,16 @@
 import React from 'react'
+/**
+ * Grid – Responsive grid with semantic props.
+ *
+ * Props
+ * - cols: 1 | 2 | 3 | 4 | 6 | 12 – responsive presets
+ * - gap: 'none' | 'small' | 'medium' | 'large' | 'xlarge'
+ * - align: 'start' | 'center' | 'end' | 'stretch'
+ * - justify: 'start' | 'center' | 'end' | 'between' | 'around' | 'evenly'
+ *
+ * Grid.Item
+ * - span: 1..12 | 'full'
+ */
 
 // Centralized grid styles
 const gridStyles = {
@@ -19,9 +31,9 @@ const gridStyles = {
   gaps: {
     none: 'gap-0',
     small: 'gap-4',
-    medium: 'gap-6',
-    large: 'gap-8',
-    xlarge: 'gap-12',
+    medium: 'gap-6 md:gap-8',
+    large: 'gap-8 md:gap-10',
+    xlarge: 'gap-12 md:gap-16',
   },
   
   // Alignment
@@ -92,3 +104,6 @@ Grid.Item = ({ span = 1, className = '', children, ...props }) => {
     </div>
   )
 }
+
+Grid.displayName = 'Grid'
+Grid.Item.displayName = 'Grid.Item'

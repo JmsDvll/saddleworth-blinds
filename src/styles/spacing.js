@@ -7,7 +7,7 @@ export const spacing = {
     large: 'py-20 lg:py-24',
     base: 'py-16 lg:py-20',
     small: 'py-12 lg:py-16',
-    none: 'py-0'
+    none: 'py-0',
   },
 
   // Container padding
@@ -15,7 +15,7 @@ export const spacing = {
     default: 'container',
     base: 'px-4 md:px-6 lg:px-8',
     narrow: 'px-4 md:px-8 lg:px-12',
-    wide: 'px-4 md:px-4 lg:px-6'
+    wide: 'px-4 md:px-4 lg:px-6',
   },
 
   // Layout utilities
@@ -23,7 +23,7 @@ export const spacing = {
     grid: 'grid',
     gridCols2: 'grid lg:grid-cols-2',
     gridCols3: 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3',
-    gridCols4: 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4'
+    gridCols4: 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4',
   },
 
   // Grid gaps
@@ -33,7 +33,7 @@ export const spacing = {
     base: 'gap-6',
     md: 'gap-8',
     lg: 'gap-12',
-    xl: 'gap-16'
+    xl: 'gap-16',
   },
 
   // Stack spacing (vertical)
@@ -43,7 +43,7 @@ export const spacing = {
     base: 'space-y-6',
     md: 'space-y-8',
     lg: 'space-y-12',
-    xl: 'space-y-16'
+    xl: 'space-y-16',
   },
 
   // Inline spacing (horizontal)
@@ -52,7 +52,7 @@ export const spacing = {
     sm: 'space-x-4',
     base: 'space-x-6',
     md: 'space-x-8',
-    lg: 'space-x-12'
+    lg: 'space-x-12',
   },
 
   // Margin utilities
@@ -66,7 +66,7 @@ export const spacing = {
     bottomSm: 'mb-2',
     bottomMd: 'mb-4',
     bottomLg: 'mb-6',
-    bottomXl: 'mb-12'
+    bottomXl: 'mb-12',
   },
 
   // Padding utilities
@@ -78,20 +78,20 @@ export const spacing = {
     lg: 'p-6',
     xl: 'p-8',
     topMd: 'pt-4',
-    topLg: 'pt-6'
+    topLg: 'pt-6',
   },
 
   // Height utilities
   height: {
     screen: 'min-h-screen',
     full: 'h-full',
-    auto: 'h-auto'
+    auto: 'h-auto',
   },
 
   // Flex utilities
   flex: {
-    minHeight: 'min-h-screen'
-  }
+    minHeight: 'min-h-screen',
+  },
 }
 
 // Layout patterns
@@ -110,7 +110,7 @@ export const layout = {
     '6xl': 'max-w-6xl',
     '7xl': 'max-w-7xl',
     full: 'max-w-full',
-    prose: 'max-w-prose'
+    prose: 'max-w-prose',
   },
 
   // Common patterns
@@ -123,6 +123,6 @@ export const layout = {
     cols2: 'grid grid-cols-1 md:grid-cols-2',
     cols3: 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3',
     cols4: 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4',
-    cols6: 'grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6'
-  }
+    cols6: 'grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6',
+  },
 }

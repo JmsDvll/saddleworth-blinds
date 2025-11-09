@@ -1,19 +1,18 @@
 import React from 'react'
 import {
-  Section,
-  Container,
-  Grid,
-  Stack,
-  Flex,
-  Heading,
-  Text,
-  Link,
-  Icon,
   Button,
-  GoldDivider,
-  LuxuryIcon,
   Card,
-  LuxuryBadge
+  Container,
+  Flex,
+  GoldDivider,
+  Grid,
+  Heading,
+  Icon,
+  Link,
+  LuxuryIcon,
+  Section,
+  Stack,
+  Text,
 } from './ui'
 import SunshineLogo from './SunshineLogo'
 
@@ -24,12 +23,12 @@ const FooterLuxury = () => {
     { name: 'Vertical Blinds', path: '/vertical-blinds' },
     { name: 'Vision Blinds', path: '/vision-blinds' },
     { name: 'Perfect Fit Blinds', path: '/perfect-fit-blinds' },
-    { name: 'Shutters', path: '/shutters' }
+    { name: 'Shutters', path: '/shutters' },
   ]
 
   const areas = [
     'Uppermill', 'Diggle', 'Delph', 'Greenfield',
-    'Dobcross', 'Lydgate', 'Denshaw', 'Friezland'
+    'Dobcross', 'Lydgate', 'Denshaw', 'Friezland',
   ]
 
   const currentYear = new Date().getFullYear()
@@ -37,7 +36,7 @@ const FooterLuxury = () => {
   return (
     <>
       {/* CTA Section */}
-      <Section background="luxury" padding="large">
+      <Section as="aside" role="complementary" aria-label="Get a free quote" background="luxury" padding="large">
         <Container>
           <Card variant="dark" padding="large">
             <Grid cols={2} gap="xlarge" align="center">
@@ -73,18 +72,18 @@ const FooterLuxury = () => {
       </Section>
 
       {/* Main Footer */}
-      <footer role="contentinfo">
-        <Section background="dark" padding="xlarge" className="border-t border-brand-gold/20">
+      <Section as="footer" role="contentinfo" aria-label="Website footer">
+        <Section background="dark" padding="xlarge">
           <Container>
             <Stack spacing="xlarge">
               {/* Main Footer Content */}
               <Grid cols={4} gap="xlarge">
                 {/* About Section */}
                 <Stack spacing="medium">
-                  <SunshineLogo className="h-12 w-auto" />
+                  <SunshineLogo height={48} width={64} />
                   <Text size="small" color="light">
                     Your trusted local window blind specialists since 1979. 
-                    We're dedicated to serving Saddleworth with quality blinds, 
+                    We&apos;re dedicated to serving Saddleworth with quality blinds, 
                     expert fitting, and outstanding service.
                   </Text>
                   <Flex gap="small">
@@ -135,9 +134,6 @@ const FooterLuxury = () => {
                         {area}
                       </Link>
                     ))}
-                    <Link to="/areas" variant="footer" size="small" className="font-semibold">
-                      View All Areas →
-                    </Link>
                   </Stack>
                 </Stack>
 
@@ -148,19 +144,19 @@ const FooterLuxury = () => {
                   </Heading>
                   <Stack spacing="small">
                     <Flex gap="small" align="center">
-                      <Icon name="phone" size="small" className="text-brand-gold" />
+                      <Icon name="phone" size="small" color="#CABC32" />
                       <Link href="tel:01457597091" variant="footer">
                         01457 597091
                       </Link>
                     </Flex>
                     <Flex gap="small" align="center">
-                      <Icon name="mail" size="small" className="text-brand-gold" />
+                      <Icon name="mail" size="small" color="#CABC32" />
                       <Link href="mailto:info@saddleworthblinds.co.uk" variant="footer" size="small">
                         info@saddleworthblinds.co.uk
                       </Link>
                     </Flex>
                     <Flex gap="small" align="start">
-                      <Icon name="location" size="small" className="text-brand-gold mt-1" />
+                      <Icon name="location" size="small" color="#CABC32" />
                       <Text size="small" color="light">
                         Serving all of Saddleworth<br />
                         and Greater Manchester
@@ -204,14 +200,14 @@ const FooterLuxury = () => {
 
               {/* Bottom Bar */}
               <Flex justify="between" align="center" wrap="wrap" gap="medium">
-                <Text size="small" color="muted">
+                <Text size="small" color="light">
                   © {currentYear} Sunshine Blinds Saddleworth. All rights reserved.
                 </Text>
                 <Flex gap="medium">
-                  <Link to="/privacy-policy" variant="subtle" size="small">
+                  <Link to="/privacy-policy" variant="footer" size="small">
                     Privacy Policy
                   </Link>
-                  <Link to="/terms-conditions" variant="subtle" size="small">
+                  <Link to="/terms-conditions" variant="footer" size="small">
                     Terms & Conditions
                   </Link>
                 </Flex>
@@ -219,7 +215,7 @@ const FooterLuxury = () => {
             </Stack>
           </Container>
         </Section>
-      </footer>
+      </Section>
     </>
   )
 }

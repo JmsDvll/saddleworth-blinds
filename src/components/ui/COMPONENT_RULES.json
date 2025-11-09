@@ -1,0 +1,32 @@
+{
+  "principles": [
+    "Use only UI components outside this directory",
+    "No inline Tailwind classes outside UI",
+    "Prefer semantic props over className"
+  ],
+  "components": {
+    "Section": { "props": ["background","padding","as","height","width"] },
+    "Container": { "props": ["maxWidth","padding","as"] },
+    "Grid": { "props": ["cols","gap","align","justify"] },
+    "Stack": { "props": ["spacing","align","justify","as"] },
+    "Flex": { "props": ["gap","align","justify","wrap","as","positioning"] },
+    "Heading": { "props": ["size","color","align","weight","as"] },
+    "Text": { "props": ["size","color","align","weight","leading","font","whitespace"] },
+    "Image": { "props": ["src","alt","loading","decoding","width","height","objectFit","rounded"] },
+    "Icon": { "props": ["name","size","color","effect"] },
+    "List": { "props": ["variant","spacing"], "children": ["List.Item"] },
+    "Button": { "props": ["variant","size","fullWidth","to","href","iconLeft","iconRight","loading"] },
+    "Form": { "props": ["onSubmit","method","action"] },
+    "FormGroup": { "props": ["error","hint"] },
+    "FormInput": { "props": ["label","type","placeholder","error","required"] },
+    "FormSelect": { "props": ["label","error","required"] },
+    "FormTextarea": { "props": ["label","rows","error","required"] },
+    "FormCheckbox": { "props": ["label","error","required"] },
+    "FormRadio": { "props": ["label","name","error","required"] },
+    "Navigation": { "props": ["items","align","variant"] },
+    "HeroSection": { "props": ["variant","height"] },
+    "HeroContent": { "props": ["align","padding","maxWidth"] },
+    "HeroImage": { "props": ["src","alt"] },
+    "CarouselContent": { "props": ["align","padding","positioning"] }
+  }
+}

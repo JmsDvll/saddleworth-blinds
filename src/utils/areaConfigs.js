@@ -9,16 +9,16 @@ export const areaConfigs = {
       'Victorian terrace specialists',
       'Understanding period features',
       'Modern apartment solutions',
-      'Conservation area expertise'
+      'Conservation area expertise',
     ],
     popularProducts: [
       { name: 'Wooden Venetians', reason: 'Perfect for period properties' },
       { name: 'Roman Blinds', reason: 'Elegant for Victorian windows' },
-      { name: 'Perfect Fit', reason: 'Ideal for modern UPVC' }
+      { name: 'Perfect Fit', reason: 'Ideal for modern UPVC' },
     ],
     localInfo: 'Located in the heart of Saddleworth, Uppermill is known for its stunning Victorian architecture and vibrant community. We\'ve been fitting blinds here for over 20 years.',
     landmarks: ['Uppermill High Street', 'Saddleworth Museum', 'The Commercial', 'King George V Playing Fields'],
-    testimonialLocation: 'Uppermill'
+    testimonialLocation: 'Uppermill',
   },
   diggle: {
     name: 'Diggle',
@@ -29,16 +29,16 @@ export const areaConfigs = {
       'Stone cottage specialists',
       'Large window solutions',
       'Energy efficient options',
-      'Child-safe designs'
+      'Child-safe designs',
     ],
     popularProducts: [
       { name: 'Roller Blinds', reason: 'Clean lines for modern homes' },
       { name: 'Shutters', reason: 'Premium finish for stone cottages' },
-      { name: 'Vision Blinds', reason: 'Contemporary style with privacy' }
+      { name: 'Vision Blinds', reason: 'Contemporary style with privacy' },
     ],
     localInfo: 'Diggle combines rural charm with modern living. From traditional stone cottages to contemporary conversions, we understand the unique character of Diggle properties.',
     landmarks: ['Diggle Lock', 'St Chads Church', 'Diggle Band Club', 'The Diggle Hotel'],
-    testimonialLocation: 'Diggle'
+    testimonialLocation: 'Diggle',
   },
   delph: {
     name: 'Delph',
@@ -49,16 +49,16 @@ export const areaConfigs = {
       'Hillside property experience',
       'Large window specialists',
       'Weather-resistant options',
-      'Traditional village style'
+      'Traditional village style',
     ],
     popularProducts: [
       { name: 'Venetian Blinds', reason: 'Classic style for village homes' },
       { name: 'Vertical Blinds', reason: 'Perfect for patio doors' },
-      { name: 'Roman Blinds', reason: 'Soft furnishing elegance' }
+      { name: 'Roman Blinds', reason: 'Soft furnishing elegance' },
     ],
     localInfo: 'Delph is a picturesque village with a mix of traditional stone properties and modern family homes. We know how to enhance both traditional and contemporary Delph interiors.',
     landmarks: ['The Kings Arms', 'Delph Library', 'St Thomas Church', 'The White Lion'],
-    testimonialLocation: 'Delph'
+    testimonialLocation: 'Delph',
   },
   dobcross: {
     name: 'Dobcross',
@@ -69,16 +69,16 @@ export const areaConfigs = {
       'Village property experts',
       'Conservation area knowledge',
       'Bespoke solutions',
-      'Premium materials only'
+      'Premium materials only',
     ],
     popularProducts: [
       { name: 'Wooden Blinds', reason: 'Natural beauty for traditional homes' },
       { name: 'Perfect Fit Blinds', reason: 'No-drill solution for UPVC' },
-      { name: 'Allusion Blinds', reason: 'Contemporary elegance' }
+      { name: 'Allusion Blinds', reason: 'Contemporary elegance' },
     ],
     localInfo: 'Dobcross retains its village charm while offering modern amenities. We help maintain the character of traditional properties while providing contemporary comfort.',
     landmarks: ['The Swan Inn', 'Dobcross Band Club', 'Holy Trinity Church', 'Dobcross Village School'],
-    testimonialLocation: 'Dobcross'
+    testimonialLocation: 'Dobcross',
   },
   denshaw: {
     name: 'Denshaw',
@@ -89,16 +89,16 @@ export const areaConfigs = {
       'Rural property experience',
       'Large window solutions',
       'Insulation focused options',
-      'Weather resistant materials'
+      'Weather resistant materials',
     ],
     popularProducts: [
       { name: 'Thermal Blinds', reason: 'Extra insulation for rural homes' },
       { name: 'Shutters', reason: 'Durable and elegant' },
-      { name: 'Blackout Blinds', reason: 'Perfect for countryside darkness' }
+      { name: 'Blackout Blinds', reason: 'Perfect for countryside darkness' },
     ],
     localInfo: 'Denshaw offers peaceful rural living with stunning moorland views. Our blinds help you make the most of the views while maintaining privacy and warmth.',
     landmarks: ['The Rams Head Inn', 'Denshaw Village Hall', 'St Thomas Church', 'Junction Inn'],
-    testimonialLocation: 'Denshaw'
+    testimonialLocation: 'Denshaw',
   },
   greenfield: {
     name: 'Greenfield',
@@ -109,16 +109,16 @@ export const areaConfigs = {
       'Eco-home specialists',
       'Traditional terrace solutions',
       'View-maximising designs',
-      'Energy efficient options'
+      'Energy efficient options',
     ],
     popularProducts: [
       { name: 'Solar Reflective Blinds', reason: 'Energy efficiency for eco-homes' },
       { name: 'Vision Blinds', reason: 'Views with privacy control' },
-      { name: 'Motorised Blinds', reason: 'High-tech convenience' }
+      { name: 'Motorised Blinds', reason: 'High-tech convenience' },
     ],
     localInfo: 'Greenfield combines stunning natural beauty with a strong community. From homes overlooking the reservoir to properties in the village centre, we enhance every view.',
     landmarks: ['Greenfield Station', 'The Wellington', 'Dovestone Reservoir', 'The King William IV'],
-    testimonialLocation: 'Greenfield'
+    testimonialLocation: 'Greenfield',
   },
   grotton: {
     name: 'Grotton',
@@ -129,16 +129,16 @@ export const areaConfigs = {
       'Mixed property expertise',
       'Quick installation service',
       'Family-safe options',
-      'Long-lasting quality'
+      'Long-lasting quality',
     ],
     popularProducts: [
       { name: 'Roller Blinds', reason: 'Simple elegance for any room' },
       { name: 'Venetian Blinds', reason: 'Timeless style and control' },
-      { name: 'Perfect Fit Blinds', reason: 'Child-safe and neat' }
+      { name: 'Perfect Fit Blinds', reason: 'Child-safe and neat' },
     ],
     localInfo: 'Grotton offers a mix of traditional and modern properties. We help create comfortable, stylish interiors that complement the local architecture.',
     landmarks: ['The Grotton Arms', 'St James Church', 'Grotton Brow', 'Grotton Hall Road'],
-    testimonialLocation: 'Grotton'
+    testimonialLocation: 'Grotton',
   },
   lydgate: {
     name: 'Lydgate',
@@ -149,16 +149,16 @@ export const areaConfigs = {
       'Hillside property experts',
       'Large window specialists',
       'Sun protection options',
-      'Privacy without losing light'
+      'Privacy without losing light',
     ],
     popularProducts: [
       { name: 'Day & Night Blinds', reason: 'Versatile light control' },
       { name: 'Shutters', reason: 'Premium finish for views' },
-      { name: 'Vertical Blinds', reason: 'Perfect for large windows' }
+      { name: 'Vertical Blinds', reason: 'Perfect for large windows' },
     ],
     localInfo: 'Lydgate\'s elevated position offers stunning views across the valley. Our blinds help you enjoy the views while controlling light and maintaining privacy.',
     landmarks: ['The White Hart', 'St Annes Church', 'Lydgate Viaduct', 'Lydgate School'],
-    testimonialLocation: 'Lydgate'
+    testimonialLocation: 'Lydgate',
   },
   springhead: {
     name: 'Springhead',
@@ -169,16 +169,16 @@ export const areaConfigs = {
       'Stone property specialists',
       'Conservation awareness',
       'Traditional styling options',
-      'Modern functionality'
+      'Modern functionality',
     ],
     popularProducts: [
       { name: 'Wooden Venetians', reason: 'Perfect for stone cottages' },
       { name: 'Roman Blinds', reason: 'Soft elegance for bedrooms' },
-      { name: 'Blackout Blinds', reason: 'Essential for restful sleep' }
+      { name: 'Blackout Blinds', reason: 'Essential for restful sleep' },
     ],
     localInfo: 'Springhead maintains its traditional village character. We help preserve this charm while adding modern comfort and style to your windows.',
     landmarks: ['The Top House', 'St Thomas Church', 'Springhead Cricket Club', 'The Old Bell Inn'],
-    testimonialLocation: 'Springhead'
+    testimonialLocation: 'Springhead',
   },
   grasscroft: {
     name: 'Grasscroft',
@@ -189,16 +189,16 @@ export const areaConfigs = {
       'Family home specialists',
       'Retirement property experience',
       'Easy-operation options',
-      'Long-term reliability'
+      'Long-term reliability',
     ],
     popularProducts: [
       { name: 'Motorised Blinds', reason: 'Convenience at a touch' },
       { name: 'Perfect Fit Blinds', reason: 'Safe for families' },
-      { name: 'Thermal Blinds', reason: 'Energy saving comfort' }
+      { name: 'Thermal Blinds', reason: 'Energy saving comfort' },
     ],
     localInfo: 'Grasscroft offers peaceful residential living with easy access to local amenities. We help create comfortable, practical homes for all ages.',
     landmarks: ['The Royal Oak', 'Grasscroft Primary', 'St James Church', 'Grasscroft Independent School'],
-    testimonialLocation: 'Grasscroft'
+    testimonialLocation: 'Grasscroft',
   },
   lees: {
     name: 'Lees',
@@ -209,16 +209,16 @@ export const areaConfigs = {
       'Terraced house experts',
       'Modern estate experience',
       'Budget-friendly options',
-      'Premium quality assured'
+      'Premium quality assured',
     ],
     popularProducts: [
       { name: 'Roller Blinds', reason: 'Affordable style' },
       { name: 'Faux Wood Blinds', reason: 'Looks great, lasts longer' },
-      { name: 'Vertical Blinds', reason: 'Perfect for bay windows' }
+      { name: 'Vertical Blinds', reason: 'Perfect for bay windows' },
     ],
     localInfo: 'Lees combines traditional terraced streets with modern developments. We provide blinds that suit every property type and budget.',
     landmarks: ['The Pavilion Gardens', 'Lees Library', 'St Thomas Church', 'The Grapes Inn'],
-    testimonialLocation: 'Lees'
+    testimonialLocation: 'Lees',
   },
   friezland: {
     name: 'Friezland',
@@ -229,15 +229,15 @@ export const areaConfigs = {
       'Rural property focus',
       'Natural material options',
       'Insulation priorities',
-      'Bespoke sizing available'
+      'Bespoke sizing available',
     ],
     popularProducts: [
       { name: 'Wooden Shutters', reason: 'Rural elegance' },
       { name: 'Thermal Roman Blinds', reason: 'Cosy and stylish' },
-      { name: 'Blackout Roller Blinds', reason: 'Dark countryside nights' }
+      { name: 'Blackout Roller Blinds', reason: 'Dark countryside nights' },
     ],
     localInfo: 'Friezland offers tranquil rural living with beautiful countryside views. Our blinds complement the natural beauty while providing modern comfort.',
     landmarks: ['The Church Inn', 'Friezland Church', 'Close Farm', 'Friezland Fisheries'],
-    testimonialLocation: 'Friezland'
-  }
+    testimonialLocation: 'Friezland',
+  },
 }

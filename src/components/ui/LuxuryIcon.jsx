@@ -1,4 +1,12 @@
 import React from 'react'
+/**
+ * LuxuryIcon – decorative icon wrapper with luxury styles.
+ *
+ * Props
+ * - variant: 'simple' | 'glow' | 'circle' | 'square' | 'luxury'
+ * - size: 'tiny' | 'small' | 'medium' | 'large' | 'xlarge'
+ * - animation: 'none' | 'spin' | 'pulse' | 'float' | 'glow'
+ */
 
 const iconStyles = {
   base: `

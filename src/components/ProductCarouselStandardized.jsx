@@ -1,19 +1,19 @@
 import React, { useState } from 'react'
 import {
+  Button,
   CarouselContainer,
-  CarouselSlide,
-  CarouselNavButton,
-  CarouselDots,
-  CarouselOverlay,
-  CarouselImageWrapper,
   CarouselContent,
+  CarouselDots,
+  CarouselImageWrapper,
+  CarouselNavButton,
+  CarouselOverlay,
+  CarouselSlide,
+  Heading,
   Icon,
   Image,
+  LuxuryBadge,
   Stack,
-  Heading,
   Text,
-  Button,
-  LuxuryBadge
 } from './ui'
 
 const ProductCarouselStandardized = ({ 
@@ -21,7 +21,7 @@ const ProductCarouselStandardized = ({
   height = 'product',
   autoPlay = true,
   autoPlayInterval = 5000,
-  showBadges = true
+  showBadges = true,
 }) => {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
@@ -54,8 +54,8 @@ const ProductCarouselStandardized = ({
           <Image
             src={`/images/optimized/${currentSlideData.image}`}
             alt={currentSlideData.alt || currentSlideData.title}
-            className="w-full h-full object-cover"
             loading="eager"
+            objectFit="cover"
           />
         </CarouselImageWrapper>
 
@@ -78,7 +78,7 @@ const ProductCarouselStandardized = ({
               </Text>
             )}
             {currentSlideData.description && (
-              <Text color="light" className="max-w-2xl">
+              <Text color="light">
                 {currentSlideData.description}
               </Text>
             )}

@@ -1,4 +1,19 @@
-import React, { useState, forwardRef } from 'react'
+import React, { forwardRef, useState } from 'react'
+/**
+ * Image – Enhanced image with lazy loading, skeletons, and graceful error fallback.
+ *
+ * Props
+ * - src, alt (required)
+ * - aspectRatio: 'none' | '16/9' | '4/3' | 'square' | '3/2' | '2/3'
+ * - objectFit: 'cover' | 'contain' | 'fill' | 'none' | 'scaleDown'
+ * - loading: 'lazy' | 'eager'
+ * - showSkeleton: boolean – show skeleton while loading
+ * - hoverEffect: 'none' | 'zoom' | 'brightness' | 'grayscale' | 'blur'
+ * - fallbackSrc: string – used on error
+ *
+ * Usage
+ *  <Image src="/images/optimized/pic.jpg" alt="Description" aspectRatio="4/3" />
+ */
 import { useInView } from 'react-intersection-observer'
 
 const imageStyles = {
@@ -15,7 +30,7 @@ const imageStyles = {
       square: 'aspect-square',
       '3/2': 'aspect-[3/2]',
       '2/3': 'aspect-[2/3]',
-    }
+    },
   },
   
   image: {
@@ -67,7 +82,7 @@ const imageStyles = {
     brightness: 'group-hover:brightness-110',
     grayscale: 'grayscale group-hover:grayscale-0',
     blur: 'group-hover:blur-sm',
-  }
+  },
 }
 
 export const Image = forwardRef(({
@@ -143,9 +158,9 @@ export const Image = forwardRef(({
       {showSkeleton && imageState === 'loading' && (
         <div className={imageStyles.skeleton}>
           <div className={imageStyles.loadingOverlay}>
-            <div className={`relative`}>
-              <div className={`w-12 h-12 border-3 border-gray-600 border-t-brand-gold rounded-full animate-spin`}></div>
-              <div className={`absolute inset-0 w-12 h-12 border-3 border-transparent border-t-brand-gold/30 rounded-full animate-spin animate-reverse`}></div>
+            <div className={'relative'}>
+              <div className={'w-12 h-12 border-3 border-gray-600 border-t-brand-gold rounded-full animate-spin'}></div>
+              <div className={'absolute inset-0 w-12 h-12 border-3 border-transparent border-t-brand-gold/30 rounded-full animate-spin animate-reverse'}></div>
             </div>
           </div>
         </div>
@@ -161,6 +176,8 @@ export const Image = forwardRef(({
           onLoad={handleLoad}
           onError={handleError}
           loading={loading}
+          decoding={loading === 'eager' ? 'sync' : 'async'}
+          fetchpriority={loading === 'eager' ? 'high' : 'auto'}
           {...props}
         />
       )}
@@ -168,15 +185,15 @@ export const Image = forwardRef(({
       {/* Error state */}
       {imageState === 'error' && currentSrc === fallbackSrc && (
         <div className={imageStyles.errorOverlay}>
-          <svg className={`w-12 h-12 mb-2`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className={'w-12 h-12 mb-2'} fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
           </svg>
-          <p className={`text-sm`}>Failed to load image</p>
+          <p className={'text-sm'}>Failed to load image</p>
         </div>
       )}
       
       {/* Premium overlay gradient */}
-      <div className={`absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`}></div>
+      <div className={'absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none'}></div>
     </div>
   )
 })
@@ -190,7 +207,7 @@ Image.Hero = forwardRef((props, ref) => (
     aspectRatio="16/9"
     loading="eager"
     hoverEffect="zoom"
-    className={`rounded-xl shadow-2xl`}
+    className={'rounded-xl shadow-2xl'}
     {...props}
   />
 ))
@@ -200,7 +217,7 @@ Image.Thumbnail = forwardRef((props, ref) => (
   <Image
     ref={ref}
     aspectRatio="square"
-    className={`rounded-lg`}
+    className={'rounded-lg'}
     hoverEffect="brightness"
     {...props}
   />
@@ -211,7 +228,7 @@ Image.Gallery = forwardRef((props, ref) => (
   <Image
     ref={ref}
     aspectRatio="4/3"
-    className={`rounded-lg`}
+    className={'rounded-lg'}
     hoverEffect="zoom"
     {...props}
   />

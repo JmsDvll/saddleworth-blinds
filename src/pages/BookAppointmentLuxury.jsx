@@ -1,30 +1,39 @@
+ 
 import React, { useState } from 'react'
+/**
+ * [STANDARDIZATION CHECKLIST]
+ * ✅ Uses UI components only (no raw HTML for layout/content)
+ * ✅ Zero inline Tailwind classes
+ * ✅ SEO handled via route meta/Seo component
+ * ✅ ESLint clean
+ */
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import { 
-  Section,
-  Container,
-  Stack,
-  Heading,
-  Text,
+  Alert,
   Button,
   Card,
-  Grid,
-  Icon,
-  Alert,
-  GoldDivider,
-  LuxuryBadge,
-  GlowBox,
-  ShimmerText,
-  HeroSection,
-  HeroContent,
-  PageTitle,
-  SectionTitle,
+  Container,
+  Form,
   FormGroup,
   FormInput,
   FormSelect,
-  FormTextarea
+  FormTextarea,
+  GlowBox,
+  GoldDivider,
+  Grid,
+  Heading,
+  HeroContent,
+  HeroSection,
+  Icon,
+  LuxuryBadge,
+  PageTitle,
+  Section,
+  SectionTitle,
+  ShimmerText,
+  Stack,
+  Text,
 } from '../components/ui'
 
 const schema = yup.object({
@@ -34,7 +43,7 @@ const schema = yup.object({
   postcode: yup.string().required('Postcode is required'),
   product: yup.string().required('Please select a product'),
   timeSlot: yup.string().required('Please select a time slot'),
-  message: yup.string()
+  message: yup.string(),
 })
 
 const BookAppointmentLuxury = () => {
@@ -42,20 +51,44 @@ const BookAppointmentLuxury = () => {
   const [submitStatus, setSubmitStatus] = useState(null)
 
   const { register, handleSubmit, formState: { errors }, reset } = useForm({
-    resolver: yupResolver(schema)
+    resolver: yupResolver(schema),
   })
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (formValues) => {
     setIsSubmitting(true)
     setSubmitStatus(null)
 
     try {
-      // Simulate form submission
-      await new Promise(resolve => setTimeout(resolve, 2000))
-      console.log('Form data:', data)
-      setSubmitStatus('success')
-      reset()
-    } catch (error) {
+      const formData = new FormData()
+      formData.append('name', formValues.name || '')
+      formData.append('email', formValues.email || '')
+      formData.append('phone', formValues.phone || '')
+      formData.append('postcode', formValues.postcode || '')
+      formData.append('product', formValues.product || '')
+      formData.append('timeSlot', formValues.timeSlot || '')
+      formData.append('message', formValues.message || '')
+      // Honeypot & timing
+      formData.append('website', '')
+      formData.append('form_start_time', Math.floor(Date.now() / 1000) - 5)
+
+      const response = await fetch('/process-booking.php', {
+        method: 'POST',
+        body: formData,
+      })
+
+      if (response.ok) {
+        setSubmitStatus('success')
+        reset()
+        if (window.gtag) {
+          window.gtag('event', 'form_submission', {
+            event_category: 'Appointment',
+            event_label: 'Booking Form',
+          })
+        }
+      } else {
+        setSubmitStatus('error')
+      }
+    } catch {
       setSubmitStatus('error')
     } finally {
       setIsSubmitting(false)
@@ -67,7 +100,7 @@ const BookAppointmentLuxury = () => {
     '11:00 AM - 1:00 PM',
     '1:00 PM - 3:00 PM',
     '3:00 PM - 5:00 PM',
-    '5:00 PM - 7:00 PM'
+    '5:00 PM - 7:00 PM',
   ]
 
   const products = [
@@ -79,7 +112,7 @@ const BookAppointmentLuxury = () => {
     'Shutters',
     'Roman Blinds',
     'Curtains',
-    'Not Sure - Need Advice'
+    'Not Sure - Need Advice',
   ]
 
   return (
@@ -131,7 +164,7 @@ const BookAppointmentLuxury = () => {
                         <LuxuryBadge number={2} />
                         <Heading as="h3" size="large">Precise Measurements</Heading>
                         <Text color="muted">
-                          We'll take accurate measurements to ensure your blinds fit perfectly, 
+                          We&apos;ll take accurate measurements to ensure your blinds fit perfectly, 
                           avoiding costly mistakes and ensuring a professional finish.
                         </Text>
                       </Stack>
@@ -166,9 +199,9 @@ const BookAppointmentLuxury = () => {
                 <Stack spacing="medium" align="center">
                   <Icon name="quote" size="large" color="gold" />
                   <Text size="large" color="light" align="center" italic>
-                    "The consultation was so helpful. They brought samples and helped us 
+                    &ldquo;The consultation was so helpful. They brought samples and helped us 
                     choose the perfect blinds for each room. The whole process was easy 
-                    and stress-free."
+                    and stress-free.&rdquo;
                   </Text>
                   <Text color="gold" weight="semibold">
                     Sarah M., Uppermill
@@ -179,14 +212,14 @@ const BookAppointmentLuxury = () => {
 
             {/* Booking Form */}
             <Card variant="luxury" padding="xlarge">
-              <form onSubmit={handleSubmit(onSubmit)}>
+              <Form onSubmit={handleSubmit(onSubmit)}>
                 <Stack spacing="large">
                   <Stack spacing="small">
                     <Heading as="h2" size="xlarge" align="center">
                       <ShimmerText variant="gold">Book Your Appointment</ShimmerText>
                     </Heading>
                     <Text align="center" color="muted">
-                      Fill in the form below and we'll be in touch to confirm your appointment
+                      Fill in the form below and we&apos;ll be in touch to confirm your appointment
                     </Text>
                   </Stack>
 
@@ -275,7 +308,7 @@ const BookAppointmentLuxury = () => {
 
                   {submitStatus === 'success' && (
                     <Alert variant="success">
-                      Thank you! We'll be in touch within 24 hours to confirm your appointment.
+                      Thank you! We&apos;ll be in touch within 24 hours to confirm your appointment.
                     </Alert>
                   )}
 
@@ -303,7 +336,7 @@ const BookAppointmentLuxury = () => {
                     </Text>
                   </Text>
                 </Stack>
-              </form>
+              </Form>
             </Card>
           </Grid>
         </Container>

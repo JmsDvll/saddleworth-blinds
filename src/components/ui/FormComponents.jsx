@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react'
-import { Stack, Text, Icon, Flex } from './index'
+import { Flex, Icon, Stack, Text } from './index'
 
 // Form Group wrapper for consistent spacing and layout
 export const FormGroup = ({ children }) => {
@@ -9,6 +9,7 @@ export const FormGroup = ({ children }) => {
     </Stack>
   )
 }
+FormGroup.displayName = 'FormGroup'
 
 // Base input styles
 const inputBase = `
@@ -42,13 +43,13 @@ export const FormInput = forwardRef(({
       {label && (
         <label className={labelBase}>
           {label}
-          {required && <span className={`text-red-500 ml-1`}>*</span>}
+          {required && <span className={'text-red-500 ml-1'}>*</span>}
         </label>
       )}
-      <div className={`relative`}>
+      <div className={'relative'}>
         {icon && (
-          <div className={`absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none`}>
-            <Icon name={icon} size="small" className={`text-brand-grey`} />
+          <div className={'absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none'}>
+            <Icon name={icon} size="small" className={'text-brand-grey'} />
           </div>
         )}
         <input
@@ -62,11 +63,15 @@ export const FormInput = forwardRef(({
         <Text size="small" color="muted">{helpText}</Text>
       )}
       {error && (
-        <Text size="small" className={`text-red-500`}>{error}</Text>
+        <Text size="small" className={'text-red-500'}>{error}</Text>
       )}
     </Stack>
   )
 })
+FormInput.displayName = 'FormInputLegacy'
+FormSelect.displayName = 'FormSelectLegacy'
+FormTextarea.displayName = 'FormTextareaLegacy'
+FormCheckbox.displayName = 'FormCheckboxLegacy'
 
 // Form Select
 export const FormSelect = forwardRef(({ 
@@ -82,10 +87,10 @@ export const FormSelect = forwardRef(({
       {label && (
         <label className={labelBase}>
           {label}
-          {required && <span className={`text-red-500 ml-1`}>*</span>}
+          {required && <span className={'text-red-500 ml-1'}>*</span>}
         </label>
       )}
-      <div className={`relative`}>
+      <div className={'relative'}>
         <select
           ref={ref}
           className={`${inputBase} appearance-none pr-10 ${error ? 'border-red-500' : ''}`}
@@ -93,15 +98,15 @@ export const FormSelect = forwardRef(({
         >
           {children}
         </select>
-        <div className={`absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none`}>
-          <Icon name="chevronDown" size="small" className={`text-brand-grey`} />
+        <div className={'absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none'}>
+          <Icon name="chevronDown" size="small" className={'text-brand-grey'} />
         </div>
       </div>
       {helpText && !error && (
         <Text size="small" color="muted">{helpText}</Text>
       )}
       {error && (
-        <Text size="small" className={`text-red-500`}>{error}</Text>
+        <Text size="small" className={'text-red-500'}>{error}</Text>
       )}
     </Stack>
   )
@@ -121,7 +126,7 @@ export const FormTextarea = forwardRef(({
       {label && (
         <label className={labelBase}>
           {label}
-          {required && <span className={`text-red-500 ml-1`}>*</span>}
+          {required && <span className={'text-red-500 ml-1'}>*</span>}
         </label>
       )}
       <textarea
@@ -134,7 +139,7 @@ export const FormTextarea = forwardRef(({
         <Text size="small" color="muted">{helpText}</Text>
       )}
       {error && (
-        <Text size="small" className={`text-red-500`}>{error}</Text>
+        <Text size="small" className={'text-red-500'}>{error}</Text>
       )}
     </Stack>
   )
@@ -150,7 +155,7 @@ export const FormCheckbox = forwardRef(({
 }, ref) => {
   return (
     <Stack spacing="small">
-      <label className={`flex items-start gap-3 cursor-pointer group`}>
+      <label className={'flex items-start gap-3 cursor-pointer group'}>
         <input
           ref={ref}
           type="checkbox"
@@ -167,9 +172,9 @@ export const FormCheckbox = forwardRef(({
           `}
           {...props}
         />
-        <Stack spacing="small" className={`flex-1`}>
+        <Stack spacing="small" className={'flex-1'}>
           {label && (
-            <Text className={`group-hover:text-brand-gold transition-colors`}>
+            <Text className={'group-hover:text-brand-gold transition-colors'}>
               {label}
             </Text>
           )}
@@ -180,7 +185,7 @@ export const FormCheckbox = forwardRef(({
         <Text size="small" color="muted" className="ml-8">{helpText}</Text>
       )}
       {error && (
-        <Text size="small" className={`text-red-500 ml-8`}>{error}</Text>
+        <Text size="small" className={'text-red-500 ml-8'}>{error}</Text>
       )}
     </Stack>
   )
@@ -195,14 +200,14 @@ export const FormRadioGroup = ({
   name,
   value,
   onChange,
-  orientation = 'vertical'
+  orientation = 'vertical',
 }) => {
   return (
     <Stack spacing="small">
       {label && (
         <Text weight="medium" className={labelBase}>
           {label}
-          {required && <span className={`text-red-500 ml-1`}>*</span>}
+          {required && <span className={'text-red-500 ml-1'}>*</span>}
         </Text>
       )}
       <Flex 
@@ -211,7 +216,7 @@ export const FormRadioGroup = ({
         wrap={orientation === 'horizontal' ? 'wrap' : undefined}
       >
         {options.map((option) => (
-          <label key={option.value} className={`flex items-center gap-3 cursor-pointer group`}>
+          <label key={option.value} className={'flex items-center gap-3 cursor-pointer group'}>
             <input
               type="radio"
               name={name}
@@ -232,7 +237,7 @@ export const FormRadioGroup = ({
               disabled={option.disabled}
             />
             <Stack spacing="none">
-              <Text className={`group-hover:text-brand-gold transition-colors`}>
+              <Text className={'group-hover:text-brand-gold transition-colors'}>
                 {option.label}
               </Text>
               {option.description && (
@@ -243,19 +248,21 @@ export const FormRadioGroup = ({
         ))}
       </Flex>
       {error && (
-        <Text size="small" className={`text-red-500`}>{error}</Text>
+        <Text size="small" className={'text-red-500'}>{error}</Text>
       )}
     </Stack>
   )
 }
+FormRadioGroup.displayName = 'FormRadioGroup'
 
 // Form Label (standalone)
 FormInput.Label = ({ children, required, htmlFor }) => (
   <label htmlFor={htmlFor} className={labelBase}>
     {children}
-    {required && <span className={`text-red-500 ml-1`}>*</span>}
+    {required && <span className={'text-red-500 ml-1'}>*</span>}
   </label>
 )
+FormInput.Label.displayName = 'FormInputLabel'
 
 // Alert for form feedback
 export const Alert = ({ variant = 'info', children, className = '' }) => {
@@ -263,7 +270,7 @@ export const Alert = ({ variant = 'info', children, className = '' }) => {
     info: 'bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800 text-blue-800 dark:text-blue-200',
     success: 'bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800 text-green-800 dark:text-green-200',
     warning: 'bg-yellow-50 dark:bg-yellow-900/20 border-yellow-200 dark:border-yellow-800 text-yellow-800 dark:text-yellow-200',
-    error: 'bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-800 text-red-800 dark:text-red-200'
+    error: 'bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-800 text-red-800 dark:text-red-200',
   }
 
   return (
@@ -276,3 +283,4 @@ export const Alert = ({ variant = 'info', children, className = '' }) => {
     </div>
   )
 }
+Alert.displayName = 'Alert'
