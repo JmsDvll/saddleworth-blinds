@@ -13,3 +13,7 @@ Examples:
 ## State
 
 `PIPELINE_STATE.md` at repo root — bootstrap/audit notes.
+
+## Director inbox
+
+`docs/tickets/_director/INBOX.md` — append-only; agents write here when you must see a decision or block. Hub: [DIRECTOR_INBOX.md](https://github.com/JmsDvll/cursor-pipeline/blob/main/docs/pipeline/DIRECTOR_INBOX.md).
