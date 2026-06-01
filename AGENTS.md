@@ -27,3 +27,4 @@ All pipeline Workers use:
 
 Cloud runs append a suffix when assigned (e.g. `cursor/T1.2-api-skeleton-d656`). One ticket = one PR. Do not push to `main`.
 
+**Director visibility:** `docs/tickets/_director/INBOX.md` (append-only) + GitHub notifications. Use `blocked-human` on the PR when work must stop. Do not rely on Cursor automation chat alone — see hub `docs/pipeline/DIRECTOR_INBOX.md` in [JmsDvll/cursor-pipeline](https://github.com/JmsDvll/cursor-pipeline/blob/main/docs/pipeline/DIRECTOR_INBOX.md).
